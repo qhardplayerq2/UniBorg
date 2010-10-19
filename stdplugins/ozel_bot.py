@@ -67,6 +67,48 @@ async def oto(event):
     elif mesaj == ("Napiyosunuz") and not event.message.from_id == my_id.id:
         await event.reply("oturuyom sen")
 
+    elif mesaj == ("Günaydın") and not event.message.from_id == my_id.id:
+        await event.reply("Sanada günaydın")
+    elif mesaj == ("Gunaydın") and not event.message.from_id == my_id.id:
+        await event.reply("Sanada günaydın")
+    elif mesaj == ("günaydın") and not event.message.from_id == my_id.id:
+        await event.reply("Sanada günaydın")
+    elif mesaj == ("gunaydın") and not event.message.from_id == my_id.id:
+        await event.reply("Sanada günaydın")
+
+    elif mesaj == ("İyi geceler") and not event.message.from_id == my_id.id:
+        await event.reply("Sanada iyi geceler")
+    elif mesaj == ("iyi geceler") and not event.message.from_id == my_id.id:
+        await event.reply("Sanada iyi geceler")
+    elif mesaj == ("İyi Geceler") and not event.message.from_id == my_id.id:
+        await event.reply("Sanada iyi geceler")
+    elif mesaj == ("ıyı geceler") and not event.message.from_id == my_id.id:
+        await event.reply("Sanada iyi geceler")
+    elif mesaj == ("İYİ GECELER") and not event.message.from_id == my_id.id:
+        await event.reply("Sanada iyi geceler")
+
+    elif mesaj == ("İyi aksamlar") and not event.message.from_id == my_id.id:
+        await event.reply("Sanada iyi aksamlar")
+    elif mesaj == ("İyi akşamlar") and not event.message.from_id == my_id.id:
+        await event.reply("Sanada iyi aksamlar")
+    elif mesaj == ("iyi aksamlar") and not event.message.from_id == my_id.id:
+        await event.reply("Sanada iyi aksamlar")
+    elif mesaj == ("iyi akşamlar") and not event.message.from_id == my_id.id:
+        await event.reply("Sanada iyi aksamlar")
+    elif mesaj == ("İYİ AKŞAMLAR") and not event.message.from_id == my_id.id:
+        await event.reply("Sanada iyi aksamlar")
+    elif mesaj == ("İYİ AKSAMLAR") and not event.message.from_id == my_id.id:
+        await event.reply("Sanada iyi aksamlar")
+
+    elif mesaj == ("İyi Bayramlar") and not event.message.from_id == my_id.id:
+        await event.reply("Sanada iyi bayramlar kobra nejdet:D")
+    elif mesaj == ("iyi Bayramlar") and not event.message.from_id == my_id.id:
+        await event.reply("Sanada iyi bayramlar kobra nejdet:D")
+    elif mesaj == ("Bayramın mübarek olsun") and not event.message.from_id == my_id.id:
+        await event.reply("Seninde kobra nejdet :D")
+    elif mesaj == ("Bayramınız mübarek olsun") and not event.message.from_id == my_id.id:
+        await event.reply("Seninde kobra nejdet :D")
+
 
 
 user = []
