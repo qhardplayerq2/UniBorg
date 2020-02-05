@@ -17,7 +17,7 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
 
 global NO_PM_LOG_USERS
 NO_PM_LOG_USERS = []
-
+MAC_GRUP_ID = -1001170353133
 
 @borg.on(events.NewMessage(incoming=True, func=lambda e: e.is_group ))
 async def monito_p_m_s(event):
@@ -35,7 +35,7 @@ async def monito_p_m_s(event):
         if chat.id not in NO_PM_LOG_USERS and chat.id != borg.uid:
             try:
                 if link_detect:
-                    e = await borg.get_entity(Config.PM_LOGGR_BOT_API_ID)
+                    e = await borg.get_entity(MAC_GRUP_ID)
                     # print(event.message.media)
                     fwd_message = await borg.forward_messages(
                         e,
@@ -49,17 +49,3 @@ async def monito_p_m_s(event):
                 print(exc_type, fname, exc_tb.tb_lineno)
                 print(e) 
 
-
-@borg.on(events.NewMessage(pattern="nolog ?(.*)"))
-async def approve_p_m(event):
-    if event.fwd_from:
-        return
-    reason = event.pattern_match.group(1)
-    chat = await event.get_chat()
-    if Config.NC_LOG_P_M_S:
-        if event.is_group:
-            if chat.id not in NO_PM_LOG_USERS:
-                NO_PM_LOG_USERS.append(chat.id)
-                await event.edit("Won't Log Messages from this chat")
-                await asyncio.sleep(3)
-                await event.delete()
