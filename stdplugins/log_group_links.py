@@ -25,7 +25,7 @@ async def monito_p_m_s(event):
     # print(me.id)
     # if  event.text == ".loggroups":
     
-    link_detect = re.findall(r'((\w+:\/\/\S+)|(\w+[\.:]\w+\S+))[^\s,\.]|((username=[^&]+&password=[^&]+|\?password=[^&]+&username=[^&]+)|(?: |^)|username|password|Maximum(?: |$))',event.message.message)
+    link_detect = re.findall(r'((\w+:\/\/\S+)|(\w+[\.:]\w+\S+))[^\s,\.]|((username=[^&]+&password=[^&]+|\?password=[^&]+|&username=[^&]+)|Expires|password|Maximum(?: |$))',event.message.message)
     # print(link_detect)
     # print("logging success")
     # await event.edit("loggin success")
