@@ -64,3 +64,15 @@ pydownload
 PyDrive
 pylast
 setuptools==39.1.0
+attrs
+idna
+pyaes
+pyasnl
+pycares
+pycparser
+rsa
+yarl
+cchardet
+brotlipy
+async-timeout
+aiodns
