@@ -67,7 +67,6 @@ setuptools==39.1.0
 attrs
 idna
 pyaes
-pyasnl
 pycares
 pycparser
 rsa
