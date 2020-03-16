@@ -27,7 +27,7 @@ async def tdk(event):
     # anlam_1 = response[0]['anlamlarListe'][0]['anlam']
     # anlam_2 = response[0]['anlamlarListe'][1]['anlam']
     try:
-        x = ""
+        x = "TDK Sözlük\n"
         for anlamlar in range(int(anlam_sayisi)):
             x += "-{}\n".format(response[0]['anlamlarListe'][anlamlar]['anlam'])
             # print(x)
