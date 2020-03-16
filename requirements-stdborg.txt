@@ -76,4 +76,4 @@ brotlipy
 async-timeout
 aiodns
 tdk
-tdk-fetch
+# tdk-fetch
