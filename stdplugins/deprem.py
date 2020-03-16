@@ -136,5 +136,5 @@ def get_quakes():
     #raw=requests.get(URL)
     #data=raw.content
    # return data
-    res=parse.main()
+    res=main()
     return res
