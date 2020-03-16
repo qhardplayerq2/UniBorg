@@ -18,7 +18,10 @@ async def tdk(event):
     if event.fwd_from:
         return
     kelime = event.pattern_match.group(1)
+    print(kelime)
     word = TurkishWord(kelime)
+    print(word)
     word.query()
     result = word.meaning
+    print(result)
     await event.edit(result)
