@@ -18,6 +18,7 @@ async def _(event):
     await event.edit("Processing ...")
     input_str = event.pattern_match.group(1)
     result = ""
+    wikipedia.set_lang("tr")
     results = wikipedia.search(input_str)
     for s in results:
         page = wikipedia.page(s)

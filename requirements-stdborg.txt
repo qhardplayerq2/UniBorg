@@ -76,4 +76,5 @@ brotlipy
 async-timeout
 aiodns
 tdk
+wikipedia-api
 # tdk-fetch
