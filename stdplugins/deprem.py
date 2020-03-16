@@ -66,7 +66,7 @@ def get_json(dat_json):
     #f=open("quakes.html","w")
     #json.dump((dat_json),f)
     #f.close()
-    return (json.dumps(test))
+    return (json.dump(test))
 
 def main():
     parse_=get_html_line(get_content())
@@ -128,7 +128,7 @@ def create_list(data_json):
     return list_quakes
 
 def get_json(data):
-    dat_json=json.loads(data)
+    dat_json=json.load(data)
     return dat_json
 
 def get_quakes():
