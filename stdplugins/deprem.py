@@ -8,7 +8,7 @@ from telethon import events
 from bin.deprem.parse import (create_dict, get_content, get_html_line,
                               get_json, get_timestamp, main, parse_html_line)
 from uniborg.util import admin_cmd
-
+import bin.deprem.parse
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
 
