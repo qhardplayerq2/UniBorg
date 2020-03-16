@@ -75,3 +75,4 @@ cchardet
 brotlipy
 async-timeout
 aiodns
+tdk
