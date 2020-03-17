@@ -19,18 +19,30 @@ async def tdk(event):
     if event.fwd_from:
         return
     inp = event.pattern_match.group(1)
-    # inp = input("kelime:")
     kelime = "https://sozluk.gov.tr/gts?ara={}".format(inp)
     headers = {"USER-AGENT": "UniBorg"}
     response = requests.get(kelime, headers=headers).json()
     anlam_sayisi = response[0]['anlam_say']
-    # anlam_1 = response[0]['anlamlarListe'][0]['anlam']
-    # anlam_2 = response[0]['anlamlarListe'][1]['anlam']
     try:
-        x = "TDK Sözlük\n"
+        x = "TDK Sözlük\n\n"
         for anlamlar in range(int(anlam_sayisi)):
-            x += "-{}\n".format(response[0]['anlamlarListe'][anlamlar]['anlam'])
+            x += "👉{}\n".format(response[0]['anlamlarListe'][anlamlar]['anlam'])
             # print(x)
         await event.edit(x)
     except KeyError:
         await event.edit(KeyError)
+
+# TDK kütüphanesi ile bu şekilde.
+
+# from tdk import tdk
+
+# # create new word
+# word = tdk.new_word("test")
+# # prints meaning of the word
+# test = "\n"
+# for a in word.meaning():
+#     test += "\n{}".format(a)
+# # print(word.meaning())
+# print(test)
+# # # prints all the word's data
+# # print(word.all_data())
