@@ -50,11 +50,20 @@ async def _(event):
             message = previous_message.message
     else:
         message = "SYNTAX: `.paste <long text to include>`"
-    data = message
-    key = requests.post('https://nekobin.com/api/documents', json={"content": data}).json().get('result').get('key')
-    url = f'https://nekobin.com/{key}'
-    reply_text = f'Nekofied to *Nekobin* : {url}'
-    await event.edit(reply_text)
+    py_file =  ""
+    if downloaded_file_name.endswith(".py"):
+        py_file += ".py"
+        data = message
+        key = requests.post('https://nekobin.com/api/documents', json={"content": data}).json().get('result').get('key')
+        url = f'https://nekobin.com/{key}{py_file}'
+        reply_text = f'Nekofied to *Nekobin* : {url}'
+        await event.edit(reply_text)
+    else:
+        data = message
+        key = requests.post('https://nekobin.com/api/documents', json={"content": data}).json().get('result').get('key')
+        url = f'https://nekobin.com/{key}'
+        reply_text = f'Nekofied to *Nekobin* : {url}'
+        await event.edit(reply_text)
 
 # data = "tets sgdfgklj kdgjld"
 
