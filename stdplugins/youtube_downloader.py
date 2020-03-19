@@ -5,24 +5,27 @@ Audio and video downloader using Youtube-dl
 .yta To Download in mp3 format
 .ytv To Download in mp4 format
 """
-import logging
-logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
-                    level=logging.WARNING)
-import os
-import time
-import math
 import asyncio
+import logging
+import math
+import os
+import shutil
+import time
+from asyncio import sleep
+
+from telethon.tl.types import DocumentAttributeAudio
+
+import wget
+from hurry.filesize import size
+from uniborg.util import admin_cmd
 from youtube_dl import YoutubeDL
-from youtube_dl.utils import (DownloadError, ContentTooShortError,
+from youtube_dl.utils import (ContentTooShortError, DownloadError,
                               ExtractorError, GeoRestrictedError,
                               MaxDownloadsReached, PostProcessingError,
                               UnavailableVideoError, XAttrMetadataError)
-from asyncio import sleep
-from telethon.tl.types import DocumentAttributeAudio
-from uniborg.util import admin_cmd
-import wget
-from hurry.filesize import size
 
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
 
 
 DELETE_TIMEOUT = 5
@@ -201,7 +204,7 @@ async def download_video(v_url):
         os.remove(f"{out_folder + ytdl_data['id']}.mp3")
         await asyncio.sleep(DELETE_TIMEOUT)
         await v_url.delete()
-        os.removedirs(out_folder)
+        shutil.rmtree(out_folder)
     elif video:
         for single_file in filename:
             # image_link = ytdl_data['thumbnail']
@@ -228,7 +231,7 @@ async def download_video(v_url):
             os.remove(f"{out_folder + ytdl_data['id']}.mp4")
             await asyncio.sleep(DELETE_TIMEOUT)
             await v_url.delete()
-        os.removedirs(out_folder)
+        shutil.rmtree(out_folder)
     
         
 
