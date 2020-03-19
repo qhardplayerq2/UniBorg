@@ -39,11 +39,8 @@ pytube3
 wget
 hurry.filesize
 PyPDF2
-pymongo 
-dnspython
 urllib3
 pysocks
-instantmusic
 alive_progress
 typing
 tgcrypto
@@ -62,19 +59,21 @@ spamwatch
 psutil
 pydownload
 PyDrive
-pylast
-setuptools==39.1.0
-attrs
-idna
-pyaes
-pycares
-pycparser
-rsa
-yarl
-cchardet
-brotlipy
-async-timeout
-aiodns
-tdk
-wikipedia-api
+setuptools
+# pymongo 
+# dnspython
+# pylast
+# attrs
+# idna
+# pyaes
+# pycares
+# pycparser
+# rsa
+# yarl
+# cchardet
+# brotlipy
+# async-timeout
+# aiodns
+# tdk
+# wikipedia-api
 # tdk-fetch
