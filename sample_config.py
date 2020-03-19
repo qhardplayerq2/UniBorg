@@ -128,7 +128,9 @@ class Config(object):
     BOTLOG = os.environ.get("BOTLOG", None)
     # MONGOCLIENT = pymongo.MongoClient(MONGO_DB_URI)
     # MONGO = MONGOCLIENT.userbot
-    
+    #MIRRORACE KEY  
+    MIRROR_ACE_API_KEY = os.environ.get("MIRROR_ACE_API_KEY",None)
+    MIRROR_ACE_API_TOKEN = os.environ.get("MIRROR_ACE_API_TOKEN",none)
     # RSS_POST_MSG_GROUP_ID = map(int, os.environ.get("RSS_POST_MSG_GROUP_ID", None).split())
     RSS_POST_MSG_GROUP_ID = os.environ.get("RSS_POST_MSG_GROUP_ID", None)
     if RSS_POST_MSG_GROUP_ID:
