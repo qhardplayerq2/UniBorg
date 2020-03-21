@@ -22,7 +22,7 @@ async def _(event):
         msg = "**Corona Virus Bilgileri**\n\nÜlke: {}\nOnaylanan Vaka: {}\nAktif Vaka: {}\nÖlümle Sonuçlanan Vaka: {}\nTedavi Edilen Vaka: {}".format(ulke,onaylanan,aktif,olum,tedavi)
         await event.edit(msg)
     except KeyError as e:
-        await event.edit("key error {}".format(e))
+        await event.edit("Ülke ismini yanlış girdin. {}".format(e))
 
 def get_country_data(country, world):
     for country_data in world:
