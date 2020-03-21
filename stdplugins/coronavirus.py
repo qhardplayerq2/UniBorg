@@ -18,7 +18,7 @@ async def _(event):
     aktif = country_data['active']
     olum = country_data['deaths']
     tedavi = country_data['recovered']
-    msg = "Ülke: {}\nOnaylanan Vaka: {}\nAktif Vaka: {}\nÖlümle Sonuçlanan Vaka: {}\nTedavi Edilen Vaka: {}".format(ulke,onaylanan,aktif,olum,tedavi)
+    msg = "**Corona Virus Bilgileri**\n\nÜlke: {}\nOnaylanan Vaka: {}\nAktif Vaka: {}\nÖlümle Sonuçlanan Vaka: {}\nTedavi Edilen Vaka: {}".format(ulke,onaylanan,aktif,olum,tedavi)
     await event.edit(msg)
 
 def get_country_data(country, world):
