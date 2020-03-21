@@ -60,6 +60,7 @@ psutil
 pydownload
 PyDrive
 setuptools
+covid
 # pymongo 
 # dnspython
 # pylast
