@@ -24,7 +24,7 @@ async def tdk(event):
     response = requests.get(kelime, headers=headers).json()
     anlam_sayisi = response[0]['anlam_say']
     try:
-        x = "TDK Sözlük\n\n"
+        x = "TDK Sözlük **{}**\n\n".format(inp)
         for anlamlar in range(int(anlam_sayisi)):
             x += "👉{}\n".format(response[0]['anlamlarListe'][anlamlar]['anlam'])
             # print(x)
