@@ -1,8 +1,9 @@
 """spamwatch for uniborg users. Credits : @By_Azade"""
 
+import asyncio
 from asyncio import sleep
 from os import remove
-import asyncio
+
 from telethon import events
 from telethon.errors import (BadRequestError, ChatAdminRequiredError,
                              ImageProcessFailedError, PhotoCropSizeSmallError,
@@ -18,9 +19,9 @@ from telethon.tl.types import (ChannelParticipantsAdmins,
                                ChatBannedRights, MessageEntityMentionName,
                                MessageMediaPhoto, PeerChat)
 
+import spamwatch
 from sample_config import Config
 from uniborg.util import admin_cmd
-import spamwatch
 
 ENABLE_LOG = True
 LOGGING_CHATID = Config.PRIVATE_CHANNEL_BOT_API_ID
@@ -38,10 +39,8 @@ BANNED_RIGHTS = ChatBannedRights(
 
 @borg.on(events.ChatAction())
 async def spam_watch_(event):
-    # user = await get_user_from_event(event)
     chat = await event.get_chat()
     client = spamwatch.Client(Config.SPAM_WATCH_API)
-    # ban = client.get_ban(event.from_id)
     user = await event.get_user()
     if (chat.admin_rights or chat.creator):
         if event.user_joined or event.user_added:
@@ -49,12 +48,6 @@ async def spam_watch_(event):
                 ban = client.get_ban(event.action_message.from_id)
                 if ban:
                     await borg(EditBannedRequest(event.chat_id,event.action_message.from_id,BANNED_RIGHTS))
-                #     await event.client.send_message(
-                #     LOGGING_CHATID,
-                #     "#SPAM_WATCH\n"
-                #     f"USER: [{user.first_name}](tg://user?id={user.id})\n"
-                #     f"CHAT: {event.chat.title}(`{event.chat_id}`)"
-                # )
                 else:
                     return
             except AttributeError:
@@ -74,39 +67,3 @@ async def spam_watch_(event):
             return ""
     else:
         return ""
-
-
-# async def get_user_from_event(event):
-#     if event.reply_to_msg_id:
-#         previous_message = await event.get_reply_message()
-#         user_obj = await event.client.get_entity(previous_message.from_id)
-#     else:
-#         user = event.pattern_match.group(1)
-#         if user.isnumeric():
-#             user = int(user)
-#         if not user:
-#             await event.edit("`Pass the user's username, id or reply!`")
-#             return
-#         if event.message.entities is not None:
-#             probable_user_mention_entity = event.message.entities[0]
-
-#             if isinstance(probable_user_mention_entity, MessageEntityMentionName):
-#                 user_id = probable_user_mention_entity.user_id
-#                 user_obj = await event.client.get_entity(user_id)
-#                 return user_obj
-#         try:
-#             user_obj = await event.client.get_entity(user)
-#         except (TypeError, ValueError) as err:
-#             await event.edit(str(err))
-#             return None
-#     return user_obj
-
-# async def get_user_from_id(user, event):
-#     if isinstance(user, str):
-#         user = int(user)
-#     try:
-#         user_obj = await event.client.get_entity(user)
-#     except (TypeError, ValueError) as err:
-#         await event.edit(str(err))
-#         return None
-#     return user_obj
