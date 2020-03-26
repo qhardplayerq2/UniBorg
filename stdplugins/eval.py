@@ -6,13 +6,9 @@ Syntax: .eval PythonCode"""
 import logging
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
-import asyncio
-import inspect
 import io
 import sys
 import traceback
-
-from telethon import errors, events, functions, types
 
 from uniborg.util import admin_cmd
 

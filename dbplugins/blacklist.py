@@ -6,7 +6,6 @@ Available Commands:
 .addblacklist
 .listblacklist
 .rmblacklist"""
-import asyncio
 import io
 import re
 import sql_helpers.blacklist_sql as sql

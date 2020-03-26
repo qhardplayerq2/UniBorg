@@ -3,7 +3,6 @@ Syntax: .filext EXTENSION"""
 import logging
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
-from telethon import events
 import requests
 from bs4 import BeautifulSoup
 from uniborg.util import admin_cmd

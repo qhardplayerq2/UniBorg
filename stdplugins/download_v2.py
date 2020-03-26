@@ -11,10 +11,7 @@ import os
 import time
 from datetime import datetime
 from bin.FastTelethon import download_file
-import aiohttp
 from pySmartDL import SmartDL
-from telethon import events
-from telethon.tl.types import DocumentAttributeVideo
 
 from uniborg.util import admin_cmd, humanbytes, progress, time_formatter
 

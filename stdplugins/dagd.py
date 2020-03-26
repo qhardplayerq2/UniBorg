@@ -4,10 +4,7 @@ Available Commands:
 .dns google.com
 .url <long url>
 .unshort <short url>"""
-from telethon import events
-import os
 import requests
-import json
 from uniborg.util import admin_cmd
 import logging
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',

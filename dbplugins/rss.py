@@ -5,14 +5,9 @@ import html
 import logging
 import os
 import re
-import time
-from datetime import datetime
-
-import aioschedule as schedule
 # import schedule
 from feedparser import parse
-from telethon import events, utils
-from telethon.tl.types import ChannelParticipantsAdmins
+from telethon import events
 
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from sample_config import Config
