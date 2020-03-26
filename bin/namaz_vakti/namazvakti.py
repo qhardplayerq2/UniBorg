@@ -98,7 +98,7 @@ class namazvakti():
 
             ulke = self.__veritabani[str(ulke_id)]
             sehirListesi = {}
-            if ulke["ilce_listesi_varmi"] :
+            if ulke["ilce_listesi_varmi"]:
 
                 liste = []
                 for i in ulke["sehirler"]:
@@ -136,7 +136,7 @@ class namazvakti():
             ulke = self.__veritabani[str(ulke_id)]
 
             # ilçeleri varsa dönelim!
-            if ulke["ilce_listesi_varmi"] :
+            if ulke["ilce_listesi_varmi"]:
                 # şehir id geçerliyse
                 if str(sehir_id) in ulke["sehirler"]:
                     sonuc["durum"] = "basarili"
