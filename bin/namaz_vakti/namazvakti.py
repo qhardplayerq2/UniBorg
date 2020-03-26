@@ -233,7 +233,8 @@ class namazvakti():
         return sonuc
 
     # Yer ile ilgili bilinmesi gerekenleri verir!
-    def __yerBilgisi(self, sehir_id):
+    @staticmethod
+    def __yerBilgisi(sehir_id):
 
         # adres dosyası
         adresDosyasi = os.path.join(os.path.join("./bin/namaz_vakti/"), "db", "adresler.ndb")
@@ -261,7 +262,8 @@ class namazvakti():
         return (gun + "." + ay + "." + yil)
 
     # tarih için verilen sayılarda 10 dan küçük olanlar için başına sıfır koyar stringe çevirir, yoksa sadece stringe çevirir!
-    def __sifirla(self, sayi):
+    @staticmethod
+    def __sifirla(sayi):
         if sayi < 10:
             return "0" + str(sayi)
         else:
