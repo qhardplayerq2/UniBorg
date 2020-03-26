@@ -131,8 +131,8 @@ def parse(message, old_entities=None):
     return del_surrogate(message), entities + old_entities
 
 
-@borg.on(events.MessageEdited(outgoing=True))
-@borg.on(events.NewMessage(outgoing=True))
+@borg.on(events.MessageEdited(outgoing=True)) # pylint:disable=E0602
+@borg.on(events.NewMessage(outgoing=True)) # pylint:disable=E0602
 async def reparse(event):
     old_entities = event.message.entities or []
     parser = partial(parse, old_entities=old_entities)

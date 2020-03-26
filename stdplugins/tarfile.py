@@ -27,7 +27,7 @@ from sample_config import Config
 from uniborg.util import admin_cmd, progress
 
 
-@borg.on(admin_cmd(pattern=("tar ?(.*)")))
+@borg.on(admin_cmd(pattern=("tar ?(.*)"))) # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return

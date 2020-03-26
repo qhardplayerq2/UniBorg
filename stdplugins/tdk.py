@@ -9,8 +9,8 @@ import requests
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
 
-@borg.on(admin_cmd(pattern="tdk ?(.*)"))
-async def tdk(event):
+@borg.on(admin_cmd(pattern="tdk ?(.*)")) # pylint:disable=E0602
+async def tdk(event): 
     if event.fwd_from:
         return
     inp = event.pattern_match.group(1)

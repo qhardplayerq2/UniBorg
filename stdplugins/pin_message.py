@@ -7,9 +7,9 @@ from telethon.tl import functions
 
 from uniborg.util import admin_cmd
 
-
-@borg.on(admin_cmd(pattern="cpin ?(.*)"))
-async def _(event):
+ 
+@borg.on(admin_cmd(pattern="cpin ?(.*)")) # pylint:disable=E0602
+async def _(event): 
     if event.fwd_from:
         return
     silent = True

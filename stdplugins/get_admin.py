@@ -10,7 +10,7 @@ from telethon.tl.types import (ChannelParticipantAdmin,
 from uniborg.util import admin_cmd
 
 
-@borg.on(admin_cmd(pattern="get_ad?(m)in ?(.*)"))
+@borg.on(admin_cmd(pattern="get_ad?(m)in ?(.*)")) # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return

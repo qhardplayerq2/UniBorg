@@ -17,7 +17,7 @@ from uniborg.util import admin_cmd, humanbytes, progress, time_formatter
 from sample_config import Config
 
 
-@borg.on(admin_cmd(pattern="download ?(.*)", allow_sudo=True))
+@borg.on(admin_cmd(pattern="download ?(.*)", allow_sudo=True)) # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return

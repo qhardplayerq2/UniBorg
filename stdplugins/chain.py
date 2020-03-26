@@ -9,7 +9,7 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
                     level=logging.WARNING)
 
                     
-@borg.on(events.NewMessage(pattern=r"\.chain", outgoing=True))
+@borg.on(events.NewMessage(pattern=r"\.chain", outgoing=True)) # pylint:disable=E0602
 async def _(event):
     await event.edit("Counting...")
     count = -1

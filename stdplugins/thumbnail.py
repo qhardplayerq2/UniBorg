@@ -36,7 +36,7 @@ def get_video_thumb(file, output=None, width=320):
         return output
 
 
-@borg.on(admin_cmd(pattern="savethumbnail"))
+@borg.on(admin_cmd(pattern="savethumbnail")) # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return
@@ -75,7 +75,7 @@ async def _(event):
         await event.edit("Reply to a photo to save custom thumbnail")
 
 
-@borg.on(admin_cmd(pattern="clearthumbnail"))
+@borg.on(admin_cmd(pattern="clearthumbnail")) # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return
@@ -84,7 +84,7 @@ async def _(event):
     await event.edit("✅ Custom thumbnail cleared succesfully.")
 
 
-@borg.on(admin_cmd(pattern="getthumbnail"))
+@borg.on(admin_cmd(pattern="getthumbnail")) # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return

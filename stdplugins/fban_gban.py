@@ -14,7 +14,7 @@ from sql_helpers.gban_sql_helper import (get_gban, add_chat_gban, remove_chat_gb
 
 # MONGOCLIENT = Config.MONGOCLIENT
 
-@borg.on(admin_cmd(pattern=("gban ?(.*)")))
+@borg.on(admin_cmd(pattern=("gban ?(.*)"))) # pylint:disable=E0602
 async def gban_all(msg):
     # if not is_mongo_alive():
     #     await msg.edit("`Database connections failing!`")
@@ -74,7 +74,7 @@ async def gban_all(msg):
 
 
 
-@borg.on(admin_cmd(pattern=("fban ?(.*)")))
+@borg.on(admin_cmd(pattern=("fban ?(.*)"))) # pylint:disable=E0602
 async def fedban_all(msg):
     # if not is_mongo_alive():
     #     await msg.edit("`Database connections failing!`")
@@ -157,7 +157,7 @@ async def fedban_all(msg):
 
 
 
-@borg.on(admin_cmd(pattern=("addfban ?(.*)")))
+@borg.on(admin_cmd(pattern=("addfban ?(.*)"))) # pylint:disable=E0602
 async def add_to_fban(chat):
     # if not is_mongo_alive():
     #     await chat.edit("`Database connections failing!`")
@@ -167,7 +167,7 @@ async def add_to_fban(chat):
 
 
 
-@borg.on(admin_cmd(pattern=("addgban ?(.*)")))
+@borg.on(admin_cmd(pattern=("addgban ?(.*)"))) # pylint:disable=E0602
 async def add_to_gban(chat):
     # if not is_mongo_alive():
     #     await chat.edit("`Database connections failing!`")
@@ -178,7 +178,7 @@ async def add_to_gban(chat):
 
 
 
-@borg.on(admin_cmd(pattern=("removefban ?(.*)")))
+@borg.on(admin_cmd(pattern=("removefban ?(.*)"))) # pylint:disable=E0602
 async def remove_from_fban(chat):
     # if not is_mongo_alive():
     #     await chat.edit("`Database connections failing!`")
@@ -188,7 +188,7 @@ async def remove_from_fban(chat):
 
 
 
-@borg.on(admin_cmd(pattern=("removegban ?(.*)")))
+@borg.on(admin_cmd(pattern=("removegban ?(.*)"))) # pylint:disable=E0602
 async def remove_from_gban(chat):
     # if not is_mongo_alive():
     #     await chat.edit("`Database connections failing!`")

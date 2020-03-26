@@ -13,7 +13,7 @@ from telethon import events
 
 
 
-@borg.on(events.NewMessage(pattern=r"\.yify recents", outgoing=True))
+@borg.on(events.NewMessage(pattern=r"\.yify recents", outgoing=True)) # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return

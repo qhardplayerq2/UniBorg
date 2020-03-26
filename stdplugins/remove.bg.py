@@ -29,7 +29,7 @@ from uniborg.util import admin_cmd
 from sample_config import Config
 
 
-@borg.on(admin_cmd(pattern="remove\.bg ?(.*)"))
+@borg.on(admin_cmd(pattern="remove\.bg ?(.*)")) # pylint:disable=E0602
 async def _(event):
     HELP_STR = "`.remove.bg` as reply to a media, or give a link as an argument to this command"
     if event.fwd_from:

@@ -19,7 +19,7 @@ from sample_config import Config
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
 
-@borg.on(admin_cmd(pattern="youtubesearch ?(\d+)? ?(.*)?"))
+@borg.on(admin_cmd(pattern="youtubesearch ?(\d+)? ?(.*)?")) # pylint:disable=E0602
 async def yt_search(video_q):
     reply = await video_q.get_reply_message()
     if video_q.pattern_match.group(2):

@@ -9,7 +9,7 @@ from uniborg.util import admin_cmd
 
 
 
-@borg.on(admin_cmd(pattern="promote ?(.*)"))
+@borg.on(admin_cmd(pattern="promote ?(.*)")) # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return
@@ -40,7 +40,7 @@ async def _(event):
         await event.edit("Successfully Promoted")
 
 
-@borg.on(admin_cmd(pattern="prankpromote ?(.*)"))
+@borg.on(admin_cmd(pattern="prankpromote ?(.*)")) # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return

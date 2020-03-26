@@ -7,7 +7,7 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
 from uniborg.util import admin_cmd
 
 
-@borg.on(admin_cmd(pattern="mention (.*)"))
+@borg.on(admin_cmd(pattern="mention (.*)")) # pylint:disable=E0602
 async def _(event):
 	if event.fwd_from:
 		return	

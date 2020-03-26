@@ -26,7 +26,7 @@ from sample_config import Config
 
 
 
-@borg.on(admin_cmd(pattern="unrar"))
+@borg.on(admin_cmd(pattern="unrar")) # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return

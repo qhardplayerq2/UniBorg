@@ -27,7 +27,7 @@ logger.info(Config.OPEN_LOAD_LOGIN)
 # https://t.me/RoseSupport/33801
 
 
-@borg.on(admin_cmd(pattern="rl"))
+@borg.on(admin_cmd(pattern="rl")) # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return

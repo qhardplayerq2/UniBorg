@@ -7,7 +7,7 @@ from telethon import functions
 from uniborg.util import admin_cmd
 
 
-@borg.on(admin_cmd(pattern="invite ?(.*)"))
+@borg.on(admin_cmd(pattern="invite ?(.*)")) # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return

@@ -11,7 +11,7 @@ from uniborg.util import admin_cmd
 import speedtest
 
 
-@borg.on(admin_cmd(pattern="speedtest ?(.*)"))
+@borg.on(admin_cmd(pattern="speedtest ?(.*)")) # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return

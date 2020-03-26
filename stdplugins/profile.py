@@ -30,7 +30,7 @@ logger = logging.getLogger(__name__)
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
 
-@borg.on(admin_cmd(pattern="delpf ?(.*)"))
+@borg.on(admin_cmd(pattern="delpf ?(.*)")) # pylint:disable=E0602
 async def remove_profilepic(delpfp):
     """ For .delpfp command, delete your current profile picture in Telegram. """
     group = delpfp.text[7:]
@@ -61,7 +61,7 @@ if 1 == 1:
     name = "Profile Photos"
     client = borg
 
-    @borg.on(admin_cmd(pattern="poto(.*)"))
+    @borg.on(admin_cmd(pattern="poto(.*)")) # pylint:disable=E0602
     async def potocmd(event):
         """Gets the profile photos of replied users, channels or chats"""
         id = "".join(event.raw_text.split(maxsplit=2)[1:])

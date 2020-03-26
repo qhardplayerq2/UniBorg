@@ -7,7 +7,7 @@ import requests
 from uniborg.util import admin_cmd
 
 
-@borg.on(admin_cmd(pattern="wikimedia (.*)"))
+@borg.on(admin_cmd(pattern="wikimedia (.*)")) # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return

@@ -19,7 +19,7 @@ import io
 
 
 
-@borg.on(admin_cmd(pattern=("mailru ?(.*)")))
+@borg.on(admin_cmd(pattern=("mailru ?(.*)"))) # pylint:disable=E0602
 async def _(event):
     url = event.pattern_match.group(1)
     if event.fwd_from:

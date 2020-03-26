@@ -6,7 +6,7 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
 from uniborg.util import admin_cmd
 
 
-@borg.on(admin_cmd(pattern="get_poll"))
+@borg.on(admin_cmd(pattern="get_poll")) # pylint:disable=E0602
 async def _(event):
     reply_message = await event.get_reply_message()
     if reply_message.media is None:

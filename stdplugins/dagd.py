@@ -10,7 +10,7 @@ import logging
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
 
-@borg.on(admin_cmd(pattern="dns (.*)"))
+@borg.on(admin_cmd(pattern="dns (.*)")) # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return
@@ -23,7 +23,7 @@ async def _(event):
         await event.edit("i can't seem to find {} on the internet".format(input_str))
 
 
-@borg.on(admin_cmd(pattern="shortlink (.*)"))
+@borg.on(admin_cmd(pattern="shortlink (.*)")) # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return
@@ -36,7 +36,7 @@ async def _(event):
         await event.edit("something is wrong. please try again later.")
 
 
-@borg.on(admin_cmd(pattern="unshort (.*)"))
+@borg.on(admin_cmd(pattern="unshort (.*)")) # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return

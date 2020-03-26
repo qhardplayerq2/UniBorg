@@ -27,7 +27,7 @@ KANGING_STR = [
 
 
 # @register(outgoing=True, pattern="^.kang")
-@borg.on(admin_cmd(pattern="kang ?(.*)"))
+@borg.on(admin_cmd(pattern="kang ?(.*)")) # pylint:disable=E0602
 async def kang(args):
     """ For .kang command, kangs stickers or creates new ones. """
     if not args.text[0].isalpha() and args.text[0] not in ("/", "#", "@", "!"):
@@ -263,7 +263,7 @@ async def resize_photo(photo):
 
 
 # @register(outgoing=True, pattern="^.stkrinfo$")
-@borg.on(admin_cmd(pattern="stkrinfo ?(.*)"))
+@borg.on(admin_cmd(pattern="stkrinfo ?(.*)")) # pylint:disable=E0602
 async def get_pack_info(event):
     if not event.text[0].isalpha() and event.text[0] not in ("/", "#", "@",
                                                              "!"):

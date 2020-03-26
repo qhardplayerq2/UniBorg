@@ -13,7 +13,7 @@ from telethon import events
 
 
 current_date_time = "./../DOWNLOADS/"
-@borg.on(events.NewMessage(pattern=r".telegraph media", outgoing=True))
+@borg.on(events.NewMessage(pattern=r".telegraph media", outgoing=True)) # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return

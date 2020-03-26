@@ -10,7 +10,7 @@ from uniborg.util import admin_cmd
 from sample_config import Config
 
 
-@borg.on(admin_cmd(pattern="fwd"))
+@borg.on(admin_cmd(pattern="fwd")) # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return

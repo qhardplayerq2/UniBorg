@@ -9,7 +9,7 @@ from telethon.errors.rpcerrorlist import (ChatAdminRequiredError, MessageTooLong
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
                                           
-@borg.on(events.NewMessage(pattern=r"\.userlists ?(.*)", outgoing=True))
+@borg.on(events.NewMessage(pattern=r"\.userlists ?(.*)", outgoing=True)) # pylint:disable=E0602
 async def get_users(show):
     """ For .userslist command, list all of the users of the chat. """
     if not show.text[0].isalpha() and show.text[0] not in ("/", "#", "@", "!"):

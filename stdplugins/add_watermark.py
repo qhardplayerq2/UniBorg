@@ -7,7 +7,7 @@ from uniborg.util import admin_cmd, progress
 from sample_config import Config
 import shutil
 
-@borg.on(admin_cmd(pattern="watermark"))
+@borg.on(admin_cmd(pattern="watermark")) # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return

@@ -8,7 +8,7 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
 from telethon import events
 
 
-@borg.on(events.NewMessage(pattern=r"\.shout", outgoing=True))
+@borg.on(events.NewMessage(pattern=r"\.shout", outgoing=True)) # pylint:disable=E0602
 async def shout(args):
     if args.fwd_from:
         return

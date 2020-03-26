@@ -20,7 +20,7 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
 
 
 
-@borg.on(admin_cmd(pattern=("rss ?(.*)")))
+@borg.on(admin_cmd(pattern=("rss ?(.*)"))) # pylint:disable=E0602
 async def show_url(event):
     tg_chat_id = str(event.chat_id)
     entity=await borg.get_input_entity(Config.RSS_POST_MSG_GROUP_ID)
@@ -69,7 +69,7 @@ async def show_url(event):
     else:
         await event.edit("URL missing")
 
-@borg.on(admin_cmd(pattern=("listrss ?(.*)")))
+@borg.on(admin_cmd(pattern=("listrss ?(.*)"))) # pylint:disable=E0602
 async def list_urls(event):
     tg_chat_id = str(event.chat_id)
     entity=await borg.get_input_entity(Config.RSS_POST_MSG_GROUP_ID)
@@ -99,7 +99,7 @@ async def list_urls(event):
         )
 
 
-@borg.on(admin_cmd(pattern=("addrss ?(.*)")))
+@borg.on(admin_cmd(pattern=("addrss ?(.*)"))) # pylint:disable=E0602
 async def add_url_(event):
     if event.pattern_match.group(1):
         chat = await event.get_chat()
@@ -134,7 +134,7 @@ async def add_url_(event):
 
 
 
-@borg.on(admin_cmd(pattern=("removerss ?(.*)")))
+@borg.on(admin_cmd(pattern=("removerss ?(.*)"))) # pylint:disable=E0602
 async def remove_url_(event):
     if event.pattern_match.group(1):
         tg_chat_id = str(event.chat_id)
@@ -157,7 +157,7 @@ async def remove_url_(event):
     else:
         await event.edit("URL missing")
 
-@borg.on(events.NewMessage(func=lambda e: e.is_group))
+@borg.on(events.NewMessage(func=lambda e: e.is_group)) # pylint:disable=E0602
 async def rss_update(event):
     user_data = get_all()
     entity=await borg.get_input_entity(Config.RSS_POST_MSG_GROUP_ID)

@@ -8,7 +8,7 @@ from uniborg.util import admin_cmd
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
 
-@borg.on(admin_cmd(pattern=("q ?(.*)")))
+@borg.on(admin_cmd(pattern=("q ?(.*)"))) # pylint:disable=E0602
 # @borg.on(outgoing=True, pattern="^.q(?: |$)(.*)")
 async def _(event):
     if event.fwd_from:

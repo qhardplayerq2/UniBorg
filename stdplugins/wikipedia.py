@@ -10,7 +10,7 @@ import wikipedia
 from uniborg.util import admin_cmd
 
 
-@borg.on(admin_cmd(pattern="wikipedia (.*)"))
+@borg.on(admin_cmd(pattern="wikipedia (.*)")) # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return

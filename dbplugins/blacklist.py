@@ -14,7 +14,7 @@ import logging
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
 
-@borg.on(admin_cmd(incoming=True))
+@borg.on(admin_cmd(incoming=True)) # pylint:disable=E0602
 async def on_new_message(event):
     # TODO: exempt admins from locks
     if borg.me.id == event.from_id:
@@ -32,7 +32,7 @@ async def on_new_message(event):
             break
 
 
-@borg.on(admin_cmd(pattern="addblacklist ((.|\n)*)"))
+@borg.on(admin_cmd(pattern="addblacklist ((.|\n)*)")) # pylint:disable=E0602
 async def on_add_black_list(event):
     text = event.pattern_match.group(1)
     to_blacklist = list(set(trigger.strip() for trigger in text.split("\n") if trigger.strip()))
@@ -41,9 +41,9 @@ async def on_add_black_list(event):
     await event.edit("Added {} triggers to the blacklist in the current chat".format(len(to_blacklist)))
 
 
-@borg.on(admin_cmd(pattern="listblacklist"))
+@borg.on(admin_cmd(pattern="listblacklist")) # pylint:disable=E0602
 async def on_view_blacklist(event):
-    all_blacklisted = sql.get_chat_blacklist(event.chat_id)
+    all_blacklisted = sql.get_chat_blacklist(event.chat_id) 
     OUT_STR = "Blacklists in the Current Chat:\n"
     if len(all_blacklisted) > 0:
         for trigger in all_blacklisted:
@@ -66,7 +66,7 @@ async def on_view_blacklist(event):
         await event.edit(OUT_STR)
 
 
-@borg.on(admin_cmd(pattern="rmblacklist ((.|\n)*)"))
+@borg.on(admin_cmd(pattern="rmblacklist ((.|\n)*)")) # pylint:disable=E0602
 async def on_delete_blacklist(event):
     text = event.pattern_match.group(1)
     to_unblacklist = list(set(trigger.strip() for trigger in text.split("\n") if trigger.strip()))

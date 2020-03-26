@@ -13,7 +13,7 @@ from uniborg.util import admin_cmd
 from sample_config import Config
 
 
-@borg.on(admin_cmd(pattern="weather (.*)"))
+@borg.on(admin_cmd(pattern="weather (.*)")) # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return
@@ -55,7 +55,7 @@ async def _(event):
         await event.edit(response_api["message"])
 
 
-@borg.on(admin_cmd(pattern="wttr (.*)"))
+@borg.on(admin_cmd(pattern="wttr (.*)")) # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return

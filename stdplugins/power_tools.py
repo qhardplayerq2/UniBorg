@@ -11,7 +11,7 @@ import sys
 from uniborg.util import admin_cmd
 
 
-@borg.on(admin_cmd(pattern="restart"))
+@borg.on(admin_cmd(pattern="restart")) # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return
@@ -28,7 +28,7 @@ async def _(event):
     quit()
 
 
-@borg.on(admin_cmd(pattern="shutdown"))
+@borg.on(admin_cmd(pattern="shutdown")) # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return

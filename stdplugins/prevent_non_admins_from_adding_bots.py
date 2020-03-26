@@ -16,7 +16,7 @@ CHATS_TO_MONITOR_FOR_ADDED_BOTS = [
 ]
 
 
-@borg.on(events.ChatAction(chats=CHATS_TO_MONITOR_FOR_ADDED_BOTS))
+@borg.on(events.ChatAction(chats=CHATS_TO_MONITOR_FOR_ADDED_BOTS)) # pylint:disable=E0602
 async def kick_if_bots(event):
     if event.user_added:
         users_added_by = event.action_message.from_id

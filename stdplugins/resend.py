@@ -7,7 +7,7 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
 from telethon import events
 
 
-@borg.on(events.NewMessage(pattern=r"\.resend", outgoing=True))
+@borg.on(events.NewMessage(pattern=r"\.resend", outgoing=True)) # pylint:disable=E0602
 async def _(event):
     await event.delete()
     m = await event.get_reply_message()

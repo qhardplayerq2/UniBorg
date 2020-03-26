@@ -20,7 +20,7 @@ aria2 = aria2p.API(
 
 EDIT_SLEEP_TIME_OUT = 10
 
-@borg.on(admin_cmd(pattern="ariaurl ?(.*)"))
+@borg.on(admin_cmd(pattern="ariaurl ?(.*)")) # pylint:disable=E0602
 async def magnet_download(event):
 	if event.fwd_from:
 		return

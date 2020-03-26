@@ -17,7 +17,7 @@ from uniborg.util import admin_cmd
 langi = "en"
 
 #kanged from Blank-x ;---;
-@borg.on(admin_cmd(pattern="imdb (.*)")) 
+@borg.on(admin_cmd(pattern="imdb (.*)"))  # pylint:disable=E0602
 async def imdb(e):
  try:
     movie_name = e.pattern_match.group(1)

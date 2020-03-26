@@ -17,7 +17,7 @@ from gtts import gTTS
 from sample_config import Config
 
 
-@borg.on(admin_cmd(pattern="tts (.*)"))
+@borg.on(admin_cmd(pattern="tts (.*)")) # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return

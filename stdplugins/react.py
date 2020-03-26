@@ -7,7 +7,7 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
 from telethon import events
 import random
 
-@borg.on(events.NewMessage(pattern=r"\.react (.*)", outgoing=True))
+@borg.on(events.NewMessage(pattern=r"\.react (.*)", outgoing=True)) # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return

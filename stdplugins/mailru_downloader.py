@@ -20,7 +20,7 @@ import io
 
 
 
-@borg.on(admin_cmd(pattern=("cmrdl ?(.*)")))
+@borg.on(admin_cmd(pattern=("cmrdl ?(.*)"))) # pylint:disable=E0602
 async def _(event):
     url = event.pattern_match.group(1)
     if event.fwd_from:

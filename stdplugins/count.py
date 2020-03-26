@@ -52,7 +52,7 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
 
 """Type `.count` and see Magic."""
 
-@borg.on(admin_cmd(pattern='count'))
+@borg.on(admin_cmd(pattern='count')) # pylint:disable=E0602
 async def stats(event: NewMessage.Event) -> None:  # pylint: disable = R0912, R0914, R0915
     """Command to get stats about the account"""
     waiting_message = await event.edit('`Collecting stats, Wait Nibba`')
