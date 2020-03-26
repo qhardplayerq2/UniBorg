@@ -5,10 +5,7 @@ originaly from : @corsicanu_bot
 import logging
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
-import sys
-from telethon import events, functions
-from uniborg.util import admin_cmd
-import random
+from telethon import events
 
 
 @borg.on(events.NewMessage(pattern=r"\.shout", outgoing=True))

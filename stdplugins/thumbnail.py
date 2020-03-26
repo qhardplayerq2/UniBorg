@@ -10,7 +10,6 @@ import os
 import subprocess
 
 from PIL import Image
-from telethon import events
 
 from uniborg.util import admin_cmd
 

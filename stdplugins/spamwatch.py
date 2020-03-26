@@ -1,27 +1,12 @@
 """spamwatch for uniborg users. Credits : @By_Azade"""
 
-import asyncio
-from asyncio import sleep
-from os import remove
-
 from telethon import events
-from telethon.errors import (BadRequestError, ChatAdminRequiredError,
-                             ImageProcessFailedError, PhotoCropSizeSmallError,
-                             UserAdminInvalidError)
-from telethon.errors.rpcerrorlist import (MessageTooLongError,
-                                          UserIdInvalidError)
-from telethon.tl.functions.channels import (EditAdminRequest,
-                                            EditBannedRequest,
-                                            EditPhotoRequest)
-from telethon.tl.functions.messages import UpdatePinnedMessageRequest
-from telethon.tl.types import (ChannelParticipantsAdmins,
-                               ChannelParticipantsBots, ChatAdminRights,
-                               ChatBannedRights, MessageEntityMentionName,
-                               MessageMediaPhoto, PeerChat)
+from telethon.errors import (BadRequestError)
+from telethon.tl.functions.channels import (EditBannedRequest)
+from telethon.tl.types import (ChatBannedRights)
 
 import spamwatch
 from sample_config import Config
-from uniborg.util import admin_cmd
 
 ENABLE_LOG = True
 LOGGING_CHATID = Config.PRIVATE_CHANNEL_BOT_API_ID

@@ -14,9 +14,6 @@ import os
 import subprocess
 import time
 from datetime import datetime
-
-import requests
-from telethon import events
 from telethon.tl.types import DocumentAttributeAudio, DocumentAttributeVideo
 
 from uniborg.util import admin_cmd, progress

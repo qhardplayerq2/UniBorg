@@ -11,7 +11,6 @@ import telethon.utils
 from telethon import TelegramClient
 
 from . import hacks
-from .storage import Storage
 
 
 class Uniborg(TelegramClient):

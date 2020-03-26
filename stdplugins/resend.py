@@ -4,8 +4,7 @@
 import logging
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
-from telethon import events, utils
-from telethon.tl import types
+from telethon import events
 
 
 @borg.on(events.NewMessage(pattern=r"\.resend", outgoing=True))

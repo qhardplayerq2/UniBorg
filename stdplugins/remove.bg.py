@@ -18,17 +18,13 @@ Syntax: .remove.bg as reply to a media"""
 import logging
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
-import asyncio
 import io
 import os
-import time
 from datetime import datetime
 
 import requests
-import telethon
-from telethon import events
 
-from uniborg.util import admin_cmd, progress
+from uniborg.util import admin_cmd
 
 from sample_config import Config
 

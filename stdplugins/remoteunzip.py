@@ -1,21 +1,12 @@
 import logging
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
-import asyncio
 import os
-import re
-import time
-import zipfile
-from datetime import datetime
-from zipfile import ZipFile
-
-from pySmartDL import SmartDL
 from remotezip import RemoteZip
-from telethon import events
-from telethon.tl.types import DocumentAttributeAudio, DocumentAttributeVideo
+from telethon.tl.types import DocumentAttributeVideo
 from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
-from uniborg.util import admin_cmd, humanbytes, progress, time_formatter
+from uniborg.util import admin_cmd
 
 from sample_config import Config
 

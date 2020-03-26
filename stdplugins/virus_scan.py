@@ -1,17 +1,12 @@
 import logging
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
-import asyncio
 import json
-import os
-import time
 from datetime import datetime
 
 import requests
 from sample_config import Config
-#
-from telethon import events
-from uniborg.util import admin_cmd, humanbytes, progress
+from uniborg.util import admin_cmd
 
 api = Config.VIRUSTOTAL_API_KEY
 

@@ -10,13 +10,9 @@ import os
 import time
 import zipfile
 from datetime import datetime
-from zipfile import ZipFile
+from telethon.tl.types import DocumentAttributeVideo
 
-from pySmartDL import SmartDL
-from telethon import events
-from telethon.tl.types import DocumentAttributeAudio, DocumentAttributeVideo
-
-from uniborg.util import admin_cmd, humanbytes, progress, time_formatter
+from uniborg.util import admin_cmd, progress
 
 from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
