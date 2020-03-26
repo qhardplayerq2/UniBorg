@@ -3,13 +3,8 @@ Turkish word meaning. Only Turkish. Coded @By_Azade
 """
 
 import logging
-import os
-from datetime import datetime
-from telethon import events
-from sample_config import Config
 from uniborg.util import admin_cmd
 import requests
-import json
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)

@@ -11,12 +11,8 @@ import math
 import os
 import shutil
 import time
-from asyncio import sleep
 
 from telethon.tl.types import DocumentAttributeAudio
-
-import wget
-from hurry.filesize import size
 from uniborg.util import admin_cmd
 from youtube_dl import YoutubeDL
 from youtube_dl.utils import (ContentTooShortError, DownloadError,

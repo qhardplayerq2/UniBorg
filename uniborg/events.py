@@ -8,10 +8,7 @@
 
 from telethon import events
 import asyncio
-from traceback import format_exc
 from time import gmtime, strftime
-import math
-import subprocess
 import sys
 import traceback
 import datetime

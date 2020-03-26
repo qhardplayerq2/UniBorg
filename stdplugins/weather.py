@@ -5,7 +5,6 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
                     level=logging.WARNING)
 import io
 import time
-from datetime import datetime, tzinfo
 
 import aiohttp
 

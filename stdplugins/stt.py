@@ -7,7 +7,6 @@ import os
 from datetime import datetime
 
 import requests
-from telethon import events
 
 from uniborg.util import admin_cmd
 

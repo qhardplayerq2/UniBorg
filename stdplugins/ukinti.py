@@ -7,19 +7,14 @@ import logging
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
 import asyncio
-from datetime import datetime, timedelta
 from time import sleep
-
-from telethon import events
-from telethon.tl import functions, types
+from telethon.tl import functions
 from telethon.tl.types import (ChannelParticipantsKicked, ChatBannedRights,
                                UserStatusEmpty, UserStatusLastMonth,
                                UserStatusLastWeek, UserStatusOffline,
                                UserStatusOnline, UserStatusRecently)
 
 from uniborg.util import admin_cmd
-
-from sample_config import Config
 
 
 @borg.on(admin_cmd(pattern="unbanall ?(.*)"))

@@ -15,7 +15,7 @@ from datetime import datetime
 from pySmartDL import SmartDL
 from telethon.tl.types import DocumentAttributeVideo
 
-from uniborg.util import admin_cmd, humanbytes, progress, time_formatter
+from uniborg.util import admin_cmd, humanbytes, progress
 
 from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser

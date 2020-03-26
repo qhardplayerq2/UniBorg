@@ -6,10 +6,7 @@ import os
 import time
 import zipfile
 
-from pySmartDL import SmartDL
-from telethon import events
-
-from uniborg.util import admin_cmd, humanbytes, progress, time_formatter
+from uniborg.util import admin_cmd, progress
 
 from sample_config import Config
 

@@ -9,7 +9,6 @@ from sys import setrecursionlimit
 
 from requests import get
 from telethon import events
-from telethon.tl import functions, types
 from telethon.tl.functions.account import UpdateProfileRequest
 
 

@@ -6,7 +6,6 @@ Syntax: .wikipedia Query"""
 import logging
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
-from telethon import events
 import wikipedia
 from uniborg.util import admin_cmd
 

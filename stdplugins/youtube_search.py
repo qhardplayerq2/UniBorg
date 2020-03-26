@@ -5,21 +5,9 @@
 \nAll thanks goes to **SNAPDRAGON** . Thnaks a lot Bruh..
 \nPorted by © [EYEPATCH](t.me/neomatrix90)
 \n`Don't Copy Without Credits.`"""
-import asyncio
 import logging
-import os
 import urllib.parse
 from html import unescape
-from re import findall
-from shutil import rmtree
-from urllib.error import HTTPError
-
-import aiohttp
-from requests import get
-from telethon import events
-
-# import pytube
-from emoji import get_emoji_regexp
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 # from gtts import gTTS

@@ -3,15 +3,8 @@ Syntax: .userlist"""
 import logging
 import os
 
-from telethon import errors, events
-from telethon.errors.rpcerrorlist import (ChatAdminRequiredError,
-                                          MessageTooLongError,
-                                          UserIdInvalidError)
-from telethon.tl.types import (ChannelParticipantAdmin,
-                               ChannelParticipantCreator,
-                               ChannelParticipantsAdmins)
-
-from uniborg.util import admin_cmd
+from telethon import events
+from telethon.errors.rpcerrorlist import (ChatAdminRequiredError, MessageTooLongError)
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
