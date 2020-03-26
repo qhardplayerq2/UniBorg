@@ -8,7 +8,6 @@ import time
 import re
 from telethon import events
 from telethon.tl.functions.messages import GetPeerDialogsRequest
-from alive_progress import alive_bar, config_handler
 
 # the secret configuration specific things
 ENV = bool(os.environ.get("ENV", False))
