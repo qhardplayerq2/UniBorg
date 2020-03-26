@@ -3,8 +3,7 @@ import time
 from datetime import datetime
 from PyPDF2 import PdfFileWriter, PdfFileReader
 import asyncio
-from telethon import events
-from uniborg.util import admin_cmd, humanbytes, progress
+from uniborg.util import admin_cmd, progress
 from sample_config import Config
 import shutil
 

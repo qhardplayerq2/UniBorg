@@ -7,7 +7,7 @@ import asyncio
 import io
 import sql_helpers.no_log_pms_sql as no_log_pms_sql
 import sql_helpers.pmpermit_sql as pmpermit_sql
-from telethon import events, errors, functions, types
+from telethon import events, functions, types
 from uniborg.util import admin_cmd
 
 from sample_config import Config

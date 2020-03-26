@@ -3,8 +3,6 @@
 .pname <Name>
 .ppic"""
 import os
-import uniborg
-from telethon import events
 from telethon.tl import functions
 from uniborg.util import admin_cmd
 

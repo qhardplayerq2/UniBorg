@@ -3,14 +3,11 @@ Syntax: .get_admin"""
 import logging
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
-from telethon import events
 from telethon.tl.types import (ChannelParticipantAdmin,
                                ChannelParticipantCreator,
                                ChannelParticipantsAdmins)
 
 from uniborg.util import admin_cmd
-
-from sample_config import Config
 
 
 @borg.on(admin_cmd(pattern="get_ad?(m)in ?(.*)"))

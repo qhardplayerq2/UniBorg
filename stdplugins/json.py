@@ -5,8 +5,6 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
                     level=logging.WARNING)
 import io
 
-from telethon import events
-
 from uniborg.util import admin_cmd
 
 from sample_config import Config

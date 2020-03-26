@@ -9,9 +9,6 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
                     level=logging.WARNING)
 import requests
 from telethon import events
-import asyncio
-import os
-import sys
 
 
 async def download_file_from_google_drive(id):
