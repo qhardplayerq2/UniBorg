@@ -3,23 +3,24 @@
 # (c) M.Furkan
 
 import asyncio
+import logging
 import os
+import re
 import subprocess
 import time
 from datetime import datetime
-import re
+
 import telethon
-from telethon import *
-from telethon.tl.types import *
+
+from telethon.tl.types import DocumentAttributeVideo
 
 from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
-# https://stackoverflow.com/a/37631799/4723940
+
 from PIL import Image
 from sample_config import Config
-from uniborg.util import *
 from uniborg.util import admin_cmd, humanbytes, progress, time_formatter
-import logging
+
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
 # thumb_image_path = Config.TMP_DOWNLOAD_DIRECTORY + "thumb_image.jpg"
