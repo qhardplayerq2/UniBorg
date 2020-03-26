@@ -112,7 +112,7 @@ async def fedban_all(msg):
             spamwatch = True
         else:
             spamwatch = False
-    failed = dict()
+    failed = {}
     count = 1
     fbanlist = []
     x = get_fban()
