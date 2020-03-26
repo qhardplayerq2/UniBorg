@@ -1,11 +1,6 @@
-import asyncio
 import datetime
 import json
 import logging
-import os
-import requests
-from telethon import events
-from unicode_tr import unicode_tr
 # from ..bin.namaz_vakti import namazvakti
 from uniborg.util import admin_cmd
 from datetime import datetime

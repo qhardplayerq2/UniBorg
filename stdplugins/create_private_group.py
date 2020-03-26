@@ -1,7 +1,7 @@
 """Create Private Groups
 Available Commands:
 .create (b|g) GroupName"""
-from telethon.tl import functions, types
+from telethon.tl import functions
 from uniborg import util
 import logging
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',

@@ -4,16 +4,12 @@ import logging
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
 import asyncio
-import io
 import os
 import time
 from datetime import datetime
 
 
 from uniborg.util import admin_cmd, progress
-
-from hachoir.metadata import extractMetadata
-from hachoir.parser import createParser
 from sample_config import Config
 
 FF_MPEG_DOWN_LOAD_MEDIA_PATH = "uniborg.media.ffmpeg"

@@ -5,7 +5,6 @@ from datetime import datetime
 import requests 
 from bs4 import BeautifulSoup
 from convertdate import islamic
-import pathlib
 
 
 

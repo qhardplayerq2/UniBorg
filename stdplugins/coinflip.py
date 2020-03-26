@@ -1,7 +1,6 @@
 """CoinFlip for @UniBorg
 Syntax: .coinflip [optional_choice]"""
-from telethon import events
-import random, re
+import random
 from uniborg.util import admin_cmd
 import logging
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',

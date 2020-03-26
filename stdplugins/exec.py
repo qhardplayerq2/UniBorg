@@ -5,13 +5,7 @@ Syntax: .exec Code"""
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 import asyncio
 import io
-
-import subprocess
 import time
-
-from telethon import events
-from telethon.errors import (MessageEmptyError, MessageNotModifiedError,
-                             MessageTooLongError)
 
 from uniborg.util import admin_cmd
 

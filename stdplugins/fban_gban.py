@@ -7,20 +7,9 @@
 from asyncio import sleep
 
 from telethon.tl.types import MessageEntityMentionName
-
-
-from telethon import events
-# from stdplugins.dbhelper import (add_chat_fban, add_chat_gban, get_fban,
-#                                       get_gban, remove_chat_fban,
-#                                       remove_chat_gban)
-from sample_config import Config
 from uniborg.util import admin_cmd
-
-
-from sql_helpers.gmute_sql import (is_gmuted, gmute, ungmute)
-from sql_helpers.mute_sql import (is_muted, mute ,unmute)
-from sql_helpers.fban_sql_helper import (is_fban,get_fban,add_chat_fban,remove_chat_fban)
-from sql_helpers.gban_sql_helper import (is_gban,get_gban,add_chat_gban,remove_chat_gban)
+from sql_helpers.fban_sql_helper import (get_fban, add_chat_fban, remove_chat_fban)
+from sql_helpers.gban_sql_helper import (get_gban, add_chat_gban, remove_chat_gban)
 from sql_helpers.spam_mute_sql import (is_muted,mute,unmute)
 
 

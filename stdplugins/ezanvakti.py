@@ -1,10 +1,7 @@
-import asyncio
-import datetime
 import json
 import logging
 
 import requests
-from telethon import events
 
 from uniborg.util import admin_cmd
 
