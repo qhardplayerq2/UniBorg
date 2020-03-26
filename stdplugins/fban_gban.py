@@ -10,7 +10,6 @@ from telethon.tl.types import MessageEntityMentionName
 from uniborg.util import admin_cmd
 from sql_helpers.fban_sql_helper import (get_fban, add_chat_fban, remove_chat_fban)
 from sql_helpers.gban_sql_helper import (get_gban, add_chat_gban, remove_chat_gban)
-from sql_helpers.spam_mute_sql import (is_muted,mute,unmute)
 
 
 # MONGOCLIENT = Config.MONGOCLIENT

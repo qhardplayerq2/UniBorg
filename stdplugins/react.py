@@ -6,7 +6,6 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
                     level=logging.WARNING)
 from telethon import events
 import random
-import asyncio
 
 @borg.on(events.NewMessage(pattern=r"\.react (.*)", outgoing=True))
 async def _(event):

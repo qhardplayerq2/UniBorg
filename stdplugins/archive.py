@@ -14,8 +14,7 @@ import os
 import subprocess
 import time
 from sample_config import Config
-from telethon import events
-from uniborg.util import admin_cmd, humanbytes, progress, time_formatter
+from uniborg.util import admin_cmd, progress
 import subprocess
 import patoolib
 import logging

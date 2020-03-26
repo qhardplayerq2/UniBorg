@@ -3,8 +3,7 @@ Syntax: .cpin [LOUD]"""
 import logging
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
-from telethon import events
-from telethon.tl import functions, types
+from telethon.tl import functions
 
 from uniborg.util import admin_cmd
 

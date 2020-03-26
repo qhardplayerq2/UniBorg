@@ -6,7 +6,6 @@ Available Commands:
 .snips
 .snipl
 .snipd"""
-from telethon import events, utils
 from telethon.tl import types
 from sql_helpers.snips_sql import get_snips, add_snip, remove_snip, get_all_snips
 from uniborg.util import admin_cmd

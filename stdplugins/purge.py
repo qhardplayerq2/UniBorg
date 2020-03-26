@@ -3,8 +3,6 @@ import asyncio
 import logging
 from asyncio import sleep
 
-from telethon import events
-
 from sample_config import Config
 from uniborg.util import admin_cmd
 

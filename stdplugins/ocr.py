@@ -5,7 +5,6 @@ import json
 import os
 from PIL import Image
 import requests
-from telethon import events
 
 from uniborg.util import admin_cmd
 

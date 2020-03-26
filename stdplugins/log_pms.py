@@ -6,11 +6,8 @@ import os
 import sys
 
 from telethon import events
-from telethon.tl import functions, types
-from telethon.tl.types import Channel, Chat, User
 
 from sample_config import Config
-from uniborg.util import admin_cmd
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                     level=logging.WARN)

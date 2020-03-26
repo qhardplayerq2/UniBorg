@@ -11,12 +11,7 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
                     level=logging.WARNING)
 import bs4
 import requests
-import asyncio
-import os
 import re
-import subprocess
-import time
-from datetime import datetime
 from uniborg.util import admin_cmd
 
 langi = "en"

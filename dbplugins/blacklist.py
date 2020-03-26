@@ -9,8 +9,6 @@ Available Commands:
 import io
 import re
 import sql_helpers.blacklist_sql as sql
-from telethon import events, utils
-from telethon.tl import types, functions
 from uniborg.util import admin_cmd
 import logging
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',

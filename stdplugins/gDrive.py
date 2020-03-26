@@ -24,9 +24,7 @@ from uniborg.util import admin_cmd, humanbytes, progress
 
 import httplib2
 from apiclient.discovery import build
-from apiclient.errors import ResumableUploadError
 from apiclient.http import MediaFileUpload
-from oauth2client import client, file, tools
 from oauth2client.client import OAuth2WebServerFlow
 from oauth2client.file import Storage
 from sample_config import Config

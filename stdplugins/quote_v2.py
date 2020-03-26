@@ -1,10 +1,7 @@
-import asyncio
-import datetime
 import logging
 
 from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
-from telethon.tl.functions.account import UpdateNotifySettingsRequest
 
 from uniborg.util import admin_cmd
 
