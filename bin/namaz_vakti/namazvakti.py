@@ -58,7 +58,7 @@ class namazvakti():
         dosyaYolu = os.path.join("./bin/namaz_vakti/db/")
 
         # Önce cache bellek işlemleri
-        if cacheklasoru != None:
+        if cacheklasoru is not None:
             self.__cache = cacheklasoru;
         else:
             self.__cache = os.path.join(dosyaYolu, self.__cacheKlasorYolu)
