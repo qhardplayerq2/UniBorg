@@ -10,7 +10,6 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
                     level=logging.WARNING)
 import os
 import time
-import math
 import asyncio
 from youtube_dl import YoutubeDL
 from youtube_dl.utils import (DownloadError, ContentTooShortError,
@@ -19,7 +18,7 @@ from youtube_dl.utils import (DownloadError, ContentTooShortError,
                               UnavailableVideoError, XAttrMetadataError)
 from telethon.tl.types import DocumentAttributeVideo
 
-from uniborg.util import admin_cmd, humanbytes, progress, time_formatter
+from uniborg.util import admin_cmd, progress
 from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
 from uniborg.util import admin_cmd
