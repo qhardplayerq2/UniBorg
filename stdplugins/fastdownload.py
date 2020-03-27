@@ -40,7 +40,7 @@ async def magnet_download(event):
 	if file.followed_by_ids:
 		new_gid = await check_metadata(gid)
 		await progress_status(gid=new_gid,event=event,previous=None)
-	while complete != True:
+	while complete is not True:
 		file = aria2.get_download(gid)
 		complete = file.is_complete
 		try:
