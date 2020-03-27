@@ -17,8 +17,9 @@ async def tdk(event):
     kelime = "https://sozluk.gov.tr/gts?ara={}".format(inp)
     headers = {"USER-AGENT": "UniBorg"}
     response = requests.get(kelime, headers=headers).json()
-    anlam_sayisi = response[0]['anlam_say']
+    
     try:
+        anlam_sayisi = response[0]['anlam_say']
         x = "TDK Sözlük **{}**\n\n".format(inp)
         for anlamlar in range(int(anlam_sayisi)):
             x += "👉{}\n".format(response[0]['anlamlarListe'][anlamlar]['anlam'])
