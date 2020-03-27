@@ -12,7 +12,6 @@ from telethon import events
 from uniborg.util import admin_cmd, humanbytes, progress, time_formatter
 import subprocess
 import patoolib
-from bin.cmrudl import *
 from datetime import datetime
 import io
 
