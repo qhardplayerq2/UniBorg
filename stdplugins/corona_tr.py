@@ -43,4 +43,7 @@ async def cor_tr(event):
         caption="Sağlık Bakanlığı Corona Virüs Güncel Bilgiler Tablosu",
         reply_to=event
     )
+    os.remove(img1)
+    await asyncio.sleep(3)
+    os.remove(img2)
 
