@@ -1,17 +1,17 @@
 """Check your internet speed powered by speedtest.net
 Syntax: .speedtest
 Available Options: image, file, text"""
-import io
+import logging
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
 from datetime import datetime
-
-from telethon import events
 
 from uniborg.util import admin_cmd
 
 import speedtest
 
 
-@borg.on(admin_cmd(pattern="speedtest ?(.*)"))
+@borg.on(admin_cmd(pattern="speedtest ?(.*)")) # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return

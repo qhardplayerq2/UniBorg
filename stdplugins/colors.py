@@ -1,13 +1,14 @@
 """Color Plugin for @UniBorg
 Syntax: .color <color_code>"""
-from telethon import events
 import os
 from PIL import Image, ImageColor
 from uniborg.util import admin_cmd
+import logging
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
 
-
-@borg.on(admin_cmd(pattern="color (.*)"))
-async def _(event):
+@borg.on(admin_cmd(pattern="color (.*)")) # pylint:disable=E0602
+async def _(event): 
     if event.fwd_from:
         return
     input_str = event.pattern_match.group(1)

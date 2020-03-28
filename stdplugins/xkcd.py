@@ -1,14 +1,14 @@
 """XKCD Search
 Syntax: .xkcd <search>"""
-from telethon import events
-import asyncio
-import json
+import logging
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
 import requests
 from urllib.parse import quote
 from uniborg.util import admin_cmd
 
 
-@borg.on(admin_cmd(pattern="xkcd ?(.*)"))
+@borg.on(admin_cmd(pattern="xkcd ?(.*)")) # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return

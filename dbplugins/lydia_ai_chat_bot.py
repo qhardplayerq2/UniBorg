@@ -12,7 +12,9 @@ Credits:
 @Hackintosh5 (for inspiring me to write this module)
 @Zero_cool7870 (For Writing The Original Module)
 Zi Xing (For CoffeeHouse API)"""
-
+import logging
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
 
 import coffeehouse as cf
 
@@ -21,14 +23,17 @@ import io
 from sql_helpers.lydia_ai_sql import get_s, get_all_s, add_s, remove_s
 from time import time
 from uniborg.util import admin_cmd
+from sample_config import Config
+from coffeehouse.lydia import LydiaAI
+from coffeehouse.api import API
 
 if Config.LYDIA_API is not None:
-    api_key = Config.LYDIA_API
+    api_key = API(Config.LYDIA_API)
     # Initialise client
-    api_client = cf.API(api_key)
+    api_client = LydiaAI(api_key)
 
 
-@borg.on(admin_cmd(pattern="(ena|del|lst)cf", allow_sudo=True))
+@borg.on(admin_cmd(pattern="(ena|del|lst)cf", allow_sudo=True)) # pylint:disable=E0602
 async def lydia_disable_enable(event):
     if event.fwd_from:
         return
@@ -76,7 +81,7 @@ async def lydia_disable_enable(event):
         await event.edit("Reply To A User's Message to Add / Delete them from Lydia Auto-Chat.")
 
 
-@borg.on(admin_cmd(incoming=True))
+@borg.on(admin_cmd(incoming=True)) # pylint:disable=E0602
 async def on_new_message(event):
     if event.chat_id in Config.UB_BLACK_LIST_CHAT:
         return

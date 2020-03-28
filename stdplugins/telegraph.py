@@ -2,11 +2,13 @@
 Available Commands:
 .telegraph media as reply to a media
 .telegraph text as reply to a large text"""
+import logging
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
 import os
 from datetime import datetime
 
 from PIL import Image
-from telethon import events
 
 from uniborg.util import admin_cmd
 
@@ -18,7 +20,7 @@ r = telegraph.create_account(short_name=Config.TELEGRAPH_SHORT_NAME)
 auth_url = r["auth_url"]
 
 
-@borg.on(admin_cmd(pattern="telegraph (media|text) ?(.*)"))
+@borg.on(admin_cmd(pattern="telegraph (media|text) ?(.*)")) # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return

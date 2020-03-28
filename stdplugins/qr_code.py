@@ -2,12 +2,14 @@
 Available Commands
 .getqr
 .makeqr <long text to include>"""
+import logging
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
 import asyncio
 import os
 from datetime import datetime
 
 from bs4 import BeautifulSoup
-from telethon import events
 
 from uniborg.util import admin_cmd
 
@@ -19,7 +21,7 @@ def progress(current, total):
     logger.info("Downloaded {} of {}\nCompleted {}".format(current, total, (current / total) * 100))
 
 
-@borg.on(admin_cmd(pattern="getqr"))
+@borg.on(admin_cmd(pattern="getqr")) # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return
@@ -63,7 +65,7 @@ async def _(event):
     await event.edit(qr_contents)
 
 
-@borg.on(admin_cmd(pattern="makeqr ?(.*)"))
+@borg.on(admin_cmd(pattern="makeqr ?(.*)")) # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return

@@ -1,7 +1,8 @@
 """Restrict Users
 Available Commands: .ban, .unban, .mute """
-from telethon import events
-import asyncio
+import logging
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
 from datetime import datetime
 from telethon.tl.functions.channels import EditBannedRequest
 from telethon.tl.types import ChatBannedRights
@@ -45,7 +46,7 @@ banned_rights = ChatBannedRights(
 
 
 
-@borg.on(admin_cmd(pattern="(ban|unban|mute) ?(.*)"))
+@borg.on(admin_cmd(pattern="(ban|unban|mute) ?(.*)")) # pylint:disable=E0602
 async def _(event):
     # Space weirdness in regex required because argument is optional and other
     # commands start with ".unban"

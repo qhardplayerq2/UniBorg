@@ -5,26 +5,24 @@ Audio and video downloader using Youtube-dl
 .yta To Download in mp3 format
 .ytv To Download in mp4 format
 """
-
-import os
-import time
-import math
 import asyncio
+import logging
+import math
+import os
+import shutil
+import time
+
+from telethon.tl.types import DocumentAttributeAudio
+from uniborg.util import admin_cmd
 from youtube_dl import YoutubeDL
-from youtube_dl.utils import (DownloadError, ContentTooShortError,
+from youtube_dl.utils import (ContentTooShortError, DownloadError,
                               ExtractorError, GeoRestrictedError,
                               MaxDownloadsReached, PostProcessingError,
                               UnavailableVideoError, XAttrMetadataError)
-from asyncio import sleep
-from telethon.tl.types import DocumentAttributeAudio
-from uniborg.util import admin_cmd
-import wget
-from hurry.filesize import size
 
-out_folder = Config.TMP_DOWNLOAD_DIRECTORY + "youtubedl/"
-thumb_image_path = Config.TMP_DOWNLOAD_DIRECTORY + "/thumb_image.jpg"
-if not os.path.isdir(out_folder):
-    os.makedirs(out_folder)
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
+
 
 DELETE_TIMEOUT = 5
 
@@ -39,8 +37,8 @@ async def progress(current, total, event, start, type_of_ps, file_name=None):
         time_to_completion = round((total - current) / speed) * 1000
         estimated_total_time = elapsed_time + time_to_completion
         progress_str = "{0}{1} {2}%\n".format(
-            ''.join(["█" for i in range(math.floor(percentage / 10))]),
-            ''.join(["░" for i in range(10 - math.floor(percentage / 10))]),
+            ''.join("█" for i in range(math.floor(percentage / 10))),
+            ''.join("░" for i in range(10 - math.floor(percentage / 10))),
             round(percentage, 2))
         tmp = progress_str + \
             "{0} of {1}\nETA: {2}".format(
@@ -85,12 +83,15 @@ def time_formatter(milliseconds: int) -> str:
         ((str(milliseconds) + " millisecond(s), ") if milliseconds else "")
     return tmp[:-2]
 
-@borg.on(admin_cmd(pattern="yt(a|v) (.*)"))
+@borg.on(admin_cmd(pattern="yt(a|v) (.*)")) # pylint:disable=E0602
 async def download_video(v_url):
     """ For .ytdl command, download media from YouTube and many other sites. """
     url = v_url.pattern_match.group(2)
     type = v_url.pattern_match.group(1).lower()
-
+    out_folder = Config.TMP_DOWNLOAD_DIRECTORY + "youtubedl/"
+    thumb_image_path = Config.TMP_DOWNLOAD_DIRECTORY + "/thumb_image.jpg"
+    if not os.path.isdir(out_folder):
+        os.makedirs(out_folder)
     await v_url.edit("`Preparing to download...`")
 
     if type == "a":
@@ -99,6 +100,7 @@ async def download_video(v_url):
             'addmetadata':True,
             'key':'FFmpegMetadata',
             'writethumbnail':True,
+            'embedthumbnail':True,
             'prefer_ffmpeg':True,
             'geo_bypass':True,
             'nocheckcertificate':True,
@@ -174,6 +176,7 @@ async def download_video(v_url):
     if song:
         # raster_size = os.path.getsize(f"{out_folder + ytdl_data['id']}.mp3")
         # song_size = size(raster_size)
+        thumb = f"{out_folder + ytdl_data['id']}.mp3"[:(len(f"{out_folder + ytdl_data['id']}.mp3")-4)] + ".jpg"
         file_path = f"{out_folder + ytdl_data['id']}.mp3"
         song_size = file_size(file_path)
         await v_url.edit(f"`Preparing to upload song:`\
@@ -184,6 +187,7 @@ async def download_video(v_url):
             f"{out_folder + ytdl_data['id']}.mp3",
             caption=ytdl_data['title'] + "\n" + f"`{song_size}`",
             supports_streaming=True,
+            thumb = thumb,
             attributes=[
                 DocumentAttributeAudio(duration=int(ytdl_data['duration']),
                                        title=str(ytdl_data['title']),
@@ -196,6 +200,7 @@ async def download_video(v_url):
         os.remove(f"{out_folder + ytdl_data['id']}.mp3")
         await asyncio.sleep(DELETE_TIMEOUT)
         await v_url.delete()
+        shutil.rmtree(out_folder)
     elif video:
         for single_file in filename:
             # image_link = ytdl_data['thumbnail']
@@ -222,8 +227,7 @@ async def download_video(v_url):
             os.remove(f"{out_folder + ytdl_data['id']}.mp4")
             await asyncio.sleep(DELETE_TIMEOUT)
             await v_url.delete()
-            os.remove(single_file)
-        os.removedirs(out_folder)
+        shutil.rmtree(out_folder)
     
         
 

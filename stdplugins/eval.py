@@ -3,21 +3,19 @@ Syntax: .eval PythonCode"""
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
-
-import asyncio
-import inspect
+import logging
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
 import io
 import sys
 import traceback
-
-from telethon import errors, events, functions, types
 
 from uniborg.util import admin_cmd
 
 from sample_config import Config
 
 
-@borg.on(admin_cmd(pattern="eval"))
+@borg.on(admin_cmd(pattern="eval")) # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return

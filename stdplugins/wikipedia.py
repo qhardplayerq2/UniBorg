@@ -3,18 +3,21 @@
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 """WikiPedia.ORG
 Syntax: .wikipedia Query"""
-from telethon import events
+import logging
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
 import wikipedia
 from uniborg.util import admin_cmd
 
 
-@borg.on(admin_cmd(pattern="wikipedia (.*)"))
+@borg.on(admin_cmd(pattern="wikipedia (.*)")) # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return
     await event.edit("Processing ...")
     input_str = event.pattern_match.group(1)
     result = ""
+    wikipedia.set_lang("tr")
     results = wikipedia.search(input_str)
     for s in results:
         page = wikipedia.page(s)

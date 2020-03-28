@@ -4,9 +4,6 @@
 # you may not use this file except in compliance with the License.
 #
 """ Userbot module containing various sites direct links generators"""
-
-import asyncio
-import datetime
 import json
 import re
 import urllib.parse
@@ -16,13 +13,13 @@ from random import choice
 import requests
 from bs4 import BeautifulSoup
 from telethon import events
-from telethon.tl import functions, types
-from uniborg.util import admin_cmd
 
 from humanize import naturalsize
+import logging
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
 
-
-@borg.on(events.NewMessage(pattern=r"^.direct(?: |$)([\s\S]*)", outgoing=True))
+@borg.on(events.NewMessage(pattern=r"^.direct(?: |$)([\s\S]*)", outgoing=True)) # pylint:disable=E0602
 async def direct_link_generator(request):
     """ direct links generator """
     await request.edit("`Processing...`")

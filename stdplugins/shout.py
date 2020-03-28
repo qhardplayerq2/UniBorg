@@ -2,14 +2,13 @@
 usage: .shout message
 originaly from : @corsicanu_bot
 """
+import logging
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
+from telethon import events
 
-import sys
-from telethon import events, functions
-from uniborg.util import admin_cmd
-import random
 
-
-@borg.on(events.NewMessage(pattern=r"\.shout", outgoing=True))
+@borg.on(events.NewMessage(pattern=r"\.shout", outgoing=True)) # pylint:disable=E0602
 async def shout(args):
     if args.fwd_from:
         return
@@ -19,7 +18,7 @@ async def shout(args):
         messagestr = messagestr[7:]
         text = " ".join(messagestr)
         result = []
-        result.append(' '.join([s for s in text]))
+        result.append(' '.join(s for s in text))
         for pos, symbol in enumerate(text[1:]):
             result.append(symbol + ' ' + '  ' * pos + symbol)
         result = list("\n".join(result))

@@ -1,13 +1,13 @@
 """Currency Converter Plugin for @UniBorg
 Syntax: .currency number from to"""
-from telethon import events
-import asyncio
 from datetime import datetime
 import requests
 from uniborg.util import admin_cmd
+import logging
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
 
-
-@borg.on(admin_cmd(pattern="currency (.*)"))
+@borg.on(admin_cmd(pattern="currency (.*)")) # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return

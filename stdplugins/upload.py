@@ -6,15 +6,14 @@ Available Commands:
 .upload <Path To File>
 .uploadir <Path To Directory>
 .uploadasstream <Path To File>"""
-
+import logging
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
 import asyncio
 import os
 import subprocess
 import time
 from datetime import datetime
-
-import requests
-from telethon import events
 from telethon.tl.types import DocumentAttributeAudio, DocumentAttributeVideo
 
 from uniborg.util import admin_cmd, progress
@@ -36,7 +35,7 @@ def get_lst_of_files(input_directory, output_lst):
     return output_lst
 
 
-@borg.on(admin_cmd(pattern="uploadir (.*)"))
+@borg.on(admin_cmd(pattern="uploadir (.*)")) # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return
@@ -144,7 +143,7 @@ async def _(event):
         await event.edit("404: Directory Not Found")
 
 
-@borg.on(admin_cmd(pattern="upload (.*)", allow_sudo=True))
+@borg.on(admin_cmd(pattern="upload (.*)", allow_sudo=True)) # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return
@@ -189,7 +188,7 @@ def get_video_thumb(file, output=None, width=90):
         return output
 
 
-@borg.on(admin_cmd(pattern="uploadasstream (.*)", allow_sudo=True))
+@borg.on(admin_cmd(pattern="uploadasstream (.*)", allow_sudo=True)) # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return

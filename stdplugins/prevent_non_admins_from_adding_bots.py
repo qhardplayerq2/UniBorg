@@ -1,12 +1,11 @@
 # For @UniBorg
 # (c) Shrimadhav U K
-
+import logging
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
 from telethon import events
 from telethon.tl.functions.channels import EditBannedRequest
 from telethon.tl.types import ChatBannedRights
-
-
-from sample_config import Config
 
 CHATS_TO_MONITOR_FOR_ADDED_BOTS = [
     # add the ID of the groups (Use .get_id command)
@@ -17,7 +16,7 @@ CHATS_TO_MONITOR_FOR_ADDED_BOTS = [
 ]
 
 
-@borg.on(events.ChatAction(chats=CHATS_TO_MONITOR_FOR_ADDED_BOTS))
+@borg.on(events.ChatAction(chats=CHATS_TO_MONITOR_FOR_ADDED_BOTS)) # pylint:disable=E0602
 async def kick_if_bots(event):
     if event.user_added:
         users_added_by = event.action_message.from_id

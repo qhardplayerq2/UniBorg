@@ -6,7 +6,9 @@ Syntax:
 # https://github.com/cyberboysumanjay/Gdrivedownloader/blob/master/gdrive_upload.py
 # there might be some changes made to suit the needs for this repository
 # Licensed under MIT License
-
+import logging
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
 import asyncio
 import json
 import math
@@ -22,9 +24,7 @@ from uniborg.util import admin_cmd, humanbytes, progress
 
 import httplib2
 from apiclient.discovery import build
-from apiclient.errors import ResumableUploadError
 from apiclient.http import MediaFileUpload
-from oauth2client import client, file, tools
 from oauth2client.client import OAuth2WebServerFlow
 from oauth2client.file import Storage
 from sample_config import Config
@@ -44,7 +44,7 @@ G_DRIVE_F_PARENT_ID = None
 G_DRIVE_DIR_MIME_TYPE = "application/vnd.google-apps.folder"
 
 
-@borg.on(admin_cmd(pattern="ugdrive ?(.*)", allow_sudo=True))
+@borg.on(admin_cmd(pattern="ugdrive ?(.*)", allow_sudo=True)) # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return
@@ -114,7 +114,7 @@ async def _(event):
         await mone.edit("File Not found in local server. Give me a file path :((")
 
 
-@borg.on(admin_cmd(pattern="gdrivesp https?://drive\.google\.com/drive/u/\d/folders/([-\w]{25,})", allow_sudo=True))
+@borg.on(admin_cmd(pattern="gdrivesp https?://drive\.google\.com/drive/u/\d/folders/([-\w]{25,})", allow_sudo=True)) # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return
@@ -128,7 +128,7 @@ async def _(event):
         await mone.edit("Send `.gdrivesp https://drive.google.com/drive/u/X/folders/Y` to set the folder to upload new files to")
 
 
-@borg.on(admin_cmd(pattern="gdriveclear", allow_sudo=True))
+@borg.on(admin_cmd(pattern="gdriveclear", allow_sudo=True)) # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return
@@ -138,7 +138,7 @@ async def _(event):
     await event.delete()
 
 
-@borg.on(admin_cmd(pattern="gdrivedir ?(.*)", allow_sudo=True))
+@borg.on(admin_cmd(pattern="gdrivedir ?(.*)", allow_sudo=True)) # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return
@@ -171,7 +171,7 @@ async def _(event):
         await mone.edit(f"directory {input_str} does not seem to exist")
 
 
-@borg.on(admin_cmd(pattern="drive (delete|get) ?(.*)", allow_sudo=True))
+@borg.on(admin_cmd(pattern="drive (delete|get) ?(.*)", allow_sudo=True)) # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return
@@ -203,7 +203,7 @@ async def _(event):
     await mone.edit(response_from_svc)
 
 
-@borg.on(admin_cmd(pattern="drive search ?(.*)", allow_sudo=True))
+@borg.on(admin_cmd(pattern="drive search ?(.*)", allow_sudo=True)) # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return
@@ -269,6 +269,7 @@ def authorize(token_file, storage):
     credentials = storage.get()
     # Create an httplib2.Http object and authorize it with our credentials
     http = httplib2.Http()
+    #https://github.com/googleapis/google-api-python-client/issues/803
     credentials.refresh(http)
     http = credentials.authorize(http)
     return http
@@ -304,8 +305,8 @@ async def upload_file(http, file_path, file_name, mime_type, event, parent_id):
         if status:
             percentage = int(status.progress() * 100)
             progress_str = "[{0}{1}]\nProgress: {2}%\n".format(
-                "".join(["█" for i in range(math.floor(percentage / 5))]),
-                "".join(["░" for i in range(20 - math.floor(percentage / 5))]),
+                "".join("█" for i in range(math.floor(percentage / 5))),
+                "".join("░" for i in range(20 - math.floor(percentage / 5))),
                 round(percentage, 2)
             )
             current_message = f"uploading to gDrive\nFile Name: {file_name}\n{progress_str}"

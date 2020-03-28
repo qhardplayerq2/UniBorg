@@ -1,14 +1,14 @@
 """Malayalam Calendar plugin for @UniBorg
 SYNTAX: .calendar YYYY-MM-DD"""
-from telethon import events
-import asyncio
 from datetime import datetime
 import requests
 import json
 from uniborg.util import admin_cmd
+import logging
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
 
-
-@borg.on(admin_cmd(pattern="calendar (.*)"))
+@borg.on(admin_cmd(pattern="calendar (.*)")) # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return

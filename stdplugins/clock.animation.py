@@ -4,9 +4,11 @@
 from telethon import events
 import asyncio
 from collections import deque
+import logging
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
 
-
-@borg.on(events.NewMessage(pattern=r"\.clock animation", outgoing=True))
+@borg.on(events.NewMessage(pattern=r"\.clock animation", outgoing=True)) # pylint:disable=E0602
 async def _(event):
 	if event.fwd_from:
 		return

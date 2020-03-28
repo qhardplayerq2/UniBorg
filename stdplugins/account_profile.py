@@ -3,13 +3,14 @@
 .pname <Name>
 .ppic"""
 import os
-import uniborg
-from telethon import events
 from telethon.tl import functions
 from uniborg.util import admin_cmd
 
 from sample_config import Config
+import logging
 
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
 
 @borg.on(admin_cmd(pattern="pbio (.*)"))  # pylint:disable=E0602
 async def _(event):
@@ -76,3 +77,24 @@ async def _(event):
         os.remove(photo)
     except Exception as e:  # pylint:disable=C0103,W0703
         logger.warn(str(e))  # pylint:disable=E0602
+
+@borg.on(admin_cmd(pattern="profilephoto (.*)"))  # pylint:disable=E0602
+async def _(event):
+    """getting user profile photo last changed time"""
+    if event.fwd_from:
+        return
+    
+    p_number = event.pattern_match.group(1)
+    print(p_number)
+    chat = await event.get_chat()
+    entity = await borg.get_entity(event.chat_id)
+    try:
+        a = await event.edit("getting profile pic changed or added date")
+        photos = await borg.get_profile_photos(entity)
+        print(photos[int(p_number)].date)
+        msg = photos[int(p_number)].date
+        msg = "Last profile photo changed: \n👉 `{}` UTC+3".format(str(msg))
+        await a.edit(msg)
+    except :
+        pass
+

@@ -7,8 +7,9 @@ Syntax:
 # there might be some changes made to suit the needs for this repository
 # Licensed under MIT License
 
-
-import aiohttp
+import logging
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
 import asyncio
 import math
 import os
@@ -18,14 +19,11 @@ from telethon import events
 from datetime import datetime
 from apiclient.discovery import build
 from apiclient.http import MediaFileUpload
-from apiclient.errors import ResumableUploadError
 from oauth2client.client import OAuth2WebServerFlow
 from oauth2client.file import Storage
-from oauth2client import file, client, tools
 from mimetypes import guess_type
 import httplib2
-import subprocess
-from uniborg.util import admin_cmd, progress, humanbytes, time_formatter
+from uniborg.util import admin_cmd, progress, humanbytes
 import ssl
 from sample_config import Config
 # Path to token json file, it should be in same directory as script
@@ -51,7 +49,7 @@ else:
     # Handle target environment that doesn't support HTTPS verification
     ssl._create_default_https_context = _create_unverified_https_context
 
-@borg.on(admin_cmd(pattern="glink ?(.*)", allow_sudo=True))
+@borg.on(admin_cmd(pattern="glink ?(.*)", allow_sudo=True)) # pylint:disable=E0602
 async def download(dryb):
     """ For .gdrive command, upload files to google drive. """
     if not dryb.text[0].isalpha() and dryb.text[0] not in ("/", "#", "@", "!"):
@@ -87,8 +85,8 @@ async def download(dryb):
                 speed = downloader.get_speed()
                 elapsed_time = round(diff) * 1000
                 progress_str = "[{0}{1}]\nProgress: {2}%".format(
-                    ''.join(["●" for i in range(math.floor(percentage / 5))]),
-                    ''.join(["○" for i in range(20 - math.floor(percentage / 5))]),
+                    ''.join("█" for i in range(math.floor(percentage / 5))),
+                    ''.join("░" for i in range(20 - math.floor(percentage / 5))),
                     round(percentage, 2))
                 estimated_total_time = downloader.get_eta(human=True)
                 try:
@@ -225,8 +223,8 @@ async def upload_file(http, file_path, file_name, mime_type, event):
         if status:
             percentage = int(status.progress() * 100)
             progress_str = "[{0}{1}]\nProgress: {2}%\n".format(
-                ''.join(["█" for i in range(math.floor(percentage / 5))]),
-                ''.join(["░" for i in range(20 - math.floor(percentage / 5))]),
+                ''.join("█" for i in range(math.floor(percentage / 5))),
+                ''.join("░" for i in range(20 - math.floor(percentage / 5))),
                 round(percentage, 2))
             await event.edit(f"Uploading to Google Drive...\n\nFile Name: {file_name}\n{progress_str}")
     if file:
@@ -238,7 +236,7 @@ async def upload_file(http, file_path, file_name, mime_type, event):
     download_url = response.get("webContentLink")
     return download_url
 
-@borg.on(admin_cmd(pattern="gfolder ?(.*)", allow_sudo=True))
+@borg.on(admin_cmd(pattern="gfolder ?(.*)", allow_sudo=True)) # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return

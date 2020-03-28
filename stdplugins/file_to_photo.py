@@ -1,6 +1,9 @@
 """
 Reply to a file with .f to send it as a photo
 """
+import logging
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
 from io import BytesIO
 
 from telethon import types
@@ -10,7 +13,7 @@ from telethon.tl.functions.messages import SendMediaRequest
 from uniborg import util
 
 
-@borg.on(util.admin_cmd(pattern="f  (.*)"))
+@borg.on(util.admin_cmd(pattern="f  (.*)")) # pylint:disable=E0602
 async def on_file_to_photo(event):
     await event.delete()
     target = await event.get_reply_message()

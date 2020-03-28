@@ -3,33 +3,24 @@ Available Commands:
 .kangsticker [Optional Emoji]
 .packinfo
 .getsticker"""
+from io import BytesIO
+from PIL import Image
 import asyncio
 import datetime
+from collections import defaultdict
 import math
 import os
 import zipfile
-from collections import defaultdict
-from io import BytesIO
-
-import requests
-from PIL import Image
-from telethon import events
-from telethon.errors import MessageNotModifiedError
 from telethon.errors.rpcerrorlist import StickersetInvalidError
-from telethon.tl.functions.account import UpdateNotifySettingsRequest
+from telethon.errors import MessageNotModifiedError
 from telethon.tl.functions.messages import GetStickerSetRequest
-from telethon.tl.types import (DocumentAttributeFilename,
-                               DocumentAttributeSticker,
-                               InputMediaUploadedDocument,
-                               InputPeerNotifySettings, InputStickerSetID,
-                               InputStickerSetShortName, MessageMediaPhoto)
-
+from telethon.tl.types import (
+    DocumentAttributeSticker, InputStickerSetID, InputStickerSetShortName, MessageMediaPhoto
+)
 from uniborg.util import admin_cmd
 
-from sample_config import Config
 
-
-@borg.on(admin_cmd(pattern="kangsticker ?(.*)"))
+@borg.on(admin_cmd(pattern="kangsticker ?(.*)")) # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return
@@ -48,14 +39,14 @@ async def _(event):
     packshortname = f"By_Azade"  # format: Uni_Borg_userid
 
     is_a_s = is_it_animated_sticker(reply_message)
-    file_ext_ns_ion = "@By_Azade_Sticker.png"
+    file_ext_ns_ion = "@By_Azade.png"
     file = await borg.download_file(reply_message.media)
     uploaded_sticker = None
     if is_a_s:
         file_ext_ns_ion = "AnimatedSticker.tgs"
         uploaded_sticker = await borg.upload_file(file, file_name=file_ext_ns_ion)
-        packname = f"{userid}'s @AnimatedStickersGroup"
-        packshortname = f"By_azade"  # format: Uni_Borg_userid
+        packname = f"@By_Azade Pack"
+        packshortname = f"By_Azade"  # format: Uni_Borg_userid
     elif not is_message_image(reply_message):
         await event.edit("Invalid message type")
         return
@@ -119,7 +110,7 @@ async def _(event):
     await event.edit(f"sticker added! Your pack can be found [here](t.me/addstickers/{packshortname})")
 
 
-@borg.on(admin_cmd(pattern="packinfo"))
+@borg.on(admin_cmd(pattern="packinfo")) # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return
@@ -155,7 +146,7 @@ async def _(event):
                      f"**Emojis In Pack:** {' '.join(pack_emojis)}")
 
 
-@borg.on(admin_cmd(pattern="getsticker ?(.*)"))
+@borg.on(admin_cmd(pattern="getsticker ?(.*)")) # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return
@@ -174,7 +165,7 @@ async def _(event):
             return
         is_a_s = is_it_animated_sticker(reply_message)
         file_ext_ns_ion = "webp"
-        file_caption = "https://t.me/RoseSupport/33801"
+        file_caption = "https://t.me/RoseSupportChat/33801"
         if is_a_s:
             file_ext_ns_ion = "tgs"
             file_caption = "Forward the ZIP file to @AnimatedStickersRoBot to get lottIE JSON containing the vector information."

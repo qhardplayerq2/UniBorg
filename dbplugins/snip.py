@@ -6,13 +6,14 @@ Available Commands:
 .snips
 .snipl
 .snipd"""
-from telethon import events, utils
 from telethon.tl import types
 from sql_helpers.snips_sql import get_snips, add_snip, remove_snip, get_all_snips
 from uniborg.util import admin_cmd
+import logging
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
 
-
-@borg.on(admin_cmd(pattern=r'\#(\S+)', outgoing=True))
+@borg.on(admin_cmd(pattern=r'\#(\S+)', outgoing=True)) # pylint:disable=E0602
 async def on_snip(event):
     name = event.pattern_match.group(1)
     snip = get_snips(name)
@@ -36,7 +37,7 @@ async def on_snip(event):
         await event.delete()
 
 
-@borg.on(admin_cmd(pattern="snips (.*)"))
+@borg.on(admin_cmd(pattern="snips (.*)")) # pylint:disable=E0602
 async def on_snip_save(event):
     name = event.pattern_match.group(1)
     msg = await event.get_reply_message()
@@ -53,7 +54,7 @@ async def on_snip_save(event):
         await event.edit("Reply to a message with `snips keyword` to save the snip")
 
 
-@borg.on(admin_cmd(pattern="snipl"))
+@borg.on(admin_cmd(pattern="snipl")) # pylint:disable=E0602
 async def on_snip_list(event):
     all_snips = get_all_snips()
     OUT_STR = "Available Snips:\n"
@@ -78,7 +79,7 @@ async def on_snip_list(event):
         await event.edit(OUT_STR)
 
 
-@borg.on(admin_cmd(pattern="snipd (\S+)"))
+@borg.on(admin_cmd(pattern="snipd (\S+)")) # pylint:disable=E0602
 async def on_snip_delete(event):
     name = event.pattern_match.group(1)
     remove_snip(name)

@@ -1,11 +1,12 @@
 """Quickly make a decision
 Syntax: .decide"""
-from telethon import events
 import requests
 from uniborg.util import admin_cmd
+import logging
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
 
-
-@borg.on(admin_cmd(pattern="decide"))
+@borg.on(admin_cmd(pattern="decide")) # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return

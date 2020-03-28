@@ -1,19 +1,19 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # (c) Shrimadhav U K
-
+import logging
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
 
 import asyncio
 
 import requests
 from bs4 import BeautifulSoup
-
-import telethon
 from telethon import events
 
 
 
-@borg.on(events.NewMessage(pattern=r"\.yify recents", outgoing=True))
+@borg.on(events.NewMessage(pattern=r"\.yify recents", outgoing=True)) # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return

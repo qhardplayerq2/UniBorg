@@ -3,7 +3,7 @@ usage: reply with file : .rar , .7z  create archived file
 
 unzip usage: reply with zipped file .unzipper
 
-Coded by @furki
+Coded by @By_Azade
 
 """
 
@@ -11,16 +11,15 @@ Coded by @furki
 
 import asyncio
 import os
-import shutil
 import subprocess
 import time
-from pySmartDL import SmartDL
 from sample_config import Config
-from telethon import events
-from uniborg.util import admin_cmd, humanbytes, progress, time_formatter
+from uniborg.util import admin_cmd, progress
 import subprocess
 import patoolib
-
+import logging
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
 
 extracted = Config.TMP_DOWNLOAD_DIRECTORY + "extracted/"
 thumb_image_path = Config.TMP_DOWNLOAD_DIRECTORY + "/thumb_image.jpg"
@@ -29,7 +28,7 @@ thumb_image_path = Config.TMP_DOWNLOAD_DIRECTORY + "/thumb_image.jpg"
 
 
 
-@borg.on(admin_cmd(pattern=("rar ?(.*)")))
+@borg.on(admin_cmd(pattern=("rar ?(.*)"))) # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return
@@ -79,7 +78,7 @@ async def _(event):
 
 
 
-@borg.on(admin_cmd(pattern=("7z ?(.*)")))
+@borg.on(admin_cmd(pattern=("7z ?(.*)"))) # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return
@@ -127,7 +126,7 @@ async def _(event):
         await event.edit("Local file compressed to `{}`".format(directory_name + ".7z"))
 
 
-@borg.on(admin_cmd(pattern=("unzipper ?(.*)")))
+@borg.on(admin_cmd(pattern=("unzipper ?(.*)"))) # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return

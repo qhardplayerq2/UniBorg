@@ -2,24 +2,22 @@
 Syntax:
 .download
 .download url | file.name to download files from a Public Link"""
-
+import logging
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
 import asyncio
 import math
 import os
 import time
 from datetime import datetime
-
-import aiohttp
 from pySmartDL import SmartDL
-from telethon import events
-from telethon.tl.types import DocumentAttributeVideo
 
 from uniborg.util import admin_cmd, humanbytes, progress, time_formatter
 
 from sample_config import Config
 
 
-@borg.on(admin_cmd(pattern="download ?(.*)", allow_sudo=True))
+@borg.on(admin_cmd(pattern="download ?(.*)", allow_sudo=True)) # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return
@@ -68,8 +66,8 @@ async def _(event):
             speed = downloader.get_speed()
             elapsed_time = round(diff) * 1000
             progress_str = "[{0}{1}]\nProgress: {2}%".format(
-                ''.join(["█" for i in range(math.floor(percentage / 5))]),
-                ''.join(["░" for i in range(20 - math.floor(percentage / 5))]),
+                ''.join("█" for i in range(math.floor(percentage / 5))),
+                ''.join("░" for i in range(20 - math.floor(percentage / 5))),
                 round(percentage, 2))
             estimated_total_time = downloader.get_eta(human=True)
             try:

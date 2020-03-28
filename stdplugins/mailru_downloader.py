@@ -1,15 +1,11 @@
+import logging
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
 import asyncio
-import os
-import shutil
-import subprocess
 import time
-from pySmartDL import SmartDL
 from sample_config import Config
-from telethon import events
-from uniborg.util import admin_cmd, humanbytes, progress, time_formatter
+from uniborg.util import admin_cmd
 import subprocess
-import patoolib
-from bin.cmrudl import *
 from datetime import datetime
 import io
 
@@ -17,7 +13,7 @@ import io
 
 
 
-@borg.on(admin_cmd(pattern=("cmrdl ?(.*)")))
+@borg.on(admin_cmd(pattern=("cmrdl ?(.*)"))) # pylint:disable=E0602
 async def _(event):
     url = event.pattern_match.group(1)
     if event.fwd_from:

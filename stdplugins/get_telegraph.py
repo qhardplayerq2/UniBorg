@@ -1,20 +1,19 @@
 # This Source Code Form is subject to the terms of the Mozilla Public
 
 # License, v. 2.0. If a copy of the MPL was not distributed with this
-
+import logging
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
 import mimetypes
 import os
 from datetime import datetime
 
 import requests
-import telethon
-# file, You can obtain one at http://mozilla.org/MPL/2.0/.
-import uniborg
 from telethon import events
 
 
 current_date_time = "./../DOWNLOADS/"
-@borg.on(events.NewMessage(pattern=r".telegraph media", outgoing=True))
+@borg.on(events.NewMessage(pattern=r".telegraph media", outgoing=True)) # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return

@@ -15,22 +15,21 @@
 """Remove.BG Plugin for @UniBorg
 Syntax: .remove.bg https://link.to/image.extension
 Syntax: .remove.bg as reply to a media"""
-import asyncio
+import logging
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
 import io
 import os
-import time
 from datetime import datetime
 
 import requests
-import telethon
-from telethon import events
 
-from uniborg.util import admin_cmd, progress
+from uniborg.util import admin_cmd
 
 from sample_config import Config
 
 
-@borg.on(admin_cmd(pattern="remove\.bg ?(.*)"))
+@borg.on(admin_cmd(pattern="remove\.bg ?(.*)")) # pylint:disable=E0602
 async def _(event):
     HELP_STR = "`.remove.bg` as reply to a media, or give a link as an argument to this command"
     if event.fwd_from:

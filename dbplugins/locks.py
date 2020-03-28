@@ -3,11 +3,17 @@ Available Commands: .lock <option>, .unlock <option>, .locks
 API Options: msg, media, sticker, gif, gamee, ainline, gpoll, adduser, cpin, changeinfo
 DB Options: bots, commands, email, forward, url"""
 
+import logging
+
 from telethon import events, functions, types
+
+from sample_config import Config
 from uniborg.util import admin_cmd
 
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
 
-@borg.on(admin_cmd(pattern="lock( (?P<target>\S+)|$)"))
+@borg.on(admin_cmd(pattern="lock( (?P<target>\S+)|$)")) # pylint:disable=E0602
 async def _(event):
      # Space weirdness in regex required because argument is optional and other
      # commands start with ".lock"
@@ -87,7 +93,7 @@ async def _(event):
             )
 
 
-@borg.on(admin_cmd(pattern="unlock ?(.*)"))
+@borg.on(admin_cmd(pattern="unlock ?(.*)")) # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return
@@ -110,7 +116,7 @@ async def _(event):
         )
 
 
-@borg.on(admin_cmd(pattern="curenabledlocks"))
+@borg.on(admin_cmd(pattern="curenabledlocks")) # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return

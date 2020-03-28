@@ -1,9 +1,11 @@
-from telethon import events
+import logging
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
 from datetime import datetime
 from uniborg.util import admin_cmd
 
 
-@borg.on(admin_cmd(pattern="ping"))
+@borg.on(admin_cmd(pattern="ping")) # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return

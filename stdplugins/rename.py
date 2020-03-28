@@ -3,7 +3,9 @@ Syntax:
 .rnupload file.name
 .rnstreamupload file.name
 By @Ck_ATR"""
-
+import logging
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
 import asyncio
 import math
 import os
@@ -13,7 +15,7 @@ from datetime import datetime
 from pySmartDL import SmartDL
 from telethon.tl.types import DocumentAttributeVideo
 
-from uniborg.util import admin_cmd, humanbytes, progress, time_formatter
+from uniborg.util import admin_cmd, humanbytes, progress
 
 from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
@@ -22,7 +24,7 @@ from sample_config import Config
 thumb_image_path = Config.TMP_DOWNLOAD_DIRECTORY + "/thumb_image.jpg"
 
 
-@borg.on(admin_cmd(pattern="rndlup (.*)"))
+@borg.on(admin_cmd(pattern="rndlup (.*)")) # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return
@@ -54,8 +56,8 @@ async def _(event):
         speed = downloader.get_speed()
         elapsed_time = round(diff) * 1000
         progress_str = "[{0}{1}]\nProgress: {2}%".format(
-            ''.join(["█" for i in range(math.floor(percentage / 5))]),
-            ''.join(["░" for i in range(20 - math.floor(percentage / 5))]),
+            ''.join("█" for i in range(math.floor(percentage / 5))),
+            ''.join("░" for i in range(20 - math.floor(percentage / 5))),
             round(percentage, 2))
         estimated_total_time = downloader.get_eta(human=True)
         try:
@@ -91,14 +93,18 @@ async def _(event):
             end_two = datetime.now()
             os.remove(downloaded_file_name)
             ms_two = (end_two - end).seconds
-            await event.edit("Downloaded in {} seconds. Uploaded in {} seconds.".format(ms_dl, ms_two))
+            a = await event.edit("Downloaded in {} seconds. Uploaded in {} seconds.".format(ms_dl, ms_two))
+            await a.delete()
+            await asyncio.sleep(5)
         else:
             await event.edit("File Not Found {}".format(input_str))
+            await asyncio.sleep(5)
+            await event.delete()
     else:
         await event.edit("Incorrect URL\n {}".format(input_str))
 
 
-@borg.on(admin_cmd(pattern="rnupload (.*)"))
+@borg.on(admin_cmd(pattern="rnupload (.*)")) # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return
@@ -149,7 +155,7 @@ async def _(event):
         await event.edit("Syntax // .rnupload file.name as reply to a Telegram media")
 
 
-@borg.on(admin_cmd(pattern="rnstreamupload (.*)"))
+@borg.on(admin_cmd(pattern="rnstreamupload (.*)")) # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return

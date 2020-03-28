@@ -2,20 +2,16 @@
 Available Commands:
 .restart
 .shutdown"""
-
-# This Source Code Form is subject to the terms of the GNU
-import asyncio
+import logging
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
 import os
 import sys
-
-# General Public License, v.3.0. If a copy of the GPL was not distributed with this
-# file, You can obtain one at https://www.gnu.org/licenses/gpl-3.0.en.html
-from telethon import events
 
 from uniborg.util import admin_cmd
 
 
-@borg.on(admin_cmd(pattern="restart"))
+@borg.on(admin_cmd(pattern="restart")) # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return
@@ -32,7 +28,7 @@ async def _(event):
     quit()
 
 
-@borg.on(admin_cmd(pattern="shutdown"))
+@borg.on(admin_cmd(pattern="shutdown")) # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return

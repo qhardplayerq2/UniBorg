@@ -4,11 +4,11 @@ usage: .gdl File-Link
 By: @Zero_cool7870
 
 """
+import logging
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
 import requests
 from telethon import events
-import asyncio
-import os
-import sys
 
 
 async def download_file_from_google_drive(id):
@@ -79,7 +79,7 @@ async def get_file_name(content):
     print("File Name: "+str(file_name))
     return file_name                 
 
-@borg.on(events.NewMessage(pattern=r"\.gdl", outgoing=True))
+@borg.on(events.NewMessage(pattern=r"\.gdl", outgoing=True)) # pylint:disable=E0602
 async def g_download(event):
     if event.fwd_from:
         return   

@@ -1,15 +1,16 @@
 """Get Detailed info about any message
 Syntax: .json"""
+import logging
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
 import io
-
-from telethon import events
 
 from uniborg.util import admin_cmd
 
 from sample_config import Config
 
 
-@borg.on(admin_cmd(pattern="json"))
+@borg.on(admin_cmd(pattern="json")) # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return

@@ -6,7 +6,9 @@ from telethon import events
 from telethon.tl import functions, types
 
 from sample_config import Config
-
+import logging
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
 
 global USER_AFK  
 global afk_time  
@@ -16,7 +18,7 @@ afk_time = None
 last_afk_message = {}
 
 
-@borg.on(events.NewMessage(outgoing=True))  
+@borg.on(events.NewMessage(outgoing=True))  # pylint:disable=E0602
 async def set_not_afk(event):
     global USER_AFK  
     global afk_time  
@@ -41,7 +43,7 @@ async def set_not_afk(event):
         afk_time = None  
 
 
-@borg.on(events.NewMessage(pattern=r"\.afk ?(.*)", outgoing=True))  
+@borg.on(events.NewMessage(pattern=r"\.afk ?(.*)", outgoing=True))   # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return
@@ -80,7 +82,7 @@ async def _(event):
 @borg.on(events.NewMessage(  
     incoming=True,
     func=lambda e: bool(e.mentioned or e.is_private)
-))
+)) # pylint:disable=E0602
 async def on_afk(event):
     if event.fwd_from:
         return

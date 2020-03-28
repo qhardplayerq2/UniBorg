@@ -1,9 +1,10 @@
 """Get weather data using OpenWeatherMap
 Syntax: .weather <Location> """
-
+import logging
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
 import io
 import time
-from datetime import datetime, tzinfo
 
 import aiohttp
 
@@ -12,7 +13,7 @@ from uniborg.util import admin_cmd
 from sample_config import Config
 
 
-@borg.on(admin_cmd(pattern="weather (.*)"))
+@borg.on(admin_cmd(pattern="weather (.*)")) # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return
@@ -28,14 +29,14 @@ async def _(event):
         sun_set_time = int(response_api["sys"]["sunset"]) + country_time_zone
         await event.edit(
             """{}
-**Temperature**: {}°С
+**Sıcaklık**: {}°С
     __minimium__: {}°С
-    __maximum__ : {}°С
-**Humidity**: {}%
-**wind**: {}m/s
-clouds: {}hpa
-**Sunrise**: {} {}
-**Sunset**: {} {}""".format(
+    __maksimum__ : {}°С
+**Nem**: {}%
+**Rüzgar**: {}m/s
+**Bulut**: {}hpa
+**Gün Doğumu**: {} {}
+**Gün Batımı**: {} {}""".format(
                 input_str,
                 response_api["main"]["temp"],
                 response_api["main"]["temp_min"],
@@ -54,7 +55,7 @@ clouds: {}hpa
         await event.edit(response_api["message"])
 
 
-@borg.on(admin_cmd(pattern="wttr (.*)"))
+@borg.on(admin_cmd(pattern="wttr (.*)")) # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return

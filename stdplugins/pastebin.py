@@ -1,11 +1,12 @@
 """IX.IO pastebin like site
 Syntax: .paste"""
-import asyncio
+import logging
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
 import os
 from datetime import datetime
 
 import requests
-from telethon import events
 
 from uniborg.util import admin_cmd
 
@@ -16,7 +17,7 @@ def progress(current, total):
     logger.info("Downloaded {} of {}\nCompleted {}".format(current, total, (current / total) * 100))
 
 
-@borg.on(admin_cmd(pattern="paste ?(.*)"))
+@borg.on(admin_cmd(pattern="paste ?(.*)")) # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return
@@ -40,7 +41,8 @@ async def _(event):
                 m_list = fd.readlines()
             message = ""
             for m in m_list:
-                message += m.decode("UTF-8") + "\r\n"
+                # message += m.decode("UTF-8") + "\r\n"
+                message += m.decode("UTF-8")
             os.remove(downloaded_file_name)
         else:
             message = previous_message.message

@@ -1,15 +1,15 @@
 """Upload local Files to Mirrors
 Syntax:
 .verystream"""
-
+import logging
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
 import asyncio
 import hashlib
 import json
 import os
 import time
 from datetime import datetime
-
-import aiofiles
 import aiohttp
 import magic
 import requests
@@ -19,7 +19,7 @@ from uniborg.util import admin_cmd, progress
 from sample_config import Config
 
 
-@borg.on(admin_cmd(pattern="verystream ?(.*)", allow_sudo=True))
+@borg.on(admin_cmd(pattern="verystream ?(.*)", allow_sudo=True)) # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return

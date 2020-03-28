@@ -6,14 +6,16 @@ By @snappy101
 import asyncio
 import barcode
 import os
-import time
 from barcode.writer import ImageWriter
 from datetime import datetime
 from uniborg.util import admin_cmd
 
 from sample_config import Config
-
-@borg.on(admin_cmd(pattern="barcode ?(.*)"))
+import logging
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
+                    
+@borg.on(admin_cmd(pattern="barcode ?(.*)")) # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return

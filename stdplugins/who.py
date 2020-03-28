@@ -1,6 +1,9 @@
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
+import logging
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
 import html
 
 from telethon import events
@@ -16,7 +19,7 @@ def get_who_string(who):
     return who_string
 
 
-@borg.on(events.NewMessage(pattern=r"\.who", outgoing=True))
+@borg.on(events.NewMessage(pattern=r"\.who", outgoing=True)) # pylint:disable=E0602
 async def _(event):
     if not event.message.is_reply:
         who = await event.get_chat()
@@ -32,7 +35,7 @@ async def _(event):
     await event.edit(get_who_string(who), parse_mode='html')
 
 
-@borg.on(events.NewMessage(pattern=r"\.members", outgoing=True))
+@borg.on(events.NewMessage(pattern=r"\.members", outgoing=True)) # pylint:disable=E0602
 async def _(event):
     members = []
     async for member in borg.iter_participants(event.chat_id):

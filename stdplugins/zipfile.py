@@ -1,17 +1,17 @@
+import logging
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
 import asyncio
 import os
 import time
 import zipfile
 
-from pySmartDL import SmartDL
-from telethon import events
-
-from uniborg.util import admin_cmd, humanbytes, progress, time_formatter
+from uniborg.util import admin_cmd, progress
 
 from sample_config import Config
 
 
-@borg.on(admin_cmd(pattern=("compress ?(.*)")))
+@borg.on(admin_cmd(pattern=("compress ?(.*)"))) # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return

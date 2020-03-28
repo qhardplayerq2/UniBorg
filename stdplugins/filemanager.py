@@ -3,16 +3,17 @@ Syntax: .exec Code"""
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
+import logging
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
 from telethon import events
-import subprocess
-from telethon.errors import MessageEmptyError, MessageTooLongError, MessageNotModifiedError
 import io
 import asyncio
 import time
 
 from sample_config import Config
 
-@borg.on(events.NewMessage(pattern=r"\.lslocal", outgoing=True))
+@borg.on(events.NewMessage(pattern=r"\.lslocal", outgoing=True)) # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return
@@ -53,7 +54,7 @@ async def _(event):
 
 
 
-@borg.on(events.NewMessage(pattern=r"\.lsroot", outgoing=True))
+@borg.on(events.NewMessage(pattern=r"\.lsroot", outgoing=True)) # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return

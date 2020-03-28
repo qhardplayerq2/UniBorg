@@ -1,7 +1,9 @@
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
-
+import logging
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
 import asyncio
 
 import telethon.utils
@@ -34,8 +36,8 @@ async def await_read(chat, message):
     await fut
 
 
-@borg.on(util.admin_cmd(pattern="(del)(?:ete)?$"))
-@borg.on(util.admin_cmd(pattern="(edit)(?:\s+(.*))?$"))
+@borg.on(util.admin_cmd(pattern="(del)(?:ete)?$")) # pylint:disable=E0602
+@borg.on(util.admin_cmd(pattern="(edit)(?:\s+(.*))?$")) # pylint:disable=E0602
 async def delete(event):
     await event.delete()
     command = event.pattern_match.group(1)

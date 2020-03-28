@@ -5,20 +5,16 @@ Syntax: .exec Code"""
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 import asyncio
 import io
-
-import subprocess
 import time
-
-from telethon import events
-from telethon.errors import (MessageEmptyError, MessageNotModifiedError,
-                             MessageTooLongError)
 
 from uniborg.util import admin_cmd
 
 from sample_config import Config
+import logging
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
 
-
-@borg.on(admin_cmd(pattern="exec ?(.*)"))
+@borg.on(admin_cmd(pattern="exec ?(.*)")) # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return

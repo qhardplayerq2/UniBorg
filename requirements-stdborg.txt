@@ -3,8 +3,8 @@ aiohttp
 aria2p
 beautifulsoup4
 cfscrape
-coffeehouse
 cryptg
+coffeehouse
 emoji
 mtranslate
 googletrans
@@ -35,13 +35,46 @@ spotify_token
 lxml
 remotezip
 patool
-pytube
+pytube3
 wget
 hurry.filesize
 PyPDF2
-pymongo 
-dnspython
 urllib3
 pysocks
-instantmusic
 alive_progress
+typing
+tgcrypto
+mtranslate
+langdetect
+emoji
+textblob
+convertdate
+pathlib
+unicode_tr
+schedule
+feedparser
+apscheduler
+aioschedule
+spamwatch
+psutil
+pydownload
+PyDrive
+setuptools
+covid
+# pymongo 
+# dnspython
+# pylast
+# attrs
+# idna
+# pyaes
+# pycares
+# pycparser
+# rsa
+# yarl
+# cchardet
+# brotlipy
+# async-timeout
+# aiodns
+# tdk
+# wikipedia-api
+# tdk-fetch

@@ -1,4 +1,3 @@
-
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # (c) Shrimadhav U K
@@ -8,7 +7,7 @@ import json
 import re
 from telethon import events, custom
 from uniborg.util import admin_cmd, humanbytes
-
+import os
 
 @borg.on(admin_cmd(  # pylint:disable=E0602
     pattern="ib (.[^ ]*) (.*)"
@@ -66,6 +65,8 @@ if Config.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
         builder = event.builder
         result = None
         query = event.text
+        if not os.path.isdir(Config.TMP_DOWNLOAD_DIRECTORY):
+            os.makedirs(Config.TMP_DOWNLOAD_DIRECTORY)
         if event.query.user_id == borg.uid and query.startswith("@UniBorg"):
             rev_text = query[::-1]
             buttons = paginate_help(0, borg._plugins, "helpme")
@@ -193,6 +194,7 @@ if Config.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
                 "© @UniBorg",
                 text="""Try @UniBorg
 You can log-in as Bot or User and do many cool things with your Telegram account.
+
 All instaructions to run @UniBorg in your PC has been explained in https://github.com/SpEcHiDe/UniBorg""",
                 buttons=[
                     [custom.Button.url("Join the Channel", "https://telegram.dog/UniBorg"), custom.Button.url(

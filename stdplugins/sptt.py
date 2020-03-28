@@ -1,5 +1,8 @@
 """Speech to Text
 Syntax: .sptt <Language Code> as reply to a speech message"""
+import logging
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
 import os
 from datetime import datetime
 
@@ -10,7 +13,7 @@ from telethon import events
 from sample_config import Config
 
 
-@borg.on(events.NewMessage(pattern=r"\.sptt (.*)", outgoing=True))
+@borg.on(events.NewMessage(pattern=r"\.sptt (.*)", outgoing=True)) # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return

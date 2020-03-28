@@ -1,11 +1,13 @@
 """Notification Manager for @UniBorg
 """
-
+import logging
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
 import asyncio
 import io
 import sql_helpers.no_log_pms_sql as no_log_pms_sql
 import sql_helpers.pmpermit_sql as pmpermit_sql
-from telethon import events, errors, functions, types
+from telethon import events, functions, types
 from uniborg.util import admin_cmd
 
 from sample_config import Config
@@ -21,7 +23,7 @@ UNIBORG_USER_BOT_WARN_ZERO = "I am currently offline. Please do not SPAM me."
 UNIBORG_USER_BOT_NO_WARN = "Hi! I will answer to your message soon. Please wait for my response and don't spam my PM. Thanks"
 
 
-@borg.on(admin_cmd(pattern="nccreatedch"))
+@borg.on(admin_cmd(pattern="nccreatedch")) # pylint:disable=E0602
 async def create_dump_channel(event):
     if Config.PM_LOGGR_BOT_API_ID is None:
         result = await event.client(functions.channels.CreateChannelRequest(  # pylint:disable=E0602
@@ -53,7 +55,7 @@ async def create_dump_channel(event):
         await event.edit(f"**is configured**. [please do not touch](https://t.me/c/{Config.PM_LOGGR_BOT_API_ID}/2)")
 
 
-@borg.on(admin_cmd(pattern="nolog ?(.*)"))
+@borg.on(admin_cmd(pattern="nolog ?(.*)")) # pylint:disable=E0602
 async def set_no_log_p_m(event):
     if Config.PM_LOGGR_BOT_API_ID is not None:
         reason = event.pattern_match.group(1)
@@ -66,7 +68,7 @@ async def set_no_log_p_m(event):
                 await event.delete()
 
 
-@borg.on(admin_cmd(pattern="dellog ?(.*)"))
+@borg.on(admin_cmd(pattern="dellog ?(.*)")) # pylint:disable=E0602
 async def set_no_log_p_m(event):
     if Config.PM_LOGGR_BOT_API_ID is not None:
         reason = event.pattern_match.group(1)
@@ -79,7 +81,7 @@ async def set_no_log_p_m(event):
                 await event.delete()
 
 
-@borg.on(admin_cmd(pattern="approvepm ?(.*)"))
+@borg.on(admin_cmd(pattern="approvepm ?(.*)")) # pylint:disable=E0602
 async def approve_p_m(event):
     if event.fwd_from:
         return
@@ -99,7 +101,7 @@ async def approve_p_m(event):
                 await event.delete()
 
 
-@borg.on(admin_cmd(pattern="blockpm ?(.*)"))
+@borg.on(admin_cmd(pattern="blockpm ?(.*)")) # pylint:disable=E0602
 async def approve_p_m(event):
     if event.fwd_from:
         return
@@ -114,7 +116,7 @@ async def approve_p_m(event):
                 await event.client(functions.contacts.BlockRequest(chat.id))
 
 
-@borg.on(admin_cmd(pattern="list approved pms"))
+@borg.on(admin_cmd(pattern="list approved pms")) # pylint:disable=E0602
 async def approve_p_m(event):
     if event.fwd_from:
         return
@@ -144,7 +146,7 @@ async def approve_p_m(event):
         await event.edit(APPROVED_PMs)
 
 
-@borg.on(events.NewMessage(incoming=True))
+@borg.on(events.NewMessage(incoming=True)) # pylint:disable=E0602
 async def on_new_private_message(event):
     if Config.PM_LOGGR_BOT_API_ID is None:
         return
@@ -187,7 +189,7 @@ async def on_new_private_message(event):
         await do_log_pm_action(chat_id, event, message_text, message_media)
 
 
-@borg.on(events.ChatAction(blacklist_chats=Config.UB_BLACK_LIST_CHAT))
+@borg.on(events.ChatAction(blacklist_chats=Config.UB_BLACK_LIST_CHAT)) # pylint:disable=E0602
 async def on_new_chat_action_message(event):
     if Config.PM_LOGGR_BOT_API_ID is None:
         return
@@ -215,7 +217,7 @@ async def on_new_chat_action_message(event):
             )
 
 
-@borg.on(events.Raw())
+@borg.on(events.Raw()) # pylint:disable=E0602
 async def on_new_channel_message(event):
     if Config.PM_LOGGR_BOT_API_ID is None:
         return

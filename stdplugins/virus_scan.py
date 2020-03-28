@@ -1,18 +1,16 @@
-import asyncio
+import logging
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
 import json
-import os
-import time
 from datetime import datetime
 
 import requests
 from sample_config import Config
-#
-from telethon import events
-from uniborg.util import admin_cmd, humanbytes, progress
+from uniborg.util import admin_cmd
 
 api = Config.VIRUSTOTAL_API_KEY
 
-@borg.on(admin_cmd(pattern="virustotal ?(.*)", allow_sudo=True))
+@borg.on(admin_cmd(pattern="virustotal ?(.*)", allow_sudo=True)) # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return

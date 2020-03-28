@@ -2,35 +2,34 @@
 coded by @By_Azade
 code rewritten my SnapDragon7410
 """
-
+import logging
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
 import asyncio
 import os
 import time
 import zipfile
 from datetime import datetime
-from zipfile import ZipFile
+from telethon.tl.types import DocumentAttributeVideo
 
-from pySmartDL import SmartDL
-from telethon import events
-from telethon.tl.types import DocumentAttributeAudio, DocumentAttributeVideo
-
-from uniborg.util import admin_cmd, humanbytes, progress, time_formatter
+from uniborg.util import admin_cmd, progress
 
 from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
 from sample_config import Config
 
-extracted = Config.TMP_DOWNLOAD_DIRECTORY + "extracted/"
-thumb_image_path = Config.TMP_DOWNLOAD_DIRECTORY + "/thumb_image.jpg"
-if not os.path.isdir(extracted):
-    os.makedirs(extracted)
 
 
-@borg.on(admin_cmd(pattern="unzip"))
+
+@borg.on(admin_cmd(pattern="unzip")) # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return
     mone = await event.edit("Processing ...")
+    extracted = Config.TMP_DOWNLOAD_DIRECTORY + "extracted/"
+    thumb_image_path = Config.TMP_DOWNLOAD_DIRECTORY + "/thumb_image.jpg"
+    if not os.path.isdir(extracted):
+        os.makedirs(extracted)
     if not os.path.isdir(Config.TMP_DOWNLOAD_DIRECTORY):
         os.makedirs(Config.TMP_DOWNLOAD_DIRECTORY)
     if event.reply_to_msg_id:

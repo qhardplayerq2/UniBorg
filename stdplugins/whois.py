@@ -1,6 +1,8 @@
 """Get Telegram Profile Picture and other information
 Syntax: .whois @username"""
-
+import logging
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
 import html
 from telethon.tl.functions.photos import GetUserPhotosRequest
 from telethon.tl.functions.users import GetFullUserRequest
@@ -10,7 +12,7 @@ from uniborg.util import admin_cmd
 
 
 
-@borg.on(admin_cmd(pattern="whois ?(.*)"))
+@borg.on(admin_cmd(pattern="whois ?(.*)")) # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return

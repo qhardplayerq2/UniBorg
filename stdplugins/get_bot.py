@@ -1,14 +1,14 @@
 """ Get the Bots in any chat*
 Syntax: .get_bot"""
-from telethon import events
+import logging
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
 from telethon.tl.types import ChannelParticipantAdmin, ChannelParticipantsBots
 
 from uniborg.util import admin_cmd
 
-from sample_config import Config
 
-
-@borg.on(admin_cmd(pattern="get_bot ?(.*)"))
+@borg.on(admin_cmd(pattern="get_bot ?(.*)")) # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return

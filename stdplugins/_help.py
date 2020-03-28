@@ -8,10 +8,12 @@
 ◇ to know syntax
 ◆ `.syntax` <plugin name>
 """
-
+import logging
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
 
 import sys
-from telethon import events, functions, __version__
+from telethon import functions, __version__
 from uniborg.util import admin_cmd
 
 
@@ -27,7 +29,7 @@ async def _(event):
     help_string = """@UniBorg
 Python {}
 Telethon {}
-UserBot Forked from https://github.com/expectocode/uniborg""".format(
+UserBot Forked from https://github.com/muhammedfurkan/uniborg""".format(
         sys.version,
         __version__
     )

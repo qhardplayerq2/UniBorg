@@ -5,26 +5,21 @@
 \nAll thanks goes to **SNAPDRAGON** . Thnaks a lot Bruh..
 \nPorted by © [EYEPATCH](t.me/neomatrix90)
 \n`Don't Copy Without Credits.`"""
-
-import os
-import aiohttp
-import asyncio
+import logging
+import urllib.parse
 from html import unescape
-from re import findall
-from shutil import rmtree
-from urllib.error import HTTPError
-
-from emoji import get_emoji_regexp
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
-from gtts import gTTS
-from pytube import YouTube
-from pytube.helpers import safe_filename
-from requests import get
-from telethon import events
+# from gtts import gTTS
+# from pytube.compat import quote
+# from pytube.helpers import safe_filename
 from uniborg.util import admin_cmd
+from sample_config import Config
 
-@borg.on(admin_cmd(pattern="youtubesearch ?(\d+)? ?(.*)?"))
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
+
+@borg.on(admin_cmd(pattern="youtubesearch ?(\d+)? ?(.*)?")) # pylint:disable=E0602
 async def yt_search(video_q):
     reply = await video_q.get_reply_message()
     if video_q.pattern_match.group(2):

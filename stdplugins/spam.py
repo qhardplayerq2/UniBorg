@@ -3,13 +3,15 @@
 # Licensed under the Raphielscape Public License, Version 1.b (the "License");
 # you may not use this file except in compliance with the License.
 #
-
+import logging
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
 from asyncio import wait
 
 from telethon import events
 from sample_config import Config
 
-@borg.on(events.NewMessage(pattern=r"\.spam", outgoing=True))
+@borg.on(events.NewMessage(pattern=r"\.spam", outgoing=True)) # pylint:disable=E0602
 async def spammer(e):
     if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
         message = e.text
