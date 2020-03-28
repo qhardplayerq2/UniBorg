@@ -12,17 +12,19 @@ import os
 async def cor_tr(event):
     await event.edit("`Corona virüs bilgileri sağlık bakanlığından alınıyor.`")
     await asyncio.sleep(3)
+    if not os.path.isdir('./DOWNLOADS/'):
+        os.makedirs('./DOWNLOADS/')
     r = requests.get(
     'https://covid19.saglik.gov.tr/')
     if r.status_code == 200:
         resim1 = "https://covid19.saglik.gov.tr/1.png"
         res1 = requests.get(resim1)
         if res1.status_code == 200:
-            wget.download(resim1, out='DOWNLOADS/1.png')
+            wget.download(resim1, out='./DOWNLOADS/1.png')
         resim2 = "https://covid19.saglik.gov.tr/2.jpg"
         res2 = requests.get(resim2)
         if res2.status_code == 200:
-            wget.download(resim2, out='DOWNLOADS/2.jpg')
+            wget.download(resim2, out='./DOWNLOADS/2.jpg')
     img1 = Config.TMP_DOWNLOAD_DIRECTORY + '2.jpg'
     await event.client.send_file(
         event.chat_id,
