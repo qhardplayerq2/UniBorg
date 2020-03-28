@@ -17,11 +17,11 @@ async def cor_tr(event):
     r = requests.get(
     'https://covid19.saglik.gov.tr/')
     if r.status_code == 200:
-        resim1 = "https://covid19.saglik.gov.tr/1.jpg"
+        resim1 = "https://covid19.saglik.gov.tr/img/1.jpg"
         res1 = requests.get(resim1)
         if res1.status_code == 200:
             wget.download(resim1, out='./DOWNLOADS/1.jpg')
-        resim2 = "https://covid19.saglik.gov.tr/2.jpg"
+        resim2 = "https://covid19.saglik.gov.tr/img/2.jpg"
         res2 = requests.get(resim2)
         if res2.status_code == 200:
             wget.download(resim2, out='./DOWNLOADS/2.jpg')
