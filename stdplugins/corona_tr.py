@@ -10,7 +10,7 @@ import os
 
 @borg.on(admin_cmd(pattern=("coronatr ?(.*)"))) # pylint:disable=E0602
 async def cor_tr(event):
-    await event.edit("`Corona virüs bilgileri sağlık bakanlığından alınıyor.`")
+    x = await event.edit("`Corona virüs bilgileri sağlık bakanlığından alınıyor.`")
     await asyncio.sleep(3)
     if not os.path.isdir('./DOWNLOADS/'):
         os.makedirs('./DOWNLOADS/')
@@ -48,5 +48,5 @@ async def cor_tr(event):
         await asyncio.sleep(3)
         os.remove(img2)
     else:
-        await event.edit("`Sağlık Bakanlığı sitesine erişilemiyor veya bir sorun var. Hata Kodu : 404`")
+        await x.edit("`Sağlık Bakanlığı sitesine erişilemiyor veya bir sorun var. Hata Kodu : 404`")
 
