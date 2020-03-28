@@ -25,26 +25,28 @@ async def cor_tr(event):
         res2 = requests.get(resim2)
         if res2.status_code == 200:
             wget.download(resim2, out='./DOWNLOADS/2.jpg')
-    img1 = Config.TMP_DOWNLOAD_DIRECTORY + '2.jpg'
-    await event.client.send_file(
-        event.chat_id,
-        img1,
-        force_document=False,
-        allow_cache=False,
-        caption="Sağlık Bakanlığı Corona Virüs Güncel Bilgiler Grafiği",
-        reply_to=event
-    )
-    await  asyncio.sleep(4)
-    img2 = Config.TMP_DOWNLOAD_DIRECTORY + '1.png'
-    await event.client.send_file(
-        event.chat_id,
-        img2,
-        force_document=False,
-        allow_cache=False,
-        caption="Sağlık Bakanlığı Corona Virüs Güncel Bilgiler Tablosu",
-        reply_to=event
-    )
-    os.remove(img1)
-    await asyncio.sleep(3)
-    os.remove(img2)
+        img1 = Config.TMP_DOWNLOAD_DIRECTORY + '2.jpg'
+        await event.client.send_file(
+            event.chat_id,
+            img1,
+            force_document=False,
+            allow_cache=False,
+            caption="Sağlık Bakanlığı Corona Virüs Güncel Bilgiler Grafiği",
+            reply_to=event
+        )
+        await  asyncio.sleep(4)
+        img2 = Config.TMP_DOWNLOAD_DIRECTORY + '1.png'
+        await event.client.send_file(
+            event.chat_id,
+            img2,
+            force_document=False,
+            allow_cache=False,
+            caption="Sağlık Bakanlığı Corona Virüs Güncel Bilgiler Tablosu",
+            reply_to=event
+        )
+        os.remove(img1)
+        await asyncio.sleep(3)
+        os.remove(img2)
+    else:
+        await event.edit("`Sağlık Bakanlığı sitesine erişilemiyor veya bir sorun var. Hata Kodu : 404`")
 
