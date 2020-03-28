@@ -3,7 +3,6 @@ import asyncio
 import requests
 
 import wget
-from bs4 import BeautifulSoup
 from sample_config import Config
 from uniborg.util import admin_cmd
 import os
@@ -19,11 +18,11 @@ async def cor_tr(event):
         resim1 = "https://covid19.saglik.gov.tr/1.png"
         res1 = requests.get(resim1)
         if res1.status_code == 200:
-            download1 = wget.download(resim1,out=Config.TMP_DOWNLOAD_DIRECTORY)
+            wget.download(resim1, out=Config.TMP_DOWNLOAD_DIRECTORY + '1.png')
         resim2 = "https://covid19.saglik.gov.tr/2.jpg"
         res2 = requests.get(resim2)
         if res2.status_code == 200:
-            download2 = wget.download(resim2,out=Config.TMP_DOWNLOAD_DIRECTORY)
+            wget.download(resim2, out=Config.TMP_DOWNLOAD_DIRECTORY + '2.jpg')
     img1 = Config.TMP_DOWNLOAD_DIRECTORY + '2.jpg'
     await event.client.send_file(
         event.chat_id,
