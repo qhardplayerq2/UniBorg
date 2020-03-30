@@ -11,7 +11,7 @@ from uniborg.util import admin_cmd
 
 
 
-@borg.on(admin_cmd("sd", outgoing=True  ))
+@borg.on(admin_cmd("sd", outgoing=True  )) # pylint:disable=E0602
 async def selfdestruct(destroy):
     """ For .sd command, make seflf-destructable messages. """
     if not destroy.text[0].isalpha() and destroy.text[0] not in ("/", "#", "@", "!"):
