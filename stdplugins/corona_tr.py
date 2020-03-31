@@ -6,7 +6,7 @@ import wget
 from sample_config import Config
 from uniborg.util import admin_cmd
 import os
-
+from bs4 import BeautifulSoup
 
 @borg.on(admin_cmd(pattern=("coronatr ?(.*)"))) # pylint:disable=E0602
 async def cor_tr(event):
@@ -17,14 +17,19 @@ async def cor_tr(event):
     r = requests.get(
     'https://covid19.saglik.gov.tr/')
     if r.status_code == 200:
-        resim1 = "https://covid19.saglik.gov.tr/img/1.jpg"
+        soup = BeautifulSoup(r.content, 'html.parser')
+        res1 = soup.find_all("img",class_="img-fluid")
+        resimler = []
+        for image in res1:
+            resimler.append(image['src'])
+        re1 = resimler[2]
+        resim1 = "https://covid19.saglik.gov.tr/{}".format(re1)
         res1 = requests.get(resim1)
-        if res1.status_code == 200:
-            wget.download(resim1, out='./DOWNLOADS/1.jpg')
-        resim2 = "https://covid19.saglik.gov.tr/img/2.jpg"
+        wget.download(res1, out='./DOWNLOADS/1.jpg')
+        re2 = resimler[3]
+        resim2 = "https://covid19.saglik.gov.tr/{}".format(re2)
         res2 = requests.get(resim2)
-        if res2.status_code == 200:
-            wget.download(resim2, out='./DOWNLOADS/2.jpg')
+        wget.download(res2, out='./DOWNLOADS/2.jpg')
         img1 = Config.TMP_DOWNLOAD_DIRECTORY + '2.jpg'
         await event.client.send_file(
             event.chat_id,
