@@ -54,7 +54,7 @@ async def ban(eventBan):
         else:
             return
         await eventBan.edit("`Banlanacak kişiyi arıyorum...`")
-        users = await borg.get_participants(chat)
+        users = await borg.get_participants(chat) # pylint:disable=E0602
         # print(users[0].id)
         try:
             await eventBan.client(
@@ -74,12 +74,12 @@ async def ban(eventBan):
         except BadRequestError:
             await eventBan.edit("`I dont have message nuking rights! But still he was banned!`")
             return
-        await eventBan.edit(f"[{users.first_name}](tg://user?id={users.id}) banlandı!")
+        await eventBan.edit(f"[{users[0].first_name}](tg://user?id={users[0].id}) banlandı!")
         if ENABLE_LOG:
             await eventBan.client.send_message(
                 LOGGING_CHATID,
                 "#Channel_BAN\n"
-                f"USER: [{users.first_name}](tg://user?id={users.id})\n"
+                f"USER: [{users[0].first_name}](tg://user?id={users[0].id})\n"
                 f"CHAT: `Kitap Arşivi Duyuru`"
             )
 
