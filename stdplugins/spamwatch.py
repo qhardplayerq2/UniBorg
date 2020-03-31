@@ -53,4 +53,6 @@ async def spam_watch_(event):
                 return ""
         else:
             return ""
+    except AttributeError:
+        return
     
