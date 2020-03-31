@@ -74,7 +74,7 @@ async def ban(eventBan):
         except BadRequestError:
             await eventBan.edit("`I dont have message nuking rights! But still he was banned!`")
             return
-        await eventBan.edit(f"[{user.first_name}](tg://user?id={user.id}) banlandı!")
+        await eventBan.edit(f"[{users.first_name}](tg://user?id={users.id}) banlandı!")
         if ENABLE_LOG:
             await eventBan.client.send_message(
                 LOGGING_CHATID,
