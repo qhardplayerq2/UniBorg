@@ -79,8 +79,8 @@ async def ban(eventBan):
             await eventBan.client.send_message(
                 LOGGING_CHATID,
                 "#Channel_BAN\n"
-                f"USER: [{user.first_name}](tg://user?id={user.id})\n"
-                f"CHAT: {eventBan.chat.title}(`{eventBan.chat_id}`)"
+                f"USER: [{users.first_name}](tg://user?id={users.id})\n"
+                f"CHAT: `Kitap Arşivi Duyuru`"
             )
 
 
