@@ -24,12 +24,10 @@ async def cor_tr(event):
             resimler.append(image['src'])
         re1 = resimler[2]
         resim1 = "https://covid19.saglik.gov.tr/{}".format(re1)
-        res1 = requests.get(resim1)
-        wget.download(res1, out='./DOWNLOADS/1.jpg')
+        wget.download(resim1, out='./DOWNLOADS/1.jpg')
         re2 = resimler[3]
         resim2 = "https://covid19.saglik.gov.tr/{}".format(re2)
-        res2 = requests.get(resim2)
-        wget.download(res2, out='./DOWNLOADS/2.jpg')
+        wget.download(resim2, out='./DOWNLOADS/2.jpg')
         img1 = Config.TMP_DOWNLOAD_DIRECTORY + '2.jpg'
         await event.client.send_file(
             event.chat_id,
