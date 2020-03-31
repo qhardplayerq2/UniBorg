@@ -55,32 +55,32 @@ async def ban(eventBan):
             return
         await eventBan.edit("`Banlanacak kişiyi arıyorum...`")
         users = await borg.get_participants(chat) # pylint:disable=E0602
-        # print(users[0].id)
-        try:
-            await eventBan.client(
-                EditBannedRequest(
-                    chat.id,
-                    users[0].id,
-                    BANNED_RIGHTS
-                )
-            )
-        except BadRequestError:
-            await eventBan.edit("`I don't have sufficient permissions!`")
-            return
-        try:
-            reply = await eventBan.get_reply_message()
-            if reply:
-                await reply.delete()
-        except BadRequestError:
-            await eventBan.edit("`I dont have message nuking rights! But still he was banned!`")
-            return
-        await eventBan.edit(f"[{users[0].first_name}](tg://user?id={users[0].id}) banlandı!")
-        if ENABLE_LOG:
-            await eventBan.client.send_message(
-                LOGGING_CHATID,
-                "#Channel_BAN\n"
-                f"USER: [{users[0].first_name}](tg://user?id={users[0].id})\n"
-                f"CHAT: `Kitap Arşivi Duyuru`"
-            )
+        print(users)
+        # try:
+        #     await eventBan.client(
+        #         EditBannedRequest(
+        #             chat.id,
+        #             users[0].id,
+        #             BANNED_RIGHTS
+        #         )
+        #     )
+        # except BadRequestError:
+        #     await eventBan.edit("`I don't have sufficient permissions!`")
+        #     return
+        # try:
+        #     reply = await eventBan.get_reply_message()
+        #     if reply:
+        #         await reply.delete()
+        # except BadRequestError:
+        #     await eventBan.edit("`I dont have message nuking rights! But still he was banned!`")
+        #     return
+        # await eventBan.edit(f"[{users[0].first_name}](tg://user?id={users[0].id}) banlandı!")
+        # if ENABLE_LOG:
+        #     await eventBan.client.send_message(
+        #         LOGGING_CHATID,
+        #         "#Channel_BAN\n"
+        #         f"USER: [{users[0].first_name}](tg://user?id={users[0].id})\n"
+        #         f"CHAT: `Kitap Arşivi Duyuru`"
+        #     )
 
 
