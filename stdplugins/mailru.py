@@ -5,7 +5,6 @@ import asyncio
 import time
 from sample_config import Config
 from uniborg.util import admin_cmd
-import subprocess
 from datetime import datetime
 
 
