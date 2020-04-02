@@ -4,8 +4,6 @@
 
 
 import time
-
-from telethon.errors import rpcbaseerrors
 from uniborg.util import admin_cmd
 
 
