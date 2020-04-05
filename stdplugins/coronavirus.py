@@ -6,9 +6,9 @@ from uniborg.util import admin_cmd
 @borg.on(admin_cmd(pattern="corona (.*)")) # pylint:disable=E0602
 async def _(event):
     covid = Covid()
-    # data = covid.get_data()
+    data = covid.get_data()
     country = event.pattern_match.group(1)
-    country_data = get_status_by_country_name(country)
+    country_data = get_country_data(country, data)
     # output_text = "" 
     # for name, value in country_data.items():
         # output_text += "`{}`: `{}`\n".format(str(name), str(value))
