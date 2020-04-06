@@ -62,7 +62,8 @@ async def cor_tr(event):
                 bugun_vefat,
                 bugun_iyilesen
             )
+            await x.edit(msg)
         else:
-            await event.edit("`Bakanlık sitesine bağlanırken sorun oluştu`")
-    except HTMLParseError as err:
-        await event.edit("`Hata oluştu. Hata kodu: {}`".format(str(err)))
+            await x.edit("`Bakanlık sitesine bağlanırken sorun oluştu`")
+    except HTMLParser.HTMLParseError as err:
+        await x.edit("`Hata oluştu. Hata kodu: {}`".format(str(err)))
