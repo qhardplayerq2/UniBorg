@@ -1,6 +1,6 @@
 import asyncio
 import os
-from HTMLParser import HTMLParseError
+from html.parser import HTMLParser
 
 import requests
 
