@@ -35,33 +35,33 @@ async def cor_tr(event):
             bugun_iyilesen = bugun_[17].text
 
             msg = """
-            Sağlık Bakanlığı Corona Virus Bilgileri
-            Kaynak: `https://covid19.saglik.gov.tr/`
+Sağlık Bakanlığı Corona Virus Bilgileri
+Kaynak: `https://covid19.saglik.gov.tr/`
 
-            *Toplam Test:* {}
-            *Toplam Vaka:* {}
-            *Toplam Vefat:* {}
-            *Toplam Yoğun Bakımdaki Hasta:* {}
-            *Toplam Entübe:* {}
-            *Toplam İyileşen:* {}
+Toplam Test: **{}**
+Toplam Vaka: **{}**
+Toplam Vefat: **{}**
+Toplam Yoğun Bakımdaki Hasta: **{}**
+Toplam Entübe: **{}**
+*Toplam İyileşen: **{}**
 
-            Bugünün Verileri
+Bugünün Verileri
 
-            *Bugünkü Test:* {}
-            *Bugünkü Vaka:* {}
-            *Bugünkü Vefat:* {}
-            *Bugünkü İyileşen:* {}
-            """.format(
-                toplam_test,
-                toplam_vaka,
-                toplam_olum,
-                toplam_yog_bakım,
-                entube,iyilesen,
-                bugun_test,
-                bugun_vaka,
-                bugun_vefat,
-                bugun_iyilesen
-            )
+Bugünkü Test: **{}**
+Bugünkü Vaka: **{}**
+Bugünkü Vefat: **{}**
+Bugünkü İyileşen: **{}**
+""".format(
+    toplam_test,
+    toplam_vaka,
+    toplam_olum,
+    toplam_yog_bakım,
+    entube,iyilesen,
+    bugun_test,
+    bugun_vaka,
+    bugun_vefat,
+    bugun_iyilesen
+)
             await x.edit(msg)
         else:
             await x.edit("`Bakanlık sitesine bağlanırken sorun oluştu`")
