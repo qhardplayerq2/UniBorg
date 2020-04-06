@@ -43,7 +43,7 @@ Toplam Vaka: **{}**
 Toplam Vefat: **{}**
 Toplam Yoğun Bakımdaki Hasta: **{}**
 Toplam Entübe: **{}**
-*Toplam İyileşen: **{}**
+Toplam İyileşen: **{}**
 
 Bugünün Verileri
 
