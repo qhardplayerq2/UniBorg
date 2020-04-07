@@ -18,6 +18,10 @@ Pluggable [``asyncio``](https://docs.python.org/3/library/asyncio.html)
 
 [![DeepSource](https://static.deepsource.io/deepsource-badge-light-mini.svg)](https://deepsource.io/gh/muhammedfurkan/UniBorg/?ref=repository-badge)
 
+### Code Quality
+
+[![CodeFactor](https://www.codefactor.io/repository/github/muhammedfurkan/uniborg/badge)](https://www.codefactor.io/repository/github/muhammedfurkan/uniborg)
+
 #### The Legacy Way
 Simply clone the repository and run the main file:
 ```sh
