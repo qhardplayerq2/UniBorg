@@ -19,6 +19,7 @@ from humanize import naturalsize
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
+logger = logging.getLogger(__name__)
 
 @borg.on(events.NewMessage(pattern=r"^.direct(?: |$)([\s\S]*)", outgoing=True)) # pylint:disable=E0602
 async def direct_link_generator(request):

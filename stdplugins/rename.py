@@ -20,12 +20,10 @@ from uniborg.util import admin_cmd, humanbytes, progress
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
-
-
+logger = logging.getLogger(__name__)
 
 
 thumb_image_path = Config.TMP_DOWNLOAD_DIRECTORY + "/thumb_image.jpg"
-
 
 @borg.on(admin_cmd(pattern="rndlup (.*)")) # pylint:disable=E0602
 async def _(event):

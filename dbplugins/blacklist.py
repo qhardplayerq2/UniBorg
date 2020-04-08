@@ -11,10 +11,11 @@ import logging
 import re
 
 import sql_helpers.blacklist_sql as sql
-from uniborg.util import admin_cmd
+from uniborg.ßutil import admin_cmd
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
+logger = logging.getLogger(__name__)
 
 @borg.on(admin_cmd(incoming=True)) # pylint:disable=E0602
 async def on_new_message(event):

@@ -8,7 +8,8 @@ from telethon import events
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
-
+logger = logging.getLogger(__name__)
+logger = logging.getLogger(__name__)
 @borg.on(events.NewMessage(pattern=r"\.react (.*)", outgoing=True)) # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:

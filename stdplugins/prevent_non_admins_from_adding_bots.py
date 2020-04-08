@@ -8,6 +8,7 @@ from telethon.tl.types import ChatBannedRights
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
+logger = logging.getLogger(__name__)
 
 CHATS_TO_MONITOR_FOR_ADDED_BOTS = [
     # add the ID of the groups (Use .get_id command)

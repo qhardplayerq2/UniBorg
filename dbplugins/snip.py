@@ -16,6 +16,7 @@ from uniborg.util import admin_cmd
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
+logger = logging.getLogger(__name__)
 
 @borg.on(admin_cmd(pattern=r'\#(\S+)', outgoing=True)) # pylint:disable=E0602
 async def on_snip(event):

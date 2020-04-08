@@ -9,6 +9,7 @@ from uniborg import util
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
+logger = logging.getLogger(__name__)
 
 
 @borg.on(util.admin_cmd(pattern="create (b|g|c) (.*)"))  # pylint:disable=E0602
