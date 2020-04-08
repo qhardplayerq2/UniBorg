@@ -2,11 +2,13 @@
 Syntax: .afk REASON"""
 import asyncio
 import datetime
+import logging
+
 from telethon import events
 from telethon.tl import functions, types
 
 from sample_config import Config
-import logging
+
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
 
@@ -26,12 +28,12 @@ async def set_not_afk(event):
     current_message = event.message.message
     if ".afk" not in current_message and "yes" in USER_AFK:  
         try:
-            await borg.send_message(  
+            await event.client.send_message(  
                 Config.PRIVATE_GROUP_BOT_API_ID,  
                 "Set AFK mode to False"
             )
         except Exception as e:  
-            await borg.send_message(  
+            await event.client.send_message(  
                 event.chat_id,
                 "Please set `PRIVATE_GROUP_BOT_API_ID` " + \
                 "for the proper functioning of afk functionality " + \
@@ -71,18 +73,15 @@ async def _(event):
         await asyncio.sleep(5)
         await event.delete()
         try:
-            await borg.send_message(  
+            await event.client.send_message(  
                 Config.PRIVATE_GROUP_BOT_API_ID,  
                 f"Set AFK mode to True, and Reason is {reason}"
             )
         except Exception as e:  
-            logger.warn(str(e))  
+            logging.warn(str(e))  
 
 
-@borg.on(events.NewMessage(  
-    incoming=True,
-    func=lambda e: bool(e.mentioned or e.is_private)
-)) # pylint:disable=E0602
+@borg.on(events.NewMessage(incoming=True,func=lambda e: bool(e.mentioned or e.is_private))) # pylint:disable=E0602
 async def on_afk(event):
     if event.fwd_from:
         return

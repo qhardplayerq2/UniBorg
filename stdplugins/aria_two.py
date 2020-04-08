@@ -9,11 +9,14 @@ cmds: Magnet link : .magnet magnetLink
 By:- @Zero_cool7870	   
 
 """
-import aria2p
-from telethon import events
 import asyncio
-import os
 import logging
+import os
+
+from telethon import events
+
+import aria2p
+
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
 
@@ -39,11 +42,11 @@ async def magnet_download(event):
 	
 	magnet_uri = var
 	magnet_uri = magnet_uri.replace("`","")
-	logger.info(magnet_uri)
+	logging.info(magnet_uri)
 	try: #Add Magnet URI Into Queue
 		download = aria2.add_magnet(magnet_uri)
 	except Exception as e:
-		logger.info(str(e))
+		logging.info(str(e))
 		await event.edit("Error :\n{}".format(str(e)))
 		return
 	gid = download.gid
@@ -80,7 +83,7 @@ async def magnet_download(event):
 	try: # Add URL Into Queue
 		download = aria2.add_uris(uris, options=None, position=None)
 	except Exception as e:
-		logger.info(str(e))
+		logging.info(str(e))
 		await event.edit("Error :\n`{}`".format(str(e)))
 		return
 	gid = download.gid
@@ -161,6 +164,6 @@ async def progress_status(gid,event,previous):
 			file.remove(force=True)
 			await event.edit("Download Auto Canceled :\n`{}`\nYour Torrent/Link is Dead.".format(file.name))
 		else:
-			logger.info(str(e))
+			logging.info(str(e))
 			await event.edit("Error :\n`{}`".format(str(e)))
 			return			
