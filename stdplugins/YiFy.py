@@ -25,8 +25,8 @@ async def _(event):
     movies_in_page = main_soup.find_all("div", class_="browse-movie-wrap")
     for movie in movies_in_page:
         movie_bottom = movie.div
-        name = movie_bottom.a.string
-        year = movie_bottom.div.string
+        # name = movie_bottom.a.string
+        # year = movie_bottom.div.string
         movie_links = movie.div.find_all("a")
         movie_links = movie_links[1:]
         for torrent_link in movie_links:
