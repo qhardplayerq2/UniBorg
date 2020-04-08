@@ -9,15 +9,12 @@
 ◆ `.syntax` <plugin name>
 """
 import logging
-import sys
-
-from telethon import __version__, functions
-
-from sample_config import Config
-from uniborg.util import admin_cmd
-
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
+
+import sys
+from telethon import functions, __version__
+from uniborg.util import admin_cmd
 
 
 @borg.on(admin_cmd(pattern="helpme ?(.*)", allow_sudo=True))  # pylint:disable=E0602
@@ -67,11 +64,11 @@ async def _(event):
         return
     result = await borg(functions.help.GetConfigRequest())  # pylint:disable=E0602
     result = result.stringify()
-    logging.info(result)  # pylint:disable=E0602
+    logger.info(result)  # pylint:disable=E0602
     await event.edit("""Telethon UserBot powered by @UniBorg""")
 
 
-@borg.on(admin_cmd(pattern="syntax (.*)"))  # pylint:disable=E0602
+@borg.on(admin_cmd(pattern="syntax (.*)"))
 async def _(event):
     if event.fwd_from:
         return

@@ -40,7 +40,7 @@ async def _(event):
         reply_message = await event.get_reply_message()
         try:
             c_time = time.time()
-            downloaded_file_name = await event.client.download_media(
+            downloaded_file_name = await borg.download_media(
                 reply_message,
                 Config.TMP_DOWNLOAD_DIRECTORY,
                 progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
@@ -52,7 +52,7 @@ async def _(event):
             # patoolib.create_archive(directory_name + '.7z',directory_name)
             patoolib.create_archive(directory_name + ".rar",(directory_name,Config.TMP_DOWNLOAD_DIRECTORY))
             # patoolib.create_archive("/content/21.yy Avrupa (1).pdf.zip",("/content/21.yy Avrupa (1).pdf","/content/"))
-            await event.client.send_file(
+            await borg.send_file(
                 event.chat_id,
                 directory_name + ".rar",
                 caption="rarred By @By_Azade",
@@ -90,7 +90,7 @@ async def _(event):
         reply_message = await event.get_reply_message()
         try:
             c_time = time.time()
-            downloaded_file_name = await event.client.download_media(
+            downloaded_file_name = await borg.download_media(
                 reply_message,
                 Config.TMP_DOWNLOAD_DIRECTORY,
                 progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
@@ -102,7 +102,7 @@ async def _(event):
             # patoolib.create_archive(directory_name + '.7z',directory_name)
             patoolib.create_archive(directory_name + ".7z",(directory_name,Config.TMP_DOWNLOAD_DIRECTORY))
             # patoolib.create_archive("/content/21.yy Avrupa (1).pdf.zip",("/content/21.yy Avrupa (1).pdf","/content/"))
-            await event.client.send_file(
+            await borg.send_file(
                 event.chat_id,
                 directory_name + ".7z",
                 caption="7z archived By @By_Azade",
@@ -138,7 +138,7 @@ async def _(event):
         reply_message = await event.get_reply_message()
         try:
             c_time = time.time()
-            downloaded_file_name = await event.client.download_media(
+            downloaded_file_name = await borg.download_media(
                 reply_message,
                 Config.TMP_DOWNLOAD_DIRECTORY,
                 progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
@@ -153,7 +153,7 @@ async def _(event):
                     "-o" + extracted,
                     directory_name]
             sp = subprocess.Popen(command_to_exec, stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
-            await event.client.send_file(
+            await borg.send_file(
                 event.chat_id,
                 directory_name + ".zip",
                 caption="Zipped By @By_Azade",

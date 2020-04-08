@@ -47,7 +47,7 @@ async def _(cas):
                     await borg.edit_permissions(entity, user.id, view_messages=False)
                     await borg.send_message(Config.PRIVATE_GROUP_BOT_API_ID, f"**antispam log** \n{who}\n{where}\n{how}\n**Action**: Banned",link_preview=False)
                 except (Exception) as exc:
-                    await cas.client.send_message(Config.PRIVATE_GROUP_BOT_API_ID, str(exc))
+                    await borg.send_message(Config.PRIVATE_GROUP_BOT_API_ID, str(exc))
                     exc_type, exc_obj, exc_tb = sys.exc_info()
                     fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
                     print(exc_type, fname, exc_tb.tb_lineno)
