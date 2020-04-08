@@ -1,8 +1,7 @@
 import threading
 
-from sqlalchemy import Column, Integer, String
-
 from sql_helpers import BASE, SESSION
+from sqlalchemy import Column, Integer, String
 
 DEF_COUNT = 0
 DEF_LIMIT = 0
@@ -89,5 +88,4 @@ def __load_flood_settings():
     finally:
         SESSION.close()
     return CHAT_FLOOD
-
 

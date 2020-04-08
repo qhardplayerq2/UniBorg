@@ -9,12 +9,15 @@
 ◆ `.syntax` <plugin name>
 """
 import logging
+import sys
+
+from telethon import __version__, functions
+
+from uniborg.util import admin_cmd
+
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
 
-import sys
-from telethon import functions, __version__
-from uniborg.util import admin_cmd
 
 
 @borg.on(admin_cmd(pattern="helpme ?(.*)", allow_sudo=True))  # pylint:disable=E0602

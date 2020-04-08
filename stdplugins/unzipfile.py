@@ -2,21 +2,24 @@
 coded by @By_Azade
 code rewritten my SnapDragon7410
 """
-import logging
-logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
-                    level=logging.WARNING)
 import asyncio
+import logging
 import os
 import time
 import zipfile
 from datetime import datetime
-from telethon.tl.types import DocumentAttributeVideo
 
-from uniborg.util import admin_cmd, progress
+from telethon.tl.types import DocumentAttributeVideo
 
 from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
 from sample_config import Config
+from uniborg.util import admin_cmd, progress
+
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
+
+
 
 
 

@@ -1,8 +1,7 @@
 import threading
 
-from sqlalchemy import Column, UnicodeText, Integer
-from sql_helpers import SESSION, BASE
-
+from sql_helpers import BASE, SESSION
+from sqlalchemy import Column, Integer, UnicodeText
 
 
 class RSS(BASE):

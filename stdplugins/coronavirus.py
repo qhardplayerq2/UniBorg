@@ -3,6 +3,7 @@ Syntax: .coronavirus <country>"""
 from covid import Covid
 from uniborg.util import admin_cmd
 
+
 @borg.on(admin_cmd(pattern="corona (.*)")) # pylint:disable=E0602
 async def _(event):
     covid = Covid()

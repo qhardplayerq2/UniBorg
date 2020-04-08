@@ -5,17 +5,18 @@
 #
 """ Userbot module containing various sites direct links generators"""
 import json
+import logging
 import re
 import urllib.parse
 from os import popen
 from random import choice
 
 import requests
-from bs4 import BeautifulSoup
 from telethon import events
 
+from bs4 import BeautifulSoup
 from humanize import naturalsize
-import logging
+
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
 

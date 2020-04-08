@@ -4,12 +4,14 @@ Available Commands:
 .gban REASON
 .ungban REASON"""
 import logging
+
+from sample_config import Config
+from uniborg.util import admin_cmd
+
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
 
-from uniborg.util import admin_cmd
 
-from sample_config import Config
 
 
 @borg.on(admin_cmd(pattern="gban ?(.*)")) # pylint:disable=E0602

@@ -2,12 +2,13 @@
 .pbio <Bio>
 .pname <Name>
 .ppic"""
+import logging
 import os
+
 from telethon.tl import functions
-from uniborg.util import admin_cmd
 
 from sample_config import Config
-import logging
+from uniborg.util import admin_cmd
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
@@ -97,4 +98,3 @@ async def _(event):
         await a.edit(msg)
     except :
         pass
-

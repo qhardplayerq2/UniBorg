@@ -9,10 +9,13 @@ import math
 import os
 import random
 import urllib.request
-from PIL import Image
-from telethon.tl.functions.messages import GetStickerSetRequest
-from telethon.tl.types import (DocumentAttributeFilename, DocumentAttributeSticker, InputStickerSetID, MessageMediaPhoto)
 
+from telethon.tl.functions.messages import GetStickerSetRequest
+from telethon.tl.types import (DocumentAttributeFilename,
+                               DocumentAttributeSticker, InputStickerSetID,
+                               MessageMediaPhoto)
+
+from PIL import Image
 from uniborg.util import admin_cmd
 
 KANGING_STR = [

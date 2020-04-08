@@ -1,8 +1,10 @@
 """CoinFlip for @UniBorg
 Syntax: .coinflip [optional_choice]"""
-import random
-from uniborg.util import admin_cmd
 import logging
+import random
+
+from uniborg.util import admin_cmd
+
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
 

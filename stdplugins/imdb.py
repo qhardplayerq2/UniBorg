@@ -7,12 +7,15 @@ Imdb Module
 .imdb
 """
 import logging
+import re
+
+import requests
+
+import bs4
+from uniborg.util import admin_cmd
+
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
-import bs4
-import requests
-import re
-from uniborg.util import admin_cmd
 
 langi = "en"
 

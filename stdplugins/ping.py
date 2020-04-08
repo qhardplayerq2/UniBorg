@@ -1,8 +1,10 @@
 import logging
+from datetime import datetime
+
+from uniborg.util import admin_cmd
+
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
-from datetime import datetime
-from uniborg.util import admin_cmd
 
 
 @borg.on(admin_cmd(pattern="ping")) # pylint:disable=E0602

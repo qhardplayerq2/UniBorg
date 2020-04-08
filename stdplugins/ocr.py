@@ -3,12 +3,12 @@ Syntax: .ocr <LangCode>
 Available Languages: .ocrlanguages"""
 import json
 import os
-from PIL import Image
+
 import requests
 
-from uniborg.util import admin_cmd
-
+from PIL import Image
 from sample_config import Config
+from uniborg.util import admin_cmd
 
 
 def ocr_space_file(filename, overlay=False, api_key=Config.OCR_SPACE_API_KEY, language='eng'):
@@ -134,5 +134,4 @@ def conv_image(image):
     new_file_name = image + ".png"
     os.rename(image, new_file_name)
     return new_file_name
-
 

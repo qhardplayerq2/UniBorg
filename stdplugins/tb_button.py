@@ -1,12 +1,15 @@
 """Create Button Posts
 """
 import logging
+import re
+
+from telethon import custom
+
+from sample_config import Config
+from uniborg.util import admin_cmd
+
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
-import re
-from telethon import custom
-from uniborg.util import admin_cmd
-from sample_config import Config
 
 # regex obtained from: https://github.com/PaulSonOfLars/tgbot/blob/master/tg_bot/modules/helper_funcs/string_handling.py#L23
 BTN_URL_REGEX = re.compile(r"(\{([^\[]+?)\}\<button(url|text):(?:/{0,2})(.+?)(:same)?\>)")

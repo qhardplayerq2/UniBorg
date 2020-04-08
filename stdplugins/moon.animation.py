@@ -1,10 +1,12 @@
 # (c) @UniBorg
+import asyncio
 import logging
+from collections import deque
+
+from telethon import events
+
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
-from telethon import events
-import asyncio
-from collections import deque
 
 
 @borg.on(events.NewMessage(pattern=r"\.moon animation", outgoing=True)) # pylint:disable=E0602
@@ -16,4 +18,3 @@ async def _(event):
 		await asyncio.sleep(0.1)
 		await event.edit("".join(deq))
 		deq.rotate(1)
-    

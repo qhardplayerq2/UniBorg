@@ -8,20 +8,23 @@
 #
 
 """RapidLeech plugin: Inspired by @SjProjects"""
-import logging
-logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
-                    level=logging.WARNING)
 import asyncio
 import json
+import logging
 import re
+
+from telethon.utils import get_inner_text
 
 import aiohttp
 from bs4 import BeautifulSoup
-from telethon.utils import get_inner_text
-
+from sample_config import Config
 from uniborg.util import admin_cmd
 
-from sample_config import Config
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
+
+
+
 
 logger.info(Config.OPEN_LOAD_LOGIN)
 # https://t.me/RoseSupport/33801

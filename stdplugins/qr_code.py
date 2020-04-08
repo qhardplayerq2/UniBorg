@@ -2,19 +2,21 @@
 Available Commands
 .getqr
 .makeqr <long text to include>"""
-import logging
-logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
-                    level=logging.WARNING)
 import asyncio
+import logging
 import os
 from datetime import datetime
 
+import qrcode
 from bs4 import BeautifulSoup
-
+from sample_config import Config
 from uniborg.util import admin_cmd
 
-import qrcode
-from sample_config import Config
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
+
+
+
 
 
 def progress(current, total):

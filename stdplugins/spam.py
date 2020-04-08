@@ -4,12 +4,15 @@
 # you may not use this file except in compliance with the License.
 #
 import logging
-logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
-                    level=logging.WARNING)
 from asyncio import wait
 
 from telethon import events
+
 from sample_config import Config
+
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
+
 
 @borg.on(events.NewMessage(pattern=r"\.spam", outgoing=True)) # pylint:disable=E0602
 async def spammer(e):

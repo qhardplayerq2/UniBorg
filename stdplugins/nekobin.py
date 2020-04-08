@@ -1,16 +1,19 @@
 """IX.IO pastebin like site
 Syntax: .paste"""
 import logging
-logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
-                    level=logging.WARNING)
 import os
 from datetime import datetime
 
 import requests
 
+from sample_config import Config
 from uniborg.util import admin_cmd
 
-from sample_config import Config
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
+
+
+
 
 
 def progress(current, total):

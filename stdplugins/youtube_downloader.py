@@ -13,6 +13,7 @@ import shutil
 import time
 
 from telethon.tl.types import DocumentAttributeAudio
+
 from uniborg.util import admin_cmd
 from youtube_dl import YoutubeDL
 from youtube_dl.utils import (ContentTooShortError, DownloadError,
@@ -22,7 +23,7 @@ from youtube_dl.utils import (ContentTooShortError, DownloadError,
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
-
+logger = logging.getLogger(__name__)
 
 DELETE_TIMEOUT = 5
 

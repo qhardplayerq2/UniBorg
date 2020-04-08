@@ -1,11 +1,13 @@
+import asyncio
 import os
+import shutil
 import time
 from datetime import datetime
-from PyPDF2 import PdfFileWriter, PdfFileReader
-import asyncio
-from uniborg.util import admin_cmd, progress
+
+from PyPDF2 import PdfFileReader, PdfFileWriter
 from sample_config import Config
-import shutil
+from uniborg.util import admin_cmd, progress
+
 
 @borg.on(admin_cmd(pattern="watermark")) # pylint:disable=E0602
 async def _(event):

@@ -1,17 +1,19 @@
 """ It does not do to dwell on dreams and forget to live
 Syntax: .getime"""
-import logging
-logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
-                    level=logging.WARNING)
 import asyncio
+import logging
 import os
 from datetime import datetime
 
 from PIL import Image, ImageDraw, ImageFont
-
+from sample_config import Config
 from uniborg.util import admin_cmd
 
-from sample_config import Config
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
+
+
+
 
 FONT_FILE_TO_USE = "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf"
 

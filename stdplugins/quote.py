@@ -14,15 +14,16 @@
 #    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-import logging
-import requests
 import base64
 import json
-import os 
+import logging
+import os
+from io import BytesIO
+
+import requests
 import telethon
 
 from PIL import Image
-from io import BytesIO
 from uniborg.util import admin_cmd
 
 logger = logging.getLogger(__name__)

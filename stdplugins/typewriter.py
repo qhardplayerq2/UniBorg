@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # (c) Shrimadhav U K
+import asyncio
 import logging
+
+from uniborg.util import admin_cmd
+
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
-import asyncio
-from uniborg.util import admin_cmd
 
 
 @borg.on(admin_cmd(pattern="typewriter (.*)")) # pylint:disable=E0602

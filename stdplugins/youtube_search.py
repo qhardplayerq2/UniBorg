@@ -10,7 +10,6 @@ from html import unescape
 
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
-
 from sample_config import Config
 # from gtts import gTTS
 # from pytube.compat import quote
@@ -19,6 +18,7 @@ from uniborg.util import admin_cmd
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
+logger = logging.getLogger(__name__)
 
 @borg.on(admin_cmd(pattern=r"youtubesearch ?(\d+)? ?(.*)?")) # pylint:disable=E0602
 async def yt_search(video_q):

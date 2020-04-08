@@ -8,10 +8,13 @@ Available Commands:
 .clearfilter
 .clearallfilters"""
 import asyncio
-import re
-from sql_helpers.filters_sql import add_filter, remove_filter, get_all_filters, remove_all_filters
-from uniborg.util import admin_cmd
 import logging
+import re
+
+from sql_helpers.filters_sql import (add_filter, get_all_filters,
+                                     remove_all_filters, remove_filter)
+from uniborg.util import admin_cmd
+
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
 

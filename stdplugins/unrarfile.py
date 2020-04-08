@@ -2,23 +2,26 @@
 coded by @By_Azade
 """
 
-import logging
-logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
-                    level=logging.WARNING)
 import asyncio
+import logging
 import os
 import time
-
 from datetime import datetime
 
-import patoolib
 from telethon.tl.types import DocumentAttributeVideo
 
-from uniborg.util import admin_cmd, progress
-
+import patoolib
 from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
 from sample_config import Config
+from uniborg.util import admin_cmd, progress
+
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
+
+
+
+
 
 
 
@@ -129,6 +132,3 @@ def get_lst_of_files(input_directory, output_lst):
             return get_lst_of_files(current_file_name, output_lst)
         output_lst.append(current_file_name)
     return output_lst
-
-        
-            

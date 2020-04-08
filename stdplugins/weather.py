@@ -1,16 +1,18 @@
 """Get weather data using OpenWeatherMap
 Syntax: .weather <Location> """
-import logging
-logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
-                    level=logging.WARNING)
 import io
+import logging
 import time
 
 import aiohttp
-
+from sample_config import Config
 from uniborg.util import admin_cmd
 
-from sample_config import Config
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
+
+
+
 
 
 @borg.on(admin_cmd(pattern="weather (.*)")) # pylint:disable=E0602

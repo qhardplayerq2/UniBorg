@@ -5,25 +5,27 @@ Audio and video downloader using Youtube-dl
 .yta To Download in mp3 format
 .ytv To Download in mp4 format
 """
-import logging
-logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
-                    level=logging.WARNING)
-import os
-import time
 import asyncio
+import logging
+import os
+import shutil
+import time
+
+from telethon.tl.types import DocumentAttributeVideo
+
+from hachoir.metadata import extractMetadata
+from hachoir.parser import createParser
+from sample_config import Config
+from uniborg.util import admin_cmd, progress
 from youtube_dl import YoutubeDL
-from youtube_dl.utils import (DownloadError, ContentTooShortError,
+from youtube_dl.utils import (ContentTooShortError, DownloadError,
                               ExtractorError, GeoRestrictedError,
                               MaxDownloadsReached, PostProcessingError,
                               UnavailableVideoError, XAttrMetadataError)
-from telethon.tl.types import DocumentAttributeVideo
 
-from uniborg.util import admin_cmd, progress
-from hachoir.metadata import extractMetadata
-from hachoir.parser import createParser
-from uniborg.util import admin_cmd
-from sample_config import Config
-import shutil
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
+logger = logging.getLogger(__name__)
 
 DELETE_TIMEOUT = 5
 

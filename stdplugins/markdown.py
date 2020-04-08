@@ -2,8 +2,6 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 import logging
-logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
-                    level=logging.WARNING)
 import re
 from functools import partial
 
@@ -14,6 +12,10 @@ from telethon.tl.types import (MessageEntityBold, MessageEntityCode,
                                MessageEntityItalic, MessageEntityPre,
                                MessageEntityTextUrl)
 from telethon.utils import add_surrogate, del_surrogate
+
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
+
 
 
 

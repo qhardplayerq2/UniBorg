@@ -2,15 +2,13 @@
 Syntax:
 .ugdrive"""
 
+import asyncio
+import json
 # The entire code given below is verbatim copied from
 # https://github.com/cyberboysumanjay/Gdrivedownloader/blob/master/gdrive_upload.py
 # there might be some changes made to suit the needs for this repository
 # Licensed under MIT License
 import logging
-logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
-                    level=logging.WARNING)
-import asyncio
-import json
 import math
 import os
 import time
@@ -18,16 +16,21 @@ from datetime import datetime
 #
 from mimetypes import guess_type
 
+import httplib2
 from telethon import events
 
-from uniborg.util import admin_cmd, humanbytes, progress
-
-import httplib2
 from apiclient.discovery import build
 from apiclient.http import MediaFileUpload
 from oauth2client.client import OAuth2WebServerFlow
 from oauth2client.file import Storage
 from sample_config import Config
+from uniborg.util import admin_cmd, humanbytes, progress
+
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
+
+
+
 
 # Path to token json file, it should be in same directory as script
 G_DRIVE_TOKEN_FILE = Config.TMP_DOWNLOAD_DIRECTORY + "/auth_token.txt"

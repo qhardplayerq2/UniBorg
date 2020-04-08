@@ -1,12 +1,14 @@
-import logging
-logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
-                    level=logging.WARNING)
 import asyncio
+import io
+import logging
 import time
+from datetime import datetime
+
 from sample_config import Config
 from uniborg.util import admin_cmd
-from datetime import datetime
-import io
+
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
 
 
 
@@ -57,4 +59,3 @@ async def _(event):
                 caption=f"`{full_file_name}`",
                 reply_to=reply_to_id
             )
-

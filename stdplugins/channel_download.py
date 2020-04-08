@@ -4,12 +4,14 @@ usage: .geta channel_username [will  get all media from channel, tho there is li
        .getc number_of_messsages channel_username  
 By: @Zero_cool7870
 """
-from telethon import events
 import asyncio
+import logging
 import os
 import subprocess
-import logging
+
+from telethon import events
 from telethon.errors import FloodWaitError
+
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
                     
@@ -85,6 +87,3 @@ async def get_media(event):
     output = output.replace("b'","")
     output = output.replace("\n'","")
     await event.edit("Downloaded "+output+" files.")
-             
-             
-             

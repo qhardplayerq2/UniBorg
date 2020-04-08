@@ -1,16 +1,19 @@
 """Notification Manager for @UniBorg
 """
-import logging
-logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
-                    level=logging.WARNING)
 import asyncio
 import io
+import logging
+
+from telethon import events, functions, types
+
 import sql_helpers.no_log_pms_sql as no_log_pms_sql
 import sql_helpers.pmpermit_sql as pmpermit_sql
-from telethon import events, functions, types
+from sample_config import Config
 from uniborg.util import admin_cmd
 
-from sample_config import Config
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
+
 
 
 PM_WARNS = {}

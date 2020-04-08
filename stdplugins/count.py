@@ -2,6 +2,7 @@
 Syntax: .count"""
 import logging
 import time
+
 from telethon.events import NewMessage
 from telethon.tl.custom import Dialog
 from telethon.tl.types import Channel, Chat, User

@@ -4,8 +4,6 @@ accroding to ur spotify songs u listening
 \n.disp (to disable and back to default name)
 \nPorted by @NeoMatrix90 , @kirito6969 (both are same person)"""
 import logging
-logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
-                    level=logging.WARNING)
 from asyncio import sleep
 from json import loads
 from json.decoder import JSONDecodeError
@@ -16,9 +14,14 @@ from requests import get
 from telethon import events
 from telethon.tl.functions.account import UpdateProfileRequest
 
-
 import spotify_token as st
 from sample_config import Config
+
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
+
+
+
 
 # =================== CONSTANT ===================
 SPO_BIO_ENABLED = "```Spotify Current Music to Name enabled.```"

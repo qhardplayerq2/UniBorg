@@ -6,21 +6,24 @@ Available Commands:
 .upload <Path To File>
 .uploadir <Path To Directory>
 .uploadasstream <Path To File>"""
-import logging
-logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
-                    level=logging.WARNING)
 import asyncio
+import logging
 import os
 import subprocess
 import time
 from datetime import datetime
-from telethon.tl.types import DocumentAttributeAudio, DocumentAttributeVideo
 
-from uniborg.util import admin_cmd, progress
+from telethon.tl.types import DocumentAttributeAudio, DocumentAttributeVideo
 
 from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
 from sample_config import Config
+from uniborg.util import admin_cmd, progress
+
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
+
+
 
 thumb_image_path = Config.TMP_DOWNLOAD_DIRECTORY + "/thumb_image.jpg"
 

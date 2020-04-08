@@ -7,25 +7,28 @@ Syntax:
 # there might be some changes made to suit the needs for this repository
 # Licensed under MIT License
 
-import logging
-logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
-                    level=logging.WARNING)
 import asyncio
+import logging
 import math
 import os
+import ssl
 import time
-from pySmartDL import SmartDL
-from telethon import events
 from datetime import datetime
+from mimetypes import guess_type
+
+import httplib2
+from telethon import events
+
 from apiclient.discovery import build
 from apiclient.http import MediaFileUpload
 from oauth2client.client import OAuth2WebServerFlow
 from oauth2client.file import Storage
-from mimetypes import guess_type
-import httplib2
-from uniborg.util import admin_cmd, progress, humanbytes
-import ssl
+from pySmartDL import SmartDL
 from sample_config import Config
+from uniborg.util import admin_cmd, humanbytes, progress
+
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
 # Path to token json file, it should be in same directory as script
 G_DRIVE_TOKEN_FILE = Config.TMP_DOWNLOAD_DIRECTORY + "/auth_token.txt"
 # Copy your credentials from the APIs Console

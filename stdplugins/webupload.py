@@ -1,13 +1,15 @@
 # originally created by
 # https://github.com/Total-Noob-69/X-tra-Telegram/blob/master/userbot/plugins/webupload.py
 # modified by __me__ to suit **my** needs
-import logging
-logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
-                    level=logging.WARNING)
-from uniborg.util import admin_cmd
 import asyncio
 import json
+import logging
 import os
+
+from uniborg.util import admin_cmd
+
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
 
 
 @borg.on(admin_cmd(pattern="webupload ?(.+?|) --(anonfiles|transfer|filebin|anonymousfiles|megaupload|bayfiles|letsupload)")) # pylint:disable=E0602

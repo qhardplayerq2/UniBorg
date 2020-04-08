@@ -3,20 +3,21 @@ Available Commands:
 .kangsticker [Optional Emoji]
 .packinfo
 .getsticker"""
-from io import BytesIO
-from PIL import Image
 import asyncio
 import datetime
-from collections import defaultdict
 import math
 import os
 import zipfile
-from telethon.errors.rpcerrorlist import StickersetInvalidError
+from collections import defaultdict
+from io import BytesIO
+
 from telethon.errors import MessageNotModifiedError
+from telethon.errors.rpcerrorlist import StickersetInvalidError
 from telethon.tl.functions.messages import GetStickerSetRequest
-from telethon.tl.types import (
-    DocumentAttributeSticker, InputStickerSetID, InputStickerSetShortName, MessageMediaPhoto
-)
+from telethon.tl.types import (DocumentAttributeSticker, InputStickerSetID,
+                               InputStickerSetShortName, MessageMediaPhoto)
+
+from PIL import Image
 from uniborg.util import admin_cmd
 
 

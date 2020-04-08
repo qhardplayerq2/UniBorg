@@ -1,16 +1,19 @@
 
 import logging
-logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
-                    level=logging.WARNING)
 import re
 from collections import defaultdict, deque
 
-import regex
 from telethon import events, utils
 from telethon.tl import functions, types
 
-
+import regex
 from sample_config import Config
+
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
+
+
+
 
 HEADER = "「sed」\n"
 KNOWN_RE_BOTS = re.compile(

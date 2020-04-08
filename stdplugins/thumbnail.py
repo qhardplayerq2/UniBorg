@@ -4,18 +4,20 @@ Available Commands:
 .clearthumbnail
 .getthumbnail"""
 import logging
-logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
-                    level=logging.WARNING)
 import os
 import subprocess
 
-from PIL import Image
-
-from uniborg.util import admin_cmd
-
 from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
+from PIL import Image
 from sample_config import Config
+from uniborg.util import admin_cmd
+
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
+
+
+
 
 thumb_image_path = Config.TMP_DOWNLOAD_DIRECTORY + "/thumb_image.jpg"
 

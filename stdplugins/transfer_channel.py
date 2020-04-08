@@ -2,15 +2,18 @@
 Available Commands:
 .otransfer @username"""
 import logging
-logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
-                    level=logging.WARNING)
+
 import telethon.password as pwd_mod
 # https://t.me/TelethonChat/140200
 from telethon.tl import functions
 
+from sample_config import Config
 from uniborg import util
 
-from sample_config import Config
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
+
+
 
 
 @borg.on(util.admin_cmd(pattern="otransfer (.*)"))  # pylint:disable=E0602

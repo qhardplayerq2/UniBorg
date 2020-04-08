@@ -9,11 +9,14 @@ cmds: Magnet link : .magnet magnetLink
 By:- @Zero_cool7870	   
 
 """
-import aria2p
-from telethon import events
 import asyncio
-import os
 import logging
+import os
+
+from telethon import events
+
+import aria2p
+
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
 

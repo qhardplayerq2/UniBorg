@@ -6,10 +6,14 @@ Available Commands:
 .snips
 .snipl
 .snipd"""
-from telethon.tl import types
-from sql_helpers.snips_sql import get_snips, add_snip, remove_snip, get_all_snips
-from uniborg.util import admin_cmd
 import logging
+
+from telethon.tl import types
+
+from sql_helpers.snips_sql import (add_snip, get_all_snips, get_snips,
+                                   remove_snip)
+from uniborg.util import admin_cmd
+
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
 

@@ -16,15 +16,17 @@ Copyright (C) <year>  <name of author>
 
 usage : reply file and .tar
 """
-import logging
-logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
-                    level=logging.WARNING)
 import asyncio
+import logging
 import os
 import shutil
 import time
+
 from sample_config import Config
 from uniborg.util import admin_cmd, progress
+
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
 
 
 @borg.on(admin_cmd(pattern=("tar ?(.*)"))) # pylint:disable=E0602

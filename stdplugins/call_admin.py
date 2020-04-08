@@ -1,7 +1,10 @@
 """.admin Plugin for @UniBorg"""
-from telethon.tl.types import ChannelParticipantsAdmins
-from uniborg.util import admin_cmd
 import logging
+
+from telethon.tl.types import ChannelParticipantsAdmins
+
+from uniborg.util import admin_cmd
+
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
 

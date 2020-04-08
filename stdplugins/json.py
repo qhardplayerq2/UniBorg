@@ -1,13 +1,15 @@
 """Get Detailed info about any message
 Syntax: .json"""
-import logging
-logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
-                    level=logging.WARNING)
 import io
-
-from uniborg.util import admin_cmd
+import logging
 
 from sample_config import Config
+from uniborg.util import admin_cmd
+
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
+
+
 
 
 @borg.on(admin_cmd(pattern="json")) # pylint:disable=E0602

@@ -1,11 +1,14 @@
 import logging
-logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
-                    level=logging.WARNING)
-import cfscrape  # https://github.com/Anorov/cloudflare-scrape
-import requests
 from datetime import datetime
+
+import requests
+
+import cfscrape  # https://github.com/Anorov/cloudflare-scrape
 from bs4 import BeautifulSoup
 from uniborg.util import admin_cmd, humanbytes
+
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
 
 
 @borg.on(admin_cmd(  # pylint:disable=E0602

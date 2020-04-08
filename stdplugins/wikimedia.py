@@ -1,11 +1,14 @@
 """WikiMedia.ORG
 Syntax: .wikimedia Query"""
 import logging
-logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
-                    level=logging.WARNING)
+
 import requests
+
 from uniborg.util import admin_cmd
 
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
+logger = logging.getLogger(__name__)
 
 @borg.on(admin_cmd(pattern="wikimedia (.*)")) # pylint:disable=E0602
 async def _(event):

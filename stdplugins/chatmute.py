@@ -1,8 +1,8 @@
 
 from asyncio import sleep
-from uniborg.util import admin_cmd
-from sample_config import Config
 
+from sample_config import Config
+from uniborg.util import admin_cmd
 
 
 @borg.on(admin_cmd(pattern="unmutechat")) # pylint:disable=E0602
@@ -49,4 +49,3 @@ async def keep_read(message):
         for i in kread:
             if i.groupid == str(message.chat_id):
                 await message.client.send_read_acknowledge(message.chat_id)
-

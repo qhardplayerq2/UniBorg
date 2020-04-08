@@ -1,11 +1,14 @@
 """Dictionary Plugin for @UniBorg
 Syntax: .meaning <word>"""
 import logging
-logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
-                    level=logging.WARNING)
+
 import requests
 
 from uniborg.util import admin_cmd
+
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
+
 
 
 @borg.on(admin_cmd(pattern="meaning (.*)")) # pylint:disable=E0602

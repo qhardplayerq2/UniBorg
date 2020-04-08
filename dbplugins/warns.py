@@ -1,6 +1,7 @@
 import html
-from uniborg.util import admin_cmd
+
 import sql_helpers.warns_sql as sql
+from uniborg.util import admin_cmd
 
 
 @borg.on(admin_cmd(pattern="warn (.*)")) # pylint:disable=E0602
@@ -54,5 +55,4 @@ async def _(event):
     reply_message = await event.get_reply_message()
     sql.reset_warns(reply_message.from_id, event.chat_id)
     await event.edit("Warnings have been reset!")
-
 

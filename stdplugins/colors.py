@@ -1,9 +1,11 @@
 """Color Plugin for @UniBorg
 Syntax: .color <color_code>"""
+import logging
 import os
+
 from PIL import Image, ImageColor
 from uniborg.util import admin_cmd
-import logging
+
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
 

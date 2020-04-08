@@ -1,17 +1,19 @@
 """Take screenshot of any website
 Syntax: .screencapture <Website URL>"""
-import logging
-logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
-                    level=logging.WARNING)
 import io
+import logging
 import traceback
 from datetime import datetime
 
+from sample_config import Config
 from selenium import webdriver
-
 from uniborg.util import admin_cmd
 
-from sample_config import Config
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
+
+
+
 
 
 @borg.on(admin_cmd(pattern="screencapture (.*)")) # pylint:disable=E0602

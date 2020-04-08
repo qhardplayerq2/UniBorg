@@ -3,23 +3,26 @@ Syntax:
 .rnupload file.name
 .rnstreamupload file.name
 By @Ck_ATR"""
-import logging
-logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
-                    level=logging.WARNING)
 import asyncio
+import logging
 import math
 import os
 import time
 from datetime import datetime
 
-from pySmartDL import SmartDL
 from telethon.tl.types import DocumentAttributeVideo
-
-from uniborg.util import admin_cmd, humanbytes, progress
 
 from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
+from pySmartDL import SmartDL
 from sample_config import Config
+from uniborg.util import admin_cmd, humanbytes, progress
+
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
+
+
+
 
 thumb_image_path = Config.TMP_DOWNLOAD_DIRECTORY + "/thumb_image.jpg"
 

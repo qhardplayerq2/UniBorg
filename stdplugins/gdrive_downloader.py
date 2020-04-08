@@ -5,10 +5,12 @@ By: @Zero_cool7870
 
 """
 import logging
-logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
-                    level=logging.WARNING)
+
 import requests
 from telethon import events
+
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
 
 
 async def download_file_from_google_drive(id):

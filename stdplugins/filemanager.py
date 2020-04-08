@@ -1,17 +1,20 @@
 """Execute GNU/Linux commands inside Telegram
 Syntax: .exec Code"""
+import asyncio
+import io
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 import logging
-logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
-                    level=logging.WARNING)
-from telethon import events
-import io
-import asyncio
 import time
 
+from telethon import events
+
 from sample_config import Config
+
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
+
 
 @borg.on(events.NewMessage(pattern=r"\.lslocal", outgoing=True)) # pylint:disable=E0602
 async def _(event):
@@ -87,4 +90,3 @@ async def _(event):
         await event.edit(f"**{stderr.decode()}**")
         return
     await event.edit(f"{OUTPUT}`{stdout.decode()}`")
-

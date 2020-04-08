@@ -1,17 +1,19 @@
 """FFMpeg for @UniBorg
 """
-import logging
-logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
-                    level=logging.WARNING)
-logger = logging.getLogger(__name__)
 import asyncio
+import logging
 import os
 import time
 from datetime import datetime
 
-
-from uniborg.util import admin_cmd, progress
 from sample_config import Config
+from uniborg.util import admin_cmd, progress
+
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
+logger = logging.getLogger(__name__)
+
+
 
 FF_MPEG_DOWN_LOAD_MEDIA_PATH = "uniborg.media.ffmpeg"
 

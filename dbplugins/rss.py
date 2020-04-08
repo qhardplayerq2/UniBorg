@@ -5,11 +5,12 @@ import html
 import logging
 import os
 import re
-# import schedule
-from feedparser import parse
+
 from telethon import events
 
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
+# import schedule
+from feedparser import parse
 from sample_config import Config
 from sql_helpers.rss_sql import (add_url, check_url_availability, get_all,
                                  get_urls, remove_url, update_url)

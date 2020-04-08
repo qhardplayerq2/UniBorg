@@ -4,14 +4,15 @@ By @snappy101
 """
 
 import asyncio
-import barcode
+import logging
 import os
-from barcode.writer import ImageWriter
 from datetime import datetime
+
+import barcode
+from barcode.writer import ImageWriter
+from sample_config import Config
 from uniborg.util import admin_cmd
 
-from sample_config import Config
-import logging
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
                     

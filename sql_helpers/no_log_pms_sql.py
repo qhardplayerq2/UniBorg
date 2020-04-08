@@ -1,5 +1,5 @@
+from sql_helpers import BASE, SESSION
 from sqlalchemy import Column, Numeric
-from sql_helpers import SESSION, BASE
 
 
 class NOLogPMs(BASE):

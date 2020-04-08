@@ -1,10 +1,13 @@
+import asyncio
 import logging
-logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
-                    level=logging.WARNING)
+
 from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
+
 from uniborg.util import admin_cmd
-import asyncio
+
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
 
 @borg.on(admin_cmd(pattern=("sg ?(.*)"))) # pylint:disable=E0602
 async def _(event):

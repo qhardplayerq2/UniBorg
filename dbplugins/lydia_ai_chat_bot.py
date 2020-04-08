@@ -12,20 +12,22 @@ Credits:
 @Hackintosh5 (for inspiring me to write this module)
 @Zero_cool7870 (For Writing The Original Module)
 Zi Xing (For CoffeeHouse API)"""
+import asyncio
+import io
 import logging
+from time import time
+
+import coffeehouse as cf
+from coffeehouse.api import API
+from coffeehouse.lydia import LydiaAI
+from sample_config import Config
+from sql_helpers.lydia_ai_sql import add_s, get_all_s, get_s, remove_s
+from uniborg.util import admin_cmd
+
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
 
-import coffeehouse as cf
 
-import asyncio
-import io
-from sql_helpers.lydia_ai_sql import get_s, get_all_s, add_s, remove_s
-from time import time
-from uniborg.util import admin_cmd
-from sample_config import Config
-from coffeehouse.lydia import LydiaAI
-from coffeehouse.api import API
 
 if Config.LYDIA_API is not None:
     api_key = API(Config.LYDIA_API)

@@ -2,10 +2,12 @@
 # -*- coding: utf-8 -*-
 # (c) @INF1N17Y
 import logging
+import random
+
+from telethon import events
+
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
-from telethon import events
-import random
 
 @borg.on(events.NewMessage(pattern=r"\.react (.*)", outgoing=True)) # pylint:disable=E0602
 async def _(event):

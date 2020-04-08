@@ -3,17 +3,19 @@ Available Commands:
 .telegraph media as reply to a media
 .telegraph text as reply to a large text"""
 import logging
-logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
-                    level=logging.WARNING)
 import os
 from datetime import datetime
 
 from PIL import Image
-
-from uniborg.util import admin_cmd
-
 from sample_config import Config
 from telegraph import Telegraph, exceptions, upload_file
+from uniborg.util import admin_cmd
+
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
+
+
+
 
 telegraph = Telegraph()
 r = telegraph.create_account(short_name=Config.TELEGRAPH_SHORT_NAME)
