@@ -1,17 +1,19 @@
-import logging
-logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
-                    level=logging.WARNING)
 import asyncio
+import logging
 import os
 import time
 import zipfile
 
+from sample_config import Config
 from uniborg.util import admin_cmd, progress
 
-from sample_config import Config
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
 
 
-@borg.on(admin_cmd(pattern=("compress ?(.*)"))) # pylint:disable=E0602
+
+
+@borg.on(admin_cmd(pattern=("zip ?(.*)"))) # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return

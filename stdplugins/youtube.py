@@ -3,6 +3,7 @@
 # General Public License, v.3.0. If a copy of the GPL was not distributed with this
 # file, You can obtain one at https://www.gnu.org/licenses/gpl-3.0.en.html
 from __future__ import unicode_literals
+
 import json
 import logging
 import os
@@ -23,7 +24,7 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
 
 
 
-@borg.on(events.MessageEdited(pattern=r"\.youtube search (.*)", outgoing=True)) # pylint:disable=E0602
+@borg.on(events.MessageEdited(pattern=r"\.youtube search (.*)", outgoing=True)) #pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return
