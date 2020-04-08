@@ -1,12 +1,7 @@
-import asyncio
-import os
 from html.parser import HTMLParser
 
 import requests
-
-import wget
 from bs4 import BeautifulSoup
-from sample_config import Config
 from uniborg.util import admin_cmd
 
 
