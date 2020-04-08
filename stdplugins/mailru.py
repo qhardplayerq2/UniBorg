@@ -2,10 +2,9 @@ import logging
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
 import asyncio
-import time
 from sample_config import Config
 from uniborg.util import admin_cmd
-from datetime import datetime
+
 
 
 
