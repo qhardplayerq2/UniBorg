@@ -13,6 +13,7 @@ from telethon.tl import types
 from sql_helpers.snips_sql import (add_snip, get_all_snips, get_snips,
                                    remove_snip)
 from uniborg.util import admin_cmd
+from sample_config import Config
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)

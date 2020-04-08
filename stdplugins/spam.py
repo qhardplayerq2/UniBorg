@@ -29,7 +29,7 @@ async def spammer(e):
         await e.delete()
         if Config.LOGGER:
             await e.client.send_message(
-                Config.LOGGER_GROUP,
+                Config.PRIVATE_GROUP_BOT_API_ID,
                 "#SPAM \n\n"
                 "Spam was executed successfully"
                 )

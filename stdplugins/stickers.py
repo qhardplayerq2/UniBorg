@@ -19,6 +19,7 @@ from telethon.tl.types import (DocumentAttributeSticker, InputStickerSetID,
 
 from PIL import Image
 from uniborg.util import admin_cmd
+from sample_config import Config
 
 
 @borg.on(admin_cmd(pattern="kangsticker ?(.*)")) # pylint:disable=E0602
