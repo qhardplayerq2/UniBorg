@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # (c) https://t.me/TelethonChat/37677
 
-import telethon.sync
+
 from telethon import TelegramClient, events
 
 from sample_config import Config
