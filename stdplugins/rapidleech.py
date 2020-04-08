@@ -24,12 +24,7 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
                     level=logging.WARNING)
 logger = logging.getLogger(__name__)
 
-
-
-
 logger.info(Config.OPEN_LOAD_LOGIN)
-# https://t.me/RoseSupport/33801
-
 
 @borg.on(admin_cmd(pattern="rl")) # pylint:disable=E0602
 async def _(event):

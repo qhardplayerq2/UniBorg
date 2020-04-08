@@ -1,13 +1,9 @@
 """Self Destruct Plugin
 .sd <time in seconds> <text>
 """
-
-
 import time
 
 from uniborg.util import admin_cmd
-
-
 
 @borg.on(admin_cmd(pattern="sd", outgoing=True  )) # pylint:disable=E0602
 async def selfdestruct(destroy):

@@ -13,9 +13,6 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
                     level=logging.WARNING)
 logger = logging.getLogger(__name__)
 
-
-
-
 HEADER = "「sed」\n"
 KNOWN_RE_BOTS = re.compile(
     Config.GROUP_REG_SED_EX_BOT_S,
