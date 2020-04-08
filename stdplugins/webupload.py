@@ -10,7 +10,7 @@ import json
 import os
 
 
-@borg.on(admin_cmd(pattern="webupload ?(.+?|) --(anonfiles|transfer|filebin|anonymousfiles|megaupload|bayfiles)")) # pylint:disable=E0602
+@borg.on(admin_cmd(pattern="webupload ?(.+?|) --(anonfiles|transfer|filebin|anonymousfiles|megaupload|bayfiles|letsupload)")) # pylint:disable=E0602
 async def _(event):
 	await event.edit("processing ...")
 	PROCESS_RUN_TIME = 100
@@ -31,7 +31,8 @@ async def _(event):
 		"filebin": "curl -X POST --data-binary \"@{full_file_path}\" -H \"filename: {bare_local_name}\" \"https://filebin.net\"",
 		"anonymousfiles": "curl -F file=\"@{full_file_path}\" https://api.anonymousfiles.io/",
 		"megaupload": "curl -F \"file=@{full_file_path}\" https://megaupload.is/api/upload",
-		"bayfiles": ".exec curl -F \"file=@{full_file_path}\" https://bayfiles.com/api/upload"
+		"bayfiles": ".exec curl -F \"file=@{full_file_path}\" https://bayfiles.com/api/upload",
+		"letsupload": ".exec curl -F \"file=@{full_file_path}\" https://api.letsupload.cc/upload"
 	}
 	filename = os.path.basename(file_name)
 	try:
