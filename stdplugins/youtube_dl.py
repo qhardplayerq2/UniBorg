@@ -7,12 +7,17 @@ Click on any of the Buttons"""
 
 import asyncio
 import json
+import logging
 import os
 import re
 from datetime import datetime
+
 from telethon import events
 
+from sample_config import Config
 
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 # pylint:disable=E0602
 if Config.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
     @tgbot.on(events.callbackquery.CallbackQuery(  # pylint:disable=E0602
