@@ -16,7 +16,7 @@ from uniborg.util import admin_cmd
 from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
 from sample_config import Config
-
+from stdborg import borg
 
 thumb_image_path = Config.TMP_DOWNLOAD_DIRECTORY + "/thumb_image.jpg"
 
@@ -37,7 +37,7 @@ def get_video_thumb(file, output=None, width=320):
         return output
 
 
-@borg.on(admin_cmd(pattern="savethumbnail")) # pylint:disable=E0602
+@borg.on(admin_cmd(pattern="savethumbnail")) 
 async def _(event):
     if event.fwd_from:
         return

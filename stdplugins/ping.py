@@ -3,7 +3,7 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
                     level=logging.WARNING)
 from datetime import datetime
 from uniborg.util import admin_cmd
-from uniborg import borg
+from stdborg import borg
 
 @borg.on(admin_cmd(pattern="ping")) 
 async def _(event):
