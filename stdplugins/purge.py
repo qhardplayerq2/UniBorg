@@ -64,16 +64,14 @@ async def purgeme(delme):
     await asyncio.sleep(5)
 
 
-@borg.on(admin_cmd(pattern="sd ?(.*)")) # pylint:disable=E0602
+@borg.on(admin_cmd(pattern="sd ?(.*) + ?(.*)", outgoing=True  )) # pylint:disable=E0602
 async def selfdestruct(destroy):
-    """ For .sd command, make seflf-destructable messages. """
-    message = destroy.text
-    counter = int(message[4:6])
-    text = str(destroy.text[6:])
-    await destroy.delete()
-    smsg = await destroy.client.send_message(destroy.chat_id, text)
-    await sleep(counter)
-    await smsg.delete()
-    if Config.BOTLOG:
-        await destroy.client.send_message(Config.PRIVATE_GROUP_BOT_API_ID,
-                                          "sd query done successfully")
+    if not destroy.text[0].isalpha() and destroy.text[0] not in ("/", "#", "@", "!"):
+        await destroy.delete()
+        message = destroy.pattern_match.group(2)
+        counter = destroy.pattern_match.group(1)
+        text = message+ "\n\n`Bu mesaj "+ str(counter)+ " saniye sonunda silinecektir.`"
+        
+        smsg = await destroy.client.send_message(destroy.chat_id, text)
+        time.sleep(int(counter))
+        await smsg.delete()
