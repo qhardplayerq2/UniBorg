@@ -24,7 +24,7 @@ async def _(event):
     main_soup = BeautifulSoup(main_page_response.text, "html.parser")
     movies_in_page = main_soup.find_all("div", class_="browse-movie-wrap")
     for movie in movies_in_page:
-        movie_bottom = movie.div
+        # movie_bottom = movie.div
         # name = movie_bottom.a.string
         # year = movie_bottom.div.string
         movie_links = movie.div.find_all("a")
