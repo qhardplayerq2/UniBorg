@@ -16,7 +16,6 @@ from uniborg.util import admin_cmd
 from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
 from sample_config import Config
-from stdborg import borg
 
 thumb_image_path = Config.TMP_DOWNLOAD_DIRECTORY + "/thumb_image.jpg"
 
@@ -92,7 +91,7 @@ async def _(event):
     if event.reply_to_msg_id:
         r = await event.get_reply_message()
         try:
-            a = await borg.download_media( 
+            a = await borg.download_media(
                 r.media.document.thumbs[0],
                 Config.TMP_DOWNLOAD_DIRECTORY
             )
@@ -112,7 +111,7 @@ async def _(event):
             await event.edit(str(e))
     elif os.path.exists(thumb_image_path):
         caption_str = "Currently Saved Thumbnail. Clear with `.clearthumbnail`"
-        await borg.send_file( 
+        await borg.send_file(
             event.chat_id,
             thumb_image_path,
             caption=caption_str,
