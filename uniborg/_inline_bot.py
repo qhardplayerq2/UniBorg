@@ -10,9 +10,9 @@ from uniborg.util import admin_cmd, errors_handler, humanbytes
 import os
 
 @borg.on(admin_cmd(  # pylint:disable=E0602
-@errors_handler
     pattern="ib (.[^ ]*) (.*)"
 ))
+@errors_handler
 async def _(event):
     # https://stackoverflow.com/a/35524254/4723940
     if event.fwd_from:
@@ -22,7 +22,6 @@ async def _(event):
     try:
         output_message = ""
         bot_results = await borg.inline_query(  # pylint:disable=E0602
-@errors_handler
             bot_username,
             search_query
         )
@@ -41,9 +40,9 @@ async def _(event):
 
 
 @borg.on(admin_cmd(  # pylint:disable=E0602
-@errors_handler
     pattern="icb (.[^ ]*) (.[^ ]*) (.*)"
 ))
+@errors_handler
 async def _(event):
     if event.fwd_from:
         return
@@ -53,7 +52,6 @@ async def _(event):
     search_query = event.pattern_match.group(3)
     try:
         bot_results = await borg.inline_query(  # pylint:disable=E0602
-@errors_handler
             bot_username,
             search_query
         )
@@ -63,10 +61,9 @@ async def _(event):
 
 
 # pylint:disable=E0602
-@errors_handler
+
 if Config.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
     @tgbot.on(events.InlineQuery)  # pylint:disable=E0602
-@errors_handler
     async def inline_handler(event):
         builder = event.builder
         result = None
@@ -214,12 +211,11 @@ All instaructions to run @UniBorg in your PC has been explained in https://githu
 
 
     @tgbot.on(events.callbackquery.CallbackQuery(  # pylint:disable=E0602
-@errors_handler
         data=re.compile(b"helpme_next\((.+?)\)")
     ))
+    @errors_handler
     async def on_plug_in_callback_query_handler(event):
         if event.query.user_id == borg.uid:  # pylint:disable=E0602
-@errors_handler
             current_page_number = int(
                 event.data_match.group(1).decode("UTF-8"))
             buttons = paginate_help(
@@ -232,18 +228,16 @@ All instaructions to run @UniBorg in your PC has been explained in https://githu
 
 
     @tgbot.on(events.callbackquery.CallbackQuery(  # pylint:disable=E0602
-@errors_handler
         data=re.compile(b"helpme_prev\((.+?)\)")
     ))
+    @errors_handler
     async def on_plug_in_callback_query_handler(event):
         if event.query.user_id == borg.uid:  # pylint:disable=E0602
-@errors_handler
             current_page_number = int(
                 event.data_match.group(1).decode("UTF-8"))
             buttons = paginate_help(
                 current_page_number - 1,
                 borg._plugins,  # pylint:disable=E0602
-@errors_handler
                 "helpme"
             )
             # https://t.me/TelethonChat/115200
@@ -253,15 +247,15 @@ All instaructions to run @UniBorg in your PC has been explained in https://githu
             await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
 
-    @tgbot.on(events.callbackquery.CallbackQuery(  # pylint:disable=E0602
-@errors_handler
+    @tgbot.on(events.callbackquery.CallbackQuery(  # pylint:disable=E060
         data=re.compile(b"ub_plugin_(.*)")
     ))
+    @errors_handler
     async def on_plug_in_callback_query_handler(event):
         plugin_name = event.data_match.group(1).decode("UTF-8")
         help_string = borg._plugins[plugin_name].__doc__[
             0:125]  # pylint:disable=E0602
-@errors_handler
+
         reply_pop_up_alert = help_string if help_string is not None else \
             "No DOCSTRING has been setup for {} plugin".format(plugin_name)
         reply_pop_up_alert += "\n\n Use .unload {} to remove this plugin\n\

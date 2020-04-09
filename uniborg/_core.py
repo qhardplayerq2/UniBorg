@@ -63,7 +63,6 @@ async def send_plug_in(event):
     the_plugin_file = "./stdplugins/{}.py".format(input_str)
     start = datetime.now()
     await event.client.send_file(  # pylint:disable=E0602
-@errors_handler
         event.chat_id,
         the_plugin_file,
         force_document=True,
@@ -87,11 +86,9 @@ async def install_plug_in(event):
             downloaded_file_name = await event.client.download_media(
                 await event.get_reply_message(),
                 borg.n_plugin_path  # pylint:disable=E0602
-@errors_handler
             )
             if "(" not in downloaded_file_name:
                 borg.load_plugin_from_file(downloaded_file_name)  # pylint:disable=E0602
-@errors_handler
                 await event.edit("Installed Plugin `{}`".format(os.path.basename(downloaded_file_name)))
             else:
                 os.remove(downloaded_file_name)
