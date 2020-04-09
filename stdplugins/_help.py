@@ -61,7 +61,6 @@ async def _(event):
     if event.fwd_from:
         return
     result = await borg(functions.help.GetNearestDcRequest())  # pylint:disable=E0602
-@errors_handler
     await event.edit(result.stringify())
 
 
@@ -71,10 +70,8 @@ async def _(event):
     if event.fwd_from:
         return
     result = await borg(functions.help.GetConfigRequest())  # pylint:disable=E0602
-@errors_handler
     result = result.stringify()
     logger.info(result)  # pylint:disable=E0602
-@errors_handler
     await event.edit("""Telethon UserBot powered by @UniBorg""")
 
 
