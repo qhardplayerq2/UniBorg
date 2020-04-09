@@ -17,9 +17,6 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
 logger = logging.getLogger(__name__)
 
 
-
-
-
 @borg.on(admin_cmd(pattern="tts (.*)")) # pylint:disable=E0602
 @errors_handler
 async def _(event):

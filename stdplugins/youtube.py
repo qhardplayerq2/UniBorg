@@ -14,11 +14,12 @@ from telethon import events
 
 import youtube_dl
 from sample_config import Config
+from uniborg.util import errors_handler
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
 logger = logging.getLogger(__name__)
-logger = logging.getLogger(__name__)
+
 
 
 
@@ -26,6 +27,7 @@ logger = logging.getLogger(__name__)
 
 
 @borg.on(events.MessageEdited(pattern=r"\.youtube search (.*)", outgoing=True)) #pylint:disable=E0602
+@errors_handler
 async def _(event):
     if event.fwd_from:
         return

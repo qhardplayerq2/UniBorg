@@ -59,7 +59,7 @@ if 1 == 1:
     client = borg
 
     @borg.on(admin_cmd(pattern="quote(.*)")) # pylint:disable=E0602
-@errors_handler
+    @errors_handler
     async def quotecmd(message):  # noqa: C901
         """Quote a message.
         Usage: .quote [template]

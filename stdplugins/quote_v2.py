@@ -9,7 +9,7 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
                     level=logging.WARNING)
 logger = logging.getLogger(__name__)
 
-@borg.on(admin_cmd(pattern=("q ?(.*)"))) # pylint:disable=E0602
+@borg.on(admin_cmd(pattern=("sq ?(.*)"))) # pylint:disable=E0602
 @errors_handler
 # @borg.on(outgoing=True, pattern="^.q(?: |$)(.*)")
 async def _(event):

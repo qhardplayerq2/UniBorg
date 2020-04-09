@@ -86,9 +86,9 @@ async def _(event):
 # Helpers
 if Config.TG_BOT_USER_NAME_BF_HER is None or tgbot is None:
     @tgbot.on(events.callbackquery.CallbackQuery(  # pylint:disable=E0602
-@errors_handler
         data=re.compile(b"txt_prod_(.*)")
     ))
+    @errors_handler
     async def on_plug_in_callback_query_handler(event):
         reply_pop_up_alert = event.data_match.group(1).decode("UTF-8")
         await event.answer(reply_pop_up_alert, cache_time=0, alert=True)

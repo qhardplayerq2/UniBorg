@@ -6,6 +6,7 @@ import logging
 from telethon.tl import functions
 
 from uniborg import util
+from uniborg.util import errors_handler
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
@@ -22,7 +23,6 @@ async def _(event):
     if type_of_group == "b":
         try:
             result = await borg(functions.messages.CreateChatRequest(  # pylint:disable=E0602
-@errors_handler
                 users=["@GoogleIMGBot"],
                 # Not enough users (to create a chat, for example)
                 # Telegram, no longer allows creating a chat with ourselves
@@ -42,7 +42,6 @@ async def _(event):
     elif type_of_group in ("c","g"):
         try:
             r = await borg(functions.channels.CreateChannelRequest(  # pylint:disable=E0602
-@errors_handler
                 title=group_name,
                 about="This is a Test from @UniBorg",
                 megagroup=False if type_of_group == "c" else True

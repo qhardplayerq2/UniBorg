@@ -32,7 +32,6 @@ UNIBORG_USER_BOT_NO_WARN = "Hi! I will answer to your message soon. Please wait 
 async def create_dump_channel(event):
     if Config.PM_LOGGR_BOT_API_ID is None:
         result = await event.client(functions.channels.CreateChannelRequest(  # pylint:disable=E0602
-@errors_handler
             title=f"UniBorg-{borg.uid}-PM_LOGGR_BOT_API_ID-data",
             about="@UniBorg PM_LOGGR_BOT_API_ID // Do Not Touch",
             megagroup=False
@@ -40,7 +39,6 @@ async def create_dump_channel(event):
         logger.info(result)
         created_chat_id = result.chats[0].id
         result = await event.client.edit_admin(  # pylint:disable=E0602
-@errors_handler
             entity=created_chat_id,
             user=Config.TG_BOT_USER_NAME_BF_HER,
             is_admin=True,

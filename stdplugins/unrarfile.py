@@ -22,14 +22,6 @@ logger = logging.getLogger(__name__)
 
 
 
-
-
-
-
-
-
-
-
 @borg.on(admin_cmd(pattern="unrar")) # pylint:disable=E0602
 @errors_handler
 async def _(event):

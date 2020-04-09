@@ -26,7 +26,7 @@ from youtube_dl.utils import (ContentTooShortError, DownloadError,
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
 logger = logging.getLogger(__name__)
-logger = logging.getLogger(__name__)
+
 
 DELETE_TIMEOUT = 5
 
