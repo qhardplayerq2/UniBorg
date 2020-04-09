@@ -7,7 +7,7 @@ from datetime import datetime
 
 from PIL import Image, ImageDraw, ImageFont
 from sample_config import Config
-from uniborg.util import admin_cmd
+from uniborg.util import admin_cmd, errors_handler
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
@@ -20,6 +20,7 @@ FONT_FILE_TO_USE = "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf"
 
 
 @borg.on(admin_cmd(pattern="getime ?(.*)"))  # pylint:disable=E0602
+@errors_handler
 async def _(event):
     if event.fwd_from:
         return
@@ -33,8 +34,11 @@ async def _(event):
         previous_message = await event.get_reply_message()
         reply_msg_id = previous_message.id
     if not os.path.isdir(Config.TMP_DOWNLOAD_DIRECTORY):  # pylint:disable=E0602
+@errors_handler
         os.makedirs(Config.TMP_DOWNLOAD_DIRECTORY)  # pylint:disable=E0602
+@errors_handler
     # pylint:disable=E0602
+@errors_handler
     required_file_name = Config.TMP_DOWNLOAD_DIRECTORY + " " + str(datetime.now()) + ".webp"
     img = Image.new("RGB", (250, 50), color=(0, 0, 0))
     fnt = ImageFont.truetype(FONT_FILE_TO_USE, 30)
@@ -42,6 +46,7 @@ async def _(event):
     drawn_text.text((10, 10), current_time, font=fnt, fill=(255, 255, 255))
     img.save(required_file_name)
     await borg.send_file(  # pylint:disable=E0602
+@errors_handler
         event.chat_id,
         required_file_name,
         caption="Time: Powered by @UniBorg",
@@ -57,8 +62,10 @@ async def _(event):
 
 
 @borg.on(admin_cmd(pattern="time (.*)"))  # pylint:disable=E0602
+@errors_handler
 async def _(event):
     if event.fwd_from:
         return
     input_str = event.pattern_match.group(1)
     logger.info(input_str)  # pylint:disable=E0602
+@errors_handler

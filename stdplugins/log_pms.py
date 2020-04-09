@@ -17,6 +17,7 @@ NO_PM_LOG_USERS = []
 
 
 @borg.on(events.NewMessage(incoming=True, func=lambda e: e.is_private)) # pylint:disable=E0602
+@errors_handler
 async def monito_p_m_s(event):
     sender = await event.get_sender()
     if Config.NC_LOG_P_M_S and not sender.bot:
@@ -38,6 +39,7 @@ async def monito_p_m_s(event):
 
 
 @borg.on(events.NewMessage(pattern="nolog ?(.*)")) # pylint:disable=E0602
+@errors_handler
 async def approve_p_m(event):
     if event.fwd_from:
         return

@@ -16,7 +16,7 @@ from telethon.tl.types import (DocumentAttributeFilename,
                                MessageMediaPhoto)
 
 from PIL import Image
-from uniborg.util import admin_cmd
+from uniborg.util import admin_cmd, errors_handler
 
 KANGING_STR = [
     "Using Witchery to kang this sticker...",
@@ -31,6 +31,7 @@ KANGING_STR = [
 
 # @register(outgoing=True, pattern="^.kang")
 @borg.on(admin_cmd(pattern="kang ?(.*)")) # pylint:disable=E0602
+@errors_handler
 async def kang(args):
     """ For .kang command, kangs stickers or creates new ones. """
     if not args.text[0].isalpha() and args.text[0] not in ("/", "#", "@", "!"):
@@ -267,6 +268,7 @@ async def resize_photo(photo):
 
 # @register(outgoing=True, pattern="^.stkrinfo$")
 @borg.on(admin_cmd(pattern="stkrinfo ?(.*)")) # pylint:disable=E0602
+@errors_handler
 async def get_pack_info(event):
     if not event.text[0].isalpha() and event.text[0] not in ("/", "#", "@",
                                                              "!"):

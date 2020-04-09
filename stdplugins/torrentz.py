@@ -5,7 +5,7 @@ import requests
 
 import cfscrape  # https://github.com/Anorov/cloudflare-scrape
 from bs4 import BeautifulSoup
-from uniborg.util import admin_cmd, humanbytes
+from uniborg.util import admin_cmd, errors_handler, humanbytes
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
@@ -13,6 +13,7 @@ logger = logging.getLogger(__name__)
 
 
 @borg.on(admin_cmd(  # pylint:disable=E0602
+@errors_handler
     pattern="torrentz (torrentz2\.eu|idop\.se) (.*)"
 ))
 async def _(event):
@@ -28,6 +29,7 @@ async def _(event):
     elif input_type == "idop.se":
         search_results = search_idop_se(input_str)
     # logger.info(search_results)  # pylint:disable=E0602
+@errors_handler
     output_str = ""
     i = 0
     for result in search_results:

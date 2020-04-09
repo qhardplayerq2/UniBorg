@@ -6,7 +6,7 @@ import json
 import logging
 import os
 
-from uniborg.util import admin_cmd
+from uniborg.util import admin_cmd, errors_handler
 from sample_config import Config
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
@@ -15,6 +15,7 @@ logger = logging.getLogger(__name__)
 
 
 @borg.on(admin_cmd(pattern="webupload ?(.+?|) --(anonfiles|transfer|filebin|anonymousfiles|megaupload|bayfiles|letsupload)")) # pylint:disable=E0602
+@errors_handler
 async def _(event):
 	await event.edit("processing ...")
 	PROCESS_RUN_TIME = 100

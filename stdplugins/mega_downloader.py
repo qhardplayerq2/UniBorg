@@ -10,7 +10,7 @@ from subprocess import PIPE, Popen
 from urllib.error import HTTPError
 
 from pySmartDL import SmartDL
-from uniborg.util import admin_cmd, humanbytes
+from uniborg.util import admin_cmd, errors_handler, humanbytes
 
 
 def subprocess_run(cmd):
@@ -29,6 +29,7 @@ def subprocess_run(cmd):
 
 
 @borg.on(admin_cmd(pattern="mega ?(.*)")) # pylint:disable=E0602
+@errors_handler
 async def mega_downloader(megadl):
     await megadl.edit("`Processing...`")
     textx = await megadl.get_reply_message()

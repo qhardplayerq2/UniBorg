@@ -18,11 +18,12 @@ from telethon.tl.types import (DocumentAttributeSticker, InputStickerSetID,
                                InputStickerSetShortName, MessageMediaPhoto)
 
 from PIL import Image
-from uniborg.util import admin_cmd
+from uniborg.util import admin_cmd, errors_handler
 from sample_config import Config
 
 
 @borg.on(admin_cmd(pattern="kangsticker ?(.*)")) # pylint:disable=E0602
+@errors_handler
 async def _(event):
     if event.fwd_from:
         return
@@ -113,6 +114,7 @@ async def _(event):
 
 
 @borg.on(admin_cmd(pattern="packinfo")) # pylint:disable=E0602
+@errors_handler
 async def _(event):
     if event.fwd_from:
         return
@@ -149,6 +151,7 @@ async def _(event):
 
 
 @borg.on(admin_cmd(pattern="getsticker ?(.*)")) # pylint:disable=E0602
+@errors_handler
 async def _(event):
     if event.fwd_from:
         return

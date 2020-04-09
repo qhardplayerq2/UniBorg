@@ -12,6 +12,7 @@ logger = logging.getLogger(__name__)
 
 
 @borg.on(events.NewMessage(pattern=r"\.shout", outgoing=True)) # pylint:disable=E0602
+@errors_handler
 async def shout(args):
     if args.fwd_from:
         return

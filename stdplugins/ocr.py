@@ -8,7 +8,7 @@ import requests
 
 from PIL import Image
 from sample_config import Config
-from uniborg.util import admin_cmd
+from uniborg.util import admin_cmd, errors_handler
 
 
 def ocr_space_file(filename, overlay=False, api_key=Config.OCR_SPACE_API_KEY, language='eng'):
@@ -68,6 +68,7 @@ def progress(current, total):
 
 
 @borg.on(admin_cmd(pattern="ocrlanguages")) # pylint:disable=E0602
+@errors_handler
 async def get_ocr_languages(event):
     if event.fwd_from:
         return
@@ -101,6 +102,7 @@ async def get_ocr_languages(event):
 
 
 @borg.on(admin_cmd(pattern="ocr (.*)")) # pylint:disable=E0602
+@errors_handler
 async def parse_ocr_space_api(event):
     if event.fwd_from:
         return

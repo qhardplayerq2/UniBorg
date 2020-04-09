@@ -5,7 +5,7 @@ from telethon.tl.functions.channels import EditBannedRequest
 from telethon.tl.types import ChatBannedRights
 
 import sql_helpers.antiflood_sql as sql
-from uniborg.util import admin_cmd
+from uniborg.util import admin_cmd, errors_handler
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
@@ -21,6 +21,7 @@ ANTI_FLOOD_WARN_MODE = ChatBannedRights(
 
 
 @borg.on(admin_cmd(incoming=True)) # pylint:disable=E0602
+@errors_handler
 async def _(event):
     # logger.info(CHAT_FLOOD)
     if not CHAT_FLOOD:
@@ -62,6 +63,7 @@ because he reached the defined flood limit.""".format(event.message.from_id),
 
 
 @borg.on(admin_cmd(pattern="setflood (.*)")) # pylint:disable=E0602
+@errors_handler
 async def _(event):
     if event.fwd_from:
         return

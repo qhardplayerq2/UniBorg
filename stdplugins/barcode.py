@@ -11,13 +11,14 @@ from datetime import datetime
 import barcode
 from barcode.writer import ImageWriter
 from sample_config import Config
-from uniborg.util import admin_cmd
+from uniborg.util import admin_cmd, errors_handler
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
 logger = logging.getLogger(__name__)
                     
 @borg.on(admin_cmd(pattern="barcode ?(.*)")) # pylint:disable=E0602
+@errors_handler
 async def _(event):
     if event.fwd_from:
         return

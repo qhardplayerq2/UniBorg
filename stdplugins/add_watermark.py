@@ -6,10 +6,11 @@ from datetime import datetime
 
 from PyPDF2 import PdfFileReader, PdfFileWriter
 from sample_config import Config
-from uniborg.util import admin_cmd, progress
+from uniborg.util import admin_cmd, errors_handler, progress
 
 
 @borg.on(admin_cmd(pattern="watermark")) # pylint:disable=E0602
+@errors_handler
 async def _(event):
     if event.fwd_from:
         return

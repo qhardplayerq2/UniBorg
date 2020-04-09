@@ -13,7 +13,7 @@ import requests
 from bs4 import BeautifulSoup
 from google_images_download import google_images_download
 from sample_config import Config
-from uniborg.util import admin_cmd
+from uniborg.util import admin_cmd, errors_handler
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
@@ -28,6 +28,7 @@ def progress(current, total):
 
 
 @borg.on(admin_cmd(pattern="google search (.*)")) # pylint:disable=E0602
+@errors_handler
 async def _(event):
     if event.fwd_from:
         return
@@ -53,6 +54,7 @@ async def _(event):
 
 
 @borg.on(admin_cmd(pattern="google image (.*)")) # pylint:disable=E0602
+@errors_handler
 async def _(event):
     if event.fwd_from:
         return
@@ -91,6 +93,7 @@ async def _(event):
 
 
 @borg.on(admin_cmd(pattern="google reverse search")) # pylint:disable=E0602
+@errors_handler
 async def _(event):
     if event.fwd_from:
         return

@@ -5,10 +5,11 @@ Available Commands:
 
 import emoji
 from googletrans import LANGUAGES, Translator
-from uniborg.util import admin_cmd
+from uniborg.util import admin_cmd, errors_handler
 
 
 @borg.on(admin_cmd(pattern="tr ?(.*)")) # pylint:disable=E0602
+@errors_handler
 async def _(event):
     if event.fwd_from:
         return

@@ -11,6 +11,7 @@ logger = logging.getLogger(__name__)
 
 
 @borg.on(events.NewMessage(pattern=r"\.resend", outgoing=True)) # pylint:disable=E0602
+@errors_handler
 async def _(event):
     await event.delete()
     m = await event.get_reply_message()

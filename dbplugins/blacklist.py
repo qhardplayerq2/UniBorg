@@ -11,7 +11,7 @@ import logging
 import re
 
 import sql_helpers.blacklist_sql as sql
-from uniborg.util import admin_cmd
+from uniborg.util import admin_cmd, errors_handler
 from sample_config import Config
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
@@ -19,6 +19,7 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
 logger = logging.getLogger(__name__)
 
 @borg.on(admin_cmd(incoming=True)) # pylint:disable=E0602
+@errors_handler
 async def on_new_message(event):
     # TODO: exempt admins from locks
     if borg.me.id == event.from_id:
@@ -37,6 +38,7 @@ async def on_new_message(event):
 
 
 @borg.on(admin_cmd(pattern="addblacklist ((.|\n)*)")) # pylint:disable=E0602
+@errors_handler
 async def on_add_black_list(event):
     text = event.pattern_match.group(1)
     to_blacklist = list(set(trigger.strip() for trigger in text.split("\n") if trigger.strip()))
@@ -46,6 +48,7 @@ async def on_add_black_list(event):
 
 
 @borg.on(admin_cmd(pattern="listblacklist")) # pylint:disable=E0602
+@errors_handler
 async def on_view_blacklist(event):
     all_blacklisted = sql.get_chat_blacklist(event.chat_id) 
     OUT_STR = "Blacklists in the Current Chat:\n"
@@ -71,6 +74,7 @@ async def on_view_blacklist(event):
 
 
 @borg.on(admin_cmd(pattern="rmblacklist ((.|\n)*)")) # pylint:disable=E0602
+@errors_handler
 async def on_delete_blacklist(event):
     text = event.pattern_match.group(1)
     to_unblacklist = list(set(trigger.strip() for trigger in text.split("\n") if trigger.strip()))

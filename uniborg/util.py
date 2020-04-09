@@ -167,3 +167,12 @@ def time_formatter(milliseconds: int) -> str:
         ((str(seconds) + "s, ") if seconds else "") + \
         ((str(milliseconds) + "ms, ") if milliseconds else "")
     return tmp[:-2]
+
+
+def errors_handler(func):
+    async def wrapper(event):
+        try:
+            return await func(event)
+        except Exception:
+            pass
+    return wrapper

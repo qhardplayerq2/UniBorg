@@ -13,7 +13,7 @@ from telethon.tl.types import (ChannelParticipantsKicked, ChatBannedRights,
                                UserStatusLastWeek, UserStatusOffline,
                                UserStatusOnline, UserStatusRecently)
 
-from uniborg.util import admin_cmd
+from uniborg.util import admin_cmd, errors_handler
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
@@ -51,6 +51,7 @@ async def _(event):
 
 
 @borg.on(admin_cmd(pattern="ukick ?(.*)")) # pylint:disable=E0602
+@errors_handler
 async def _(event):
     if event.fwd_from:
         return

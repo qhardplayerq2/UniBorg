@@ -13,6 +13,7 @@ logger = logging.getLogger(__name__)
 
 
 @borg.on(util.admin_cmd(pattern="create (b|g|c) (.*)"))  # pylint:disable=E0602
+@errors_handler
 async def _(event):
     if event.fwd_from:
         return
@@ -21,6 +22,7 @@ async def _(event):
     if type_of_group == "b":
         try:
             result = await borg(functions.messages.CreateChatRequest(  # pylint:disable=E0602
+@errors_handler
                 users=["@GoogleIMGBot"],
                 # Not enough users (to create a chat, for example)
                 # Telegram, no longer allows creating a chat with ourselves
@@ -40,6 +42,7 @@ async def _(event):
     elif type_of_group in ("c","g"):
         try:
             r = await borg(functions.channels.CreateChannelRequest(  # pylint:disable=E0602
+@errors_handler
                 title=group_name,
                 about="This is a Test from @UniBorg",
                 megagroup=False if type_of_group == "c" else True

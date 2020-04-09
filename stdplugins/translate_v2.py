@@ -3,7 +3,7 @@
 #                     level=logging.WARNING)
 # import emoji
 # from googletrans import Translator
-# from uniborg.util import admin_cmd
+# from uniborg.util import admin_cmd, errors_handler
 # from mtranslate import translate
 # from langdetect import detect
 

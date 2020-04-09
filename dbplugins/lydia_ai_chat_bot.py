@@ -22,7 +22,7 @@ from coffeehouse.api import API
 from coffeehouse.lydia import LydiaAI
 from sample_config import Config
 from sql_helpers.lydia_ai_sql import add_s, get_all_s, get_s, remove_s
-from uniborg.util import admin_cmd
+from uniborg.util import admin_cmd, errors_handler
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
@@ -37,6 +37,7 @@ if Config.LYDIA_API is not None:
 
 
 @borg.on(admin_cmd(pattern="(ena|del|lst)cf", allow_sudo=True)) # pylint:disable=E0602
+@errors_handler
 async def lydia_disable_enable(event):
     if event.fwd_from:
         return
@@ -85,6 +86,7 @@ async def lydia_disable_enable(event):
 
 
 @borg.on(admin_cmd(incoming=True)) # pylint:disable=E0602
+@errors_handler
 async def on_new_message(event):
     if event.chat_id in Config.UB_BLACK_LIST_CHAT:
         return

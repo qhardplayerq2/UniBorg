@@ -11,7 +11,7 @@ from datetime import datetime
 
 from pySmartDL import SmartDL
 from sample_config import Config
-from uniborg.util import admin_cmd, humanbytes, progress, time_formatter
+from uniborg.util import admin_cmd, errors_handler, humanbytes, progress, time_formatter
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
@@ -21,6 +21,7 @@ logger = logging.getLogger(__name__)
 
 
 @borg.on(admin_cmd(pattern="download ?(.*)", allow_sudo=True)) # pylint:disable=E0602
+@errors_handler
 async def _(event):
     if event.fwd_from:
         return

@@ -12,7 +12,7 @@ import re
 import requests
 
 import bs4
-from uniborg.util import admin_cmd
+from uniborg.util import admin_cmd, errors_handler
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
@@ -22,6 +22,7 @@ langi = "en"
 
 #kanged from Blank-x ;---;
 @borg.on(admin_cmd(pattern="imdb (.*)"))  # pylint:disable=E0602
+@errors_handler
 async def imdb(e):
  try:
     movie_name = e.pattern_match.group(1)

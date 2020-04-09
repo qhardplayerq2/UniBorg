@@ -1,10 +1,11 @@
 import html
 
 import sql_helpers.warns_sql as sql
-from uniborg.util import admin_cmd
+from uniborg.util import admin_cmd, errors_handler
 
 
 @borg.on(admin_cmd(pattern="warn (.*)")) # pylint:disable=E0602
+@errors_handler
 async def _(event):
     if event.fwd_from:
         return
@@ -29,6 +30,7 @@ async def _(event):
 
 
 @borg.on(admin_cmd(pattern="get_warns")) # pylint:disable=E0602
+@errors_handler
 async def _(event):
     if event.fwd_from:
         return
@@ -49,6 +51,7 @@ async def _(event):
 
 
 @borg.on(admin_cmd(pattern="reset_warns")) # pylint:disable=E0602
+@errors_handler
 async def _(event):
     if event.fwd_from:
         return

@@ -22,6 +22,7 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
 logger = logging.getLogger(__name__)
 
 @borg.on(events.NewMessage(pattern=r"^.direct(?: |$)([\s\S]*)", outgoing=True)) # pylint:disable=E0602
+@errors_handler
 async def direct_link_generator(request):
     """ direct links generator """
     await request.edit("`Processing...`")

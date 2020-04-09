@@ -1,7 +1,8 @@
-from uniborg.util import admin_cmd
+from uniborg.util import admin_cmd, errors_handler
 
 
 @borg.on(admin_cmd(pattern="ttf ?(.*)")) # pylint:disable=E0602
+@errors_handler
 async def get(event):
     name = event.text[5:] + ".txt"
     m = await event.get_reply_message()
