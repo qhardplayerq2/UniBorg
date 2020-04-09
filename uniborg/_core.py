@@ -19,18 +19,14 @@ async def load_reload(event):
     shortname = event.pattern_match["shortname"]
     try:
         if shortname in borg._plugins:  # pylint:disable=E0602
-@errors_handler
             borg.remove_plugin(shortname)  # pylint:disable=E0602
-@errors_handler
         borg.load_plugin(shortname)  # pylint:disable=E0602
-@errors_handler
         msg = await event.respond(f"Successfully (re)loaded plugin {shortname}")
         await asyncio.sleep(DELETE_TIMEOUT)
         await msg.delete()
     except Exception as e:  # pylint:disable=C0103,W0703
         trace_back = traceback.format_exc()
         # pylint:disable=E0602
-@errors_handler
         logger.warn(f"Failed to (re)load plugin {shortname}: {trace_back}")
         await event.respond(f"Failed to (re)load plugin {shortname}: {e}")
 
@@ -43,9 +39,7 @@ async def remove(event):
     if shortname == "_core":
         msg = await event.respond(f"Not removing {shortname}")
     elif shortname in borg._plugins:  # pylint:disable=E0602
-@errors_handler
         borg.remove_plugin(shortname)  # pylint:disable=E0602
-@errors_handler
         msg = await event.respond(f"Removed plugin {shortname}")
     else:
         msg = await event.respond(f"Plugin {shortname} is not loaded")
