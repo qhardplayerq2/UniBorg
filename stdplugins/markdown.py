@@ -13,6 +13,8 @@ from telethon.tl.types import (MessageEntityBold, MessageEntityCode,
                                MessageEntityTextUrl)
 from telethon.utils import add_surrogate, del_surrogate
 
+from uniborg.util import errors_handler
+
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
 logger = logging.getLogger(__name__)
@@ -135,7 +137,6 @@ def parse(message, old_entities=None):
 
 
 @borg.on(events.MessageEdited(outgoing=True)) # pylint:disable=E0602
-@errors_handler
 @borg.on(events.NewMessage(outgoing=True)) # pylint:disable=E0602
 @errors_handler
 async def reparse(event):

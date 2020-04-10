@@ -12,7 +12,8 @@ from datetime import datetime
 from bin.FastTelethon import download_file
 from pySmartDL import SmartDL
 from sample_config import Config
-from uniborg.util import admin_cmd, errors_handler, humanbytes, progress, time_formatter
+from uniborg.util import (admin_cmd, errors_handler, humanbytes, progress,
+                          time_formatter)
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)

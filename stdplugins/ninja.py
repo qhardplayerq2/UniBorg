@@ -8,6 +8,7 @@ import telethon.utils
 from telethon import events
 
 from uniborg import util
+from uniborg.util import errors_handler
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
@@ -41,7 +42,6 @@ async def await_read(chat, message):
 
 
 @borg.on(util.admin_cmd(pattern="(del)(?:ete)?$")) # pylint:disable=E0602
-@errors_handler
 @borg.on(util.admin_cmd(pattern="(edit)(?:\s+(.*))?$")) # pylint:disable=E0602
 @errors_handler
 async def delete(event):

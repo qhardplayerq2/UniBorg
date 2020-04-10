@@ -8,6 +8,7 @@ import sys
 from telethon import events
 
 from sample_config import Config
+from uniborg.util import errors_handler
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                     level=logging.WARN)

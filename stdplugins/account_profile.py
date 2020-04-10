@@ -22,7 +22,6 @@ async def _(event):
     bio = event.pattern_match.group(1)
     try:
         await borg(functions.account.UpdateProfileRequest(  # pylint:disable=E0602
-@errors_handler
             about=bio
         ))
         await event.edit("Succesfully changed my profile bio")
@@ -31,7 +30,7 @@ async def _(event):
 
 
 @borg.on(admin_cmd(pattern="pname ((.|\n)*)"))  # pylint:disable=E0602
-@errors_handler,W0703
+@errors_handler
 async def _(event):
     if event.fwd_from:
         return
@@ -42,7 +41,6 @@ async def _(event):
         first_name, last_name = names.split("\\n", 1)
     try:
         await borg(functions.account.UpdateProfileRequest(  # pylint:disable=E0602
-@errors_handler
             first_name=first_name,
             last_name=last_name
         ))
@@ -59,16 +57,12 @@ async def _(event):
     reply_message = await event.get_reply_message()
     await event.edit("Downloading Profile Picture to my local ...")
     if not os.path.isdir(Config.TMP_DOWNLOAD_DIRECTORY):  # pylint:disable=E0602
-@errors_handler
         os.makedirs(Config.TMP_DOWNLOAD_DIRECTORY)  # pylint:disable=E0602
-@errors_handler
     photo = None
     try:
         photo = await borg.download_media(  # pylint:disable=E0602
-@errors_handler
             reply_message,
             Config.TMP_DOWNLOAD_DIRECTORY  # pylint:disable=E0602
-@errors_handler
         )
     except Exception as e:  # pylint:disable=C0103,W0703
         await event.edit(str(e))
@@ -76,10 +70,8 @@ async def _(event):
         if photo:
             await event.edit("now, Uploading to @Telegram ...")
             file = await borg.upload_file(photo)  # pylint:disable=E0602
-@errors_handler
             try:
                 await borg(functions.photos.UploadProfilePhotoRequest(  # pylint:disable=E0602
-@errors_handler
                     file
                 ))
             except Exception as e:  # pylint:disable=C0103,W0703
@@ -90,7 +82,6 @@ async def _(event):
         os.remove(photo)
     except Exception as e:  # pylint:disable=C0103,W0703
         logger.warn(str(e))  # pylint:disable=E0602
-@errors_handler
 
 @borg.on(admin_cmd(pattern="profilephoto (.*)"))  # pylint:disable=E0602
 @errors_handler

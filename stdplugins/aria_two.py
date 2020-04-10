@@ -14,7 +14,7 @@ import logging
 import os
 
 from telethon import events
-
+from uniborg.util import errors_handler
 import aria2p
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',

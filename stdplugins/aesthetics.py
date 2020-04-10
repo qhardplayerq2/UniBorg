@@ -5,7 +5,7 @@
 import logging
 
 from telethon import events
-
+from uniborg.util import errors_handler
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
 logger = logging.getLogger(__name__)
@@ -23,7 +23,6 @@ def aesthetify(string):
 
 
 @borg.on(events.NewMessage(pattern=r'.ae\s+(.+)', outgoing=True)) # pylint:disable=E0602
-@errors_handler
 @borg.on(events.MessageEdited(pattern=r'.ae\s+(.+)', outgoing=True)) # pylint:disable=E0602
 @errors_handler
 async def _(event):

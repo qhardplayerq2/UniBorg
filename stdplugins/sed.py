@@ -8,6 +8,7 @@ from telethon.tl import functions, types
 
 import regex
 from sample_config import Config
+from uniborg.util import errors_handler
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)

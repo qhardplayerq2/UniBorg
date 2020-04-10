@@ -7,6 +7,7 @@ from telethon.tl.types import ChatBannedRights
 
 import spamwatch
 from sample_config import Config
+from uniborg.util import errors_handler
 
 ENABLE_LOG = True
 LOGGING_CHATID = Config.PRIVATE_CHANNEL_BOT_API_ID
