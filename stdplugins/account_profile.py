@@ -81,7 +81,7 @@ async def _(event):
     try:
         os.remove(photo)
     except Exception as e:  # pylint:disable=C0103,W0703
-        logger.warn(str(e))  # pylint:disable=E0602
+        logger.warning(str(e))  # pylint:disable=E0602
 
 @borg.on(admin_cmd(pattern="profilephoto (.*)"))  # pylint:disable=E0602
 @errors_handler

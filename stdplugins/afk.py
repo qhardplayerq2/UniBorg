@@ -81,7 +81,7 @@ async def _(event):
                 f"Set AFK mode to True, and Reason is {reason}"
             )
         except Exception as e:  
-            logger.warn(str(e))  
+            logger.warning(str(e))  
 
 
 @borg.on(events.NewMessage(  

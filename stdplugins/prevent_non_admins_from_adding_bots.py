@@ -43,7 +43,7 @@ async def kick_if_bots(event):
                     # kick the bot
                     await borg(EditBannedRequest(event.chat_id, user_obj, rights))
                 except Exception as e:
-                    logger.warn(str(e))
+                    logger.warning(str(e))
                     # maybe you don't have admin priveleges here :\
                     pass
         if is_ban_able:

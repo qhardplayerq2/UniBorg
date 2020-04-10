@@ -36,7 +36,7 @@ async def _(event):
                         cws.previous_welcome
                     )
                 except Exception as e:  # pylint:disable=C0103,W0703
-                    logger.warn(str(e))  # pylint:disable=E0602
+                    logger.warning(str(e))  # pylint:disable=E0602
             a_user = await event.get_user()
             msg_o = await event.client.get_messages(
                 entity=Config.PRIVATE_CHANNEL_BOT_API_ID,

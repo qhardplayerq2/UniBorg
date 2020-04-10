@@ -41,7 +41,7 @@ async def _(event):
             try:
                 await borg(functions.channels.EditBannedRequest(event.chat_id, i, rights))
             except FloodWaitError as ex:
-                logger.warn("sleeping for {} seconds".format(ex.seconds))
+                logger.warning("sleeping for {} seconds".format(ex.seconds))
                 sleep(ex.seconds)
             except Exception as ex:
                 await event.edit(str(ex))
