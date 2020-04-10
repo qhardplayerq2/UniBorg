@@ -28,7 +28,6 @@ UNIBORG_USER_BOT_NO_WARN = "Hi! I will answer to your message soon. Please wait 
 
 
 @borg.on(admin_cmd(pattern="nccreatedch")) # pylint:disable=E0602
-@errors_handler
 async def create_dump_channel(event):
     if Config.PM_LOGGR_BOT_API_ID is None:
         result = await event.client(functions.channels.CreateChannelRequest(  # pylint:disable=E0602
@@ -61,7 +60,6 @@ async def create_dump_channel(event):
 
 
 @borg.on(admin_cmd(pattern="nolog ?(.*)")) # pylint:disable=E0602
-@errors_handler
 async def set_no_log_p_m(event):
     if Config.PM_LOGGR_BOT_API_ID is not None:
         reason = event.pattern_match.group(1)
@@ -75,7 +73,6 @@ async def set_no_log_p_m(event):
 
 
 @borg.on(admin_cmd(pattern="dellog ?(.*)")) # pylint:disable=E0602
-@errors_handler
 async def set_no_log_p_m(event):
     if Config.PM_LOGGR_BOT_API_ID is not None:
         reason = event.pattern_match.group(1)
@@ -89,7 +86,6 @@ async def set_no_log_p_m(event):
 
 
 @borg.on(admin_cmd(pattern="approvepm ?(.*)")) # pylint:disable=E0602
-@errors_handler
 async def approve_p_m(event):
     if event.fwd_from:
         return
@@ -110,7 +106,6 @@ async def approve_p_m(event):
 
 
 @borg.on(admin_cmd(pattern="blockpm ?(.*)")) # pylint:disable=E0602
-@errors_handler
 async def approve_p_m(event):
     if event.fwd_from:
         return
@@ -126,7 +121,6 @@ async def approve_p_m(event):
 
 
 @borg.on(admin_cmd(pattern="list approved pms")) # pylint:disable=E0602
-@errors_handler
 async def approve_p_m(event):
     if event.fwd_from:
         return
@@ -157,7 +151,6 @@ async def approve_p_m(event):
 
 
 @borg.on(events.NewMessage(incoming=True)) # pylint:disable=E0602
-@errors_handler
 async def on_new_private_message(event):
     if Config.PM_LOGGR_BOT_API_ID is None:
         return
@@ -201,7 +194,6 @@ async def on_new_private_message(event):
 
 
 @borg.on(events.ChatAction(blacklist_chats=Config.UB_BLACK_LIST_CHAT)) # pylint:disable=E0602
-@errors_handler
 async def on_new_chat_action_message(event):
     if Config.PM_LOGGR_BOT_API_ID is None:
         return
@@ -230,7 +222,6 @@ async def on_new_chat_action_message(event):
 
 
 @borg.on(events.Raw()) # pylint:disable=E0602
-@errors_handler
 async def on_new_channel_message(event):
     if Config.PM_LOGGR_BOT_API_ID is None:
         return
