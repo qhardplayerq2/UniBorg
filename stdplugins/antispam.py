@@ -6,7 +6,6 @@ import os
 import sys
 
 from telethon import events
-from uniborg.util import errors_handler
 from sample_config import Config
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
@@ -14,7 +13,6 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
 logger = logging.getLogger(__name__)
 
 @borg.on(events.ChatAction()) # pylint:disable=E0602
-@errors_handler
 async def _(cas):
     chat = await cas.get_chat()
     if (chat.admin_rights or chat.creator):
