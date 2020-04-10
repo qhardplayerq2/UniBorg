@@ -23,7 +23,6 @@ logger = logging.getLogger(__name__)
 
 
 @borg.on(admin_cmd(pattern="udownload ?(.*)", allow_sudo=True)) # pylint:disable=E0602
-@errors_handlers
 async def _(event):
     if event.fwd_from:
         return
