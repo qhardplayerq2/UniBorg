@@ -11,6 +11,7 @@ from telethon.tl.functions.account import UpdateProfileRequest
 
 import spotify_token as st
 from sample_config import Config
+from uniborg.util import errors_handler
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)

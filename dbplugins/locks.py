@@ -162,7 +162,6 @@ async def _(event):
 
 
 @borg.on(events.MessageEdited())  # pylint:disable=E0602
-@errors_handler
 @borg.on(events.NewMessage())  # pylint:disable=E0602
 @errors_handler
 async def check_incoming_messages(event):
