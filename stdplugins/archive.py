@@ -52,9 +52,7 @@ async def _(event):
             )
             directory_name = downloaded_file_name
             await event.edit("creating rar archive, please wait..")
-            # patoolib.create_archive(directory_name + '.7z',directory_name)
             patoolib.create_archive(directory_name + ".rar",(directory_name,Config.TMP_DOWNLOAD_DIRECTORY))
-            # patoolib.create_archive("/content/21.yy Avrupa (1).pdf.zip",("/content/21.yy Avrupa (1).pdf","/content/"))
             await borg.send_file(
                 event.chat_id,
                 directory_name + ".rar",
@@ -71,7 +69,7 @@ async def _(event):
             await event.edit("Task Completed")
             await asyncio.sleep(3)
             await event.delete()
-        except Exception as e:  # pylint:disable=C0103,W0703
+        except Exception as e: 
             await mone.edit(str(e))
     elif input_str:
         directory_name = input_str
