@@ -14,18 +14,18 @@ import time
 
 from telethon.tl.types import DocumentAttributeAudio
 
+from sample_config import Config
 from uniborg.util import admin_cmd, errors_handler
 from youtube_dl import YoutubeDL
 from youtube_dl.utils import (ContentTooShortError, DownloadError,
                               ExtractorError, GeoRestrictedError,
                               MaxDownloadsReached, PostProcessingError,
                               UnavailableVideoError, XAttrMetadataError)
-from sample_config import Config
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
 logger = logging.getLogger(__name__)
-logger = logging.getLogger(__name__)
+
 
 DELETE_TIMEOUT = 5
 
