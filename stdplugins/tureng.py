@@ -72,7 +72,7 @@ async def turen(event):
     await event.edit(result)
 
 
-@borg.on(admin_cmd(pattern=("trtureng ?(.*)"))) # pylint:disable=E0602
+@borg.on(admin_cmd(pattern=("tur_eng ?(.*)"))) # pylint:disable=E0602
 @errors_handler
 async def turen_(event):
     input_str = event.pattern_match.group(1)
