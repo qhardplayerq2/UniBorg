@@ -34,6 +34,7 @@ async def list_users(event):
     title = info.title if info.title else "this chat"
     mentions = '\n'
     b = []
+    msg = event.pattern_match.group(1)
     try:
         if not event.pattern_match.group(1):
             async for user in event.client.iter_participants(event.chat_id):
@@ -53,11 +54,11 @@ async def list_users(event):
                     b.append(user)
                     mentions += f"\n{user.id}"
             a=[]
-            async for message in borg.iter_messages(event.chat_id,from_user=await borg.get_entity(b)):
-                print(message.message)
-                a.append(message.message)
+            async for messages in event.client.iter_messages(event.chat_id,from_user=await event.client.get_entity(b)):
+                print(messages.message)
+                a.append(messages.message)
             print(len(a))
-            if len(a)<65:
+            if len(a)<msg:
                 chat = await event.get_chat()
                 admin = chat.admin_rights
                 creator = chat.creator
