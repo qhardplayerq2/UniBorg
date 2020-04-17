@@ -74,7 +74,7 @@ async def turen(event):
 
 @borg.on(admin_cmd(pattern=("turengtr ?(.*)"))) # pylint:disable=E0602
 @errors_handler
-async def turen(event):
+async def turen_(event):
     input_str = event.pattern_match.group(1)
     result = searchTureng_tr(input_str)
     await event.edit(result)
