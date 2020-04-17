@@ -55,10 +55,10 @@ async def list_users(event):
                     mentions += f"\n{user.id}"
             a=[]
             async for messages in event.client.iter_messages(event.chat_id,from_user=await event.client.get_entity(b)):
-                print(messages.message)
+                # print(messages.message)
                 a.append(messages.message)
             print(len(a))
-            if len(a)<msg:
+            if len(a)<int(msg):
                 chat = await event.get_chat()
                 admin = chat.admin_rights
                 creator = chat.creator
