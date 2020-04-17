@@ -25,7 +25,7 @@ KICK_RIGHTS = ChatBannedRights(
     view_messages=True
 )
 
-@borg.on(events.NewMessage(outgoing=True, pattern="^.inactive ?(.*)"))  
+@borg.on(events.NewMessage(outgoing=True, pattern="inactive ?(.*)"))  
 async def list_users(event):
     if not event.is_group:
         await event.edit("Are you sure this is a group?")
