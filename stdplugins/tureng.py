@@ -44,9 +44,37 @@ def turengsearch(word):
         return "Sonuç bulunamadı"
 
 
+def searchTureng_tr(word):
+    http=urllib3.PoolManager()
+    url="https://tureng.com/tr/turkce-ingilizce/"+word
+    try:
+        answer = http.request('GET', url)
+    except:
+        return "No connection"
+    soup = BeautifulSoup(answer.data, 'html.parser')
+    trlated='{} Kelimesinin Anlamı/Anlamları:\n\n'.format(word)
+    try:
+        table = soup.find('table')
+        td = table.find_all('td', attrs={'lang':'en'})
+        # print(td)
+        for val in td[0:5]:
+            trlated = '{}👉  {}\n'.format(trlated , val.text )
+        return trlated
+    except:
+        return "Sonuç bulunamadı"
+
+
 @borg.on(admin_cmd(pattern=("tureng ?(.*)"))) # pylint:disable=E0602
 @errors_handler
 async def turen(event):
     input_str = event.pattern_match.group(1)
     result = turengsearch(input_str)
+    await event.edit(result)
+
+
+@borg.on(admin_cmd(pattern=("turengtr ?(.*)"))) # pylint:disable=E0602
+@errors_handler
+async def turen(event):
+    input_str = event.pattern_match.group(1)
+    result = searchTureng_tr(input_str)
     await event.edit(result)
