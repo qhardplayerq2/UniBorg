@@ -60,14 +60,14 @@ async def list_users(event):
                     # print(messages.from_id,messages.text)
             p = p+1
             h = h+1
-            logger.info(x)
+            print(x)
             # print(x)
             # print()
             # print(l)
-            logger.info(l)
+            print(l)
             for t in range(len(l)):
                 # print(x.count(str(l[t])))
-                logger.info(x.count(str(l[t])))
+                print(x.count(str(l[t])))
             # print(x.count('\n'))
             # if messages.from_id in b:
                 # print(messages.message)
