@@ -1,6 +1,8 @@
+import asyncio
+import logging
 from asyncio import sleep
 from os import remove
-import asyncio
+
 from telethon import events
 from telethon.errors import (BadRequestError, ChatAdminRequiredError,
                              ImageProcessFailedError, PhotoCropSizeSmallError,
@@ -19,6 +21,9 @@ from telethon.tl.types import (ChannelParticipantsAdmins,
 from sample_config import Config
 from uniborg.util import admin_cmd
 
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
+logger = logging.getLogger(__name__)
 
 KICK_RIGHTS = ChatBannedRights(
     until_date=None,
@@ -27,6 +32,7 @@ KICK_RIGHTS = ChatBannedRights(
 
 @borg.on(events.NewMessage(outgoing=True, pattern="inactive ?(.*)"))  
 async def list_users(event):
+    logger.info("çalışıyor")
     if not event.is_group:
         await event.edit("Are you sure this is a group?")
         return
@@ -54,11 +60,14 @@ async def list_users(event):
                     # print(messages.from_id,messages.text)
             p = p+1
             h = h+1
-            print(x)
-            print()
-            print(l)
+            logger.info(x)
+            # print(x)
+            # print()
+            # print(l)
+            logger.info(l)
             for t in range(len(l)):
-                print(x.count(str(l[t])))
+                # print(x.count(str(l[t])))
+                logger.info(x.count(str(l[t])))
             # print(x.count('\n'))
             # if messages.from_id in b:
                 # print(messages.message)
@@ -90,7 +99,4 @@ async def list_users(event):
         #     print(messages.message)
         #     a.append(messages.message)
         # print(len(a))
-
-
-
 
