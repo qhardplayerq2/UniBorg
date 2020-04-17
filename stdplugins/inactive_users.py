@@ -30,7 +30,7 @@ KICK_RIGHTS = ChatBannedRights(
     view_messages=True
 )
 
-@borg.on(events.NewMessage(outgoing=True, pattern="inactive ?(.*)"))  
+@borg.on(admin_cmd(pattern="inactive ?(.*)"))  
 async def list_users(event):
     logger.info("çalışıyor")
     if not event.is_group:
