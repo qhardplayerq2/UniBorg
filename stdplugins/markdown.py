@@ -138,7 +138,6 @@ def parse(message, old_entities=None):
 
 @borg.on(events.MessageEdited(outgoing=True)) # pylint:disable=E0602
 @borg.on(events.NewMessage(outgoing=True)) # pylint:disable=E0602
-@errors_handler
 async def reparse(event):
     old_entities = event.message.entities or []
     parser = partial(parse, old_entities=old_entities)

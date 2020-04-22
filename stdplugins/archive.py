@@ -17,7 +17,7 @@ import time
 
 import patoolib
 from sample_config import Config
-from uniborg.util import admin_cmd, errors_handler, progress
+from uniborg.util import admin_cmd, progress
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
@@ -31,7 +31,6 @@ thumb_image_path = Config.TMP_DOWNLOAD_DIRECTORY + "/thumb_image.jpg"
 
 
 @borg.on(admin_cmd(pattern=("rar ?(.*)"))) # pylint:disable=E0602
-@errors_handler
 async def _(event):
     if event.fwd_from:
         return
@@ -80,7 +79,6 @@ async def _(event):
 
 
 @borg.on(admin_cmd(pattern=("7z ?(.*)"))) # pylint:disable=E0602
-@errors_handler
 async def _(event):
     if event.fwd_from:
         return
@@ -129,7 +127,6 @@ async def _(event):
 
 
 @borg.on(admin_cmd(pattern=("unzipper ?(.*)"))) # pylint:disable=E0602
-@errors_handler
 async def _(event):
     if event.fwd_from:
         return

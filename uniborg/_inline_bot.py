@@ -6,7 +6,7 @@ import asyncio
 import json
 import re
 from telethon import events, custom
-from uniborg.util import admin_cmd, errors_handler, humanbytes
+from uniborg.util import admin_cmd, humanbytes
 import os
 
 @borg.on(admin_cmd(  # pylint:disable=E0602
@@ -61,7 +61,10 @@ async def _(event):
 
 
 # pylint:disable=E0602
+<<<<<<< HEAD
 
+=======
+>>>>>>> parent of 54ae803... added error handler
 if Config.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
     @tgbot.on(events.InlineQuery)  # pylint:disable=E0602
     async def inline_handler(event):
@@ -247,7 +250,11 @@ All instaructions to run @UniBorg in your PC has been explained in https://githu
             await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
 
+<<<<<<< HEAD
     @tgbot.on(events.callbackquery.CallbackQuery(  # pylint:disable=E060
+=======
+    @tgbot.on(events.callbackquery.CallbackQuery(  # pylint:disable=E0602
+>>>>>>> parent of 54ae803... added error handler
         data=re.compile(b"ub_plugin_(.*)")
     ))
     @errors_handler
@@ -255,7 +262,10 @@ All instaructions to run @UniBorg in your PC has been explained in https://githu
         plugin_name = event.data_match.group(1).decode("UTF-8")
         help_string = borg._plugins[plugin_name].__doc__[
             0:125]  # pylint:disable=E0602
+<<<<<<< HEAD
 
+=======
+>>>>>>> parent of 54ae803... added error handler
         reply_pop_up_alert = help_string if help_string is not None else \
             "No DOCSTRING has been setup for {} plugin".format(plugin_name)
         reply_pop_up_alert += "\n\n Use .unload {} to remove this plugin\n\

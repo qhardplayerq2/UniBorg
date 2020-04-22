@@ -10,7 +10,7 @@ from datetime import datetime
 import requests
 
 import aiohttp
-from uniborg.util import admin_cmd, errors_handler, progress
+from uniborg.util import admin_cmd, progress
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
@@ -26,7 +26,6 @@ else:
         from sample_config import Development as Config
 
 @borg.on(admin_cmd(pattern="mirrorace ?(.*)", allow_sudo=True)) # pylint:disable=E0602
-@errors_handler
 async def _(event):
     if event.fwd_from:
         return

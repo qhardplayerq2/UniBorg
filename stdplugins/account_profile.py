@@ -8,14 +8,13 @@ import os
 from telethon.tl import functions
 
 from sample_config import Config
-from uniborg.util import admin_cmd, errors_handler
+from uniborg.util import admin_cmd
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
 logger = logging.getLogger(__name__)
 
 @borg.on(admin_cmd(pattern="pbio (.*)"))  # pylint:disable=E0602
-@errors_handler
 async def _(event):
     if event.fwd_from:
         return
@@ -29,8 +28,12 @@ async def _(event):
         await event.edit(str(e))
 
 
+<<<<<<< HEAD
 @borg.on(admin_cmd(pattern="pname ((.|\n)*)"))  # pylint:disable=E0602
 @errors_handler
+=======
+@borg.on(admin_cmd(pattern="pname ((.|\n)*)"))  # pylint:disable=E0602,W0703
+>>>>>>> parent of 54ae803... added error handler
 async def _(event):
     if event.fwd_from:
         return
@@ -50,7 +53,6 @@ async def _(event):
 
 
 @borg.on(admin_cmd(pattern="ppic"))  # pylint:disable=E0602
-@errors_handler
 async def _(event):
     if event.fwd_from:
         return
@@ -81,10 +83,13 @@ async def _(event):
     try:
         os.remove(photo)
     except Exception as e:  # pylint:disable=C0103,W0703
+<<<<<<< HEAD
         logger.warning(str(e))  # pylint:disable=E0602
+=======
+        logger.warn(str(e))  # pylint:disable=E0602
+>>>>>>> parent of 54ae803... added error handler
 
 @borg.on(admin_cmd(pattern="profilephoto (.*)"))  # pylint:disable=E0602
-@errors_handler
 async def _(event):
     """getting user profile photo last changed time"""
     if event.fwd_from:

@@ -14,7 +14,7 @@ import patoolib
 from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
 from sample_config import Config
-from uniborg.util import admin_cmd, errors_handler, progress
+from uniborg.util import admin_cmd, progress
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
@@ -23,7 +23,6 @@ logger = logging.getLogger(__name__)
 
 
 @borg.on(admin_cmd(pattern="unrar")) # pylint:disable=E0602
-@errors_handler
 async def _(event):
     if event.fwd_from:
         return

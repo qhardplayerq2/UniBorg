@@ -7,7 +7,7 @@ import time
 from datetime import datetime
 
 from sample_config import Config
-from uniborg.util import admin_cmd, errors_handler, progress
+from uniborg.util import admin_cmd, progress
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
@@ -20,7 +20,6 @@ FF_MPEG_DOWN_LOAD_MEDIA_PATH = "uniborg.media.ffmpeg"
 
 
 @borg.on(admin_cmd(pattern="ffmpegsave")) # pylint:disable=E0602
-@errors_handler
 async def ff_mpeg_trim_cmd(event):
     if event.fwd_from:
         return
@@ -52,7 +51,6 @@ async def ff_mpeg_trim_cmd(event):
 
 
 @borg.on(admin_cmd(pattern="ffmpegtrim")) # pylint:disable=E0602
-@errors_handler
 async def ff_mpeg_trim_cmd(event):
     if event.fwd_from:
         return

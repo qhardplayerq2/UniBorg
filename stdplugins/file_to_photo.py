@@ -18,7 +18,6 @@ logger = logging.getLogger(__name__)
 
 
 @borg.on(util.admin_cmd(pattern="f  (.*)")) # pylint:disable=E0602
-@errors_handler
 async def on_file_to_photo(event):
     await event.delete()
     target = await event.get_reply_message()

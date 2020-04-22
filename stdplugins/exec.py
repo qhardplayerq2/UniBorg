@@ -7,7 +7,7 @@ import asyncio
 import io
 import time
 
-from uniborg.util import admin_cmd, errors_handler
+from uniborg.util import admin_cmd
 
 from sample_config import Config
 import logging
@@ -16,7 +16,6 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
 logger = logging.getLogger(__name__)
 
 @borg.on(admin_cmd(pattern="exec ?(.*)")) # pylint:disable=E0602
-@errors_handler
 async def _(event):
     if event.fwd_from:
         return

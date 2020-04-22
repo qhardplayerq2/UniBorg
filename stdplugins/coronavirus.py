@@ -1,11 +1,10 @@
 """CoronaVirus LookUp
 Syntax: .coronavirus <country>"""
 from covid import Covid
-from uniborg.util import admin_cmd, errors_handler
+from uniborg.util import admin_cmd
 
 
 @borg.on(admin_cmd(pattern="corona (.*)")) # pylint:disable=E0602
-@errors_handler
 async def _(event):
     covid = Covid()
     data = covid.get_data()

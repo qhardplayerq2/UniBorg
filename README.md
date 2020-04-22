@@ -100,7 +100,7 @@ a new file under the plugin directory to do the job:
 ```python
 # stdplugins/myplugin.py
 from telethon import events
-from uniborg.util import admin_cmd, errors_handler
+from uniborg.util import admin_cmd
 
 @borg.on(admin_cmd(pattern="hi"))
 async def handler(event):

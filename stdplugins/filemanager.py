@@ -19,7 +19,6 @@ logger = logging.getLogger(__name__)
 
 
 @borg.on(events.NewMessage(pattern=r"\.lslocal", outgoing=True)) # pylint:disable=E0602
-@errors_handler
 async def _(event):
     if event.fwd_from:
         return
@@ -61,7 +60,6 @@ async def _(event):
 
 
 @borg.on(events.NewMessage(pattern=r"\.lsroot", outgoing=True)) # pylint:disable=E0602
-@errors_handler
 async def _(event):
     if event.fwd_from:
         return

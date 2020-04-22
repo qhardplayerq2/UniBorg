@@ -24,7 +24,7 @@ import requests
 import telethon
 
 from PIL import Image
-from uniborg.util import admin_cmd, errors_handler
+from uniborg.util import admin_cmd
 
 logger = logging.getLogger(__name__)
 
@@ -59,7 +59,10 @@ if 1 == 1:
     client = borg
 
     @borg.on(admin_cmd(pattern="quote(.*)")) # pylint:disable=E0602
+<<<<<<< HEAD
     @errors_handler
+=======
+>>>>>>> parent of 54ae803... added error handler
     async def quotecmd(message):  # noqa: C901
         """Quote a message.
         Usage: .quote [template]

@@ -24,7 +24,6 @@ def get_who_string(who):
 
 
 @borg.on(events.NewMessage(pattern=r"\.who", outgoing=True)) # pylint:disable=E0602
-@errors_handler
 async def _(event):
     if not event.message.is_reply:
         who = await event.get_chat()
@@ -41,7 +40,6 @@ async def _(event):
 
 
 @borg.on(events.NewMessage(pattern=r"\.members", outgoing=True)) # pylint:disable=E0602
-@errors_handler
 async def _(event):
     members = []
     async for member in borg.iter_participants(event.chat_id):

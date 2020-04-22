@@ -9,7 +9,7 @@ from telethon import events, functions, types
 import sql_helpers.no_log_pms_sql as no_log_pms_sql
 import sql_helpers.pmpermit_sql as pmpermit_sql
 from sample_config import Config
-from uniborg.util import admin_cmd, errors_handler
+from uniborg.util import admin_cmd
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)

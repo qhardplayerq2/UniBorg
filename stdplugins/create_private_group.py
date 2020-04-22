@@ -14,7 +14,6 @@ logger = logging.getLogger(__name__)
 
 
 @borg.on(util.admin_cmd(pattern="create (b|g|c) (.*)"))  # pylint:disable=E0602
-@errors_handler
 async def _(event):
     if event.fwd_from:
         return

@@ -4,14 +4,13 @@ import logging
 
 import requests
 
-from uniborg.util import admin_cmd, errors_handler
+from uniborg.util import admin_cmd
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
 logger = logging.getLogger(__name__)
 
 @borg.on(admin_cmd(pattern="decide")) # pylint:disable=E0602
-@errors_handler
 async def _(event):
     if event.fwd_from:
         return

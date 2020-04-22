@@ -12,8 +12,12 @@ from datetime import datetime
 from bin.FastTelethon import download_file
 from pySmartDL import SmartDL
 from sample_config import Config
+<<<<<<< HEAD
 from uniborg.util import (admin_cmd, errors_handler, humanbytes, progress,
                           time_formatter)
+=======
+from uniborg.util import admin_cmd, humanbytes, progress, time_formatter
+>>>>>>> parent of 54ae803... added error handler
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
@@ -22,7 +26,11 @@ logger = logging.getLogger(__name__)
 
 
 
+<<<<<<< HEAD
 @borg.on(admin_cmd(pattern="udownload ?(.*)", allow_sudo=True)) # pylint:disable=E0602
+=======
+@borg.on(admin_cmd(pattern="udownload ?(.*)", allow_sudo=True)) # pylint:disable=E0602s
+>>>>>>> parent of 54ae803... added error handler
 async def _(event):
     if event.fwd_from:
         return

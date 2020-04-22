@@ -7,7 +7,7 @@ from remotezip import RemoteZip
 from telethon.tl.types import DocumentAttributeVideo
 from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
-from uniborg.util import admin_cmd, errors_handler
+from uniborg.util import admin_cmd
 
 from sample_config import Config
 
@@ -16,7 +16,6 @@ thumb_image_path = Config.TMP_DOWNLOAD_DIRECTORY + "/thumb_image.jpg"
 
 
 @borg.on(admin_cmd(pattern=("runzip ?(.*)"))) # pylint:disable=E0602
-@errors_handler
 async def _(event):
     if event.fwd_from:
         return

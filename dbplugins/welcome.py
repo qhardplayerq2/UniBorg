@@ -12,14 +12,13 @@ from sql_helpers.welcome_sql import (add_welcome_setting,
                                      get_current_welcome_settings,
                                      rm_welcome_setting,
                                      update_previous_welcome)
-from uniborg.util import admin_cmd, errors_handler
+from uniborg.util import admin_cmd
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
 logger = logging.getLogger(__name__)
 
 @borg.on(events.ChatAction())  # pylint:disable=E0602
-@errors_handler
 async def _(event):
     cws = get_current_welcome_settings(event.chat_id)
     if cws:
@@ -36,7 +35,11 @@ async def _(event):
                         cws.previous_welcome
                     )
                 except Exception as e:  # pylint:disable=C0103,W0703
+<<<<<<< HEAD
                     logger.warning(str(e))  # pylint:disable=E0602
+=======
+                    logger.warn(str(e))  # pylint:disable=E0602
+>>>>>>> parent of 54ae803... added error handler
             a_user = await event.get_user()
             msg_o = await event.client.get_messages(
                 entity=Config.PRIVATE_CHANNEL_BOT_API_ID,
@@ -53,7 +56,6 @@ async def _(event):
 
 
 @borg.on(admin_cmd(pattern="savewelcome"))  # pylint:disable=E0602
-@errors_handler
 async def _(event):
     if event.fwd_from:
         return
@@ -70,7 +72,6 @@ async def _(event):
 
 
 @borg.on(admin_cmd(pattern="clearwelcome"))  # pylint:disable=E0602
-@errors_handler
 async def _(event):
     if event.fwd_from:
         return

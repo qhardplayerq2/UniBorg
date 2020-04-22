@@ -18,7 +18,10 @@
 
                     
 # @borg.on(events.NewMessage(pattern=r"\.carbon", outgoing=True)) # pylint:disable=E0602
+<<<<<<< HEAD
 
+=======
+>>>>>>> parent of 54ae803... added error handler
 # async def carbon_api(e):
 # if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
 #       """ A Wrapper for carbon.now.sh """

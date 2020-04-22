@@ -24,7 +24,6 @@ BANNED_RIGHTS = ChatBannedRights(
 )
 
 @borg.on(events.ChatAction()) # pylint:disable=E0602
-@errors_handler
 async def spam_watch_(event):
     chat = await event.get_chat()
     client = spamwatch.Client(Config.SPAM_WATCH_API)

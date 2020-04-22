@@ -85,7 +85,6 @@ async def get_file_name(content):
     return file_name                 
 
 @borg.on(events.NewMessage(pattern=r"\.gdl", outgoing=True)) # pylint:disable=E0602
-@errors_handler
 async def g_download(event):
     if event.fwd_from:
         return   

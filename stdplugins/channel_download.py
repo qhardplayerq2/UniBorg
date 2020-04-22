@@ -18,7 +18,6 @@ logger = logging.getLogger(__name__)
                     
 
 @borg.on(events.NewMessage(pattern=r"\.getc", outgoing=True)) # pylint:disable=E0602
-@errors_handler
 async def get_media(event):
     if event.fwd_from:
         return
@@ -55,7 +54,6 @@ async def get_media(event):
              
              
 @borg.on(events.NewMessage(pattern=r"\.geta", outgoing=True)) # pylint:disable=E0602
-@errors_handler
 async def get_media(event):
     if event.fwd_from:
         return

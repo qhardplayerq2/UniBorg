@@ -14,7 +14,6 @@ DELETE_TIMEOUT = 5
 
 
 @borg.on(util.admin_cmd(pattern="load (?P<shortname>\w+)$"))  # pylint:disable=E0602
-@errors_handler
 async def load_reload(event):
     await event.delete()
     shortname = event.pattern_match["shortname"]
@@ -28,12 +27,15 @@ async def load_reload(event):
     except Exception as e:  # pylint:disable=C0103,W0703
         trace_back = traceback.format_exc()
         # pylint:disable=E0602
+<<<<<<< HEAD
         logger.warning(f"Failed to (re)load plugin {shortname}: {trace_back}")
+=======
+        logger.warn(f"Failed to (re)load plugin {shortname}: {trace_back}")
+>>>>>>> parent of 54ae803... added error handler
         await event.respond(f"Failed to (re)load plugin {shortname}: {e}")
 
 
 @borg.on(util.admin_cmd(pattern="(?:unload|remove) (?P<shortname>\w+)$"))  # pylint:disable=E0602
-@errors_handler
 async def remove(event):
     await event.delete()
     shortname = event.pattern_match["shortname"]
@@ -49,7 +51,6 @@ async def remove(event):
 
 
 @borg.on(util.admin_cmd(pattern="send plugin (?P<shortname>\w+)$"))  # pylint:disable=E0602
-@errors_handler
 async def send_plug_in(event):
     if event.fwd_from:
         return
@@ -72,7 +73,6 @@ async def send_plug_in(event):
 
 
 @borg.on(util.admin_cmd(pattern="install plugin"))  # pylint:disable=E0602
-@errors_handler
 async def install_plug_in(event):
     if event.fwd_from:
         return

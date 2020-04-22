@@ -13,7 +13,6 @@ logger = logging.getLogger(__name__)
 
                     
 @borg.on(events.NewMessage(pattern=r"\.chain", outgoing=True)) # pylint:disable=E0602
-@errors_handler
 async def _(event):
     await event.edit("Counting...")
     count = -1

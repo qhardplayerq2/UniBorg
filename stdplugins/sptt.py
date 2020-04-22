@@ -15,7 +15,6 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
 logger = logging.getLogger(__name__)
 
 @borg.on(events.NewMessage(pattern=r"\.sptt (.*)", outgoing=True)) # pylint:disable=E0602
-@errors_handler
 async def _(event):
     if event.fwd_from:
         return

@@ -8,7 +8,7 @@ import pytz
 # from bin.namaz_vakti import namazvakti
 from bin.namaz_vakti.namazvakti import namazvakti
 # from ..bin.namaz_vakti import namazvakti
-from uniborg.util import admin_cmd, errors_handler
+from uniborg.util import admin_cmd
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
@@ -18,7 +18,6 @@ TEMP = ''
 
 
 @borg.on(admin_cmd(pattern=("ezanv ?(.*) + ?(.*)"))) # pylint:disable=E0602
-@errors_handler
 async def namaz_(event):
     """kullanımı .ezanv <şehir> <ilçe>"""
     if not event.text.startswith("."):

@@ -13,7 +13,7 @@ import sys
 
 from telethon import __version__, functions
 
-from uniborg.util import admin_cmd, errors_handler
+from uniborg.util import admin_cmd
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
@@ -22,7 +22,6 @@ logger = logging.getLogger(__name__)
 
 
 @borg.on(admin_cmd(pattern="helpme ?(.*)", allow_sudo=True))  # pylint:disable=E0602
-@errors_handler
 async def _(event):
     if event.fwd_from:
         return
@@ -56,7 +55,6 @@ UserBot Forked from https://github.com/muhammedfurkan/uniborg""".format(
 
 
 @borg.on(admin_cmd(pattern="dc"))  # pylint:disable=E0602
-@errors_handler
 async def _(event):
     if event.fwd_from:
         return
@@ -65,7 +63,6 @@ async def _(event):
 
 
 @borg.on(admin_cmd(pattern="config"))  # pylint:disable=E0602
-@errors_handler
 async def _(event):
     if event.fwd_from:
         return

@@ -18,7 +18,7 @@ from telethon.tl.types import DocumentAttributeAudio, DocumentAttributeVideo
 from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
 from sample_config import Config
-from uniborg.util import admin_cmd, errors_handler, progress
+from uniborg.util import admin_cmd, progress
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
@@ -40,7 +40,6 @@ def get_lst_of_files(input_directory, output_lst):
 
 
 @borg.on(admin_cmd(pattern="uploadir (.*)")) # pylint:disable=E0602
-@errors_handler
 async def _(event):
     if event.fwd_from:
         return
@@ -149,7 +148,6 @@ async def _(event):
 
 
 @borg.on(admin_cmd(pattern="upload (.*)", allow_sudo=True)) # pylint:disable=E0602
-@errors_handler
 async def _(event):
     if event.fwd_from:
         return
@@ -195,7 +193,6 @@ def get_video_thumb(file, output=None, width=90):
 
 
 @borg.on(admin_cmd(pattern="uploadasstream (.*)", allow_sudo=True)) # pylint:disable=E0602
-@errors_handler
 async def _(event):
     if event.fwd_from:
         return

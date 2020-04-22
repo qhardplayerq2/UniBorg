@@ -19,8 +19,12 @@ from uniborg.util import errors_handler
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
+<<<<<<< HEAD
 
 
+=======
+# pylint:disable=E0602
+>>>>>>> parent of 54ae803... added error handler
 if Config.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
     @tgbot.on(events.callbackquery.CallbackQuery(  # pylint:disable=E0602
         data=re.compile(b"ytdl|(.*)|(.*)|(.*)")

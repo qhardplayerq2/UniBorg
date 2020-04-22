@@ -16,7 +16,7 @@ from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
 from pySmartDL import SmartDL
 from sample_config import Config
-from uniborg.util import admin_cmd, errors_handler, humanbytes, progress
+from uniborg.util import admin_cmd, humanbytes, progress
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
@@ -26,7 +26,6 @@ logger = logging.getLogger(__name__)
 thumb_image_path = Config.TMP_DOWNLOAD_DIRECTORY + "/thumb_image.jpg"
 
 @borg.on(admin_cmd(pattern="rndlup (.*)")) # pylint:disable=E0602
-@errors_handler
 async def _(event):
     if event.fwd_from:
         return
@@ -107,7 +106,6 @@ async def _(event):
 
 
 @borg.on(admin_cmd(pattern="rnupload (.*)")) # pylint:disable=E0602
-@errors_handler
 async def _(event):
     if event.fwd_from:
         return
@@ -159,7 +157,6 @@ async def _(event):
 
 
 @borg.on(admin_cmd(pattern="rnstreamupload (.*)")) # pylint:disable=E0602
-@errors_handler
 async def _(event):
     if event.fwd_from:
         return

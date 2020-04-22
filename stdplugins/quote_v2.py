@@ -3,14 +3,18 @@ import logging
 from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 
-from uniborg.util import admin_cmd, errors_handler
+from uniborg.util import admin_cmd
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
 logger = logging.getLogger(__name__)
 
+<<<<<<< HEAD
 @borg.on(admin_cmd(pattern=("sq ?(.*)"))) # pylint:disable=E0602
 @errors_handler
+=======
+@borg.on(admin_cmd(pattern=("q ?(.*)"))) # pylint:disable=E0602
+>>>>>>> parent of 54ae803... added error handler
 # @borg.on(outgoing=True, pattern="^.q(?: |$)(.*)")
 async def _(event):
     if event.fwd_from:

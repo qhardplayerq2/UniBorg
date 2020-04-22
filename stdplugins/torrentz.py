@@ -5,7 +5,7 @@ import requests
 
 import cfscrape  # https://github.com/Anorov/cloudflare-scrape
 from bs4 import BeautifulSoup
-from uniborg.util import admin_cmd, errors_handler, humanbytes
+from uniborg.util import admin_cmd, humanbytes
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
@@ -13,7 +13,10 @@ logger = logging.getLogger(__name__)
 
 
 @borg.on(admin_cmd(  # pylint:disable=E0602
+<<<<<<< HEAD
 
+=======
+>>>>>>> parent of 54ae803... added error handler
     pattern="torrentz (torrentz2\.eu|idop\.se) (.*)"
 ))
 @errors_handler

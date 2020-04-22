@@ -9,7 +9,7 @@ from datetime import datetime
 from PIL import Image
 from sample_config import Config
 from telegraph import Telegraph, exceptions, upload_file
-from uniborg.util import admin_cmd, errors_handler
+from uniborg.util import admin_cmd
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
@@ -22,7 +22,6 @@ auth_url = r["auth_url"]
 
 
 @borg.on(admin_cmd(pattern="telegraph (media|text) ?(.*)")) # pylint:disable=E0602
-@errors_handler
 async def _(event):
     if event.fwd_from:
         return

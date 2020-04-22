@@ -4,7 +4,7 @@ import logging
 from asyncio import sleep
 
 from sample_config import Config
-from uniborg.util import admin_cmd, errors_handler
+from uniborg.util import admin_cmd
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
@@ -14,7 +14,6 @@ level=logging.INFO
 print(level)
 
 @borg.on(admin_cmd(pattern="purge ?(.*)")) # pylint:disable=E0602
-@errors_handler
 async def _(event): 
     if event.fwd_from:
         return
@@ -44,7 +43,6 @@ async def _(event):
             await event.edit("**PURGE** Failed!")
 
 @borg.on(admin_cmd(pattern="purgme ?(.*)")) # pylint:disable=E0602
-@errors_handler
 async def purgeme(delme):
     """ For .purgeme, delete x count of your latest message."""
     message = delme.text
@@ -67,7 +65,6 @@ async def purgeme(delme):
 
 
 @borg.on(admin_cmd(pattern="sd ?(.*) + ?(.*)", outgoing=True  )) # pylint:disable=E0602
-@errors_handler
 async def selfdestruct(destroy):
     if not destroy.text[0].isalpha() and destroy.text[0] not in ("/", "#", "@", "!"):
         await destroy.delete()

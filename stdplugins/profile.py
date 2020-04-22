@@ -25,7 +25,7 @@ from telethon.tl.functions.photos import (DeletePhotosRequest,
                                           GetUserPhotosRequest)
 from telethon.tl.types import InputPhoto
 
-from uniborg.util import admin_cmd, errors_handler
+from uniborg.util import admin_cmd
 
 logger = logging.getLogger(__name__)
 
@@ -34,7 +34,6 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
 logger = logging.getLogger(__name__)
 
 @borg.on(admin_cmd(pattern="delpf ?(.*)")) # pylint:disable=E0602
-@errors_handler
 async def remove_profilepic(delpfp):
     """ For .delpfp command, delete your current profile picture in Telegram. """
     group = delpfp.text[7:]
@@ -66,7 +65,10 @@ if 1 == 1:
     client = borg
 
     @borg.on(admin_cmd(pattern="poto(.*)")) # pylint:disable=E0602
+<<<<<<< HEAD
     @errors_handler
+=======
+>>>>>>> parent of 54ae803... added error handler
     async def potocmd(event):
         """Gets the profile photos of replied users, channels or chats"""
         id = "".join(event.raw_text.split(maxsplit=2)[1:])

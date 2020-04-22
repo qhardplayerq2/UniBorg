@@ -13,7 +13,7 @@ import re
 
 from sql_helpers.filters_sql import (add_filter, get_all_filters,
                                      remove_all_filters, remove_filter)
-from uniborg.util import admin_cmd, errors_handler
+from uniborg.util import admin_cmd
 from sample_config import Config
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
@@ -25,7 +25,6 @@ last_triggered_filters = {}
 
 
 @borg.on(admin_cmd(incoming=True)) # pylint:disable=E0602
-@errors_handler
 async def on_snip(event):
     name = event.raw_text
     if event.chat_id in last_triggered_filters:
@@ -59,7 +58,6 @@ async def on_snip(event):
 
 
 @borg.on(admin_cmd(pattern="savefilter (.*)")) # pylint:disable=E0602
-@errors_handler
 async def on_snip_save(event):
     name = event.pattern_match.group(1)
     msg = await event.get_reply_message()
@@ -77,7 +75,6 @@ async def on_snip_save(event):
 
 
 @borg.on(admin_cmd(pattern="listfilters")) # pylint:disable=E0602
-@errors_handler
 async def on_snip_list(event):
     all_snips = get_all_filters(event.chat_id)
     OUT_STR = "Available Filters in the Current Chat:\n"
@@ -103,7 +100,6 @@ async def on_snip_list(event):
 
 
 @borg.on(admin_cmd(pattern="clearfilter (.*)")) # pylint:disable=E0602
-@errors_handler
 async def on_snip_delete(event):
     name = event.pattern_match.group(1)
     remove_filter(event.chat_id, name)
@@ -111,7 +107,6 @@ async def on_snip_delete(event):
 
 
 @borg.on(admin_cmd(pattern="clearallfilters")) # pylint:disable=E0602
-@errors_handler
 async def on_all_snip_delete(event):
     remove_all_filters(event.chat_id)
     await event.edit(f"filters **in current chat** deleted successfully")

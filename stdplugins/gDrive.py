@@ -24,7 +24,7 @@ from apiclient.http import MediaFileUpload
 from oauth2client.client import OAuth2WebServerFlow
 from oauth2client.file import Storage
 from sample_config import Config
-from uniborg.util import admin_cmd, errors_handler, humanbytes, progress
+from uniborg.util import admin_cmd, humanbytes, progress
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
@@ -49,7 +49,6 @@ G_DRIVE_DIR_MIME_TYPE = "application/vnd.google-apps.folder"
 
 
 @borg.on(admin_cmd(pattern="ugdrive ?(.*)", allow_sudo=True)) # pylint:disable=E0602
-@errors_handler
 async def _(event):
     if event.fwd_from:
         return
@@ -120,7 +119,6 @@ async def _(event):
 
 
 @borg.on(admin_cmd(pattern="gdrivesp https?://drive\.google\.com/drive/u/\d/folders/([-\w]{25,})", allow_sudo=True)) # pylint:disable=E0602
-@errors_handler
 async def _(event):
     if event.fwd_from:
         return
@@ -135,7 +133,6 @@ async def _(event):
 
 
 @borg.on(admin_cmd(pattern="gdriveclear", allow_sudo=True)) # pylint:disable=E0602
-@errors_handler
 async def _(event):
     if event.fwd_from:
         return
@@ -146,7 +143,6 @@ async def _(event):
 
 
 @borg.on(admin_cmd(pattern="gdrivedir ?(.*)", allow_sudo=True)) # pylint:disable=E0602
-@errors_handler
 async def _(event):
     if event.fwd_from:
         return
@@ -180,7 +176,6 @@ async def _(event):
 
 
 @borg.on(admin_cmd(pattern="drive (delete|get) ?(.*)", allow_sudo=True)) # pylint:disable=E0602
-@errors_handler
 async def _(event):
     if event.fwd_from:
         return
@@ -213,7 +208,6 @@ async def _(event):
 
 
 @borg.on(admin_cmd(pattern="drive search ?(.*)", allow_sudo=True)) # pylint:disable=E0602
-@errors_handler
 async def _(event):
     if event.fwd_from:
         return

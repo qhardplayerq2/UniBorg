@@ -14,7 +14,6 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
 logger = logging.getLogger(__name__)
                                           
 @borg.on(events.NewMessage(pattern=r"\.userlists ?(.*)", outgoing=True)) # pylint:disable=E0602
-@errors_handler
 async def get_users(show):
     """ For .userslist command, list all of the users of the chat. """
     if not show.text[0].isalpha() and show.text[0] not in ("/", "#", "@", "!"):

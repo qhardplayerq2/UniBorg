@@ -2,7 +2,7 @@
 Syntax: .get_poll"""
 import logging
 
-from uniborg.util import admin_cmd, errors_handler
+from uniborg.util import admin_cmd
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
@@ -10,7 +10,6 @@ logger = logging.getLogger(__name__)
 
 
 @borg.on(admin_cmd(pattern="get_poll")) # pylint:disable=E0602
-@errors_handler
 async def _(event):
     reply_message = await event.get_reply_message()
     if reply_message.media is None:
