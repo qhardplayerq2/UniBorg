@@ -3,6 +3,7 @@
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 import asyncio
+import logging
 import os
 import traceback
 from datetime import datetime
@@ -10,6 +11,9 @@ from datetime import datetime
 from uniborg import util
 from uniborg.util import errors_handler
 
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
+logger = logging.getLogger(__name__)
 DELETE_TIMEOUT = 5
 
 
@@ -27,11 +31,7 @@ async def load_reload(event):
     except Exception as e:  # pylint:disable=C0103,W0703
         trace_back = traceback.format_exc()
         # pylint:disable=E0602
-<<<<<<< HEAD
-        logger.warning(f"Failed to (re)load plugin {shortname}: {trace_back}")
-=======
         logger.warn(f"Failed to (re)load plugin {shortname}: {trace_back}")
->>>>>>> parent of 54ae803... added error handler
         await event.respond(f"Failed to (re)load plugin {shortname}: {e}")
 
 
