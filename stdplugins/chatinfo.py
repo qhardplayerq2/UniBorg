@@ -17,7 +17,7 @@ from emoji import emojize
 from uniborg.util import admin_cmd
 
 
-@borg.on(admin_cmd(pattern=".chatinfo(?: |$)(.*)")) # pylint:disable=E0602
+@borg.on(admin_cmd(pattern="chatinfo(?: |$)(.*)")) # pylint:disable=E0602
 async def info(event):
     await event.edit("`Analysing the chat...`")
     chat = await get_chatinfo(event)
