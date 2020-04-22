@@ -4,7 +4,6 @@ from telethon.tl.functions.channels import LeaveChannelRequest
 
 from uniborg.util import admin_cmd
 
-from stdborg import borg
 
 @borg.on(admin_cmd(pattern="leave", outgoing=True))
 async def leave(e):
