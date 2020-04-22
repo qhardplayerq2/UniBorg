@@ -28,12 +28,7 @@ async def _(event):
         await event.edit(str(e))
 
 
-<<<<<<< HEAD
-@borg.on(admin_cmd(pattern="pname ((.|\n)*)"))  # pylint:disable=E0602
-@ 
-=======
 @borg.on(admin_cmd(pattern="pname ((.|\n)*)"))  # pylint:disable=E0602,W0703
->>>>>>> parent of 54ae803... added error handler
 async def _(event):
     if event.fwd_from:
         return
@@ -83,11 +78,7 @@ async def _(event):
     try:
         os.remove(photo)
     except Exception as e:  # pylint:disable=C0103,W0703
-<<<<<<< HEAD
-        logger.warning(str(e))  # pylint:disable=E0602
-=======
         logger.warn(str(e))  # pylint:disable=E0602
->>>>>>> parent of 54ae803... added error handler
 
 @borg.on(admin_cmd(pattern="profilephoto (.*)"))  # pylint:disable=E0602
 async def _(event):

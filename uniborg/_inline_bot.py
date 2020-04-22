@@ -12,7 +12,7 @@ import os
 @borg.on(admin_cmd(  # pylint:disable=E0602
     pattern="ib (.[^ ]*) (.*)"
 ))
-@ 
+
 async def _(event):
     # https://stackoverflow.com/a/35524254/4723940
     if event.fwd_from:
