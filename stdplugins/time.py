@@ -30,25 +30,16 @@ async def _(event):
     elif event.reply_to_msg_id:
         previous_message = await event.get_reply_message()
         reply_msg_id = previous_message.id
-<<<<<<< HEAD
-    if not os.path.isdir(Config.TMP_DOWNLOAD_DIRECTORY):  
-        os.makedirs(Config.TMP_DOWNLOAD_DIRECTORY) 
-=======
     if not os.path.isdir(Config.TMP_DOWNLOAD_DIRECTORY):  # pylint:disable=E0602
         os.makedirs(Config.TMP_DOWNLOAD_DIRECTORY)  # pylint:disable=E0602
     # pylint:disable=E0602
->>>>>>> parent of 54ae803... added error handler
     required_file_name = Config.TMP_DOWNLOAD_DIRECTORY + " " + str(datetime.now()) + ".webp"
     img = Image.new("RGB", (250, 50), color=(0, 0, 0))
     fnt = ImageFont.truetype(FONT_FILE_TO_USE, 30)
     drawn_text = ImageDraw.Draw(img)
     drawn_text.text((10, 10), current_time, font=fnt, fill=(255, 255, 255))
     img.save(required_file_name)
-<<<<<<< HEAD
-    await borg.send_file(  
-=======
     await borg.send_file(  # pylint:disable=E0602
->>>>>>> parent of 54ae803... added error handler
         event.chat_id,
         required_file_name,
         caption="Time: Powered by @UniBorg",
@@ -68,8 +59,4 @@ async def _(event):
     if event.fwd_from:
         return
     input_str = event.pattern_match.group(1)
-<<<<<<< HEAD
-    logger.info(input_str)  
-=======
     logger.info(input_str)  # pylint:disable=E0602
->>>>>>> parent of 54ae803... added error handler

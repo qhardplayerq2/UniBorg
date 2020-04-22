@@ -65,10 +65,6 @@ if 1 == 1:
     client = borg
 
     @borg.on(admin_cmd(pattern="poto(.*)")) # pylint:disable=E0602
-<<<<<<< HEAD
-    @ 
-=======
->>>>>>> parent of 54ae803... added error handler
     async def potocmd(event):
         """Gets the profile photos of replied users, channels or chats"""
         id = "".join(event.raw_text.split(maxsplit=2)[1:])
