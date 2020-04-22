@@ -27,7 +27,6 @@ logger = logging.getLogger(__name__)
 
 
 @borg.on(events.MessageEdited(pattern=r"\.youtube search (.*)", outgoing=True)) #pylint:disable=E0602
-@ 
 async def _(event):
     if event.fwd_from:
         return

@@ -13,13 +13,8 @@ import shutil
 import time
 
 from telethon.tl.types import DocumentAttributeAudio
-
-<<<<<<< HEAD
 from sample_config import Config
-from uniborg.util import admin_cmd,  
-=======
 from uniborg.util import admin_cmd
->>>>>>> parent of 54ae803... added error handler
 from youtube_dl import YoutubeDL
 from youtube_dl.utils import (ContentTooShortError, DownloadError,
                               ExtractorError, GeoRestrictedError,

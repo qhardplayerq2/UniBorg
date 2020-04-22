@@ -13,13 +13,8 @@ logger = logging.getLogger(__name__)
 
 
 @borg.on(admin_cmd(  # pylint:disable=E0602
-<<<<<<< HEAD
-
-=======
->>>>>>> parent of 54ae803... added error handler
     pattern="torrentz (torrentz2\.eu|idop\.se) (.*)"
 ))
-@ 
 async def _(event):
     if event.fwd_from:
         return

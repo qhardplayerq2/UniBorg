@@ -8,6 +8,7 @@ import re
 from telethon import events, custom
 from uniborg.util import admin_cmd, humanbytes
 import os
+from sample_config import Config
 
 @borg.on(admin_cmd(  # pylint:disable=E0602
     pattern="ib (.[^ ]*) (.*)"
@@ -42,7 +43,7 @@ async def _(event):
 @borg.on(admin_cmd(  # pylint:disable=E0602
     pattern="icb (.[^ ]*) (.[^ ]*) (.*)"
 ))
-@ 
+
 async def _(event):
     if event.fwd_from:
         return
@@ -61,10 +62,6 @@ async def _(event):
 
 
 # pylint:disable=E0602
-<<<<<<< HEAD
-
-=======
->>>>>>> parent of 54ae803... added error handler
 if Config.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
     @tgbot.on(events.InlineQuery)  # pylint:disable=E0602
     async def inline_handler(event):
@@ -216,7 +213,6 @@ All instaructions to run @UniBorg in your PC has been explained in https://githu
     @tgbot.on(events.callbackquery.CallbackQuery(  # pylint:disable=E0602
         data=re.compile(b"helpme_next\((.+?)\)")
     ))
-    @ 
     async def on_plug_in_callback_query_handler(event):
         if event.query.user_id == borg.uid:  # pylint:disable=E0602
             current_page_number = int(
@@ -230,10 +226,9 @@ All instaructions to run @UniBorg in your PC has been explained in https://githu
             await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
 
-    @tgbot.on(events.callbackquery.CallbackQuery(  # pylint:disable=E0602
+    @tgbot.on(events.callbackquery.CallbackQuery(  
         data=re.compile(b"helpme_prev\((.+?)\)")
     ))
-    @ 
     async def on_plug_in_callback_query_handler(event):
         if event.query.user_id == borg.uid:  # pylint:disable=E0602
             current_page_number = int(
@@ -250,22 +245,13 @@ All instaructions to run @UniBorg in your PC has been explained in https://githu
             await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
 
-<<<<<<< HEAD
-    @tgbot.on(events.callbackquery.CallbackQuery(  # pylint:disable=E060
-=======
     @tgbot.on(events.callbackquery.CallbackQuery(  # pylint:disable=E0602
->>>>>>> parent of 54ae803... added error handler
         data=re.compile(b"ub_plugin_(.*)")
     ))
-    @ 
     async def on_plug_in_callback_query_handler(event):
         plugin_name = event.data_match.group(1).decode("UTF-8")
         help_string = borg._plugins[plugin_name].__doc__[
             0:125]  # pylint:disable=E0602
-<<<<<<< HEAD
-
-=======
->>>>>>> parent of 54ae803... added error handler
         reply_pop_up_alert = help_string if help_string is not None else \
             "No DOCSTRING has been setup for {} plugin".format(plugin_name)
         reply_pop_up_alert += "\n\n Use .unload {} to remove this plugin\n\
