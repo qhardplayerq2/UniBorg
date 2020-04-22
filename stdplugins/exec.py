@@ -17,7 +17,7 @@ logger = logging.getLogger(__name__)
 
 @borg.on(admin_cmd(pattern="exec ?(.*)")) # pylint:disable=E0602
 async def _(event):
-    if event.fwd_from:
+    if event.fwd_from or event.via_bot_id:
         return
     DELAY_BETWEEN_EDITS = 0.3
     PROCESS_RUN_TIME = 100

@@ -20,7 +20,7 @@ logger = logging.getLogger(__name__)
 
 @borg.on(admin_cmd(pattern="eval")) # pylint:disable=E0602
 async def _(event):
-    if event.fwd_from:
+    if event.fwd_from or event.via_bot_id:
         return
     await event.edit("Processing ...")
     cmd = event.text.split(" ", maxsplit=1)[1]
