@@ -14,7 +14,7 @@ from telethon import events
 
 import youtube_dl
 from sample_config import Config
-from uniborg.util import  
+  
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)

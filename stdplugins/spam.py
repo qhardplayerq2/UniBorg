@@ -7,7 +7,7 @@ import logging
 from asyncio import wait
 
 from telethon import events
-from uniborg.util import  
+  
 from sample_config import Config
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',

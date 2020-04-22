@@ -15,7 +15,7 @@ from datetime import datetime
 from telethon import events
 
 from sample_config import Config
-from uniborg.util import  
+  
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)

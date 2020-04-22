@@ -7,7 +7,7 @@ import logging
 from telethon import events, utils
 from telethon.tl import types
 
-from uniborg.util import  
+  
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)

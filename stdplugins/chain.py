@@ -6,7 +6,7 @@ import logging
 
 from telethon import events
 from telethon.tl.functions.messages import SaveDraftRequest
-from uniborg.util import  
+  
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
 logger = logging.getLogger(__name__)

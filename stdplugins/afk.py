@@ -3,7 +3,7 @@ Syntax: .afk REASON"""
 import asyncio
 import datetime
 import logging
-from uniborg.util import  
+  
 from telethon import events
 from telethon.tl import functions, types
 

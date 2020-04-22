@@ -6,7 +6,7 @@ import logging
 
 import requests
 from telethon import events
-from uniborg.util import  
+  
 from bs4 import BeautifulSoup
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
