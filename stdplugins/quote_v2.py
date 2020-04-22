@@ -11,7 +11,7 @@ logger = logging.getLogger(__name__)
 
 <<<<<<< HEAD
 @borg.on(admin_cmd(pattern=("sq ?(.*)"))) # pylint:disable=E0602
-@errors_handler
+@ 
 =======
 @borg.on(admin_cmd(pattern=("q ?(.*)"))) # pylint:disable=E0602
 >>>>>>> parent of 54ae803... added error handler

@@ -7,7 +7,7 @@ from collections import deque
 
 from telethon import events
 
-from uniborg.util import errors_handler
+from uniborg.util import  
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)

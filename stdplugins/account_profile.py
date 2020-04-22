@@ -30,7 +30,7 @@ async def _(event):
 
 <<<<<<< HEAD
 @borg.on(admin_cmd(pattern="pname ((.|\n)*)"))  # pylint:disable=E0602
-@errors_handler
+@ 
 =======
 @borg.on(admin_cmd(pattern="pname ((.|\n)*)"))  # pylint:disable=E0602,W0703
 >>>>>>> parent of 54ae803... added error handler

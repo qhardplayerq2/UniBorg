@@ -60,7 +60,7 @@ if 1 == 1:
 
     @borg.on(admin_cmd(pattern="quote(.*)")) # pylint:disable=E0602
 <<<<<<< HEAD
-    @errors_handler
+    @ 
 =======
 >>>>>>> parent of 54ae803... added error handler
     async def quotecmd(message):  # noqa: C901

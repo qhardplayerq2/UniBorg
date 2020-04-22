@@ -16,7 +16,7 @@ from telethon.tl.types import DocumentAttributeAudio
 
 <<<<<<< HEAD
 from sample_config import Config
-from uniborg.util import admin_cmd, errors_handler
+from uniborg.util import admin_cmd,  
 =======
 from uniborg.util import admin_cmd
 >>>>>>> parent of 54ae803... added error handler

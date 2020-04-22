@@ -35,7 +35,7 @@ def register(**args):
     return decorator
 
 
-def errors_handler(func):
+def  (func):
     async def wrapper(errors):
         try:
             await func(errors)

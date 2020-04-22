@@ -19,7 +19,7 @@ logger = logging.getLogger(__name__)
 >>>>>>> parent of 54ae803... added error handler
     pattern="torrentz (torrentz2\.eu|idop\.se) (.*)"
 ))
-@errors_handler
+@ 
 async def _(event):
     if event.fwd_from:
         return

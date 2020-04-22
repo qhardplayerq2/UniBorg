@@ -13,7 +13,7 @@ from bin.FastTelethon import download_file
 from pySmartDL import SmartDL
 from sample_config import Config
 <<<<<<< HEAD
-from uniborg.util import (admin_cmd, errors_handler, humanbytes, progress,
+from uniborg.util import (admin_cmd,  , humanbytes, progress,
                           time_formatter)
 =======
 from uniborg.util import admin_cmd, humanbytes, progress, time_formatter
