@@ -5,6 +5,7 @@
 import logging
 
 from telethon import events
+from uniborg.events import register
   
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
@@ -22,8 +23,9 @@ def aesthetify(string):
         yield chr(c)
 
 
-@borg.on(events.NewMessage(pattern=r'.ae\s+(.+)', outgoing=True))  
-@borg.on(events.MessageEdited(pattern=r'.ae\s+(.+)', outgoing=True))  
+# @borg.on(events.NewMessage(pattern=r'.ae\s+(.+)', outgoing=True))  
+# @borg.on(events.MessageEdited(pattern=r'.ae\s+(.+)', outgoing=True))  
+@register(outgoing=True, pattern=r'.ae\s+(.+)')
 async def _(event):
     text = event.pattern_match.group(1)
     text = "".join(aesthetify(text))
