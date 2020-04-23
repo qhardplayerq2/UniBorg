@@ -85,7 +85,7 @@ def time_formatter(milliseconds: int) -> str:
         ((str(milliseconds) + " millisecond(s), ") if milliseconds else "")
     return tmp[:-2]
 
-@borg.on(admin_cmd(pattern="yt(a|v) (.*)")) # pylint:disable=E0602
+@borg.on(admin_cmd(pattern="yt(a|v) (.*)"))  
 async def download_video(v_url):
     """ For .ytdl command, download media from YouTube and many other sites. """
     url = v_url.pattern_match.group(2)

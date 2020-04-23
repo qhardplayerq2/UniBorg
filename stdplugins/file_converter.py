@@ -17,7 +17,7 @@ logger = logging.getLogger(__name__)
 
 
 
-@borg.on(admin_cmd(pattern="nfc (.*)"))  # pylint:disable=E0602
+@borg.on(admin_cmd(pattern="nfc (.*)"))   
 async def _(event):
     if event.fwd_from:
         return

@@ -18,7 +18,7 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
 logger = logging.getLogger(__name__)
 
 
-@borg.on(events.NewMessage(pattern=r"\.lslocal", outgoing=True)) # pylint:disable=E0602
+@borg.on(events.NewMessage(pattern=r"\.lslocal", outgoing=True))  
 async def _(event):
     if event.fwd_from:
         return
@@ -59,7 +59,7 @@ async def _(event):
 
 
 
-@borg.on(events.NewMessage(pattern=r"\.lsroot", outgoing=True)) # pylint:disable=E0602
+@borg.on(events.NewMessage(pattern=r"\.lsroot", outgoing=True))  
 async def _(event):
     if event.fwd_from:
         return

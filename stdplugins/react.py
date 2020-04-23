@@ -12,7 +12,7 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
                     level=logging.WARNING)
 logger = logging.getLogger(__name__)
 logger = logging.getLogger(__name__)
-@borg.on(events.NewMessage(pattern=r"\.react (.*)", outgoing=True)) # pylint:disable=E0602
+@borg.on(events.NewMessage(pattern=r"\.react (.*)", outgoing=True))  
 async def _(event):
     if event.fwd_from:
         return

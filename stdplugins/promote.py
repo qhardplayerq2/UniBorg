@@ -13,7 +13,7 @@ logger = logging.getLogger(__name__)
 
 
 
-@borg.on(admin_cmd(pattern="promote ?(.*)")) # pylint:disable=E0602
+@borg.on(admin_cmd(pattern="promote ?(.*)"))  
 async def _(event):
     if event.fwd_from:
         return
@@ -44,7 +44,7 @@ async def _(event):
         await event.edit("Successfully Promoted")
 
 
-@borg.on(admin_cmd(pattern="prankpromote ?(.*)")) # pylint:disable=E0602
+@borg.on(admin_cmd(pattern="prankpromote ?(.*)"))  
 async def _(event):
     if event.fwd_from:
         return

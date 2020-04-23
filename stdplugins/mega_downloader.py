@@ -28,7 +28,7 @@ def subprocess_run(cmd):
     return talk
 
 
-@borg.on(admin_cmd(pattern="mega ?(.*)")) # pylint:disable=E0602
+@borg.on(admin_cmd(pattern="mega ?(.*)"))  
 async def mega_downloader(megadl):
     await megadl.edit("`Processing...`")
     textx = await megadl.get_reply_message()

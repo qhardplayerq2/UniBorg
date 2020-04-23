@@ -21,7 +21,7 @@ def progress(current, total):
     logger.info("Downloaded {} of {}\nCompleted {}".format(current, total, (current / total) * 100))
 
 
-@borg.on(admin_cmd(pattern="npaste ?(.*)")) # pylint:disable=E0602
+@borg.on(admin_cmd(pattern="npaste ?(.*)"))  
 async def _(event):
     if event.fwd_from:
         return

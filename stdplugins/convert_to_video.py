@@ -21,7 +21,7 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
 logger = logging.getLogger(__name__)
 # thumb_image_path = Config.TMP_DOWNLOAD_DIRECTORY + "thumb_image.jpg"
 
-@borg.on(admin_cmd(pattern="converttovideo ?(.*)")) # pylint:disable=E0602
+@borg.on(admin_cmd(pattern="converttovideo ?(.*)"))  
 async def _(event):
     if event.fwd_from:
         return

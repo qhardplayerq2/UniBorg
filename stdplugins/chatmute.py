@@ -5,7 +5,7 @@ from sample_config import Config
 from uniborg.util import admin_cmd
 
 
-@borg.on(admin_cmd(pattern="unmutechat")) # pylint:disable=E0602
+@borg.on(admin_cmd(pattern="unmutechat"))  
 async def unmute_chat(unm_e):
     """ For .unmutechat command, unmute a muted chat. """
     try:
@@ -19,7 +19,7 @@ async def unmute_chat(unm_e):
     await unm_e.delete()
 
 
-@borg.on(admin_cmd(pattern="mutechat")) # pylint:disable=E0602
+@borg.on(admin_cmd(pattern="mutechat"))  
 async def mute_chat(mute_e):
     """ For .mutechat command, mute any chat. """
     try:

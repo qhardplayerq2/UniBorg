@@ -21,7 +21,7 @@ logger = logging.getLogger(__name__)
 langi = "en"
 
 #kanged from Blank-x ;---;
-@borg.on(admin_cmd(pattern="imdb (.*)"))  # pylint:disable=E0602
+@borg.on(admin_cmd(pattern="imdb (.*)"))   
 async def imdb(e):
  try:
     movie_name = e.pattern_match.group(1)

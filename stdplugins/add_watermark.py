@@ -7,9 +7,9 @@ from datetime import datetime
 from PyPDF2 import PdfFileReader, PdfFileWriter
 from sample_config import Config
 from uniborg.util import admin_cmd, progress
+from stdborg import borg
 
-
-@borg.on(admin_cmd(pattern="watermark")) # pylint:disable=E0602
+@borg.on(admin_cmd(pattern="watermark")) 
 async def _(event):
     if event.fwd_from:
         return
@@ -31,7 +31,7 @@ async def _(event):
                     progress(d, t, mone, c_time, "trying to download")
                 )
             )
-        except Exception as e:  # pylint:disable=C0103,W0703
+        except Exception as e:  
             await mone.edit(str(e))
         else:
             end = datetime.now()

@@ -15,12 +15,12 @@ logger = logging.getLogger(__name__)
 _last_messages = {}
 
 
-@borg.on(events.NewMessage(outgoing=True)) # pylint:disable=E0602
+@borg.on(events.NewMessage(outgoing=True))  
 async def _(event):
     _last_messages[event.chat_id] = event.message
 
 
-@borg.on(events.NewMessage(pattern=r"\.(fix)?reply", outgoing=True)) # pylint:disable=E0602
+@borg.on(events.NewMessage(pattern=r"\.(fix)?reply", outgoing=True))  
 async def _(event):
     if not event.is_reply or event.chat_id not in _last_messages:
         return

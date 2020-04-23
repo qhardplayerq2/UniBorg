@@ -15,7 +15,7 @@ logger = logging.getLogger(__name__)
 
 
 
-@borg.on(admin_cmd(pattern=("cmrdl ?(.*)"))) # pylint:disable=E0602
+@borg.on(admin_cmd(pattern=("cmrdl ?(.*)")))  
 async def _(event):
     url = event.pattern_match.group(1)
     if event.fwd_from:

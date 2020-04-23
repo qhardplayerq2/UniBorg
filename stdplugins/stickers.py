@@ -22,7 +22,7 @@ from uniborg.util import admin_cmd
 from sample_config import Config
 
 
-@borg.on(admin_cmd(pattern="kangsticker ?(.*)")) # pylint:disable=E0602
+@borg.on(admin_cmd(pattern="kangsticker ?(.*)"))  
 async def _(event):
     if event.fwd_from:
         return
@@ -112,7 +112,7 @@ async def _(event):
     await event.edit(f"sticker added! Your pack can be found [here](t.me/addstickers/{packshortname})")
 
 
-@borg.on(admin_cmd(pattern="packinfo")) # pylint:disable=E0602
+@borg.on(admin_cmd(pattern="packinfo"))  
 async def _(event):
     if event.fwd_from:
         return
@@ -148,7 +148,7 @@ async def _(event):
                      f"**Emojis In Pack:** {' '.join(pack_emojis)}")
 
 
-@borg.on(admin_cmd(pattern="getsticker ?(.*)")) # pylint:disable=E0602
+@borg.on(admin_cmd(pattern="getsticker ?(.*)"))  
 async def _(event):
     if event.fwd_from:
         return

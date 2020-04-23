@@ -58,7 +58,7 @@ if 1 == 1:
                                           "default_username_color": "#b48bf2"}
     client = borg
 
-    @borg.on(admin_cmd(pattern="quote(.*)")) # pylint:disable=E0602
+    @borg.on(admin_cmd(pattern="quote(.*)"))  
     async def quotecmd(message):  # noqa: C901
         """Quote a message.
         Usage: .quote [template]

@@ -34,7 +34,7 @@ aria2 = aria2p.API(
 	)
 
 
-@borg.on(events.NewMessage(pattern=r"\.magnet", outgoing=True)) # pylint:disable=E0602
+@borg.on(events.NewMessage(pattern=r"\.magnet", outgoing=True))  
 async def magnet_download(event):
 	if event.fwd_from:
 		return
@@ -58,7 +58,7 @@ async def magnet_download(event):
 	
 
 
-@borg.on(events.NewMessage(pattern=r"\.tor", outgoing=True)) # pylint:disable=E0602
+@borg.on(events.NewMessage(pattern=r"\.tor", outgoing=True))  
 async def torrent_download(event):
 	if event.fwd_from:
 		return
@@ -74,7 +74,7 @@ async def torrent_download(event):
 	gid = download.gid
 	await progress_status(gid=gid,event=event,previous=None)
 
-@borg.on(events.NewMessage(pattern=r"\.url", outgoing=True)) # pylint:disable=E0602
+@borg.on(events.NewMessage(pattern=r"\.url", outgoing=True))  
 async def magnet_download(event):
 	if event.fwd_from:
 		return
@@ -94,7 +94,7 @@ async def magnet_download(event):
 		new_gid = await check_metadata(gid)
 		await progress_status(gid=new_gid,event=event,previous=None)
 
-@borg.on(events.NewMessage(pattern=r"\.ariaRM", outgoing=True)) # pylint:disable=E0602
+@borg.on(events.NewMessage(pattern=r"\.ariaRM", outgoing=True))  
 async def remove_all(event):
 	if event.fwd_from:
 		return
@@ -107,7 +107,7 @@ async def remove_all(event):
 		os.system("aria2p remove-all")
 	await event.edit("`Removed All Downloads.`")  
 
-@borg.on(events.NewMessage(pattern=r"\.show", outgoing=True)) # pylint:disable=E0602
+@borg.on(events.NewMessage(pattern=r"\.show", outgoing=True))  
 async def show_all(event):
 	if event.fwd_from:
 		return

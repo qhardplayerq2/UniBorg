@@ -21,7 +21,7 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
 logger = logging.getLogger(__name__)
 
 
-@borg.on(admin_cmd(pattern=r"youtubesearch ?(\d+)? ?(.*)?")) # pylint:disable=E0602
+@borg.on(admin_cmd(pattern=r"youtubesearch ?(\d+)? ?(.*)?"))  
 async def yt_search(video_q):
     reply = await video_q.get_reply_message()
     if video_q.pattern_match.group(2):

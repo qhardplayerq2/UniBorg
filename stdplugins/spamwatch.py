@@ -23,7 +23,7 @@ BANNED_RIGHTS = ChatBannedRights(
     embed_links=True,
 )
 
-@borg.on(events.ChatAction()) # pylint:disable=E0602
+@borg.on(events.ChatAction())  
 async def spam_watch_(event):
     chat = await event.get_chat()
     client = spamwatch.Client(Config.SPAM_WATCH_API)

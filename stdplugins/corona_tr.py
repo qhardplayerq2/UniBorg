@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup
 from uniborg.util import admin_cmd
 
 
-@borg.on(admin_cmd(pattern=("coronatr ?(.*)"))) # pylint:disable=E0602
+@borg.on(admin_cmd(pattern=("coronatr ?(.*)")))  
 async def cor_tr(event):
     x = await event.edit("`Corona Virüs Bilgileri https://covid19.saglik.gov.tr/ adresinden alınıyor..`")
     try:

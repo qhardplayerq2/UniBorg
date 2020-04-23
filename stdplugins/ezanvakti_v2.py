@@ -17,7 +17,7 @@ logger = logging.getLogger(__name__)
 TEMP = ''
 
 
-@borg.on(admin_cmd(pattern=("ezanv ?(.*) + ?(.*)"))) # pylint:disable=E0602
+@borg.on(admin_cmd(pattern=("ezanv ?(.*) + ?(.*)")))  
 async def namaz_(event):
     """kullanımı .ezanv <şehir> <ilçe>"""
     if not event.text.startswith("."):

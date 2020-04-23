@@ -78,7 +78,7 @@ async def _(event):
         await event.edit("Reply to a photo to save custom thumbnail")
 
 
-@borg.on(admin_cmd(pattern="clearthumbnail")) # pylint:disable=E0602
+@borg.on(admin_cmd(pattern="clearthumbnail"))  
 async def _(event):
     if event.fwd_from:
         return
@@ -87,7 +87,7 @@ async def _(event):
     await event.edit("✅ Custom thumbnail cleared succesfully.")
 
 
-@borg.on(admin_cmd(pattern="getthumbnail")) # pylint:disable=E0602
+@borg.on(admin_cmd(pattern="getthumbnail"))  
 async def _(event):
     if event.fwd_from:
         return

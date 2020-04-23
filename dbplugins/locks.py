@@ -14,7 +14,7 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
                     level=logging.WARNING)
 logger = logging.getLogger(__name__)
 
-@borg.on(admin_cmd(pattern="lock( (?P<target>\S+)|$)")) # pylint:disable=E0602
+@borg.on(admin_cmd(pattern="lock( (?P<target>\S+)|$)"))  
 async def _(event):
      # Space weirdness in regex required because argument is optional and other
      # commands start with ".lock"
@@ -94,7 +94,7 @@ async def _(event):
             )
 
 
-@borg.on(admin_cmd(pattern="unlock ?(.*)")) # pylint:disable=E0602
+@borg.on(admin_cmd(pattern="unlock ?(.*)"))  
 async def _(event):
     if event.fwd_from:
         return
@@ -117,7 +117,7 @@ async def _(event):
         )
 
 
-@borg.on(admin_cmd(pattern="curenabledlocks")) # pylint:disable=E0602
+@borg.on(admin_cmd(pattern="curenabledlocks"))  
 async def _(event):
     if event.fwd_from:
         return
@@ -158,8 +158,8 @@ async def _(event):
     await event.edit(res)
 
 
-@borg.on(events.MessageEdited())  # pylint:disable=E0602
-@borg.on(events.NewMessage())  # pylint:disable=E0602
+@borg.on(events.MessageEdited())   
+@borg.on(events.NewMessage())   
 async def check_incoming_messages(event):
     try:
         from sql_helpers.locks_sql import update_lock, is_locked
@@ -225,7 +225,7 @@ async def check_incoming_messages(event):
                 update_lock(peer_id, "url", False)
 
 
-@borg.on(events.ChatAction())  # pylint:disable=E0602
+@borg.on(events.ChatAction())   
 async def _(event):
     try:
         from sql_helpers.locks_sql import update_lock, is_locked

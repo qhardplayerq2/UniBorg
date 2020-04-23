@@ -41,8 +41,8 @@ async def await_read(chat, message):
     await fut
 
 
-@borg.on(util.admin_cmd(pattern="(del)(?:ete)?$")) # pylint:disable=E0602
-@borg.on(util.admin_cmd(pattern="(edit)(?:\s+(.*))?$")) # pylint:disable=E0602
+@borg.on(util.admin_cmd(pattern="(del)(?:ete)?$"))  
+@borg.on(util.admin_cmd(pattern="(edit)(?:\s+(.*))?$"))  
 async def delete(event):
     await event.delete()
     command = event.pattern_match.group(1)

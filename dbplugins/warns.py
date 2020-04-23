@@ -4,7 +4,7 @@ import sql_helpers.warns_sql as sql
 from uniborg.util import admin_cmd
 
 
-@borg.on(admin_cmd(pattern="warn (.*)")) # pylint:disable=E0602
+@borg.on(admin_cmd(pattern="warn (.*)"))  
 async def _(event):
     if event.fwd_from:
         return
@@ -28,7 +28,7 @@ async def _(event):
     await event.edit(reply, parse_mode="html")
 
 
-@borg.on(admin_cmd(pattern="get_warns")) # pylint:disable=E0602
+@borg.on(admin_cmd(pattern="get_warns"))  
 async def _(event):
     if event.fwd_from:
         return
@@ -48,7 +48,7 @@ async def _(event):
         await event.edit("this user hasn't got any warnings!")
 
 
-@borg.on(admin_cmd(pattern="reset_warns")) # pylint:disable=E0602
+@borg.on(admin_cmd(pattern="reset_warns"))  
 async def _(event):
     if event.fwd_from:
         return

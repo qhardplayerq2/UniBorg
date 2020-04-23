@@ -18,7 +18,7 @@ logger = logging.getLogger(__name__)
 
 
 current_date_time = "./../DOWNLOADS/"
-@borg.on(events.NewMessage(pattern=r".telegraph media", outgoing=True)) # pylint:disable=E0602
+@borg.on(events.NewMessage(pattern=r".telegraph media", outgoing=True))  
 async def _(event):
     if event.fwd_from:
         return

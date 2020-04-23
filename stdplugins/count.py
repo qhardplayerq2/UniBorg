@@ -54,7 +54,7 @@ logger = logging.getLogger(__name__)
 
 """Type `.count` and see Magic."""
 
-@borg.on(admin_cmd(pattern='count')) # pylint:disable=E0602
+@borg.on(admin_cmd(pattern='count'))  
 async def stats(event: NewMessage.Event) -> None:  # pylint: disable = R0912, R0914, R0915
     """Command to get stats about the account"""
     waiting_message = await event.edit('`Collecting stats, Wait Nibba`')

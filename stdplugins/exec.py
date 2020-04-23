@@ -15,7 +15,7 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
                     level=logging.WARNING)
 logger = logging.getLogger(__name__)
 
-@borg.on(admin_cmd(pattern="exec ?(.*)")) # pylint:disable=E0602
+@borg.on(admin_cmd(pattern="exec ?(.*)"))  
 async def _(event):
     if event.fwd_from or event.via_bot_id:
         return

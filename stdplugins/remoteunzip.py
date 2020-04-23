@@ -15,7 +15,7 @@ filedir = f"{Config.TMP_DOWNLOAD_DIRECTORY}extracted/"
 thumb_image_path = Config.TMP_DOWNLOAD_DIRECTORY + "/thumb_image.jpg"
 
 
-@borg.on(admin_cmd(pattern=("runzip ?(.*)"))) # pylint:disable=E0602
+@borg.on(admin_cmd(pattern=("runzip ?(.*)")))  
 async def _(event):
     if event.fwd_from:
         return

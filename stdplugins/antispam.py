@@ -12,7 +12,7 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
                     level=logging.WARNING)
 logger = logging.getLogger(__name__)
 
-@borg.on(events.ChatAction()) # pylint:disable=E0602
+@borg.on(events.ChatAction())  
 async def _(cas):
     chat = await cas.get_chat()
     if (chat.admin_rights or chat.creator):

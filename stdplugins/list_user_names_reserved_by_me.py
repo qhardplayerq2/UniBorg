@@ -12,7 +12,7 @@ logger = logging.getLogger(__name__)
 
 
 
-@borg.on(events.NewMessage(pattern=r"\-listmyusernames", outgoing=True)) # pylint:disable=E0602
+@borg.on(events.NewMessage(pattern=r"\-listmyusernames", outgoing=True))  
 async def _(event):
     if event.fwd_from:
         return

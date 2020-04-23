@@ -12,7 +12,7 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
 logger = logging.getLogger(__name__)
 logger = logging.getLogger(__name__)
 
-@borg.on(admin_cmd(pattern=("zip ?(.*)"))) # pylint:disable=E0602
+@borg.on(admin_cmd(pattern=("zip ?(.*)")))  
 async def _(event):
     if event.fwd_from:
         return

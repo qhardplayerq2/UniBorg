@@ -13,7 +13,7 @@ logger = logging.getLogger(__name__)
 level=logging.INFO
 print(level)
 
-@borg.on(admin_cmd(pattern="purge ?(.*)")) # pylint:disable=E0602
+@borg.on(admin_cmd(pattern="purge ?(.*)"))  
 async def _(event): 
     if event.fwd_from:
         return
@@ -42,7 +42,7 @@ async def _(event):
         else:
             await event.edit("**PURGE** Failed!")
 
-@borg.on(admin_cmd(pattern="purgme ?(.*)")) # pylint:disable=E0602
+@borg.on(admin_cmd(pattern="purgme ?(.*)"))  
 async def purgeme(delme):
     """ For .purgeme, delete x count of your latest message."""
     message = delme.text
@@ -64,7 +64,7 @@ async def purgeme(delme):
     await asyncio.sleep(5)
 
 
-@borg.on(admin_cmd(pattern="sd ?(.*) + ?(.*)", outgoing=True  )) # pylint:disable=E0602
+@borg.on(admin_cmd(pattern="sd ?(.*) + ?(.*)", outgoing=True  ))  
 async def selfdestruct(destroy):
     if not destroy.text[0].isalpha() and destroy.text[0] not in ("/", "#", "@", "!"):
         await destroy.delete()

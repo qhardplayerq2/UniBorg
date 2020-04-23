@@ -26,7 +26,7 @@ logger = logging.getLogger(__name__)
 
 logger.info(Config.OPEN_LOAD_LOGIN)
 
-@borg.on(admin_cmd(pattern="rl")) # pylint:disable=E0602
+@borg.on(admin_cmd(pattern="rl"))  
 async def _(event):
     if event.fwd_from:
         return

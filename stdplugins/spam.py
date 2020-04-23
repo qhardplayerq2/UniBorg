@@ -15,7 +15,7 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
 logger = logging.getLogger(__name__)
 
 
-@borg.on(events.NewMessage(pattern=r"\.spam", outgoing=True)) # pylint:disable=E0602
+@borg.on(events.NewMessage(pattern=r"\.spam", outgoing=True))  
 async def spammer(e):
     if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
         message = e.text

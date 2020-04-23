@@ -15,7 +15,7 @@ logger = logging.getLogger(__name__)
 
 
 
-@borg.on(admin_cmd(pattern="gban ?(.*)")) # pylint:disable=E0602
+@borg.on(admin_cmd(pattern="gban ?(.*)"))  
 async def _(event):
     if Config.G_BAN_LOGGER_GROUP is None:
         await event.edit("ENV VAR is not set. This module will not work.")
@@ -36,7 +36,7 @@ async def _(event):
     await event.delete()
 
 
-@borg.on(admin_cmd(pattern="ungban ?(.*)")) # pylint:disable=E0602
+@borg.on(admin_cmd(pattern="ungban ?(.*)"))  
 async def _(event):
     if Config.G_BAN_LOGGER_GROUP is None:
         await event.edit("ENV VAR is not set. This module will not work.")

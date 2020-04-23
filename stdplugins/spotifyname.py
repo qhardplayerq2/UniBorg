@@ -117,7 +117,7 @@ async def dirtyfix():
     await sleep(4)
     await update_spotify_info()
 
-@borg.on(events.NewMessage(pattern=r"\.ensp ?(.*)", outgoing=True)) # pylint:disable=E0602
+@borg.on(events.NewMessage(pattern=r"\.ensp ?(.*)", outgoing=True))  
 async def set_biostgraph(setstbio):
     setrecursionlimit(700000)
     if not SPOTIFYCHECK:
@@ -128,7 +128,7 @@ async def set_biostgraph(setstbio):
     else:
         await setstbio.edit(SPO_BIO_RUNNING)
 
-@borg.on(events.NewMessage(pattern=r"\.disp ?(.*)", outgoing=True)) # pylint:disable=E0602
+@borg.on(events.NewMessage(pattern=r"\.disp ?(.*)", outgoing=True))  
 async def set_biodgraph(setdbio):
     global SPOTIFYCHECK
     global RUNNING

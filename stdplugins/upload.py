@@ -39,7 +39,7 @@ def get_lst_of_files(input_directory, output_lst):
     return output_lst
 
 
-@borg.on(admin_cmd(pattern="uploadir (.*)")) # pylint:disable=E0602
+@borg.on(admin_cmd(pattern="uploadir (.*)"))  
 async def _(event):
     if event.fwd_from:
         return
@@ -147,7 +147,7 @@ async def _(event):
         await event.edit("404: Directory Not Found")
 
 
-@borg.on(admin_cmd(pattern="upload (.*)", allow_sudo=True)) # pylint:disable=E0602
+@borg.on(admin_cmd(pattern="upload (.*)", allow_sudo=True))  
 async def _(event):
     if event.fwd_from:
         return
@@ -192,7 +192,7 @@ def get_video_thumb(file, output=None, width=90):
         return output
 
 
-@borg.on(admin_cmd(pattern="uploadasstream (.*)", allow_sudo=True)) # pylint:disable=E0602
+@borg.on(admin_cmd(pattern="uploadasstream (.*)", allow_sudo=True))  
 async def _(event):
     if event.fwd_from:
         return

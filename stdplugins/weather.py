@@ -16,7 +16,7 @@ logger = logging.getLogger(__name__)
 
 
 
-@borg.on(admin_cmd(pattern="weather (.*)")) # pylint:disable=E0602
+@borg.on(admin_cmd(pattern="weather (.*)"))  
 async def _(event):
     if event.fwd_from:
         return
@@ -58,7 +58,7 @@ async def _(event):
         await event.edit(response_api["message"])
 
 
-@borg.on(admin_cmd(pattern="wttr (.*)")) # pylint:disable=E0602
+@borg.on(admin_cmd(pattern="wttr (.*)"))  
 async def _(event):
     if event.fwd_from:
         return

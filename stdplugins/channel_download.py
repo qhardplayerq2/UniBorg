@@ -17,7 +17,7 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
 logger = logging.getLogger(__name__)
                     
 
-@borg.on(events.NewMessage(pattern=r"\.getc", outgoing=True)) # pylint:disable=E0602
+@borg.on(events.NewMessage(pattern=r"\.getc", outgoing=True))  
 async def get_media(event):
     if event.fwd_from:
         return
@@ -53,7 +53,7 @@ async def get_media(event):
              
              
              
-@borg.on(events.NewMessage(pattern=r"\.geta", outgoing=True)) # pylint:disable=E0602
+@borg.on(events.NewMessage(pattern=r"\.geta", outgoing=True))  
 async def get_media(event):
     if event.fwd_from:
         return

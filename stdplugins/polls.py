@@ -9,7 +9,7 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
 logger = logging.getLogger(__name__)
 
 
-@borg.on(admin_cmd(pattern="get_poll")) # pylint:disable=E0602
+@borg.on(admin_cmd(pattern="get_poll"))  
 async def _(event):
     reply_message = await event.get_reply_message()
     if reply_message.media is None:

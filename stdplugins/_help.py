@@ -21,7 +21,7 @@ logger = logging.getLogger(__name__)
 
 
 
-@borg.on(admin_cmd(pattern="helpme ?(.*)", allow_sudo=True))  # pylint:disable=E0602
+@borg.on(admin_cmd(pattern="helpme ?(.*)", allow_sudo=True))   
 async def _(event):
     if event.fwd_from:
         return
@@ -37,9 +37,9 @@ UserBot Forked from https://github.com/muhammedfurkan/uniborg""".format(
         sys.version,
         __version__
     )
-    tgbotusername = Config.TG_BOT_USER_NAME_BF_HER  # pylint:disable=E0602
+    tgbotusername = Config.TG_BOT_USER_NAME_BF_HER   
     if tgbotusername is not None:
-        results = await borg.inline_query(  # pylint:disable=E0602
+        results = await borg.inline_query(   
             tgbotusername,
             help_string + "\n\n" + s_help_string
         )
@@ -54,21 +54,21 @@ UserBot Forked from https://github.com/muhammedfurkan/uniborg""".format(
         await event.delete()
 
 
-@borg.on(admin_cmd(pattern="dc"))  # pylint:disable=E0602
+@borg.on(admin_cmd(pattern="dc"))   
 async def _(event):
     if event.fwd_from:
         return
-    result = await borg(functions.help.GetNearestDcRequest())  # pylint:disable=E0602
+    result = await borg(functions.help.GetNearestDcRequest())   
     await event.edit(result.stringify())
 
 
-@borg.on(admin_cmd(pattern="config"))  # pylint:disable=E0602
+@borg.on(admin_cmd(pattern="config"))   
 async def _(event):
     if event.fwd_from:
         return
-    result = await borg(functions.help.GetConfigRequest())  # pylint:disable=E0602
+    result = await borg(functions.help.GetConfigRequest())   
     result = result.stringify()
-    logger.info(result)  # pylint:disable=E0602
+    logger.info(result)   
     await event.edit("""Telethon UserBot powered by @UniBorg""")
 
 

@@ -12,7 +12,7 @@ logger = logging.getLogger(__name__)
 TEMPAT = ''
 
  
-@borg.on(admin_cmd(pattern=("ezanvakti ?(.*)"))) # pylint:disable=E0602
+@borg.on(admin_cmd(pattern=("ezanvakti ?(.*)")))  
 async def get_adzan(adzan): 
     if not adzan.text.startswith("."):
         return ""
