@@ -3,9 +3,6 @@ PyDrive
 PyPDF2
 aiofiles
 aiohttp
-aioschedule
-alive_progress
-apscheduler
 aria2p
 asyncio
 beautifulsoup4
@@ -60,6 +57,9 @@ wget
 wikipedia
 youtube-dl
 PyLyrics 
+# aioschedule
+# alive_progress
+# apscheduler
 # pymongo 
 # dnspython
 # pylast
