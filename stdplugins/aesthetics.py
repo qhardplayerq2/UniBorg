@@ -5,7 +5,7 @@
 import logging
 from webbrowser import register
 
-from telethon import events
+from telethon import events,sync
 
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
