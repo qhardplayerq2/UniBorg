@@ -7,7 +7,7 @@ from webbrowser import register
 
 from telethon import events
 
-from uniborg.uniborg import register
+from stdborg import register
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
