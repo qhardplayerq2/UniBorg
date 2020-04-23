@@ -7,7 +7,7 @@ from datetime import datetime
 from PyPDF2 import PdfFileReader, PdfFileWriter
 from sample_config import Config
 from uniborg.util import admin_cmd, progress
-from stdborg import borg
+
 
 @borg.on(admin_cmd(pattern="watermark")) 
 async def _(event):
