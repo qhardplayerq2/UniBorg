@@ -8,8 +8,4 @@ from uniborg.util import admin_cmd
 @borg.on(admin_cmd(pattern="leave", outgoing=True))
 async def leave(e):
     await e.delete()
-    time.sleep(3)
-    if '-' in str(e.chat_id):
-        await borg(LeaveChannelRequest(e.chat_id))
-    else:
-        pass
+    await e.client.kick_participant(leave.chat_id, 'me')
