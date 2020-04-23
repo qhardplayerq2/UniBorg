@@ -19,6 +19,7 @@ from traceback import format_exc
 from telethon import events
 
 from sample_config import Config
+from stdborg import borg
 
 
 def register(**args):
