@@ -1,13 +1,13 @@
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
+import asyncio
 import html
 import logging
 
 from telethon import events, utils
+from telethon.errors import MessageTooLongError
 from telethon.tl import types
-
-  
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
@@ -21,6 +21,15 @@ def get_who_string(who):
         who_string += f" <i>(@{who.username})</i>"
     who_string += f", <a href='tg://user?id={who.id}'>#{who.id}</a>"
     return who_string
+
+
+def split_message(text, length=4096, offset=200):
+    return [text[text.find('\n', i - offset, i + 1) if text.find('\n', i - offset, i + 1) != -1 else i:
+                 text.find('\n', i + length - offset, i + length) if text.find('\n', i + length - offset,
+                                                                               i + length) != -1 else i + length] for
+            i
+            in
+            range(0, len(text), length)]
 
 
 @borg.on(events.NewMessage(pattern=r"\.who", outgoing=True))  
@@ -56,5 +65,11 @@ async def _(event):
     members = (
         m[1] for m in sorted(members, key=lambda m: m[0], reverse=True)
     )
-
-    await event.edit("\n".join(members), parse_mode='html')
+    try:
+        await event.edit("\n".join(members), parse_mode='html')
+    except MessageTooLongError:
+        for m in split_message(members):
+            # print(m)
+            await asyncio.sleep(2)
+            await event.reply(f"{m}", parse_mode="html")
+    del members
