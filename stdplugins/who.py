@@ -63,7 +63,7 @@ async def _(event):
     try:
         await event.edit("\n".join(members), parse_mode='html')
     except MessageTooLongError:
-        res = textwrap.wrap(members, 4096-len(members))
+        res = textwrap.wrap(text=members, width=4096-len(members))
         for part in res[1::]:
             await asyncio.sleep(1)
             await event.reply(f"<code>{part}</code>")
