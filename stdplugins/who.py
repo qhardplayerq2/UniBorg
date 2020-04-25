@@ -43,11 +43,12 @@ async def _(event):
 async def _(event):
     members = []
     async for member in borg.iter_participants(event.chat_id):
-        messages = await borg.get_messages(
-            event.chat_id,
-            from_user=member,
-            limit=0
-        )
+        if not member.deleted:
+            messages = await borg.get_messages(
+                event.chat_id,
+                from_user=member,
+                limit=0
+            )
         members.append((
             messages.total,
             f"{messages.total} - {get_who_string(member)}"
