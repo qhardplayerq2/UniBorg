@@ -52,7 +52,7 @@ async def _(event):
 async def _(event):
     members = []
     async for member in borg.iter_participants(event.chat_id):
-        if not member.deleted:
+        if not member.deleted and not member.bot:
             messages = await borg.get_messages(
                 event.chat_id,
                 from_user=member,
