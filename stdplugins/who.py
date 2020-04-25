@@ -55,8 +55,6 @@ async def _(event):
             from_user=member,
             limit=0
         )
-        
-        # members += messages.total  + (f"{messages.total} - {get_who_string(member)}")
         if not member.deleted and not member.bot:
             print(member)
             members.append((
