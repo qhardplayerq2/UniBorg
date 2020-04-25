@@ -1,21 +1,17 @@
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
-import asyncio
 import html
 import logging
-import textwrap
 
 from telethon import events, utils
-from telethon.errors import MessageTooLongError
 from telethon.tl import types
 
-from sample_config import Config
+  
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
 logger = logging.getLogger(__name__)
-
 
 
 
@@ -60,12 +56,5 @@ async def _(event):
     members = (
         m[1] for m in sorted(members, key=lambda m: m[0], reverse=True)
     )
-    try:
-        await event.edit("\n".join(members), parse_mode='html')
-    except MessageTooLongError:
-        res = textwrap.wrap(text=members, width=4096-len(members))
-        for part in res[1::]:
-            await asyncio.sleep(1)
-            await event.reply(f"<code>{part}</code>")
 
-
+    await event.edit("\n".join(members), parse_mode='html')
