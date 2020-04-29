@@ -2,7 +2,6 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-import asyncio
 import math
 import os
 import re
@@ -10,8 +9,6 @@ import time
 
 from telethon import events
 from telethon.tl.functions.messages import GetPeerDialogsRequest
-
-from alive_progress import alive_bar
 
 # the secret configuration specific things
 ENV = bool(os.environ.get("ENV", False))

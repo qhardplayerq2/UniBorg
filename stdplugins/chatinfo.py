@@ -2,12 +2,10 @@ from datetime import datetime
 from math import sqrt
 
 from telethon.errors import (ChannelInvalidError, ChannelPrivateError,
-                             ChannelPublicGroupNaError, InviteHashEmptyError,
-                             InviteHashExpiredError, InviteHashInvalidError)
+                             ChannelPublicGroupNaError)
 from telethon.tl.functions.channels import (GetFullChannelRequest,
                                             GetParticipantsRequest)
-from telethon.tl.functions.messages import (CheckChatInviteRequest,
-                                            GetFullChatRequest,
+from telethon.tl.functions.messages import (GetFullChatRequest,
                                             GetHistoryRequest)
 from telethon.tl.types import (ChannelParticipantsAdmins,
                                MessageActionChannelMigrateFrom)

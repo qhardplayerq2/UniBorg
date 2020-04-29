@@ -1,6 +1,3 @@
-import time
-
-from telethon.tl.functions.channels import LeaveChannelRequest
 
 from uniborg.util import admin_cmd
 

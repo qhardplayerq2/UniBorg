@@ -2,9 +2,7 @@
 command: .singer singer name - song name 
 by @quiec
 """
-from telethon import events
 from uniborg.util import admin_cmd
-import asyncio
 from PyLyrics import *
 
 @borg.on(admin_cmd(pattern="singer (.*)"))
