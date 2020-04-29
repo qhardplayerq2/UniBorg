@@ -1,9 +1,6 @@
 """Purge your messages without the admins seeing it in Recent Actions"""
 import asyncio
 import logging
-from asyncio import sleep
-
-from sample_config import Config
 from uniborg.util import admin_cmd
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',

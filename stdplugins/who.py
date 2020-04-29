@@ -7,7 +7,6 @@ import logging
 
 from telethon import events, utils
 from telethon.errors.rpcerrorlist import MessageTooLongError
-from telethon.events import NewMessage
 from telethon.tl import types
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
