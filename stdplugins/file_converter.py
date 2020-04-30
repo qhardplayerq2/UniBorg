@@ -14,7 +14,95 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
 logger = logging.getLogger(__name__)
 
 
+# .exec ffmpeg -i ./DOWNLOADS/6VQyOe5Rs7_Csf7Z.mp4 -vf "fps=10,scale=320:-1:flags=lanczos" -c:v pam -f image2pipe - | convert -delay 10 - -loop 0 -layers optimize output.gif
 
+@borg.on(admin_cmd(pattern="gif (.*)"))
+async def giff(event):
+    if event.fwd_from:
+        return
+    reply_message = await event.get_reply_message()
+    if reply_message is None:
+        await event.edit("reply to a media to use the `gif` operation.")
+        return
+    await event.edit("trying to download media file, to my local")
+    try:
+        start = datetime.now()
+        c_time = time.time()
+        downloaded_file_name = await event.client.download_media(
+            reply_message,
+            Config.TMP_DOWNLOAD_DIRECTORY,
+            progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
+                progress(d, t, event, c_time, "indiriliyor")
+            )
+        )
+    except Exception as e:  # pylint:disable=C0103,W0703
+        await event.edit(str(e))
+    else:
+        end = datetime.now()
+        ms = (end - start).seconds
+        await event.edit("Downloaded to `{}` in {} seconds.".format(downloaded_file_name, ms))
+        new_required_file_name = downloaded_file_name[:-3] + ".gif"
+        new_required_file_caption = ""
+        command_to_run = []
+        force_document = False
+        voice_note = False
+        supports_streaming = False
+        command_to_run = [
+            "ffmpeg",
+            "-i",
+            downloaded_file_name,
+            "-vf",
+            "fps=10,scale=320:-1:flags=lanczos",
+            "-c:v",
+            "pam",
+            "-f",
+            "image2pipe",
+            "-",
+            "|",
+            "convert",
+            "-delay",
+            "10",
+            "-",
+            "-loop",
+            "0",
+            "-layers",
+            "optimize",
+            new_required_file_name
+            ]
+        logger.info(command_to_run)
+        # TODO: re-write create_subprocess_exec 😉
+        process = await asyncio.create_subprocess_exec(
+            *command_to_run,
+            # stdout must a pipe to be accessible as process.stdout
+            stdout=asyncio.subprocess.PIPE,
+            stderr=asyncio.subprocess.PIPE,
+        )
+        # Wait for the subprocess to finish
+        stdout, stderr = await process.communicate()
+        e_response = stderr.decode().strip()
+        t_response = stdout.decode().strip()
+        if os.path.exists(new_required_file_name):
+            end_two = datetime.now()
+            await event.client.send_file(
+                entity=event.chat_id,
+                file=new_required_file_name,
+                caption=new_required_file_caption,
+                allow_cache=False,
+                silent=True,
+                force_document=force_document,
+                voice_note=voice_note,
+                supports_streaming=supports_streaming,
+                progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
+                    progress(d, t, event, c_time, "yükleniyor..")
+                )
+            )
+            ms_two = (end_two - end).seconds
+            os.remove(new_required_file_name)
+            await asyncio.sleep(5)
+            os.remove(downloaded_file_name)
+            a = await event.edit(f"converted in {ms_two} seconds")
+            await asyncio.sleep(5)
+            await a.delete()
 
 
 @borg.on(admin_cmd(pattern="nfc (.*)"))   
