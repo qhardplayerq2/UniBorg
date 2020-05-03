@@ -113,9 +113,10 @@ async def _(event):
                     )
                     # some media were having some issues
                     continue
-                os.remove(single_file)
-        os.remove(downloaded_file_name)
-        os.rmdir(Config.TMP_DOWNLOAD_DIRECTORY)
+                shutil.rmtree(Config.TMP_DOWNLOAD_DIRECTORY)
+                # os.remove(single_file)
+        # os.remove(downloaded_file_name)
+        # os.rmdir(Config.TMP_DOWNLOAD_DIRECTORY)
 
 
 
