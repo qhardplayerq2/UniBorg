@@ -5,6 +5,7 @@ code rewritten my SnapDragon7410
 import asyncio
 import logging
 import os
+import shutil
 import time
 import zipfile
 from datetime import datetime
@@ -114,6 +115,7 @@ async def _(event):
                     continue
                 os.remove(single_file)
         os.remove(downloaded_file_name)
+        shutil.rmtree(Config.TMP_DOWNLOAD_DIRECTORY)
 
 
 
