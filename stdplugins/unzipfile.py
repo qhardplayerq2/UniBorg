@@ -95,7 +95,7 @@ async def _(event):
                     await borg.send_file(
                         event.chat_id,
                         single_file,
-                        caption=f"UnZipped `{caption_rts}`",
+                        caption=f"`{caption_rts}`",
                         force_document=force_document,
                         supports_streaming=supports_streaming,
                         allow_cache=False,
@@ -115,7 +115,7 @@ async def _(event):
                     continue
                 os.remove(single_file)
         os.remove(downloaded_file_name)
-        shutil.rmtree(Config.TMP_DOWNLOAD_DIRECTORY)
+        os.rmdir(Config.TMP_DOWNLOAD_DIRECTORY)
 
 
 
