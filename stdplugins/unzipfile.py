@@ -5,7 +5,6 @@ code rewritten my SnapDragon7410
 import asyncio
 import logging
 import os
-import shutil
 import time
 import zipfile
 from datetime import datetime
@@ -20,10 +19,6 @@ from uniborg.util import admin_cmd, progress
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
 logger = logging.getLogger(__name__)
-
-
-
-
 
 
 @borg.on(admin_cmd(pattern="unzip"))  
@@ -113,10 +108,8 @@ async def _(event):
                     )
                     # some media were having some issues
                     continue
-                shutil.rmtree(Config.TMP_DOWNLOAD_DIRECTORY)
-                # os.remove(single_file)
-        # os.remove(downloaded_file_name)
-        # os.rmdir(Config.TMP_DOWNLOAD_DIRECTORY)
+                os.remove(single_file)
+        os.remove(downloaded_file_name)
 
 
 
