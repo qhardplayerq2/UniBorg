@@ -7,7 +7,7 @@ from telethon.tl.types import ChatBannedRights
 
 import spamwatch
 from sample_config import Config
-  
+
 
 ENABLE_LOG = True
 LOGGING_CHATID = Config.PRIVATE_CHANNEL_BOT_API_ID
@@ -23,18 +23,19 @@ BANNED_RIGHTS = ChatBannedRights(
     embed_links=True,
 )
 
-@borg.on(events.ChatAction())  
+
+@borg.on(events.ChatAction())
 async def spam_watch_(event):
     chat = await event.get_chat()
     client = spamwatch.Client(Config.SPAM_WATCH_API)
     user = await event.get_user()
     try:
         if (chat.admin_rights or chat.creator):
-            if event.user_joined or event.user_added:
+            if (event.user_joined or event.user_added):
                 try:
                     ban = client.get_ban(event.action_message.from_id)
                     if ban:
-                        await borg(EditBannedRequest(event.chat_id,event.action_message.from_id,BANNED_RIGHTS))
+                        await borg(EditBannedRequest(event.chat_id, event.action_message.from_id, BANNED_RIGHTS))
                     else:
                         return
                 except AttributeError:
