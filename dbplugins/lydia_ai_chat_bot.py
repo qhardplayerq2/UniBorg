@@ -30,14 +30,15 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
 logger = logging.getLogger(__name__)
 
 
-
 if Config.LYDIA_API is not None:
-    api_key = API(Config.LYDIA_API)
-    # Initialise client
-    api_client = LydiaAI(api_key)
+    api_key = Config.LYDIA_API
+    # Create the CoffeeHouse API instance
+    coffeehouse_api = API(api_key)
+    # Create Lydia instance
+    lydia = LydiaAI(coffeehouse_api)
 
 
-@borg.on(admin_cmd(pattern="(ena|del|lst)cf", allow_sudo=True))  
+@borg.on(admin_cmd(pattern="(ena|del|lst)cf", allow_sudo=True))
 async def lydia_disable_enable(event):
     if event.fwd_from:
         return
@@ -90,7 +91,7 @@ async def lydia_disable_enable(event):
         await event.edit("Reply To A User's Message to Add / Delete them from Lydia Auto-Chat.")
 
 
-@borg.on(admin_cmd(incoming=True))  
+@borg.on(admin_cmd(incoming=True))
 async def on_new_message(event):
     if event.chat_id in Config.UB_BLACK_LIST_CHAT:
         return
@@ -120,7 +121,8 @@ async def on_new_message(event):
                 logger.info(session)
                 session_id = session.id
                 session_expires = session.expires
-                logger.info(add_s(user_id, chat_id, session_id, session_expires))
+                logger.info(
+                    add_s(user_id, chat_id, session_id, session_expires))
             # Try to think a thought.
             try:
                 async with event.client.action(event.chat_id, "typing"):
