@@ -24,7 +24,7 @@ BANNED_RIGHTS = ChatBannedRights(
 )
 
 
-@borg.on(events.ChatAction())
+@borg.on(events.ChatAction(func=lambda e: e.is_group))
 async def spam_watch_(event):
     chat = await event.get_chat()
     client = spamwatch.Client(Config.SPAM_WATCH_API)
