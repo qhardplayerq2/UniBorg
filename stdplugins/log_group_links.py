@@ -24,30 +24,32 @@ async def monito_p_m_s(event):
     # me = await borg.get_me()
     # print(me.id)
     # if  event.text == ".loggroups":
-    
-    link_detect = re.findall(r'[a-z]{3,}.[a-z]{2,}\S+\?(username=[^&]+&password=[^&]+|\?password=[^&]+&username=[^&]+)',event.message.message)
-    # print(link_detect)
-    # print("logging success")
-    # await event.edit("loggin success")
-    sender = await event.get_sender()
-    if Config.NC_LOG_P_M_S and not sender.bot:
-        chat = await event.get_chat()
-        if chat.id not in NO_PM_LOG_USERS and chat.id != borg.uid:
-            try:
-                if link_detect:
-                    e = await borg.get_entity(PM_LINKS)
-                    # print(event.message.media)
-                    fwd_message = await borg.forward_messages(
-                        e,
-                        event.message,
-                        silent=True
-                    )
-            except Exception as e:
-                # logger.warn(str(e))
-                exc_type, exc_obj, exc_tb = sys.exc_info()
-                fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
-                print(exc_type, fname, exc_tb.tb_lineno)
-                print(e) 
+    try:
+      link_detect = re.findall(r'[a-z]{3,}.[a-z]{2,}\S+\?(username=[^&]+&password=[^&]+|\?password=[^&]+&username=[^&]+)',event.message.message)
+      # print(link_detect)
+      # print("logging success")
+      # await event.edit("loggin success")
+      sender = await event.get_sender()
+      if Config.NC_LOG_P_M_S and not sender.bot:
+          chat = await event.get_chat()
+          if chat.id not in NO_PM_LOG_USERS and chat.id != borg.uid:
+              try:
+                  if link_detect:
+                      e = await borg.get_entity(PM_LINKS)
+                      # print(event.message.media)
+                      fwd_message = await borg.forward_messages(
+                          e,
+                          event.message,
+                          silent=True
+                      )
+              except Exception as e:
+                  # logger.warn(str(e))
+                  exc_type, exc_obj, exc_tb = sys.exc_info()
+                  fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+                  print(exc_type, fname, exc_tb.tb_lineno)
+                  print(e) 
+    except AttributeError:
+      return ""
 
 
 @borg.on(events.NewMessage(pattern="nolog ?(.*)"))
