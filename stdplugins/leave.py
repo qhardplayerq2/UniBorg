@@ -1,8 +1,16 @@
+import time
+
+from telethon.tl.functions.channels import LeaveChannelRequest
 
 from uniborg.util import admin_cmd
 
 
-@borg.on(admin_cmd(pattern="leave", outgoing=True))
+@borg.on(admin_cmd("leave", outgoing=True))
 async def leave(e):
-    await e.delete()
-    await e.client.kick_participant(e.chat_id, 'me')
+    if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
+        await e.delete()
+        time.sleep(3)
+        if '-' in str(e.chat_id):
+            await borg(LeaveChannelRequest(e.chat_id))
+        else:
+            await e.edit('`This is Not A Chat`')
