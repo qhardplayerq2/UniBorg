@@ -250,7 +250,7 @@ class namazvakti():
     # sunucudan çekilen bozuk tarihi düzeltir dd.mm.YYYY şeklinde döndürür!
     def __tarihDuzelt(self, bozukTarih):
         bozulanTarih = bozukTarih.split(" ")
-        aylar = dict((v,k) for k, v in self.__miladiAylar.items())
+        aylar = {v:k for k, v in self.__miladiAylar.items()}
         gun = bozulanTarih[0]
         ay = aylar[bozulanTarih[1]]
         if ay < 10:
