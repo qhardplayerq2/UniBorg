@@ -7,13 +7,13 @@ from telethon import events
 from telethon.errors.rpcerrorlist import (ChatAdminRequiredError,
                                           MessageTooLongError)
 
-  
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
 logger = logging.getLogger(__name__)
-                                          
-@borg.on(events.NewMessage(pattern=r"\.userlists ?(.*)", outgoing=True))  
+
+
+@borg.on(events.NewMessage(pattern=r"\.userlists ?(.*)", outgoing=True))
 async def get_users(show):
     """ For .userslist command, list all of the users of the chat. """
     if not show.text[0].isalpha() and show.text[0] not in ("/", "#", "@", "!"):
@@ -43,9 +43,9 @@ async def get_users(show):
             await show.edit(mentions)
         except MessageTooLongError:
             await show.edit("Damn, this is a huge group. Uploading users lists as file.")
-            file = open("userslist.txt", "w+")
-            file.write(mentions)
-            file.close()
+            with open("userslist.txt", "w+", encoding="utf-8") as file:
+                file.write(mentions)
+                file.close()
             await show.client.send_file(
                 show.chat_id,
                 "userslist.txt",
