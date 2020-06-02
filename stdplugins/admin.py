@@ -87,7 +87,8 @@ UNMUTE_RIGHTS = ChatBannedRights(
     send_messages=False
 )
 
-@borg.on(events.NewMessage(outgoing=True, pattern="^.setgic$"))  
+
+@borg.on(events.NewMessage(outgoing=True, pattern="^.setgic$"))
 async def setgrouppic(eventPic):
     if not eventPic.text[0].isalpha() and eventPic.text[0] not in ("/", "#", "@", "!"):
         if eventPic.reply_to_msg_id:
@@ -109,8 +110,8 @@ async def setgrouppic(eventPic):
             if photo:
                 try:
                     await eventPic.client(EditPhotoRequest(
-                    eventPic.chat_id,
-                    await eventPic.client.upload_file(photo)
+                        eventPic.chat_id,
+                        await eventPic.client.upload_file(photo)
                     ))
                     await eventPic.edit("`Chat Picture Changed`")
 
@@ -122,7 +123,7 @@ async def setgrouppic(eventPic):
             await eventPic.edit("`Reply .setgrouppic to an Image to set it as group's icon.`")
 
 
-@borg.on(events.NewMessage(outgoing=True, pattern="^.promote(?: |$)(.*)"))  
+@borg.on(events.NewMessage(outgoing=True, pattern="^.promote(?: |$)(.*)"))
 async def promote(eventPromote):
     if not eventPromote.text[0].isalpha() \
             and eventPromote.text[0] not in ("/", "#", "@", "!"):
@@ -152,7 +153,7 @@ async def promote(eventPromote):
                     eventPromote.chat_id,
                     user.id,
                     newAdminRights,
-                    rank = ""
+                    rank=""
                 )
             )
             await eventPromote.edit("`Başarıyla yetkilendirildi!`")
@@ -168,7 +169,7 @@ async def promote(eventPromote):
             )
 
 
-@borg.on(events.NewMessage(outgoing=True, pattern="^.demote(?: |$)(.*)"))  
+@borg.on(events.NewMessage(outgoing=True, pattern="^.demote(?: |$)(.*)"))
 async def demote(eventDemote):
     if not eventDemote.text[0].isalpha() and eventDemote.text[0] not in ("/", "#", "@", "!"):
         chat = await eventDemote.get_chat()
@@ -197,7 +198,7 @@ async def demote(eventDemote):
                     eventDemote.chat_id,
                     user.id,
                     newAdminRights,
-                    rank = ""
+                    rank=""
                 )
             )
         except BadRequestError:
@@ -213,7 +214,7 @@ async def demote(eventDemote):
             )
 
 
-@borg.on(events.NewMessage(outgoing=True, pattern="^.ban(?: |$)(.*)"))  
+@borg.on(events.NewMessage(outgoing=True, pattern="^.ban(?: |$)(.*)"))
 async def ban(eventBan):
     if not eventBan.text[0].isalpha() and eventBan.text[0] not in ("/", "#", "@", "!"):
         chat = await eventBan.get_chat()
@@ -256,7 +257,7 @@ async def ban(eventBan):
             )
 
 
-@borg.on(events.NewMessage(outgoing=True, pattern="^.bots$"))  
+@borg.on(events.NewMessage(outgoing=True, pattern="^.bots$"))
 async def listbots(eventListBots):
     info = await eventListBots.client.get_entity(eventListBots.chat_id)
     title = info.title if info.title else "this chat"
@@ -294,8 +295,9 @@ async def listbots(eventListBots):
             reply_to=eventListBots.id,
         )
         remove("botlist.txt")
-            
-@borg.on(events.NewMessage(outgoing=True, pattern="^.unban(?: |$)(.*)"))  
+
+
+@borg.on(events.NewMessage(outgoing=True, pattern="^.unban(?: |$)(.*)"))
 async def unban(eventUnban):
     if not eventUnban.text[0].isalpha() and eventUnban.text[0] \
             not in ("/", "#", "@", "!"):
@@ -328,8 +330,8 @@ async def unban(eventUnban):
         except UserIdInvalidError:
             await eventUnban.edit("`Uh oh my unban logic broke!`")
 
- 
-@borg.on(events.NewMessage(outgoing=True, pattern="^.mute(?: |$)(.*)"))  
+
+@borg.on(events.NewMessage(outgoing=True, pattern="^.mute(?: |$)(.*)"))
 async def mute(eventMute):
     if not eventMute.text[0].isalpha() and eventMute.text[0] not in ("/", "#", "@", "!"):
         try:
@@ -377,7 +379,7 @@ async def mute(eventMute):
                 return await eventMute.edit("`Uh oh my mute logic broke!`")
 
 
-@borg.on(events.NewMessage(outgoing=True, pattern="^.unmute(?: |$)(.*)"))  
+@borg.on(events.NewMessage(outgoing=True, pattern="^.unmute(?: |$)(.*)"))
 async def unmute(eventUnMute):
     if not eventUnMute.text[0].isalpha() and eventUnMute.text[0] \
             not in ("/", "#", "@", "!"):
@@ -424,8 +426,8 @@ async def unmute(eventUnMute):
                 )
 
 
-@borg.on(events.NewMessage(incoming=True))  
-async def muter(mutedMessage): 
+@borg.on(events.NewMessage(incoming=True))
+async def muter(mutedMessage):
     try:
         from sql_helpers.spam_mute_sql import is_muted
         from sql_helpers.gmute_sql import is_gmuted
@@ -457,7 +459,7 @@ async def muter(mutedMessage):
             await mutedMessage.delete()
 
 
-@borg.on(events.NewMessage(outgoing=True, pattern="^.gmute(?: |$)(.*)"))  
+@borg.on(events.NewMessage(outgoing=True, pattern="^.gmute(?: |$)(.*)"))
 async def gmute(eventGmute):
     if not eventGmute.text[0].isalpha() and eventGmute.text[0] not in ("/", "#", "@", "!"):
         chat = await eventGmute.get_chat()
@@ -492,7 +494,7 @@ async def gmute(eventGmute):
                 )
 
 
-@borg.on(events.NewMessage(outgoing=True, pattern="^.ungmute(?: |$)(.*)"))  
+@borg.on(events.NewMessage(outgoing=True, pattern="^.ungmute(?: |$)(.*)"))
 async def ungmute_(eventUnGmute):
     if not eventUnGmute.text[0].isalpha() and eventUnGmute.text[0] \
             not in ("/", "#", "@", "!"):
@@ -528,7 +530,7 @@ async def ungmute_(eventUnGmute):
                 )
 
 
-@borg.on(events.NewMessage(outgoing=True, pattern="^.delusers(?: |$)(.*)"))  
+@borg.on(events.NewMessage(outgoing=True, pattern="^.delusers(?: |$)(.*)"))
 async def rm_deletedacc(eventDeletedAccs):
     if not eventDeletedAccs.text[0].isalpha() and eventDeletedAccs.text[0] not in ("/", "#", "@", "!"):
         con = eventDeletedAccs.pattern_match.group(1)
@@ -594,7 +596,7 @@ async def rm_deletedacc(eventDeletedAccs):
         await eventDeletedAccs.edit(del_status)
 
 
-@borg.on(events.NewMessage(outgoing=True, pattern="^.adminlist$"))  
+@borg.on(events.NewMessage(outgoing=True, pattern="^.adminlist$"))
 async def listadmins(eventListAdmins):
     if not eventListAdmins.text[0].isalpha() and eventListAdmins.text[0] not in ("/", "#", "@", "!"):
         if not eventListAdmins.is_group:
@@ -618,7 +620,7 @@ async def listadmins(eventListAdmins):
         await eventListAdmins.edit(mentions, parse_mode="html")
 
 
-@borg.on(events.NewMessage(outgoing=True, pattern="^.pin(?: |$)(.*)"))  
+@borg.on(events.NewMessage(outgoing=True, pattern="^.pin(?: |$)(.*)"))
 async def pinmessage(eventPinMessage):
     if not eventPinMessage.text[0].isalpha() and eventPinMessage.text[0] not in ("/", "#", "@", "!"):
         chat = await eventPinMessage.get_chat()
@@ -652,7 +654,7 @@ async def pinmessage(eventPinMessage):
             )
 
 
-@borg.on(events.NewMessage(outgoing=True, pattern="^.kick(?: |$)(.*)"))  
+@borg.on(events.NewMessage(outgoing=True, pattern="^.kick(?: |$)(.*)"))
 async def kick(eventKickUser):
     if not eventKickUser.text[0].isalpha() and eventKickUser.text[0] not in ("/", "#", "@", "!"):
         chat = await eventKickUser.get_chat()
@@ -695,7 +697,7 @@ async def kick(eventKickUser):
             )
 
 
-@borg.on(events.NewMessage(outgoing=True, pattern="^.userslist ?(.*)"))  
+@borg.on(events.NewMessage(outgoing=True, pattern="^.userslist ?(.*)"))
 async def list_users(eventListUsers):
     if not eventListUsers.text[0].isalpha() and eventListUsers.text[0] not in ("/", "#", "@", "!"):
         if not eventListUsers.is_group:
@@ -724,9 +726,9 @@ async def list_users(eventListUsers):
             await eventListUsers.edit(mentions)
         except MessageTooLongError:
             await eventListUsers.edit("Damn, this is a huge group. Uploading users lists as file.")
-            file = open("userslist.txt", "w+")
-            file.write(mentions)
-            file.close()
+            with open("userslist.txt", "w+", encoding="utf-8") as file:
+                file.write(mentions)
+                file.close()
             await eventListUsers.client.send_file(
                 eventListUsers.chat_id,
                 "userslist.txt",
@@ -735,13 +737,14 @@ async def list_users(eventListUsers):
             )
             remove("userslist.txt")
 
-@borg.on(admin_cmd(pattern="undlt ?(.*)"))  
+
+@borg.on(admin_cmd(pattern="undlt ?(.*)"))
 async def _(event):
     if event.fwd_from:
         return
     c = await event.get_chat()
     if c.admin_rights or c.creator:
-        a = await borg.get_admin_log(event.chat_id,limit=5, edit=False, delete=True)
+        a = await borg.get_admin_log(event.chat_id, limit=5, edit=False, delete=True)
         # print(a[0].old.message)
         deleted_msg = "Deleted message in this group:"
         for i in a:
@@ -777,6 +780,7 @@ async def get_user_from_event(event):
             await event.edit(str(err))
             return None
     return user_obj
+
 
 async def get_user_from_id(user, event):
     if isinstance(user, str):
