@@ -10,11 +10,11 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
 logger = logging.getLogger(__name__)
 
 
-@borg.on(admin_cmd(pattern="tagall"))  
+@borg.on(admin_cmd(pattern="tagall"))
 async def _(event):
     if event.fwd_from:
         return
-    mentions = "@tagall"
+    mentions = "@tag"
     chat = await event.get_input_chat()
     async for x in borg.iter_participants(chat, 100):
         mentions += f"[\u2063](tg://user?id={x.id})"
