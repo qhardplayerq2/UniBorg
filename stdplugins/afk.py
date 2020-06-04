@@ -70,7 +70,7 @@ async def _(event):
         if reason:
             await event.edit(f"Set AFK mode to True, and Reason is {reason}")
         else:
-            await event.edit(f"Set AFK mode to True")
+            await event.edit("Set AFK mode to True")
         await asyncio.sleep(5)
         await event.delete()
         try:
@@ -129,7 +129,7 @@ async def on_afk(event):
             else:
                 afk_since = f"`{int(seconds)} saniye önce`"
         msg = None
-        message_to_reply = f"`Şu anda burada değilim.` " + \
+        message_to_reply = "`Şu anda burada değilim.` " + \
             f"`Yakında mesajına döneceğim`.\n\nSebebi: **{reason}**\n\n(Son Görülme: **{afk_since}**)"\
             if reason \
             else f"**Yakında mesajına döneceğim**\n\n(Son Görülme: **{afk_since}**)"
