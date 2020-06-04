@@ -18,10 +18,10 @@ async def filterxxx(message):
     media = None
     reply = await message.get_reply_message()
     if not args:
-        await message.edit("<b>You need to enter a filter name</b>")
+        await message.edit("**You need to enter a filter name**")
         return
     if len(args) == 1 and not message.is_reply:
-        await message.edit("<b>You need to either enter a a text or reply to a message to save as filter</b>")
+        await message.edit("**You need to either enter a a text or reply to a message to save as filter**")
         return
     if message.is_reply:
         value = reply.text
@@ -34,10 +34,10 @@ async def filterxxx(message):
     if await nicedb.check_one("Filters", chatid, name):
         await nicedb.update("Filters", {"Chat": chatid, "Key": name},
                             chatid, name, value, media)
-        await message.edit("<b>Filter succesfully updated</b>")
+        await message.edit("**Filter succesfully updated**")
     else:
         await nicedb.add("Filters", chatid, name, value, media)
-        await message.edit("<b>Filter succesfully saved</b>")
+        await message.edit("**Filter succesfully saved**")
 
 
 @borg.on(admin_cmd(pattern='listfilters (.*)', outgoing=True))
@@ -45,12 +45,12 @@ async def filtersxxx(message):
     chatid = message.chat_id
     filters = await nicedb.check("Filters", chatid)
     if not filters:
-        await message.edit("<b>No filter found in this chat</b>")
+        await message.edit("**No filter found in this chat**")
         return
-    caption = "<b>Word(s) you filtered in this chat:\n\n</b>"
+    caption = "**Word(s) you filtered in this chat:\n\n**"
     list = ""
     for filter in filters:
-        list += "<b>  ◍ " + filter["Key"] + "</b>\n"
+        list += "**  ◍ " + filter["Key"] + "**\n"
     caption += list
     await message.edit(caption)
 
@@ -60,20 +60,20 @@ async def stopxxx(message):
     args = get_arg(message)
     chatid = message.chat_id
     if not await nicedb.check_one("Filters", chatid, args):
-        await message.edit("<b>No filter found in that name</b>")
+        await message.edit("**No filter found in that name**")
         return
     await nicedb.delete_one("Filters", chatid, args)
-    await message.edit("<b>Filter deleted successfully</b>")
+    await message.edit("**Filter deleted successfully**")
 
 
 @borg.on(admin_cmd(pattern='stopallfilter (.*)', outgoing=True))
 async def stopallxxx(message):
     chatid = message.chat_id
     if not await nicedb.check("Filters", chatid):
-        await message.edit("<b>There are no filters in this chat</b>")
+        await message.edit("**There are no filters in this chat**")
         return
     await nicedb.delete("Filters", chatid)
-    await message.edit("<b>Filters cleared out successfully</b>")
+    await message.edit("**Filters cleared out successfully**")
 
 
 @borg.on(admin_cmd(incoming=True))

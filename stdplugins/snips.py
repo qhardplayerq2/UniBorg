@@ -56,10 +56,10 @@ async def snipxxx(message):
     reply = await message.get_reply_message()
     name = args[0]
     if len(args) == 0:
-        await message.edit("<b>Enter the name of the snip first</b>")
+        await message.edit("**Enter the name of the snip first**")
         return
     if len(args) == 1 and not message.is_reply:
-        await message.edit("<b>Enter or reply to a text to save as snip</b>")
+        await message.edit("**Enter or reply to a text to save as snip**")
         return
     if message.is_reply:
         if reply.media:
@@ -76,8 +76,8 @@ async def snipxxx(message):
     else:
         await nicedb.update({"Key": name}, name, value, media)
     await message.edit(
-        "<b>Snip </b><i>{}</i><b> successfully saved into the list."
-        "Type </b><i>${}</i><b> to call it.</b>".format(name, name))
+        "**Snip **<i>{}</i>** successfully saved into the list."
+        "Type **<i>${}</i>** to call it.**".format(name, name))
 
 
 @borg.on(admin_cmd(pattern="snipl"))
@@ -86,11 +86,11 @@ async def snipsxxx(message):
     snips = ""
     get = await nicedb.check()
     if not get:
-        await message.edit("<b>No snip found in snips list.</b>")
+        await message.edit("**No snip found in snips list.**")
         return
     for snip in get:
-        snips += "<b> ◍  " + snip["Key"] + "</b>\n"
-    snipl = "<b>Snips that you saved: </b>\n\n" + snips
+        snips += "** ◍  " + snip["Key"] + "**\n"
+    snipl = "**Snips that you saved: **\n\n" + snips
     await message.edit(snipl)
 
 
@@ -99,20 +99,20 @@ async def remsnipxxx(message):
     """Removes a snip from the list."""
     snipn = get_arg(message)
     if not snipn:
-        await message.edit("<b>Please specify the name of the snip to remove.</b>")
+        await message.edit("**Please specify the name of the snip to remove.**")
         return
     if await nicedb.check_one(snipn):
         await nicedb.delete_one(snipn)
-        await message.edit("<b>Snip </b><i>{}</i><b> successfully deleted</b>".format(snipn))
+        await message.edit("**Snip **<i>{}</i>** successfully deleted**".format(snipn))
     else:
-        await message.edit("<b>Snip </b><i>{}</i><b> not found in snips list</b>".format(snipn))
+        await message.edit("**Snip **<i>{}</i>** not found in snips list**".format(snipn))
 
 
 @borg.on(admin_cmd(pattern="snipdl"))
 async def remsnipsxxx(message):
     """Clears out the snip list."""
     if not await nicedb.check():
-        await message.edit("<b>There are no snips in the list to clear out.</b>")
+        await message.edit("**There are no snips in the list to clear out.**")
         return
     await nicedb.delete()
-    await message.edit("<b>All snips successfully removed from the list.</b>")
+    await message.edit("**All snips successfully removed from the list.**")

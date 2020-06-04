@@ -16,4 +16,4 @@ async def setprefixxxx(message):
     pref = get_arg(message)
     await settings.delete("Prefix")
     await settings.set_prefix(pref)
-    await message.edit("<b>Prefix has been successfully set to: {}</b>".format(pref))
+    await message.edit("**Prefix has been successfully set to: {}**".format(pref))

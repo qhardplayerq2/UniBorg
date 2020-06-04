@@ -22,11 +22,11 @@ async def savexxx(message):
     media = None
     reply = await message.get_reply_message()
     if not args:
-        await message.edit("<b>You need to enter a note name</b>")
+        await message.edit("**You need to enter a note name**")
         return
     if len(args) == 1 and not message.is_reply:
         await message.edit(
-            "<b>You need to either enter a a text or reply to a message to save as note</b>")
+            "**You need to either enter a a text or reply to a message to save as note**")
         return
     value = reply.text if message.is_reply else " ".join(args[1:])
     name = args[0]
@@ -36,10 +36,10 @@ async def savexxx(message):
     if await nicedb.check_one("Notes", chatid, name):
         await nicedb.update("Notes", {"Chat": chatid, "Key": name},
                             chatid, name, value, media)
-        await message.edit("<b>Note succesfully updated</b>")
+        await message.edit("**Note succesfully updated**")
     else:
         await nicedb.add("Notes", chatid, name, value, media)
-        await message.edit("<b>Note succesfully saved</b>")
+        await message.edit("**Note succesfully saved**")
 
 
 @borg.on(admin_cmd(pattern='notes (.*)', outgoing=True))
@@ -50,12 +50,12 @@ async def notesxxx(message):
     chatid = message.chat_id
     notes = await nicedb.check("Notes", chatid)
     if not notes:
-        await message.edit("<b>No notes found in this chat</b>")
+        await message.edit("**No notes found in this chat**")
         return
-    caption = "<b>Notes you saved in this chat:\n\n</b>"
+    caption = "**Notes you saved in this chat:\n\n**"
     list = ""
     for note in notes:
-        list += "<b>  ◍ " + note["Key"] + "</b>\n"
+        list += "**  ◍ " + note["Key"] + "**\n"
     caption += list
     await message.edit(caption)
 
@@ -68,10 +68,10 @@ async def clearxxx(message):
     args = get_arg(message)
     chatid = message.chat_id
     if not await nicedb.check_one("Notes", chatid, args):
-        await message.edit("<b>No notes found in that name</b>")
+        await message.edit("**No notes found in that name**")
         return
     await nicedb.delete_one("Notes", chatid, args)
-    await message.edit("<b>Note deleted successfully</b>")
+    await message.edit("**Note deleted successfully**")
 
 
 @borg.on(admin_cmd(pattern='deleteallnotes (.*)', outgoing=True))
@@ -81,10 +81,10 @@ async def clearallxxx(message):
         return
     chatid = message.chat_id
     if not await nicedb.check("Notes", chatid):
-        await message.edit("<b>There are no notes in this chat</b>")
+        await message.edit("**There are no notes in this chat**")
         return
     await nicedb.delete("Notes", chatid)
-    await message.edit("<b>Notes cleared out successfully</b>")
+    await message.edit("**Notes cleared out successfully**")
 
 
 # @borg.on(admin_cmd(pattern='notechk (.*)', outgoing=True))
