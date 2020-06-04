@@ -42,7 +42,7 @@ async def savexxx(message):
         await message.edit("**Note succesfully saved**")
 
 
-@borg.on(admin_cmd(pattern='notes', outgoing=True))
+@borg.on(admin_cmd(pattern='notes (.*)', outgoing=True))
 async def notesxxx(message):
     if not MONGO_DB_URI:
         await message.edit("`Database connections failing!`")
@@ -60,7 +60,7 @@ async def notesxxx(message):
     await message.edit(caption)
 
 
-@borg.on(admin_cmd(pattern='delnotes ?(.*)', outgoing=True))
+@borg.on(admin_cmd(pattern='delnotes (.*)', outgoing=True))
 async def clearxxx(message):
     if not MONGO_DB_URI:
         await message.edit("`Database connections failing!`")
@@ -71,10 +71,10 @@ async def clearxxx(message):
         await message.edit("**No notes found in that name**")
         return
     await nicedb.delete_one("Notes", chatid, args)
-    await message.edit("**Note {} deleted successfully**".format(message.pattern_match.group(1)))
+    await message.edit("**Note deleted successfully**")
 
 
-@borg.on(admin_cmd(pattern='deleteallnotes ?(.*)', outgoing=True))
+@borg.on(admin_cmd(pattern='deleteallnotes (.*)', outgoing=True))
 async def clearallxxx(message):
     if not MONGO_DB_URI:
         await message.edit("`Database connections failing!`")

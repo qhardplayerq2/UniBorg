@@ -40,7 +40,7 @@ async def filterxxx(message):
         await message.edit("**Filter succesfully saved**")
 
 
-@borg.on(admin_cmd(pattern='listfilters', outgoing=True))
+@borg.on(admin_cmd(pattern='listfilters (.*)', outgoing=True))
 async def filtersxxx(message):
     chatid = message.chat_id
     filters = await nicedb.check("Filters", chatid)
@@ -55,7 +55,7 @@ async def filtersxxx(message):
     await message.edit(caption)
 
 
-@borg.on(admin_cmd(pattern='stopfilter ?(.*)', outgoing=True))
+@borg.on(admin_cmd(pattern='stopfilter (.*)', outgoing=True))
 async def stopxxx(message):
     args = get_arg(message)
     chatid = message.chat_id
@@ -66,7 +66,7 @@ async def stopxxx(message):
     await message.edit("**Filter deleted successfully**")
 
 
-@borg.on(admin_cmd(pattern='stopallfilter', outgoing=True))
+@borg.on(admin_cmd(pattern='stopallfilter (.*)', outgoing=True))
 async def stopallxxx(message):
     chatid = message.chat_id
     if not await nicedb.check("Filters", chatid):
