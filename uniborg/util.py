@@ -10,7 +10,7 @@ import time
 from telethon import events
 from telethon.tl.functions.messages import GetPeerDialogsRequest
 
-from alive_progress import alive_bar
+# from alive_progress import alive_bar
 
 # the secret configuration specific things
 ENV = bool(os.environ.get("ENV", False))
@@ -19,7 +19,6 @@ if ENV:
 else:
     if os.path.exists("config.py"):
         from sample_config import Development as Config
-
 
 
 def admin_cmd(**args):
@@ -157,6 +156,7 @@ async def progress(current, total, event, start, type_of_ps):
 #             type_of_ps,
 #             tmp
 #         ))
+
 
 def humanbytes(size):
     """Input size in bytes,
