@@ -6,7 +6,7 @@ from time import time
 import coffeehouse as cf
 from coffeehouse.api import API
 from coffeehouse.lydia import LydiaAI
-from database.lydiadb import add_lydia, check_lydia, delete_lydia
+from database.lydiadb import add_lydia, check_lydia, delete_lydia, get_lydia
 from sample_config import Config
 from uniborg.util import admin_cmd
 
@@ -92,7 +92,7 @@ async def on_new_message(event):
     if not event.media:
         user_id = event.from_id
         chat_id = event.chat_id
-        s = get_s(user_id, chat_id)
+        s = get_lydia(user_id, chat_id)
         if s is not None:
             session_id = s.session_id
             session_expires = s.session_expires
@@ -107,7 +107,7 @@ async def on_new_message(event):
                 session_id = session.id
                 session_expires = session.expires
                 logger.info(
-                    add_s(user_id, chat_id, session_id, session_expires))
+                    add_lydia(user_id, chat_id, session_id, session_expires))
             # Try to think a thought.
             try:
                 async with event.client.action(event.chat_id, "typing"):
