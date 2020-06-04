@@ -10,12 +10,10 @@ import logging
 
 from telethon.tl import types
 
-# from sql_helpers.snips_sql import (add_snip, get_all_snips, get_snips,
-#                                    remove_snip)
-import io
-from stdplugins.dphelper import add_note, get_note, get_notes, delete_note
+from sql_helpers.snips_sql import (add_snip, get_all_snips, get_snips,
+                                   remove_snip)
 from uniborg.util import admin_cmd
-from sample_config import Config, is_mongo_alive, is_redis_alive
+from sample_config import Config
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
@@ -25,14 +23,11 @@ logger = logging.getLogger(__name__)
 @borg.on(admin_cmd(pattern=r'\#(\S+)', outgoing=True))
 async def on_snip(event):
     name = event.pattern_match.group(1)
-    if not is_mongo_alive() or not is_redis_alive():
-        await event.edit("`Database connections failing!`")
-        return
-    snip = get_note(event.chat_id, name)
+    snip = get_snips(name)
     if snip:
         msg_o = await event.client.get_messages(
             entity=Config.PRIVATE_CHANNEL_BOT_API_ID,
-            ids=int(snip["text"])
+            ids=int(snip.f_mesg_id)
         )
         message_id = event.message.id
         if event.reply_to_msg_id:
@@ -49,9 +44,6 @@ async def on_snip(event):
 
 @borg.on(admin_cmd(pattern="snips (.*)"))
 async def on_snip_save(event):
-    if not is_mongo_alive() or not is_redis_alive():
-        await event.edit("`Database connections failing!`")
-        return
     name = event.pattern_match.group(1)
     msg = await event.get_reply_message()
     if msg:
@@ -61,22 +53,18 @@ async def on_snip_save(event):
             from_peer=event.chat_id,
             silent=True
         )
-        # add_note(name, msg_o.id)
-        note = add_note(event.chat_id, name, msg)
-        await event.edit("snip {name} saved successfully. Get it with #{name}".format(name=note["text"]))
+        add_snip(name, msg_o.id)
+        await event.edit("snip {name} saved successfully. Get it with #{name}".format(name=name))
     else:
         await event.edit("Reply to a message with `snips keyword` to save the snip")
 
 
 @borg.on(admin_cmd(pattern="snipl"))
 async def on_snip_list(event):
-    if not is_mongo_alive() or not is_redis_alive():
-        await event.edit("`Database connections failing!`")
-        return
-    all_snips = get_notes(event.chat_id)
+    all_snips = get_all_snips()
     OUT_STR = "Available Snips:\n"
-    if len(all_snips["name"]) > 0:
-        for a_snip in all_snips["name"]:
+    if len(all_snips) > 0:
+        for a_snip in all_snips:
             OUT_STR += f"👉 #{a_snip.snip} \n"
     else:
         OUT_STR = "No Snips. Start Saving using `.snips`"
@@ -98,16 +86,6 @@ async def on_snip_list(event):
 
 @borg.on(admin_cmd(pattern="snipd (\S+)"))
 async def on_snip_delete(event):
-    if not is_mongo_alive() or not is_redis_alive():
-        await event.edit("`Database connections failing!`")
-        return
     name = event.pattern_match.group(1)
-    # remove_snip(name)
-    delete_note(event.chat_id, name)
-    if await delete_note(event.chat_id, name) is False:
-        return await event.edit("`Couldn't find note:` **{}**".format(name)
-                                )
-    else:
-        return await event.edit(
-            "`Successfully deleted note:` **{}**".format(name))
+    remove_snip(name)
     await event.edit("snip #{} deleted successfully".format(name))

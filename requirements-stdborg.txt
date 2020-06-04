@@ -58,9 +58,6 @@ wget
 wikipedia
 youtube-dl
 PyLyrics 
-pymongo[srv]
-redis
-dnspython
 # gitpython
 # aioschedule
 # alive_progress
