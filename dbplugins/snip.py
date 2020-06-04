@@ -1,17 +1,17 @@
-from sample_config import Config
-from uniborg.util import admin_cmd
-from sql_helpers.snips_sql import (add_snip, get_all_snips, get_snips,
-                                   remove_snip)
-from telethon.tl import types
-import logging
--  # This Source Code Form is subject to the terms of the Mozilla Public
-# License, v. 2.0. If a copy of the MPL was not distributed with this
-# file, You can obtain one at http://mozilla.org/MPL/2.0/.
 """Snips
 Available Commands:
 .snips
 .snipl
 .snipd"""
+
+import logging
+
+from telethon.tl import types
+
+from sample_config import Config
+from sql_helpers.snips_sql import (add_snip, get_all_snips, get_snips,
+                                   remove_snip)
+from uniborg.util import admin_cmd
 
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
