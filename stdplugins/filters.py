@@ -37,7 +37,7 @@ async def add_new_filter(event):
         await event.edit(msg.format(keyword[1], 'updated'))
 
 
-@borg.on(admin_cmd(pattern='listfilters', outgoing=True))
+@borg.on(admin_cmd(pattern='listfilters (.*)', outgoing=True))
 async def filters_active(event):
     """ For .filters command, lists all of the active filters in a chat. """
     if not Config.MONGO_DB_URI:

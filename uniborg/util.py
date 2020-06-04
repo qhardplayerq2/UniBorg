@@ -21,6 +21,27 @@ else:
         from sample_config import Development as Config
 
 
+def get_arg(message):
+    msg = message.raw_text
+    msg = msg.replace(" ", "", 1) if msg[1] == " " else msg
+    split = msg[1:].replace("\n", " \n").split(" ")
+    if " ".join(split[1:]).strip() == "":
+        return ""
+    return " ".join(split[1:])
+
+
+def arg_split_with(message, char):
+    args = get_arg(message).split(char)
+    for space in args:
+        if space.strip() == "":
+            args.remove(space)
+    return args
+
+
+async def reply(message, msg):
+    await message.client.send_message(message.chat_id, msg, reply_to=message.id)
+
+
 def admin_cmd(**args):
     pattern = args.get("pattern", None)
     allow_sudo = args.get("allow_sudo", False)
