@@ -1,6 +1,6 @@
 import logging
 
-from database import notesdb as nicedb
+from database.notesdb import add_note, delete_note, get_note, get_notes
 from database import settingsdb as settings
 from sample_config import Config
 from uniborg.util import admin_cmd, arg_split_with, get_arg, reply
@@ -13,94 +13,71 @@ MONGO_DB_URI = Config.MONGO_DB_URI
 
 
 @borg.on(admin_cmd(pattern='savenote (.*)', outgoing=True))
-async def savexxx(message):
+async def add_filter(event):
+    """ For .save command, saves notes in a chat. """
     if not MONGO_DB_URI:
-        await message.edit("`Database connections failing!`")
+        await event.edit("`Database connections failing!`")
         return
-    args = arg_split_with(message, ",")
-    storage = await settings.check_asset()
-    media = None
-    reply = await message.get_reply_message()
-    if not args:
-        await message.edit("**You need to enter a note name**")
-        return
-    if len(args) == 1 and not message.is_reply:
-        await message.edit(
-            "**You need to either enter a a text or reply to a message to save as note**")
-        return
-    value = reply.text if message.is_reply else " ".join(args[1:])
-    name = args[0]
-    chatid = message.chat_id
-    if reply and reply.media and not reply.web_preview:
-        media = (await message.client.send_message(storage, reply)).id
-    if await nicedb.check_one("Notes", chatid, name):
-        await nicedb.update("Notes", {"Chat": chatid, "Key": name},
-                            chatid, name, value, media)
-        await message.edit("**Note succesfully updated**")
+
+    notename = event.pattern_match.group(1)
+    string = event.text.partition(notename)[2]
+    if event.reply_to_msg_id:
+        string = " " + (await event.get_reply_message()).text
+
+    msg = "`Note {} successfully. Use` #{} `to get it`"
+
+    if await add_note(event.chat_id, notename, string[1:]) is False:
+        return await event.edit(msg.format('updated', notename))
     else:
-        await nicedb.add("Notes", chatid, name, value, media)
-        await message.edit("**Note succesfully saved**")
+        return await event.edit(msg.format('added', notename))
 
 
 @borg.on(admin_cmd(pattern='notes (.*)', outgoing=True))
-async def notesxxx(message):
+async def notes_active(event):
+    """ For .notes command, list all of the notes saved in a chat. """
     if not MONGO_DB_URI:
-        await message.edit("`Database connections failing!`")
+        await event.edit("`Database connections failing!`")
         return
-    chatid = message.chat_id
-    notes = await nicedb.check("Notes", chatid)
-    if not notes:
-        await message.edit("**No notes found in this chat**")
-        return
-    caption = "**Notes you saved in this chat:\n\n**"
-    list = ""
+
+    message = "`There are no saved notes in this chat`"
+    notes = await get_notes(event.chat_id)
     for note in notes:
-        list += "**  ◍ " + note["Key"] + "**\n"
-    caption += list
-    await message.edit(caption)
+        if message == "`There are no saved notes in this chat`":
+            message = "Notes saved in this chat:\n"
+            message += "🔹 **{}**\n".format(note["name"])
+        else:
+            message += "🔹 **{}**\n".format(note["name"])
+
+    await event.edit(message)
 
 
-@borg.on(admin_cmd(pattern='delnotes (.*)', outgoing=True))
-async def clearxxx(message):
+@borg.on(admin_cmd(pattern='delnote (.*)', outgoing=True))
+async def remove_notes(event):
+    """ For .clear command, clear note with the given name."""
     if not MONGO_DB_URI:
-        await message.edit("`Database connections failing!`")
+        await event.edit("`Database connections failing!`")
         return
-    args = get_arg(message)
-    chatid = message.chat_id
-    if not await nicedb.check_one("Notes", chatid, args):
-        await message.edit("**No notes found in that name**")
-        return
-    await nicedb.delete_one("Notes", chatid, args)
-    await message.edit("**Note deleted successfully**")
-
-
-@borg.on(admin_cmd(pattern='deleteallnotes (.*)', outgoing=True))
-async def clearallxxx(message):
-    if not MONGO_DB_URI:
-        await message.edit("`Database connections failing!`")
-        return
-    chatid = message.chat_id
-    if not await nicedb.check("Notes", chatid):
-        await message.edit("**There are no notes in this chat**")
-        return
-    await nicedb.delete("Notes", chatid)
-    await message.edit("**Notes cleared out successfully**")
+    notename = event.pattern_match.group(1)
+    if await delete_note(event.chat_id, notename) is False:
+        return await event.edit("`Couldn't find note:` **{}**".format(notename)
+                                )
+    else:
+        return await event.edit(
+            "`Successfully deleted note:` **{}**".format(notename))
 
 
 # @borg.on(admin_cmd(pattern='notechk (.*)', outgoing=True))
 @borg.on(admin_cmd(incoming=True))
-async def watchout(message):
-    if not MONGO_DB_URI:
-        await message.edit("`Database connections failing!`")
-        return
-    arg = message.text[1::]
-    chatid = message.chat_id
-    storage = await settings.check_asset()
-    note = await nicedb.check_one("Notes", chatid, arg)
-    if not note:
-        return
-    fetch = None if not note["Media"] else await message.client.get_messages(entity=storage, ids=note["Media"])
-    if hasattr(fetch, "media"):
-        await reply(message, fetch)
-        return
-    await message.reply(note["Value"])
+async def note(event):
+    """ Notes logic. """
+    try:
+        if not (await event.get_sender()).bot:
+            if not MONGO_DB_URI:
+                return
+
+            notename = event.text[1:]
+            note = await get_note(event.chat_id, notename)
+            if note:
+                await event.reply(note["text"])
+    except BaseException:
+        pass
