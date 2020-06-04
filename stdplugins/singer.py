@@ -3,7 +3,7 @@ command: .singer singer name - song name
 by @quiec
 """
 from uniborg.util import admin_cmd
-from PyLyrics import *
+from PyLyrics import getLyrics
 
 
 @borg.on(admin_cmd(pattern="singer (.*)"))
