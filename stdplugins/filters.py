@@ -1,7 +1,10 @@
 import logging
+import re
+from asyncio import sleep
 
-from database import notesdb as nicedb
 from database import settingsdb as settings
+from database.filtersdb import add_filter, delete_filter, get_filters
+from sample_config import Config
 from uniborg.util import admin_cmd, arg_split_with, get_arg
 
 BLACKLIST = [".stop", ".stopall", ".filter"]
@@ -12,86 +15,80 @@ logger.setLevel(logging.ERROR)
 
 
 @borg.on(admin_cmd(pattern='filter (.*)', outgoing=True))
-async def filterxxx(message):
-    args = arg_split_with(message, ",")
-    storage = await settings.check_asset()
-    media = None
-    reply = await message.get_reply_message()
-    if not args:
-        await message.edit("**You need to enter a filter name**")
+async def add_new_filter(event):
+    """ Command for adding a new filter """
+    if not Config.MONGO_DB_URI:
+        await event.edit("`Database connections failing!`")
         return
-    if len(args) == 1 and not message.is_reply:
-        await message.edit("**You need to either enter a a text or reply to a message to save as filter**")
-        return
-    if message.is_reply:
-        value = reply.text
+    message = event.text
+    keyword = message.split()
+    string = ""
+    for i in range(2, len(keyword)):
+        string = string + " " + str(keyword[i])
+
+    if event.reply_to_msg_id:
+        string = " " + (await event.get_reply_message()).text
+
+    msg = "`Filter `**{}**` {} successfully`"
+
+    if await add_filter(event.chat_id, keyword[1], string[1:]) is True:
+        await event.edit(msg.format(keyword[1], 'added'))
     else:
-        value = " ".join(args[1:])
-    name = args[0]
-    chatid = message.chat_id
-    if reply and reply.media and not reply.web_preview:
-        media = (await message.client.send_message(storage, reply)).id
-    if await nicedb.check_one("Filters", chatid, name):
-        await nicedb.update("Filters", {"Chat": chatid, "Key": name},
-                            chatid, name, value, media)
-        await message.edit("**Filter succesfully updated**")
-    else:
-        await nicedb.add("Filters", chatid, name, value, media)
-        await message.edit("**Filter succesfully saved**")
+        await event.edit(msg.format(keyword[1], 'updated'))
 
 
 @borg.on(admin_cmd(pattern='listfilters (.*)', outgoing=True))
-async def filtersxxx(message):
-    chatid = message.chat_id
-    filters = await nicedb.check("Filters", chatid)
-    if not filters:
-        await message.edit("**No filter found in this chat**")
+async def filters_active(event):
+    """ For .filters command, lists all of the active filters in a chat. """
+    if not Config.MONGO_DB_URI:
+        await event.edit("`Database connections failing!`")
         return
-    caption = "**Word(s) you filtered in this chat:\n\n**"
-    list = ""
-    for filter in filters:
-        list += "**  ◍ " + filter["Key"] + "**\n"
-    caption += list
-    await message.edit(caption)
+    transact = "`There are no filters in this chat.`"
+    filters = await get_filters(event.chat_id)
+    for filt in filters:
+        if transact == "`There are no filters in this chat.`":
+            transact = "Active filters in this chat:\n"
+            transact += " • **{}** - `{}`\n".format(filt["keyword"],
+                                                    filt["msg"])
+        else:
+            transact += " • **{}** - `{}`\n".format(filt["keyword"],
+                                                    filt["msg"])
+
+    await event.edit(transact)
 
 
 @borg.on(admin_cmd(pattern='stopfilter (.*)', outgoing=True))
-async def stopxxx(message):
-    args = get_arg(message)
-    chatid = message.chat_id
-    if not await nicedb.check_one("Filters", chatid, args):
-        await message.edit("**No filter found in that name**")
+async def remove_filter(event):
+    """ Command for removing a filter """
+    if not Config.MONGO_DB_URI:
+        await event.edit("`Database connections failing!`")
         return
-    await nicedb.delete_one("Filters", chatid, args)
-    await message.edit("**Filter deleted successfully**")
+    filt = event.text[6:]
 
-
-@borg.on(admin_cmd(pattern='stopallfilter (.*)', outgoing=True))
-async def stopallxxx(message):
-    chatid = message.chat_id
-    if not await nicedb.check("Filters", chatid):
-        await message.edit("**There are no filters in this chat**")
-        return
-    await nicedb.delete("Filters", chatid)
-    await message.edit("**Filters cleared out successfully**")
+    if not await delete_filter(event.chat_id, filt):
+        await event.edit("`Filter `**{}**` doesn't exist.`".format(filt))
+    else:
+        await event.edit(
+            "`Filter `**{}**` was deleted successfully`".format(filt))
 
 
 @borg.on(admin_cmd(incoming=True))
-async def watchout(message):
-    for i in BLACKLIST:
-        if message.text.startswith(i):
-            return
-    arg = message.text
-    chatid = message.chat_id
-    storage = await settings.check_asset()
-    filters = await nicedb.check("Filters", chatid)
-    if not filters:
-        return
-    for item in filters:
-        if item["Key"] in arg:
-            value = item["Value"] if not item["Media"] else item["Media"]
-            if item["Media"]:
-                fetch = await message.client.get_messages(entity=storage, ids=value)
-                await message.client.send_message(chatid, fetch, reply_to=message.id)
+async def filter_incoming_handler(handler):
+    """ Checks if the incoming message contains handler of a filter """
+    try:
+        if not (await handler.get_sender()).bot:
+            if not Config.MONGO_DB_URI:
+                await handler.edit("`Database connections failing!`")
                 return
-            await message.reply(value)
+
+            filters = await get_filters(handler.chat_id)
+            if not filters:
+                return
+            for trigger in filters:
+                pattern = r"( |^|[^\w])" + re.escape(
+                    trigger["keyword"]) + r"( |$|[^\w])"
+                if re.search(pattern, handler.text, flags=re.IGNORECASE):
+                    await handler.reply(trigger["msg"])
+                    return
+    except AttributeError:
+        pass
