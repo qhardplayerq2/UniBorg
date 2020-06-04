@@ -1,9 +1,8 @@
 """
 command: .singer singer name - song name 
-by @quiec
 """
 from uniborg.util import admin_cmd
-from PyLyrics import getLyrics
+from PyLyrics import *
 
 
 @borg.on(admin_cmd(pattern="singer (.*)"))
@@ -11,9 +10,7 @@ async def _(event):
     if event.fwd_from:
         return
     i = 0
-
     input_str = event.pattern_match.group(1)
-
     try:
         song = input_str.split("-")
         if len(song) == 1:
