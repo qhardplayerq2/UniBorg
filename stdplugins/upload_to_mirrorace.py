@@ -17,7 +17,6 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
 logger = logging.getLogger(__name__)
 
 
-
 ENV = bool(os.environ.get("ENV", False))
 if ENV:
     from sample_config import Config
@@ -25,7 +24,8 @@ else:
     if os.path.exists("sample_config.py"):
         from sample_config import Development as Config
 
-@borg.on(admin_cmd(pattern="mirrorace ?(.*)", allow_sudo=True))  
+
+@borg.on(admin_cmd(pattern="mirrorace ?(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return

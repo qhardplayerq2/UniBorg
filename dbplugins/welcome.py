@@ -18,7 +18,8 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
                     level=logging.WARNING)
 logger = logging.getLogger(__name__)
 
-@borg.on(events.ChatAction())   
+
+@borg.on(events.ChatAction())
 async def _(event):
     cws = get_current_welcome_settings(event.chat_id)
     if cws:
@@ -35,7 +36,7 @@ async def _(event):
                         cws.previous_welcome
                     )
                 except Exception as e:  # pylint:disable=C0103,W0703
-                    logger.warn(str(e))   
+                    logger.warn(str(e))
             a_user = await event.get_user()
             msg_o = await event.client.get_messages(
                 entity=Config.PRIVATE_CHANNEL_BOT_API_ID,
@@ -51,7 +52,7 @@ async def _(event):
             update_previous_welcome(event.chat_id, current_message.id)
 
 
-@borg.on(admin_cmd(pattern="savewelcome"))   
+@borg.on(admin_cmd(pattern="savewelcome"))
 async def _(event):
     if event.fwd_from:
         return
@@ -67,14 +68,14 @@ async def _(event):
         await event.edit("Welcome note saved. ")
 
 
-@borg.on(admin_cmd(pattern="clearwelcome"))   
+@borg.on(admin_cmd(pattern="clearwelcome"))
 async def _(event):
     if event.fwd_from:
         return
     cws = get_current_welcome_settings(event.chat_id)
     rm_welcome_setting(event.chat_id)
     await event.edit(
-        "Welcome note cleared. " + \
+        "Welcome note cleared. " +
         "[This](https://t.me/c/{}/{}) was your previous welcome message.".format(
             str(Config.PRIVATE_CHANNEL_BOT_API_ID)[4:],
             cws.f_mesg_id

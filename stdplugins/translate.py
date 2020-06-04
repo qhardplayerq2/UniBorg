@@ -8,7 +8,7 @@ from googletrans import LANGUAGES, Translator
 from uniborg.util import admin_cmd
 
 
-@borg.on(admin_cmd(pattern="tr ?(.*)"))  
+@borg.on(admin_cmd(pattern="tr ?(.*)"))
 async def _(event):
     if event.fwd_from:
         return
@@ -34,7 +34,7 @@ async def _(event):
         transl_lan = LANGUAGES[f'{translated.dest.lower()}']
         output_str = """Detected Language: **{}**\nTRANSLATED To: **{}**\n\n{}
 """.format(
-            #previous_message.message,
+            # previous_message.message,
             source_lan.title(),
             transl_lan.title(),
             after_tr_text

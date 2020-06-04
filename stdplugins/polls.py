@@ -9,7 +9,7 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
 logger = logging.getLogger(__name__)
 
 
-@borg.on(admin_cmd(pattern="get_poll"))  
+@borg.on(admin_cmd(pattern="get_poll"))
 async def _(event):
     reply_message = await event.get_reply_message()
     if reply_message.media is None:
@@ -29,7 +29,8 @@ Answers: \n""".format(closed_status, question)
             results = media.results
             i = 0
             for result in results.results:
-                edit_caption += "{}> {}    {}\n".format(result.option, answers[i].text, result.voters)
+                edit_caption += "{}> {}    {}\n".format(
+                    result.option, answers[i].text, result.voters)
                 i += 1
             edit_caption += "Total Voters: {}".format(results.total_voters)
         else:

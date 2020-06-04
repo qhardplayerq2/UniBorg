@@ -8,11 +8,7 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
                     level=logging.WARNING)
 logger = logging.getLogger(__name__)
 
-
-
-
-
-@borg.on(admin_cmd(pattern=("mailru ?(.*)")))  
+@borg.on(admin_cmd(pattern=("mailru ?(.*)")))
 async def _(event):
     url = event.pattern_match.group(1)
     if event.fwd_from:
@@ -24,13 +20,13 @@ async def _(event):
         downloaded_file_name = Config.TMP_DOWNLOAD_DIRECTORY
         await event.edit("Finish downloading to my local")
         command_to_exec = [
-                "./bin/cmrudl.py",
-                url,
-                "-d",
-                downloaded_file_name
-                ]
+            "./bin/cmrudl.py",
+            url,
+            "-d",
+            downloaded_file_name
+        ]
         process = await asyncio.create_subprocess_shell(
-        command_to_exec, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE
+            command_to_exec, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE
         )
         stdout, stderr = await process.communicate()
 

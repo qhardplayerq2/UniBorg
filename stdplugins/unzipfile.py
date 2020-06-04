@@ -22,7 +22,7 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
 logger = logging.getLogger(__name__)
 
 
-@borg.on(admin_cmd(pattern="unzip"))  
+@borg.on(admin_cmd(pattern="unzip"))
 async def _(event):
     if event.fwd_from:
         return
@@ -73,7 +73,8 @@ async def _(event):
                     if metadata.has("duration"):
                         duration = metadata.get('duration').seconds
                     if os.path.exists(thumb_image_path):
-                        metadata = extractMetadata(createParser(thumb_image_path))
+                        metadata = extractMetadata(
+                            createParser(thumb_image_path))
                         if metadata.has("width"):
                             width = metadata.get("width")
                         if metadata.has("height"):
@@ -113,12 +114,6 @@ async def _(event):
         os.remove(downloaded_file_name)
     await asyncio.sleep(2)
     shutil.rmtree(Config.TMP_DOWNLOAD_DIRECTORY)
-
-
-
-
-
-
 
 
 def get_lst_of_files(input_directory, output_lst):

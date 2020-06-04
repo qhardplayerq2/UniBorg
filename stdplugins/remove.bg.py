@@ -29,7 +29,8 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
                     level=logging.WARNING)
 logger = logging.getLogger(__name__)
 
-@borg.on(admin_cmd(pattern="remove\.bg ?(.*)"))  
+
+@borg.on(admin_cmd(pattern="remove\.bg ?(.*)"))
 async def _(event):
     HELP_STR = "`.remove.bg` as reply to a media, or give a link as an argument to this command"
     if event.fwd_from:
@@ -106,7 +107,7 @@ def ReTrieveURL(input_url):
         "X-API-Key": Config.REM_BG_API_KEY,
     }
     data = {
-      "image_url": input_url
+        "image_url": input_url
     }
     r = requests.post(
         "https://api.remove.bg/v1.0/removebg",

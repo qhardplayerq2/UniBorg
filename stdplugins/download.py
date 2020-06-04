@@ -18,9 +18,7 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
 logger = logging.getLogger(__name__)
 
 
-
-
-@borg.on(admin_cmd(pattern="download ?(.*)", allow_sudo=True))  
+@borg.on(admin_cmd(pattern="download ?(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -131,12 +129,12 @@ File Name: {}
 File Size: {}
 Downloaded: {}
 ETA: {}""".format(
-    url,
-    file_name,
-    humanbytes(total_length),
-    humanbytes(downloaded),
-    time_formatter(estimated_total_time)
-)
+                            url,
+                            file_name,
+                            humanbytes(total_length),
+                            humanbytes(downloaded),
+                            time_formatter(estimated_total_time)
+                        )
                         if current_message != display_message:
                             await event.edit(current_message)
                             display_message = current_message

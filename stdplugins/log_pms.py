@@ -8,7 +8,7 @@ import sys
 from telethon import events
 
 from sample_config import Config
-  
+
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                     level=logging.WARN)
@@ -17,7 +17,7 @@ global NO_PM_LOG_USERS
 NO_PM_LOG_USERS = []
 
 
-@borg.on(events.NewMessage(incoming=True, func=lambda e: e.is_private))  
+@borg.on(events.NewMessage(incoming=True, func=lambda e: e.is_private))
 async def monito_p_m_s(event):
     sender = await event.get_sender()
     if Config.NC_LOG_P_M_S and not sender.bot:
@@ -35,10 +35,10 @@ async def monito_p_m_s(event):
                 exc_type, exc_obj, exc_tb = sys.exc_info()
                 fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
                 print(exc_type, fname, exc_tb.tb_lineno)
-                print(e) 
+                print(e)
 
 
-@borg.on(events.NewMessage(pattern="nolog ?(.*)"))  
+@borg.on(events.NewMessage(pattern="nolog ?(.*)"))
 async def approve_p_m(event):
     if event.fwd_from:
         return

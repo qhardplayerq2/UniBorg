@@ -20,10 +20,7 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
                     level=logging.WARNING)
 logger = logging.getLogger(__name__)
 
-
-
-
-@borg.on(admin_cmd(pattern="verystream ?(.*)", allow_sudo=True))  
+@borg.on(admin_cmd(pattern="verystream ?(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -97,12 +94,14 @@ async def _(event):
                     url = step_one_response_text["result"]["url"]
                     await mone.edit(f"Start Uploading to {url}")
                     start = datetime.now()
-                    files = {"file1": (file_name, open(required_file_name, "rb"))}
+                    files = {"file1": (file_name, open(
+                        required_file_name, "rb"))}
                     resp = requests.post(url, files=files)
                     step_two_response_text = resp.json()
                     # logger.info(step_two_response_text)
                     if step_two_response_text["status"] == 200:
-                        output_str = json.dumps(step_two_response_text["result"], sort_keys=True, indent=4)
+                        output_str = json.dumps(
+                            step_two_response_text["result"], sort_keys=True, indent=4)
                         stream_url = step_two_response_text["result"]["url"]
                         end = datetime.now()
                         ms = (end - start).seconds

@@ -9,7 +9,8 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
                     level=logging.WARNING)
 logger = logging.getLogger(__name__)
 
-@borg.on(admin_cmd(pattern="coinflip ?(.*)"))  
+
+@borg.on(admin_cmd(pattern="coinflip ?(.*)"))
 async def _(event):
     if event.fwd_from:
         return

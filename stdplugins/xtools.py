@@ -13,7 +13,7 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
 logger = logging.getLogger(__name__)
 
 
-@borg.on(admin_cmd(pattern="xtools (.*)"))  
+@borg.on(admin_cmd(pattern="xtools (.*)"))
 async def _(event):
     if event.fwd_from:
         return
@@ -25,7 +25,8 @@ async def _(event):
         sub_domain = input_str
     else:
         sub_domain, username = input_str.split("|")
-    final_url = "https://xtools.wmflabs.org/api/user/simple_editcount/{}.wikipedia.org/{}".format(sub_domain, username)
+    final_url = "https://xtools.wmflabs.org/api/user/simple_editcount/{}.wikipedia.org/{}".format(
+        sub_domain, username)
     json_string = requests.get(final_url).json()
     result_text = json_string["liveEditCount"]
     end = datetime.now()

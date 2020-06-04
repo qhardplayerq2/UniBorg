@@ -8,7 +8,7 @@ from telethon.tl import functions, types
 
 import regex
 from sample_config import Config
-  
+
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
@@ -82,11 +82,12 @@ async def group_has_sedbot(group):
     return any(KNOWN_RE_BOTS.match(x.username or '') for x in full.users)
 
 
-@borg.on(events.NewMessage)  
+@borg.on(events.NewMessage)
 async def on_message(event):
     last_msgs[event.chat_id].appendleft(event.message)
 
-@borg.on(events.MessageEdited)  
+
+@borg.on(events.MessageEdited)
 async def on_edit(event):
     for m in last_msgs[event.chat_id]:
         if m.id == event.id:
@@ -94,7 +95,7 @@ async def on_edit(event):
             break
 
 @borg.on(events.NewMessage(
-    pattern=re.compile(r"^s/((?:\\/|[^/])+)/((?:\\/|[^/])*)(/.*)?"), outgoing=True))  
+    pattern=re.compile(r"^s/((?:\\/|[^/])+)/((?:\\/|[^/])*)(/.*)?"), outgoing=True))
 async def on_regex(event):
     if event.fwd_from:
         return

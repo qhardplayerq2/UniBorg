@@ -5,6 +5,7 @@ by @quiec
 from uniborg.util import admin_cmd
 from PyLyrics import *
 
+
 @borg.on(admin_cmd(pattern="singer (.*)"))
 async def _(event):
     if event.fwd_from:
@@ -12,14 +13,15 @@ async def _(event):
     i = 0
 
     input_str = event.pattern_match.group(1)
-    
+
     try:
         song = input_str.split("-")
         if len(song) == 1:
             await event.edit("Usage: .singer Duman - Haberin Yok Ölüyorum")
         else:
             await event.edit("🔍︎Searching lyrics")
-            lyrics = PyLyrics.getLyrics(song[0].strip(), song[1].strip()).split("\n")
+            lyrics = PyLyrics.getLyrics(
+                song[0].strip(), song[1].strip()).split("\n")
             lyric_message = f"Singing {song[0].strip()} from {song[1].strip()} 🎙"
             lyric_message += "\n\n" + "\n".join(lyrics)
             try:
@@ -29,4 +31,3 @@ async def _(event):
                 logger.info(lyric_message)
     except ValueError:
         await event.edit("Song not found")
-

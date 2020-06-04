@@ -16,8 +16,8 @@
 # logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
 #                     level=logging.WARNING)
 
-                    
-# @borg.on(events.NewMessage(pattern=r"\.carbon", outgoing=True))  
+
+# @borg.on(events.NewMessage(pattern=r"\.carbon", outgoing=True))
 # async def carbon_api(e):
 # if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
 #       """ A Wrapper for carbon.now.sh """

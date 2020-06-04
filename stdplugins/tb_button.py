@@ -13,10 +13,11 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
 logger = logging.getLogger(__name__)
 
 # regex obtained from: https://github.com/PaulSonOfLars/tgbot/blob/master/tg_bot/modules/helper_funcs/string_handling.py#L23
-BTN_URL_REGEX = re.compile(r"(\{([^\[]+?)\}\<button(url|text):(?:/{0,2})(.+?)(:same)?\>)")
+BTN_URL_REGEX = re.compile(
+    r"(\{([^\[]+?)\}\<button(url|text):(?:/{0,2})(.+?)(:same)?\>)")
 
 
-@borg.on(admin_cmd(pattern="cbutton"))   
+@borg.on(admin_cmd(pattern="cbutton"))
 async def _(event):
     if Config.TG_BOT_USER_NAME_BF_HER is None or tgbot is None:
         await event.edit("need to set up a @BotFather bot for this module to work")
@@ -46,7 +47,8 @@ async def _(event):
         # if even, not escaped -> create button
         if n_escapes % 2 == 0:
             # create a thruple with button label, url, and newline status
-            buttons.append((match.group(2), match.group(4), bool(match.group(5))))
+            buttons.append(
+                (match.group(2), match.group(4), bool(match.group(5))))
             note_data += markdown_note[prev:match.start(1)]
             prev = match.end(1)
 
@@ -54,7 +56,7 @@ async def _(event):
         else:
             note_data += markdown_note[prev:to_check]
             prev = match.start(1) - 1
-        
+
         note_data += markdown_note[prev:]
 
     message_text = note_data.strip()
@@ -84,12 +86,13 @@ async def _(event):
 
 # Helpers
 if Config.TG_BOT_USER_NAME_BF_HER is None or tgbot is None:
-    @tgbot.on(events.callbackquery.CallbackQuery(   
+    @tgbot.on(events.callbackquery.CallbackQuery(
         data=re.compile(b"txt_prod_(.*)")
     ))
     async def on_plug_in_callback_query_handler(event):
         reply_pop_up_alert = event.data_match.group(1).decode("UTF-8")
         await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
+
 
 def build_keyboard(buttons, tipe):
     keyb = []
@@ -99,7 +102,9 @@ def build_keyboard(buttons, tipe):
         elif tipe == "url":
             keyb.append([custom.Button.url(btn[0], btn[1])])
         if btn[2] and keyb and tipe == "text":
-            keyb[-1].append(custom.Button.inline(btn[0], data="txt_prod_{}".format(btn[1])))
+            keyb[-1].append(custom.Button.inline(btn[0],
+                                                 data="txt_prod_{}".format(btn[1])))
         elif tipe == "text":
-            keyb.append([custom.Button.inline(btn[0], data="txt_prod_{}".format(btn[1]))])
+            keyb.append([custom.Button.inline(
+                btn[0], data="txt_prod_{}".format(btn[1]))])
     return keyb

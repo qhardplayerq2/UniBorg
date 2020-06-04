@@ -15,11 +15,10 @@ logger = logging.getLogger(__name__)
 logger = logging.getLogger(__name__)
 
 
-
 FF_MPEG_DOWN_LOAD_MEDIA_PATH = "uniborg.media.ffmpeg"
 
 
-@borg.on(admin_cmd(pattern="ffmpegsave"))  
+@borg.on(admin_cmd(pattern="ffmpegsave"))
 async def ff_mpeg_trim_cmd(event):
     if event.fwd_from:
         return
@@ -50,7 +49,7 @@ async def ff_mpeg_trim_cmd(event):
         await event.edit(f"a media file already exists in path. Please remove the media and try again!\n`.exec rm {FF_MPEG_DOWN_LOAD_MEDIA_PATH}`")
 
 
-@borg.on(admin_cmd(pattern="ffmpegtrim"))  
+@borg.on(admin_cmd(pattern="ffmpegtrim"))
 async def ff_mpeg_trim_cmd(event):
     if event.fwd_from:
         return
@@ -155,6 +154,7 @@ async def take_screen_shot(video_file, output_directory, ttl):
         return None
 
 # https://github.com/Nekmo/telegram-upload/blob/master/telegram_upload/video.py#L26
+
 
 async def cult_small_video(video_file, output_directory, start_time, end_time):
     # https://stackoverflow.com/a/13891070/4723940

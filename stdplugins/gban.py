@@ -12,10 +12,7 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
                     level=logging.WARNING)
 logger = logging.getLogger(__name__)
 
-
-
-
-@borg.on(admin_cmd(pattern="gban ?(.*)"))  
+@borg.on(admin_cmd(pattern="gban ?(.*)"))
 async def _(event):
     if Config.G_BAN_LOGGER_GROUP is None:
         await event.edit("ENV VAR is not set. This module will not work.")
@@ -36,7 +33,7 @@ async def _(event):
     await event.delete()
 
 
-@borg.on(admin_cmd(pattern="ungban ?(.*)"))  
+@borg.on(admin_cmd(pattern="ungban ?(.*)"))
 async def _(event):
     if Config.G_BAN_LOGGER_GROUP is None:
         await event.edit("ENV VAR is not set. This module will not work.")

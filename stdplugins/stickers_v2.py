@@ -30,7 +30,7 @@ KANGING_STR = [
 
 
 # @register(outgoing=True, pattern="^.kang")
-@borg.on(admin_cmd(pattern="kang ?(.*)"))  
+@borg.on(admin_cmd(pattern="kang ?(.*)"))
 async def kang(args):
     """ For .kang command, kangs stickers or creates new ones. """
     if not args.text[0].isalpha() and args.text[0] not in ("/", "#", "@", "!"):
@@ -59,7 +59,7 @@ async def kang(args):
             elif "tgsticker" in message.media.document.mime_type:
                 await args.edit(f"`{random.choice(KANGING_STR)}`")
                 await borg.download_file(message.media.document,
-                                        'AnimatedSticker.tgs')
+                                         'AnimatedSticker.tgs')
 
                 attributes = message.media.document.attributes
                 for attribute in attributes:
@@ -266,7 +266,7 @@ async def resize_photo(photo):
 
 
 # @register(outgoing=True, pattern="^.stkrinfo$")
-@borg.on(admin_cmd(pattern="stkrinfo ?(.*)"))  
+@borg.on(admin_cmd(pattern="stkrinfo ?(.*)"))
 async def get_pack_info(event):
     if not event.text[0].isalpha() and event.text[0] not in ("/", "#", "@",
                                                              "!"):

@@ -31,8 +31,6 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
 logger = logging.getLogger(__name__)
 
 
-
-
 # Path to token json file, it should be in same directory as script
 G_DRIVE_TOKEN_FILE = Config.TMP_DOWNLOAD_DIRECTORY + "/auth_token.txt"
 # Copy your credentials from the APIs Console
@@ -48,7 +46,7 @@ G_DRIVE_F_PARENT_ID = None
 G_DRIVE_DIR_MIME_TYPE = "application/vnd.google-apps.folder"
 
 
-@borg.on(admin_cmd(pattern="ugdrive ?(.*)", allow_sudo=True))  
+@borg.on(admin_cmd(pattern="ugdrive ?(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -118,7 +116,7 @@ async def _(event):
         await mone.edit("File Not found in local server. Give me a file path :((")
 
 
-@borg.on(admin_cmd(pattern="gdrivesp https?://drive\.google\.com/drive/u/\d/folders/([-\w]{25,})", allow_sudo=True))  
+@borg.on(admin_cmd(pattern="gdrivesp https?://drive\.google\.com/drive/u/\d/folders/([-\w]{25,})", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -132,7 +130,7 @@ async def _(event):
         await mone.edit("Send `.gdrivesp https://drive.google.com/drive/u/X/folders/Y` to set the folder to upload new files to")
 
 
-@borg.on(admin_cmd(pattern="gdriveclear", allow_sudo=True))  
+@borg.on(admin_cmd(pattern="gdriveclear", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -142,7 +140,7 @@ async def _(event):
     await event.delete()
 
 
-@borg.on(admin_cmd(pattern="gdrivedir ?(.*)", allow_sudo=True))  
+@borg.on(admin_cmd(pattern="gdrivedir ?(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -175,7 +173,7 @@ async def _(event):
         await mone.edit(f"directory {input_str} does not seem to exist")
 
 
-@borg.on(admin_cmd(pattern="drive (delete|get) ?(.*)", allow_sudo=True))  
+@borg.on(admin_cmd(pattern="drive (delete|get) ?(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -207,7 +205,7 @@ async def _(event):
     await mone.edit(response_from_svc)
 
 
-@borg.on(admin_cmd(pattern="drive search ?(.*)", allow_sudo=True))  
+@borg.on(admin_cmd(pattern="drive search ?(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -273,7 +271,7 @@ def authorize(token_file, storage):
     credentials = storage.get()
     # Create an httplib2.Http object and authorize it with our credentials
     http = httplib2.Http()
-    #https://github.com/googleapis/google-api-python-client/issues/803
+    # https://github.com/googleapis/google-api-python-client/issues/803
     credentials.refresh(http)
     http = credentials.authorize(http)
     return http
@@ -353,7 +351,8 @@ async def create_directory(http, directory_name, parent_id):
         drive_service.permissions().insert(fileId=file_id, body=permissions).execute()
     except:
         pass
-    logger.info("Created Gdrive Folder:\nName: {}\nID: {} ".format(file.get("title"), file_id))
+    logger.info("Created Gdrive Folder:\nName: {}\nID: {} ".format(
+        file.get("title"), file_id))
     return file_id
 
 
@@ -401,7 +400,8 @@ async def gdrive_list_file_md(service, file_id):
             file_meta_data["mimeType"] = file["mimeType"]
             file_meta_data["md5Checksum"] = file["md5Checksum"]
             file_meta_data["fileSize"] = str(humanbytes(int(file["fileSize"])))
-            file_meta_data["quotaBytesUsed"] = str(humanbytes(int(file["quotaBytesUsed"])))
+            file_meta_data["quotaBytesUsed"] = str(
+                humanbytes(int(file["quotaBytesUsed"])))
             file_meta_data["previewURL"] = file["downloadUrl"]
         return json.dumps(file_meta_data, sort_keys=True, indent=4)
     except Exception as e:
@@ -410,7 +410,8 @@ async def gdrive_list_file_md(service, file_id):
 
 async def gdrive_search(http, search_query):
     if G_DRIVE_F_PARENT_ID is not None:
-        query = "'{}' in parents and (title contains '{}')".format(G_DRIVE_F_PARENT_ID, search_query)
+        query = "'{}' in parents and (title contains '{}')".format(
+            G_DRIVE_F_PARENT_ID, search_query)
     else:
         query = "title contains '{}'".format(search_query)
     drive_service = build("drive", "v2", http=http, cache_discovery=False)
@@ -424,7 +425,7 @@ async def gdrive_search(http, search_query):
                 fields="nextPageToken, items(id, title, mimeType)",
                 pageToken=page_token
             ).execute()
-            for file in response.get("items",[]):
+            for file in response.get("items", []):
                 file_title = file.get("title")
                 file_id = file.get("id")
                 if file.get("mimeType") == G_DRIVE_DIR_MIME_TYPE:

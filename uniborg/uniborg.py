@@ -76,7 +76,6 @@ class Uniborg(TelegramClient):
                     if plugin_name in self._plugins:
                         self.remove_plugin(plugin_name)
 
-
     async def _async_init(self, **kwargs):
         await self.start(**kwargs)
 
@@ -84,7 +83,6 @@ class Uniborg(TelegramClient):
         self.uid = telethon.utils.get_peer_id(self.me)
 
         self._logger.info(f"Logged in as {self.uid}")
-
 
     def load_plugin(self, shortname):
         self.load_plugin_from_file(f"{self.n_plugin_path}/{shortname}.py")
@@ -103,7 +101,6 @@ class Uniborg(TelegramClient):
         mod.Config = self.config
         if self.config.TG_BOT_USER_NAME_BF_HER is not None:
             mod.tgbot = self.tgbot
-
 
         spec.loader.exec_module(mod)
         self._plugins[shortname] = mod

@@ -13,6 +13,7 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
                     level=logging.WARNING)
 logger = logging.getLogger(__name__)
 
+
 def split_message(text, length=4096, offset=200):
     return [text[text.find('\n', i - offset, i + 1) if text.find('\n', i - offset, i + 1) != -1 else i:
                  text.find('\n', i + length - offset, i + length) if text.find('\n', i + length - offset,
@@ -20,6 +21,7 @@ def split_message(text, length=4096, offset=200):
             i
             in
             range(0, len(text), length)]
+
 
 def get_who_string(who):
     who_string = html.escape(utils.get_display_name(who))
@@ -29,14 +31,14 @@ def get_who_string(who):
     return who_string
 
 
-@borg.on(events.NewMessage(pattern=r"\.who", outgoing=True)) # pylint:disable=E0602
+@borg.on(events.NewMessage(pattern=r"\.who", outgoing=True))  # pylint:disable=E0602
 async def _(event):
     if not event.message.is_reply:
         who = await event.get_chat()
     else:
         msg = await event.message.get_reply_message()
         if msg.forward:
-          	# FIXME forward privacy memes
+            # FIXME forward privacy memes
             who = await borg.get_entity(
                 msg.forward.from_id or msg.forward.channel_id)
         else:
@@ -45,7 +47,7 @@ async def _(event):
     await event.edit(get_who_string(who), parse_mode='html')
 
 
-@borg.on(events.NewMessage(pattern=r"\.members", outgoing=True)) # pylint:disable=E0602
+@borg.on(events.NewMessage(pattern=r"\.members", outgoing=True))  # pylint:disable=E0602
 async def _(event):
     members = []
     async for member in borg.iter_participants(event.chat_id):

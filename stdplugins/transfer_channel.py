@@ -9,16 +9,13 @@ from telethon.tl import functions
 
 from sample_config import Config
 from uniborg import util
-  
+
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
 logger = logging.getLogger(__name__)
 
-
-
-
-@borg.on(util.admin_cmd(pattern="otransfer (.*)"))   
+@borg.on(util.admin_cmd(pattern="otransfer (.*)"))
 async def _(event):
     if event.fwd_from:
         return

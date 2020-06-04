@@ -18,10 +18,7 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
                     level=logging.WARNING)
 logger = logging.getLogger(__name__)
 
-
-
-
-@borg.on(admin_cmd(pattern="udownload ?(.*)", allow_sudo=True))  
+@borg.on(admin_cmd(pattern="udownload ?(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -35,8 +32,8 @@ async def _(event):
         try:
             c_time = time.time()
             downloaded_file_name = await download_file(
-                reply_message, 
-                Config.TMP_DOWNLOAD_DIRECTORY, 
+                reply_message,
+                Config.TMP_DOWNLOAD_DIRECTORY,
                 progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
                     progress(d, t, mone, c_time, "trying to download"))
             )
@@ -138,12 +135,12 @@ File Name: {}
 File Size: {}
 Downloaded: {}
 ETA: {}""".format(
-    url,
-    file_name,
-    humanbytes(total_length),
-    humanbytes(downloaded),
-    time_formatter(estimated_total_time)
-)
+                            url,
+                            file_name,
+                            humanbytes(total_length),
+                            humanbytes(downloaded),
+                            time_formatter(estimated_total_time)
+                        )
                         if current_message != display_message:
                             await event.edit(current_message)
                             display_message = current_message

@@ -10,8 +10,9 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
                     level=logging.WARNING)
 logger = logging.getLogger(__name__)
 
-@borg.on(admin_cmd(pattern="color (.*)"))  
-async def _(event): 
+
+@borg.on(admin_cmd(pattern="color (.*)"))
+async def _(event):
     if event.fwd_from:
         return
     input_str = event.pattern_match.group(1)

@@ -9,7 +9,7 @@ from sample_config import Config
 from uniborg.util import admin_cmd, progress
 
 
-@borg.on(admin_cmd(pattern="watermark")) 
+@borg.on(admin_cmd(pattern="watermark"))
 async def _(event):
     if event.fwd_from:
         return
@@ -31,7 +31,7 @@ async def _(event):
                     progress(d, t, mone, c_time, "trying to download")
                 )
             )
-        except Exception as e:  
+        except Exception as e:
             await mone.edit(str(e))
         else:
             end = datetime.now()
@@ -46,7 +46,8 @@ async def _(event):
         # filename = sorted(get_lst_of_files(watermark_path + reply_message.file.name, []))
         #filename = filename + "/"
         await event.edit("Uploading now")
-        caption_rts = os.path.basename(watermark_path + reply_message.file.name)
+        caption_rts = os.path.basename(
+            watermark_path + reply_message.file.name)
         await borg.send_file(
             event.chat_id,
             watermark_path + reply_message.file.name,
@@ -66,6 +67,7 @@ async def _(event):
         await asyncio.sleep(5)
         os.remove(Config.TMP_DOWNLOAD_DIRECTORY + reply_message.file.name)
 
+
 def watermark(inputpdf, outputpdf, watermarkpdf):
     watermark = PdfFileReader(watermarkpdf)
     watermarkpage = watermark.getPage(0)
@@ -77,6 +79,7 @@ def watermark(inputpdf, outputpdf, watermarkpdf):
         pdfwrite.addPage(pdfpage)
     with open(outputpdf, 'wb') as fh:
         pdfwrite.write(fh)
+
 
 def get_lst_of_files(input_directory, output_lst):
     filesinfolder = os.listdir(input_directory)

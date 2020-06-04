@@ -20,7 +20,6 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
 logger = logging.getLogger(__name__)
 
 
-
 @borg.on(admin_cmd(pattern="unbanall ?(.*)"))
 async def _(event):
     if event.fwd_from:
@@ -50,7 +49,7 @@ async def _(event):
         await event.edit("{}: {} unbanned".format(event.chat_id, p))
 
 
-@borg.on(admin_cmd(pattern="ukick ?(.*)"))  
+@borg.on(admin_cmd(pattern="ukick ?(.*)"))
 async def _(event):
     if event.fwd_from:
         return

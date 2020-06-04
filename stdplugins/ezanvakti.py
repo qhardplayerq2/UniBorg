@@ -11,9 +11,9 @@ logger = logging.getLogger(__name__)
 
 TEMPAT = ''
 
- 
-@borg.on(admin_cmd(pattern=("ezanvakti ?(.*)")))  
-async def get_adzan(adzan): 
+
+@borg.on(admin_cmd(pattern=("ezanvakti ?(.*)")))
+async def get_adzan(adzan):
     if not adzan.text.startswith("."):
         return ""
 

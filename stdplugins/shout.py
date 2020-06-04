@@ -6,14 +6,13 @@ import logging
 
 from telethon import events
 
-  
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
 logger = logging.getLogger(__name__)
 
 
-@borg.on(events.NewMessage(pattern=r"\.shout", outgoing=True))  
+@borg.on(events.NewMessage(pattern=r"\.shout", outgoing=True))
 async def shout(args):
     if args.fwd_from:
         return

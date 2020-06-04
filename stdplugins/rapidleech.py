@@ -26,7 +26,8 @@ logger = logging.getLogger(__name__)
 
 logger.info(Config.OPEN_LOAD_LOGIN)
 
-@borg.on(admin_cmd(pattern="rl"))  
+
+@borg.on(admin_cmd(pattern="rl"))
 async def _(event):
     if event.fwd_from:
         return
@@ -124,7 +125,8 @@ async def get_direct_ip_specific_link(link: str):
     elif re.search(GOOGLE_DRIVE_VALID_URLS, link):
         file_id = re.search(GOOGLE_DRIVE_VALID_URLS, link).group("id")
         async with aiohttp.ClientSession(cookie_jar=aiohttp.CookieJar()) as session:
-            step_zero_url = "https://drive.google.com/uc?export=download&id={}".format(file_id)
+            step_zero_url = "https://drive.google.com/uc?export=download&id={}".format(
+                file_id)
             http_response = await session.get(step_zero_url, allow_redirects=False)
             if "location" in http_response.headers:
                 # in case of small file size, Google downloads directly
@@ -140,9 +142,13 @@ async def get_direct_ip_specific_link(link: str):
             else:
                 # in case of download warning page
                 http_response_text = await http_response.text()
-                response_b_soup = BeautifulSoup(http_response_text, "html.parser")
-                warning_page_url = "https://drive.google.com" + response_b_soup.find("a", {"id": "uc-download-link"}).get("href")
-                file_name_and_size = response_b_soup.find("span", {"class": "uc-name-size"}).text
+                response_b_soup = BeautifulSoup(
+                    http_response_text, "html.parser")
+                warning_page_url = "https://drive.google.com" + \
+                    response_b_soup.find(
+                        "a", {"id": "uc-download-link"}).get("href")
+                file_name_and_size = response_b_soup.find(
+                    "span", {"class": "uc-name-size"}).text
                 http_response_two = await session.get(warning_page_url, allow_redirects=False)
                 if "location" in http_response_two.headers:
                     file_url = http_response_two.headers["location"]

@@ -1,4 +1,4 @@
-#kanged from AbhiNash Reddy's PPE (THX)
+# kanged from AbhiNash Reddy's PPE (THX)
 
 """it will search youtube videos using Api
 \n`Type .yt (anynumber(maximum 50)) {ur query}`
@@ -21,7 +21,7 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
 logger = logging.getLogger(__name__)
 
 
-@borg.on(admin_cmd(pattern=r"youtubesearch ?(\d+)? ?(.*)?"))  
+@borg.on(admin_cmd(pattern=r"youtubesearch ?(\d+)? ?(.*)?"))
 async def yt_search(video_q):
     reply = await video_q.get_reply_message()
     if video_q.pattern_match.group(2):
@@ -30,7 +30,8 @@ async def yt_search(video_q):
         query = reply.message
     else:
         return await video_q.edit("Invalid syntax")
-    resultamt = int(video_q.pattern_match.group(1)) if video_q.pattern_match.group(1) is not None else 10
+    resultamt = int(video_q.pattern_match.group(
+        1)) if video_q.pattern_match.group(1) is not None else 10
     result = ''
     i = 1
 

@@ -14,14 +14,11 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
 logger = logging.getLogger(__name__)
 
 
-
-
-
 def progress(current, total):
-    logger.info("Downloaded {} of {}\nCompleted {}".format(current, total, (current / total) * 100))
+    logger.info("Downloaded {} of {}\nCompleted {}".format(
+        current, total, (current / total) * 100))
 
-
-@borg.on(admin_cmd(pattern="paste ?(.*)"))  
+@borg.on(admin_cmd(pattern="paste ?(.*)"))
 async def _(event):
     if event.fwd_from:
         return

@@ -30,9 +30,7 @@ logger = logging.getLogger(__name__)
 
 DELETE_TIMEOUT = 5
 
-
-
-@borg.on(admin_cmd(pattern="playlist(a|v) (.*)"))  
+@borg.on(admin_cmd(pattern="playlist(a|v) (.*)"))
 async def download_video(v_url):
     """ For .ytdl command, download media from YouTube and many other sites. """
     url = v_url.pattern_match.group(2)
@@ -44,48 +42,48 @@ async def download_video(v_url):
         os.makedirs(out_folder)
     if type == "a":
         opts = {
-            'format':'bestaudio',
-            'addmetadata':True,
+            'format': 'bestaudio',
+            'addmetadata': True,
             'noplaylist': False,
-            'key':'FFmpegMetadata',
-            'writethumbnail':True,
-            'embedthumbnail':True,
-            'prefer_ffmpeg':True,
-            'geo_bypass':True,
-            'nocheckcertificate':True,
+            'key': 'FFmpegMetadata',
+            'writethumbnail': True,
+            'embedthumbnail': True,
+            'prefer_ffmpeg': True,
+            'geo_bypass': True,
+            'nocheckcertificate': True,
             'postprocessors': [{
                 'key': 'FFmpegExtractAudio',
                 'preferredcodec': 'mp3',
                 'preferredquality': '320',
             }],
-            'outtmpl':out_folder + '%(title)s.%(ext)s',
-            'quiet':True,
-            'logtostderr':False
+            'outtmpl': out_folder + '%(title)s.%(ext)s',
+            'quiet': True,
+            'logtostderr': False
         }
         video = False
         song = True
 
     elif type == "v":
         opts = {
-            'format':'best',
+            'format': 'best',
             'addmetadata': True,
             'noplaylist': False,
-            'getthumbnail':True,
+            'getthumbnail': True,
             'embedthumbnail': True,
-            'xattrs':True,
+            'xattrs': True,
             'writethumbnail': True,
-            'key':'FFmpegMetadata',
-            'prefer_ffmpeg':True,
-            'geo_bypass':True,
-            'nocheckcertificate':True,
-            'postprocessors': 
+            'key': 'FFmpegMetadata',
+            'prefer_ffmpeg': True,
+            'geo_bypass': True,
+            'nocheckcertificate': True,
+            'postprocessors':
             [{
                 'key': 'FFmpegVideoConvertor',
-                'preferedformat': 'mp4'},               
-            ],
-            'outtmpl':out_folder + '%(title)s.%(ext)s',
-            'logtostderr':False,
-            'quiet':True
+                'preferedformat': 'mp4'},
+             ],
+            'outtmpl': out_folder + '%(title)s.%(ext)s',
+            'logtostderr': False,
+            'quiet': True
         }
         song = False
         video = True
@@ -152,24 +150,27 @@ async def download_video(v_url):
                         ]
                     try:
                         ytdl_data_name_audio = os.path.basename(single_file)
-                        thumb = out_folder + ytdl_data_name_audio[:(len(ytdl_data_name_audio)-4)] + ".jpg"
+                        thumb = out_folder + \
+                            ytdl_data_name_audio[:(
+                                len(ytdl_data_name_audio)-4)] + ".jpg"
                         print(ytdl_data_name_audio)
                         file_path = single_file
                         song_size = file_size(file_path)
                         await v_url.client.send_file(
                             v_url.chat_id,
                             single_file,
-                            caption=f"`{ytdl_data_name_audio}`" + "\n" + f"{song_size}",
+                            caption=f"`{ytdl_data_name_audio}`" +
+                            "\n" + f"{song_size}",
                             force_document=force_document,
                             supports_streaming=supports_streaming,
                             allow_cache=False,
-                            thumb = thumb,
+                            thumb=thumb,
                             reply_to=v_url.message.id,
                             attributes=document_attributes,
                             progress_callback=lambda d, t: asyncio.get_event_loop(
-                                ).create_task(
-                                    progress(d, t, v_url, c_time, "Uploading..",
-                                    f"{ytdl_data_name_audio}")))
+                            ).create_task(
+                                progress(d, t, v_url, c_time, "Uploading..",
+                                         f"{ytdl_data_name_audio}")))
                         # os.remove(thumb)
                     except Exception as e:
                         await v_url.client.send_message(
@@ -208,7 +209,7 @@ async def download_video(v_url):
                     # for file in os.listdir("./DOWNLOADS/youtubedl/"):
                     #     if file.endswith(".jpg"):
                     #         thumb = "./DOWNLOADS/youtubedl/" + file
-                            # print(os.path.join("./DOWNLOADS/youtubedl/", file))
+                        # print(os.path.join("./DOWNLOADS/youtubedl/", file))
                     # image_link = ytdl_data['thumbnail']
                     # downloaded_image = wget.download(image_link,out_folder)
                     # thumb = ytdl_data_name_video + ".jpg"
@@ -216,21 +217,24 @@ async def download_video(v_url):
                     video_size = file_size(file_path)
                     try:
                         ytdl_data_name_video = os.path.basename(single_file)
-                        thumb = out_folder + ytdl_data_name_video[:(len(ytdl_data_name_video)-4)] + ".jpg"
+                        thumb = out_folder + \
+                            ytdl_data_name_video[:(
+                                len(ytdl_data_name_video)-4)] + ".jpg"
                         await v_url.client.send_file(
                             v_url.chat_id,
                             single_file,
-                            caption=f"`{ytdl_data_name_video}`" + "\n" + f"{video_size}",
+                            caption=f"`{ytdl_data_name_video}`" +
+                            "\n" + f"{video_size}",
                             force_document=force_document,
                             supports_streaming=supports_streaming,
-                            thumb = thumb,
+                            thumb=thumb,
                             allow_cache=False,
                             reply_to=v_url.message.id,
                             attributes=document_attributes,
                             progress_callback=lambda d, t: asyncio.get_event_loop(
-                                ).create_task(
-                                    progress(d, t, v_url, c_time, "Uploading..",
-                                    f"{ytdl_data_name_video}")))
+                            ).create_task(
+                                progress(d, t, v_url, c_time, "Uploading..",
+                                         f"{ytdl_data_name_video}")))
                         # os.remove(thumb)
                     except Exception as e:
                         await v_url.client.send_message(
@@ -242,8 +246,6 @@ async def download_video(v_url):
                     await asyncio.sleep(DELETE_TIMEOUT)
                     # await v_url.delete()
         shutil.rmtree(out_folder)
-        
-
 
 
 

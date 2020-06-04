@@ -11,9 +11,8 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
 logger = logging.getLogger(__name__)
 
 
- 
-@borg.on(admin_cmd(pattern="cpin ?(.*)"))  
-async def _(event): 
+@borg.on(admin_cmd(pattern="cpin ?(.*)"))
+async def _(event):
     if event.fwd_from:
         return
     silent = True

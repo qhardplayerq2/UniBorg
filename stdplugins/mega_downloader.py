@@ -28,7 +28,7 @@ def subprocess_run(cmd):
     return talk
 
 
-@borg.on(admin_cmd(pattern="mega ?(.*)"))  
+@borg.on(admin_cmd(pattern="mega ?(.*)"))
 async def mega_downloader(megadl):
     await megadl.edit("`Processing...`")
     textx = await megadl.get_reply_message()
@@ -67,7 +67,8 @@ async def mega_download(url, megadl):
     if not exists(file_name):
         temp_file_name = file_name + ".temp"
         downloaded_file_name = "./" + "" + temp_file_name
-        downloader = SmartDL(file_url, downloaded_file_name, progress_bar=False)
+        downloader = SmartDL(
+            file_url, downloaded_file_name, progress_bar=False)
         display_message = None
         try:
             downloader.start(blocking=False)

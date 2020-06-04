@@ -30,7 +30,7 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
 logger = logging.getLogger(__name__)
 
 
-@borg.on(admin_cmd(pattern=("tar ?(.*)")))  
+@borg.on(admin_cmd(pattern=("tar ?(.*)")))
 async def _(event):
     if event.fwd_from:
         return
@@ -52,7 +52,7 @@ async def _(event):
             directory_name = downloaded_file_name
             await event.edit("Finish downloading to my local")
             to_upload_file = directory_name
-            output = await create_archive(to_upload_file) 
+            output = await create_archive(to_upload_file)
             is_zip = False
             if is_zip:
                 check_if_file = await create_archive(to_upload_file)
@@ -70,7 +70,7 @@ async def _(event):
                 os.remove(output)
                 os.remove(output)
             except:
-                    pass
+                pass
             await event.edit("Task Completed")
             await asyncio.sleep(3)
             await event.delete()
@@ -78,9 +78,8 @@ async def _(event):
             await mone.edit(str(e))
     elif input_str:
         directory_name = input_str
-        
-        await event.edit("Local file compressed to `{}`".format(output))
 
+        await event.edit("Local file compressed to `{}`".format(output))
 
 
 async def create_archive(input_directory):

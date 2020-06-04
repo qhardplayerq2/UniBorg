@@ -21,7 +21,8 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
 logger = logging.getLogger(__name__)
 # thumb_image_path = Config.TMP_DOWNLOAD_DIRECTORY + "thumb_image.jpg"
 
-@borg.on(admin_cmd(pattern="converttovideo ?(.*)"))  
+
+@borg.on(admin_cmd(pattern="converttovideo ?(.*)"))
 async def _(event):
     if event.fwd_from:
         return
@@ -51,15 +52,16 @@ async def _(event):
             ms = (end - start).seconds
             await mone.edit("Downloaded now preparing to streaming upload")
         # if os.path.exists(input_str):
-            
+
             if os.path.exists(Config.TMP_DOWNLOAD_DIRECTORY):
-                if not downloaded_file_name.endswith((".mkv", ".mp4", ".mp3", ".flac",".webm",".ts",".mov")):
+                if not downloaded_file_name.endswith((".mkv", ".mp4", ".mp3", ".flac", ".webm", ".ts", ".mov")):
                     await mone.edit(
                         "**Supported Formats**: MKV, MP4, MP3, FLAC"
                     )
                     return False
                 if downloaded_file_name.upper().endswith(("MKV", "MP4", "WEBM")):
-                    metadata = extractMetadata(createParser(downloaded_file_name))
+                    metadata = extractMetadata(
+                        createParser(downloaded_file_name))
                     duration = 0
                     if metadata.has("duration"):
                         duration = metadata.get('duration').seconds
@@ -67,9 +69,9 @@ async def _(event):
                     height = 0
                     thumb = None
                 if os.path.exists(thumb_image_path):
-                    thumb = thumb_image_path   
+                    thumb = thumb_image_path
                 else:
-                    thumb =  await take_screen_shot(
+                    thumb = await take_screen_shot(
                         downloaded_file_name,
                         os.path.dirname(os.path.abspath(downloaded_file_name)),
                         (duration / 2)
@@ -80,7 +82,7 @@ async def _(event):
                 width = 0
                 height = 0
                 # if metadata.has("duration"):
-                    # duration = metadata.get('duration').seconds
+                # duration = metadata.get('duration').seconds
                 if os.path.exists(thumb_image_path):
                     metadata = extractMetadata(createParser(thumb_image_path))
                     if metadata.has("width"):
@@ -125,18 +127,19 @@ async def _(event):
                 await mone.edit("404: File Not Found")
 
 
-
 def get_video_thumb(file, output=None, width=90):
     metadata = extractMetadata(createParser(file))
     p = subprocess.Popen([
         'ffmpeg', '-i', file,
-        '-ss', str(int((0, metadata.get('duration').seconds)[metadata.has('duration')] / 2)),
+        '-ss', str(int((0, metadata.get('duration').seconds)
+                       [metadata.has('duration')] / 2)),
         '-filter:v', 'scale={}:-1'.format(width),
         '-vframes', '1',
         output,
     ], stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
     if not p.returncode and os.path.lexists(file):
         return output
+
 
 async def take_screen_shot(video_file, output_directory, ttl):
     # https://stackoverflow.com/a/13891070/4723940
@@ -171,9 +174,6 @@ async def take_screen_shot(video_file, output_directory, ttl):
         return out_put_file_name
     else:
         return None
-
-
-
 
 
 def get_lst_of_files(input_directory, output_lst):

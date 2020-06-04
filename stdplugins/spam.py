@@ -7,7 +7,7 @@ import logging
 from asyncio import wait
 
 from telethon import events
-  
+
 from sample_config import Config
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
@@ -15,7 +15,7 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
 logger = logging.getLogger(__name__)
 
 
-@borg.on(events.NewMessage(pattern=r"\.spam", outgoing=True))  
+@borg.on(events.NewMessage(pattern=r"\.spam", outgoing=True))
 async def spammer(e):
     if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
         message = e.text
@@ -24,7 +24,7 @@ async def spammer(e):
 
         await wait(
             [e.respond(spam_message) for i in range(counter)]
-            )
+        )
 
         await e.delete()
         if Config.LOGGER:
@@ -32,4 +32,4 @@ async def spammer(e):
                 Config.PRIVATE_GROUP_BOT_API_ID,
                 "#SPAM \n\n"
                 "Spam was executed successfully"
-                )
+            )

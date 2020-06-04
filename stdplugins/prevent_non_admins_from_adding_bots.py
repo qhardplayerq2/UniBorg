@@ -6,7 +6,6 @@ from telethon import events
 from telethon.tl.functions.channels import EditBannedRequest
 from telethon.tl.types import ChatBannedRights
 
-  
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
@@ -21,7 +20,7 @@ CHATS_TO_MONITOR_FOR_ADDED_BOTS = [
 ]
 
 
-@borg.on(events.ChatAction(chats=CHATS_TO_MONITOR_FOR_ADDED_BOTS))  
+@borg.on(events.ChatAction(chats=CHATS_TO_MONITOR_FOR_ADDED_BOTS))
 async def kick_if_bots(event):
     if event.user_added:
         users_added_by = event.action_message.from_id

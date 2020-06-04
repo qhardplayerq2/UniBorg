@@ -1,21 +1,21 @@
+from sample_config import Config
+from uniborg.util import admin_cmd
+from hachoir.parser import createParser
+from hachoir.metadata import extractMetadata
+from telethon.tl.types import DocumentAttributeVideo
+from remotezip import RemoteZip
+import os
 import logging
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
 logger = logging.getLogger(__name__)
-import os
-from remotezip import RemoteZip
-from telethon.tl.types import DocumentAttributeVideo
-from hachoir.metadata import extractMetadata
-from hachoir.parser import createParser
-from uniborg.util import admin_cmd
 
-from sample_config import Config
 
 filedir = f"{Config.TMP_DOWNLOAD_DIRECTORY}extracted/"
 thumb_image_path = Config.TMP_DOWNLOAD_DIRECTORY + "/thumb_image.jpg"
 
 
-@borg.on(admin_cmd(pattern=("runzip ?(.*)")))  
+@borg.on(admin_cmd(pattern=("runzip ?(.*)")))
 async def _(event):
     if event.fwd_from:
         return
@@ -57,7 +57,8 @@ async def _(event):
                         if metadata.has("duration"):
                             duration = metadata.get('duration').seconds
                         if os.path.exists(thumb_image_path):
-                            metadata = extractMetadata(createParser(thumb_image_path))
+                            metadata = extractMetadata(
+                                createParser(thumb_image_path))
                             if metadata.has("width"):
                                 width = metadata.get("width")
                             if metadata.has("height"):
@@ -104,7 +105,6 @@ async def _(event):
             #                     # )
             #                 )
             # # await event.edit(reply)
-
 
 
 def get_lst_of_files(input_directory, output_lst):

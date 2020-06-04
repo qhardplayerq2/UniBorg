@@ -14,10 +14,11 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
                     level=logging.WARNING)
 logger = logging.getLogger(__name__)
 
-@borg.on(admin_cmd(pattern="lock( (?P<target>\S+)|$)"))  
+
+@borg.on(admin_cmd(pattern="lock( (?P<target>\S+)|$)"))
 async def _(event):
-     # Space weirdness in regex required because argument is optional and other
-     # commands start with ".lock"
+    # Space weirdness in regex required because argument is optional and other
+    # commands start with ".lock"
     if event.fwd_from:
         return
     input_str = event.pattern_match.group("target")
@@ -94,7 +95,7 @@ async def _(event):
             )
 
 
-@borg.on(admin_cmd(pattern="unlock ?(.*)"))  
+@borg.on(admin_cmd(pattern="unlock ?(.*)"))
 async def _(event):
     if event.fwd_from:
         return
@@ -117,7 +118,7 @@ async def _(event):
         )
 
 
-@borg.on(admin_cmd(pattern="curenabledlocks"))  
+@borg.on(admin_cmd(pattern="curenabledlocks"))
 async def _(event):
     if event.fwd_from:
         return
@@ -158,8 +159,8 @@ async def _(event):
     await event.edit(res)
 
 
-@borg.on(events.MessageEdited())   
-@borg.on(events.NewMessage())   
+@borg.on(events.MessageEdited())
+@borg.on(events.NewMessage())
 async def check_incoming_messages(event):
     try:
         from sql_helpers.locks_sql import update_lock, is_locked
@@ -181,7 +182,8 @@ async def check_incoming_messages(event):
                 await event.delete()
             except Exception as e:
                 await event.reply(
-                    "I don't seem to have ADMIN permission here. \n`{}`".format(str(e))
+                    "I don't seem to have ADMIN permission here. \n`{}`".format(
+                        str(e))
                 )
                 update_lock(peer_id, "commands", False)
     if is_locked(peer_id, "forward"):
@@ -190,7 +192,8 @@ async def check_incoming_messages(event):
                 await event.delete()
             except Exception as e:
                 await event.reply(
-                    "I don't seem to have ADMIN permission here. \n`{}`".format(str(e))
+                    "I don't seem to have ADMIN permission here. \n`{}`".format(
+                        str(e))
                 )
                 update_lock(peer_id, "forward", False)
     if is_locked(peer_id, "email"):
@@ -205,7 +208,8 @@ async def check_incoming_messages(event):
                 await event.delete()
             except Exception as e:
                 await event.reply(
-                    "I don't seem to have ADMIN permission here. \n`{}`".format(str(e))
+                    "I don't seem to have ADMIN permission here. \n`{}`".format(
+                        str(e))
                 )
                 update_lock(peer_id, "email", False)
     if is_locked(peer_id, "url"):
@@ -220,12 +224,13 @@ async def check_incoming_messages(event):
                 await event.delete()
             except Exception as e:
                 await event.reply(
-                    "I don't seem to have ADMIN permission here. \n`{}`".format(str(e))
+                    "I don't seem to have ADMIN permission here. \n`{}`".format(
+                        str(e))
                 )
                 update_lock(peer_id, "url", False)
 
 
-@borg.on(events.ChatAction())   
+@borg.on(events.ChatAction())
 async def _(event):
     try:
         from sql_helpers.locks_sql import update_lock, is_locked
@@ -258,11 +263,13 @@ async def _(event):
                         ))
                     except Exception as e:
                         await event.reply(
-                            "I don't seem to have ADMIN permission here. \n`{}`".format(str(e))
+                            "I don't seem to have ADMIN permission here. \n`{}`".format(
+                                str(e))
                         )
                         update_lock(event.chat_id, "bots", False)
                         break
             if Config.G_BAN_LOGGER_GROUP is not None and is_ban_able:
                 ban_reason_msg = await event.reply(
-                    "!warn [user](tg://user?id={}) Please Do Not Add BOTs to this chat.".format(users_added_by)
+                    "!warn [user](tg://user?id={}) Please Do Not Add BOTs to this chat.".format(
+                        users_added_by)
                 )
