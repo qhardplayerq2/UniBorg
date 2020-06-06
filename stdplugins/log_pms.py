@@ -12,8 +12,6 @@ from sample_config import Config
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                     level=logging.WARN)
-
-global NO_PM_LOG_USERS
 NO_PM_LOG_USERS = []
 
 
