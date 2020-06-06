@@ -1,6 +1,5 @@
 import html
 
-<<<<<<< HEAD
 from telethon.tl.functions.channels import EditBannedRequest
 from telethon.tl.types import ChatBannedRights
 
@@ -31,11 +30,6 @@ unbanned_rights = ChatBannedRights(
     embed_links=None
 )
 
-=======
-import sql_helpers.warns_sql as sql
-from uniborg.util import admin_cmd
-
->>>>>>> parent of b004461... Merge branch 'master' of https://github.com/SpEcHiDe/UniBorg
 
 @borg.on(admin_cmd(pattern="warn (.*)"))
 async def _(event):
