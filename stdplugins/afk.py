@@ -12,10 +12,6 @@ from sample_config import Config
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
 logger = logging.getLogger(__name__)
-
-global USER_AFK
-global afk_time
-global last_afk_message
 USER_AFK = {}
 afk_time = None
 last_afk_message = {}
