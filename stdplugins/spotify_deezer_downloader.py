@@ -12,7 +12,7 @@ from telethon.tl.functions.messages import ImportChatInviteRequest
 from uniborg.util import admin_cmd
 
 
-@borg.on(admin_cmd(pattern="sdd ?(.*)"))
+@borg.on(admin_cmd(pattern="spoti ?(.*)"))
 async def _(event):
     if event.fwd_from:
         return
