@@ -1,7 +1,10 @@
 import html
+
+from telethon.tl.functions.channels import EditBannedRequest
+from telethon.tl.types import ChatBannedRights
+
 import sql_helpers.warns_sql as sql
 from uniborg.util import admin_cmd
-
 
 banned_rights = ChatBannedRights(
     until_date=None,
