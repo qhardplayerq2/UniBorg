@@ -33,10 +33,10 @@ async def _(event):
                 await asyncio.sleep(0.00000069420)
             await conv.send_message(d_link)
             details = await conv.get_response()
-            await event.client.send_message(event.chat_id, details)
+            # await event.client.send_message(event.chat_id, details)
             await conv.get_response()
             songh = await conv.get_response()
-            await event.client.send_file(event.chat_id, songh, caption="🔆Kanal Linki : https://t.me/joinchat/AAAAAE8NqbV48l7ls-pFtQ🔆)")
+            await event.client.send_file(event.chat_id, songh, caption="Kanal Linki:\nhttps://t.me/joinchat/AAAAAE8NqbV48l7ls-pFtQ")
             await event.delete()
         except YouBlockedUserError:
             await event.edit("**Error:** `unblock` @DeezLoadBot `and retry!`")
