@@ -6,7 +6,9 @@ DB Options: bots, commands, email, forward, url"""
 import logging
 
 from telethon import events, functions, types
-from uniborg.util import admin_cmd, is_admin
+
+from sample_config import Config
+from uniborg.util import admin_cmd
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)

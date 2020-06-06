@@ -1,8 +1,4 @@
 import html
-from telethon import events
-from telethon.tl.functions.channels import EditBannedRequest
-from telethon.tl.types import ChatBannedRights
-from uniborg.util import admin_cmd, is_admin
 import sql_helpers.warns_sql as sql
 from uniborg.util import admin_cmd
 
@@ -46,12 +42,11 @@ async def _(event):
     if num_warns >= limit:
         sql.reset_warns(reply_message.from_id, event.chat_id)
         if soft_warn:
-            await borg(EditBannedRequest(event.chat_id, reply_message.from_id, banned_rights))
+            logger.info("TODO: kick user")
             reply = "{} warnings, <u><a href='tg://user?id={}'>user</a></u> has been kicked!".format(
                 limit, reply_message.from_id)
-            await borg(EditBannedRequest(event.chat_id, reply_message.from_id, unbanned_rights))
         else:
-            await borg(EditBannedRequest(event.chat_id, reply_message.from_id, banned_rights))
+            logger.info("TODO: ban user")
             reply = "{} warnings, <u><a href='tg://user?id={}'>user</a></u> has been banned!".format(
                 limit, reply_message.from_id)
     else:
