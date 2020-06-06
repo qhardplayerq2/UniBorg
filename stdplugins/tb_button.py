@@ -46,9 +46,9 @@ async def _(event):
 
         # if even, not escaped -> create button
         if n_escapes % 2 == 0:
-            # create a tuple with button label, url, and newline status
+            # create a thruple with button label, url, and newline status
             buttons.append(
-                (match.group(2), match.group(3), bool(match.group(4))))
+                (match.group(2), match.group(4), bool(match.group(5))))
             note_data += markdown_note[prev:match.start(1)]
             prev = match.end(1)
 

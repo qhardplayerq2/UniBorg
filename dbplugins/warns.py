@@ -1,5 +1,6 @@
 import html
 
+<<<<<<< HEAD
 from telethon.tl.functions.channels import EditBannedRequest
 from telethon.tl.types import ChatBannedRights
 
@@ -30,6 +31,11 @@ unbanned_rights = ChatBannedRights(
     embed_links=None
 )
 
+=======
+import sql_helpers.warns_sql as sql
+from uniborg.util import admin_cmd
+
+>>>>>>> parent of b004461... Merge branch 'master' of https://github.com/SpEcHiDe/UniBorg
 
 @borg.on(admin_cmd(pattern="warn (.*)"))
 async def _(event):
@@ -37,8 +43,6 @@ async def _(event):
         return
     warn_reason = event.pattern_match.group(1)
     reply_message = await event.get_reply_message()
-    if await is_admin(event.client, event.chat_id, reply_message.from_id):
-        return
     limit, soft_warn = sql.get_warn_setting(event.chat_id)
     num_warns, reasons = sql.warn_user(
         reply_message.from_id, event.chat_id, warn_reason)

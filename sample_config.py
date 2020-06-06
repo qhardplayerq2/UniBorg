@@ -115,8 +115,6 @@ class Config(object):
     DEFAULT_NAME = os.environ.get("DEFAULT_NAME", None)
     VIRUSTOTAL_API_KEY = os.environ.get("VIRUSTOTAL_API_KEY", None)
     #
-    # JustWatch Country
-    WATCH_COUNTRY = os.environ.get("WATCH_COUNTRY","IN")
     # define "spam" in PMs
     MAX_FLOOD_IN_P_M_s = int(os.environ.get("MAX_FLOOD_IN_P_M_s", 3))
     # leave this blank, should be automatically filled for Heroku.com users
