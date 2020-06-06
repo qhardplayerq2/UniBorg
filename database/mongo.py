@@ -1,4 +1,3 @@
-import logging
 from pymongo import MongoClient
 from sample_config import Config
 
