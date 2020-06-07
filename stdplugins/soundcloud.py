@@ -23,7 +23,7 @@ async def _(event):
         return
     if not os.path.isdir(Config.TMP_DOWNLOAD_DIRECTORY):
         os.makedirs(Config.TMP_DOWNLOAD_DIRECTORY)
-    msg = await event.edit("Music downloading from SoundCloud, please wait..")
+    msg = await event.edit("`Music downloading from SoundCloud, please wait..`")
     link = event.pattern_match.group(1)
     if os.path.exists(Config.TMP_DOWNLOAD_DIRECTORY):
         api = SoundcloudAPI()
@@ -33,14 +33,15 @@ async def _(event):
             f'{track.artist} - {track.title}.mp3'
         with open(filename, 'wb+') as fp:
             await track.write_mp3_to(fp)
-        edited = await msg.edit("Downloaded. Uploading now..")
+        edited = await msg.edit("`Downloaded. Uploading now..`")
         await event.client.send_file(
             event.chat_id,
             filename,
             force_document=True,
             supports_streaming=True,
             allow_cache=False,
-            reply_to=event.message.id
+            reply_to=event.message.id,
+            caption=track.title
         )
         await edited.delete()
         os.remove(Config.TMP_DOWNLOAD_DIRECTORY +
