@@ -58,6 +58,7 @@ wget
 wikipedia
 youtube-dl
 PyLyrics 
+soundcloud-lib
 # gitpython
 # aioschedule
 # alive_progress
