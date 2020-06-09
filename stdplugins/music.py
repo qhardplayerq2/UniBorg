@@ -19,7 +19,7 @@ async def music_find(event):
     msg = await event.get_reply_message()
     if music_name:
         await event.delete()
-        song_result = await event.client.inline_query("deezermusicbot", music_name)
+        song_result = await event.client.inline_query("MusicDownloaderRobot", music_name)
 
         await song_result[0].click(
             event.chat_id,
@@ -28,7 +28,7 @@ async def music_find(event):
         )
     elif msg:
         await event.delete()
-        song_result = await event.client.inline_query("deezermusicbot", msg.message)
+        song_result = await event.client.inline_query("MusicDownloaderRobot", msg.message)
 
         await song_result[0].click(
             event.chat_id,
