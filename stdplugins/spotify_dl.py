@@ -1,3 +1,5 @@
+"plugin credits https://t.me/By_Azade"
+
 import asyncio
 import logging
 import os
