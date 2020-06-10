@@ -12,6 +12,7 @@ coffeehouse
 convertdate
 covid
 cryptg
+deezloader
 emoji
 feedparser
 google-api-python-client
