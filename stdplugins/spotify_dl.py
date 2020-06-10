@@ -1,4 +1,4 @@
-"plugin credits https://t.me/By_Azade"
+"plugin credits https://t.me/By_Azade usage: .spot <song name> plugin choose automatically best quality"
 
 import asyncio
 import logging
