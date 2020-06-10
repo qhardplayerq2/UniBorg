@@ -144,8 +144,6 @@ class Config(object):
     # Userbot logging feature switch.
     LOGSPAMMER = sb(os.environ.get("LOGSPAMMER", None))
     MONGO_DB_URI = os.environ.get("MONGO_DB_URI", None)
-    # Deezer ARL Token
-    DEEZER_ARL_TOKEN = os.environ.get("DEEZER_ARL_TOKEN", None)
 
 
 class Production(Config):

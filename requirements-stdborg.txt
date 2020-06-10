@@ -12,7 +12,6 @@ coffeehouse
 convertdate
 covid
 cryptg
-deezloader
 emoji
 feedparser
 google-api-python-client
@@ -60,6 +59,7 @@ wikipedia
 youtube-dl
 PyLyrics 
 soundcloud-lib
+spotdl
 # gitpython
 # aioschedule
 # alive_progress
