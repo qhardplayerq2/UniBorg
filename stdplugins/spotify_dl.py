@@ -6,6 +6,10 @@ import os
 import shutil
 from datetime import datetime
 
+from telethon.tl.types import DocumentAttributeAudio, DocumentAttributeVideo
+
+from hachoir.metadata import extractMetadata
+from hachoir.parser import createParser
 from sample_config import Config
 from uniborg.util import admin_cmd
 
@@ -18,6 +22,7 @@ DOWNLOAC_LOC = Config.TMP_DOWNLOAD_DIRECTORY + "spotify/"
 
 @borg.on(admin_cmd(pattern="spot ?(.*)"))  # pylint:disable=E0602
 async def spoti(event):
+    await event.edit("Processing ...")
     music_name = event.pattern_match.group(1)
     if not os.path.exists(DOWNLOAC_LOC):
         os.makedirs(DOWNLOAC_LOC)
@@ -25,7 +30,7 @@ async def spoti(event):
         f"spotdl --song '{music_name}' -o flac -q best -f {DOWNLOAC_LOC}")
     if os.path.exists(DOWNLOAC_LOC):
         start = datetime.now()
-        # await event.edit("Processing ...")
+
         lst_of_files = sorted(get_lst_of_files(DOWNLOAC_LOC, []))
         logger.info(lst_of_files)
         u = 0
@@ -35,8 +40,33 @@ async def spoti(event):
         )
         for single_file in lst_of_files:
             if os.path.exists(single_file):
-                supports_streaming = True
-                force_document = False
+                force_document = True
+                supports_streaming = False
+                document_attributes = []
+                width = 0
+                height = 0
+            if single_file.upper().endswith(Config.TL_MUS_STREAM_TYPES):
+                    metadata = extractMetadata(createParser(single_file))
+                    duration = 0
+                    title = ""
+                    artist = ""
+                    if metadata.has("duration"):
+                        duration = metadata.get('duration').seconds
+                    if metadata.has("title"):
+                        title = metadata.get("title")
+                    if metadata.has("artist"):
+                        artist = metadata.get("artist")
+                    document_attributes = [
+                        DocumentAttributeAudio(
+                            duration=duration,
+                            voice=False,
+                            title=title,
+                            performer=artist,
+                            waveform=None
+                        )
+                    ]
+                    supports_streaming = True
+                    force_document = False
             if not single_file.endswith(".temp"):
                 try:
                     caption_text = os.path.splitext(
@@ -69,7 +99,7 @@ async def spoti(event):
             end = datetime.now()
             ms = (end - start).seconds
             await event.edit("`Uploaded {} music in {} seconds.`".format(u, ms))
-            os.removedirs(DOWNLOAC_LOC)
+            shutil.rmtree(DOWNLOAC_LOC)
         else:
             await event.edit("`Music Not Found`")
 
