@@ -103,8 +103,6 @@ async def spoti(event):
             ms = (end - start).seconds
             await event.edit("`Uploaded {} music in {} seconds.`".format(u, ms))
             shutil.rmtree(DOWNLOAC_LOC)
-        else:
-            await event.edit("`Music Not Found`")
 
 
 def get_lst_of_files(input_directory, output_lst):
