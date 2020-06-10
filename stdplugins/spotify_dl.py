@@ -4,6 +4,7 @@ import asyncio
 import logging
 import os
 import shutil
+import subprocess
 from datetime import datetime
 
 from telethon.tl.types import DocumentAttributeAudio, DocumentAttributeVideo
@@ -26,8 +27,10 @@ async def spoti(event):
     music_name = event.pattern_match.group(1)
     if not os.path.exists(DOWNLOAC_LOC):
         os.makedirs(DOWNLOAC_LOC)
-    os.system(
-        f"spotdl --song '{music_name}' -o flac -q best -f {DOWNLOAC_LOC}")
+    subprocess.Popen(
+        ["spotdl", "--song", f"'{music_name}'", "-o", "flac", "-q", "best", "-f", f"{DOWNLOAC_LOC}"])
+    # os.system(
+    #     f"spotdl --song '{music_name}' -o flac -q best -f {DOWNLOAC_LOC}")
     if os.path.exists(DOWNLOAC_LOC):
         start = datetime.now()
 
@@ -46,27 +49,27 @@ async def spoti(event):
                 width = 0
                 height = 0
             if single_file.upper().endswith(Config.TL_MUS_STREAM_TYPES):
-                    metadata = extractMetadata(createParser(single_file))
-                    duration = 0
-                    title = ""
-                    artist = ""
-                    if metadata.has("duration"):
-                        duration = metadata.get('duration').seconds
-                    if metadata.has("title"):
-                        title = metadata.get("title")
-                    if metadata.has("artist"):
-                        artist = metadata.get("artist")
-                    document_attributes = [
-                        DocumentAttributeAudio(
-                            duration=duration,
-                            voice=False,
-                            title=title,
-                            performer=artist,
-                            waveform=None
-                        )
-                    ]
-                    supports_streaming = True
-                    force_document = False
+                metadata = extractMetadata(createParser(single_file))
+                duration = 0
+                title = ""
+                artist = ""
+                if metadata.has("duration"):
+                    duration = metadata.get('duration').seconds
+                if metadata.has("title"):
+                    title = metadata.get("title")
+                if metadata.has("artist"):
+                    artist = metadata.get("artist")
+                document_attributes = [
+                    DocumentAttributeAudio(
+                        duration=duration,
+                        voice=False,
+                        title=title,
+                        performer=artist,
+                        waveform=None
+                    )
+                ]
+                supports_streaming = True
+                force_document = False
             if not single_file.endswith(".temp"):
                 try:
                     caption_text = os.path.splitext(
