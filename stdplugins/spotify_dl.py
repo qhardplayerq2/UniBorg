@@ -17,7 +17,7 @@ DOWNLOAC_LOC = Config.TMP_DOWNLOAD_DIRECTORY + "spotify/"
 async def spoti(event):
     music_name = event.pattern_match.group(1)
     if not os.path.exists(DOWNLOAC_LOC):
-        os.mkdir(DOWNLOAC_LOC)
+        os.makedirs(DOWNLOAC_LOC)
     os.system(
         f"spotdl --song '{music_name}' -o flac -q best -f {DOWNLOAC_LOC}")
     if os.path.exists(DOWNLOAC_LOC):
