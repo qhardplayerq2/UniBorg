@@ -3,6 +3,7 @@
 import asyncio
 import logging
 import os
+import shutil
 from datetime import datetime
 
 from sample_config import Config
@@ -68,7 +69,7 @@ async def spoti(event):
             end = datetime.now()
             ms = (end - start).seconds
             await event.edit("`Uploaded {} music in {} seconds.`".format(u, ms))
-            os.removedirs("/workspace/UniBorg/bin/test/")
+            os.removedirs(DOWNLOAC_LOC)
         else:
             await event.edit("`Music Not Found`")
 
