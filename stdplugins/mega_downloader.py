@@ -2,6 +2,7 @@
 # All rights reserved.
 
 import json
+import logging
 import os
 import re
 import time
@@ -11,6 +12,7 @@ from urllib.error import HTTPError
 
 from pySmartDL import SmartDL
 from uniborg.util import admin_cmd, humanbytes
+
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
 logger = logging.getLogger(__name__)
