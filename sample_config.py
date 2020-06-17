@@ -64,7 +64,6 @@ class Config(object):
     # because of their ephemeral file system
     NO_LOAD = [
         "rss",
-        "gban",
         "unbanmute",
         "antispam",
         "notification_mtab_manager"
