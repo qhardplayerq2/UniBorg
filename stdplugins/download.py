@@ -50,7 +50,7 @@ async def _(event):
         file_name = os.path.basename(url)
         to_download_directory = Config.TMP_DOWNLOAD_DIRECTORY
         if "|" in input_str:
-            url, file_name = input_str.split("|", maxsplit=1)
+            url, file_name = input_str.split("|")
         url = url.strip()
         file_name = file_name.strip()
         downloaded_file_name = os.path.join(to_download_directory, file_name)
@@ -72,13 +72,12 @@ async def _(event):
                 round(percentage, 2))
             estimated_total_time = downloader.get_eta(human=True)
             try:
-                current_message = f"trying to download\n"\
-                                  f"URL: {url}\n"\
-                                  f"File Name: {file_name}\n" \
-                                  f"Speed: {speed}"\
-                                  f"{progress_str}\n"\
-                                  f"{humanbytes(downloaded)} of {humanbytes(total_length)}\n"\
-                                  f"ETA: {estimated_total_time}"
+                current_message = "trying to download\n"
+                current_message += f"URL: {url}\n"
+                current_message += f"File Name: {file_name}\n"
+                current_message += f"{progress_str}\n"
+                current_message += f"{humanbytes(downloaded)} of {humanbytes(total_length)}\n"
+                current_message += f"ETA: {estimated_total_time}"
                 if round(diff % 10.00) == 0 and current_message != display_message:
                     await mone.edit(current_message)
                     display_message = current_message

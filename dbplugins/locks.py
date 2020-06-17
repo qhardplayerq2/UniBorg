@@ -6,7 +6,9 @@ DB Options: bots, commands, email, forward, url"""
 import logging
 
 from telethon import events, functions, types
-from uniborg.util import admin_cmd, is_admin
+
+from sample_config import Config
+from uniborg.util import admin_cmd
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
@@ -166,8 +168,7 @@ async def check_incoming_messages(event):
         logger.info("DB_URI is not configured.")
         logger.info(str(e))
         return False
-    if await is_admin(event.client, event.chat_id, event.from_id):
-        return
+    # TODO: exempt admins from locks
     peer_id = event.chat_id
     if is_locked(peer_id, "commands"):
         entities = event.message.entities
@@ -237,8 +238,8 @@ async def _(event):
         logger.info("DB_URI is not configured.")
         logger.info(str(e))
         return False
-    if await is_admin(event.client, event.chat_id, event.action_message.from_id):
-        return
+    # TODO: exempt admins from locks
+    # check for "lock" "bots"
     if is_locked(event.chat_id, "bots"):
         # bots are limited Telegram accounts,
         # and cannot join by themselves

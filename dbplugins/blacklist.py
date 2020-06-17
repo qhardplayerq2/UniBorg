@@ -1,41 +1,22 @@
-# This Source Code Form is subject to the terms of the Mozilla Public
-# License, v. 2.0. If a copy of the MPL was not distributed with this
-# file, You can obtain one at http://mozilla.org/MPL/2.0/.
-"""Filters
-Available Commands:
-.addblacklist
-.listblacklist
-.rmblacklist"""
-import asyncio
-import io
-import re
-import sql_helpers.blacklist_sql as sql
-from telethon import events, utils
-from telethon.tl import types, functions
-from uniborg.util import admin_cmd, is_admin
+# # This Source Code Form is subject to the terms of the Mozilla Public
+# # License, v. 2.0. If a copy of the MPL was not distributed with this
+# # file, You can obtain one at http://mozilla.org/MPL/2.0/.
+# """Filters
+# Available Commands:
+# .addblacklist
+# .listblacklist
+# .rmblacklist"""
+# import io
+# import logging
+# import re
 
 # import sql_helpers.blacklist_sql as sql
 # from uniborg.util import admin_cmd
 # from sample_config import Config
 
-
-@borg.on(admin_cmd(incoming=True))
-async def on_new_message(event):
-    if await is_admin(event.client, event.chat_id, event.from_id):
-        return
-    if borg.me.id == event.from_id:
-        return
-    name = event.raw_text
-    snips = sql.get_chat_blacklist(event.chat_id)
-    for snip in snips:
-        pattern = r"( |^|[^\w])" + re.escape(snip) + r"( |$|[^\w])"
-        if re.search(pattern, name, flags=re.IGNORECASE):
-            try:
-                await event.delete()
-            except Exception as e:
-                await event.reply("I do not have DELETE permission in this chat")
-                sql.rm_from_blacklist(event.chat_id, snip.lower())
-            break
+# logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+#                     level=logging.WARNING)
+# logger = logging.getLogger(__name__)
 
 
 # @borg.on(admin_cmd(incoming=True))

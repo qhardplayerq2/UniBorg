@@ -1,4 +1,3 @@
-import logging
 from database.mongo import cli
 
 cli = cli["Userbot"]["Settings"]
