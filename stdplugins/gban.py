@@ -40,7 +40,7 @@ async def _(event):
     await event.delete()
 
 
-@borg.on(admin_cmd(pattern="ungban ?(.*)"))
+@borg.on(admin_cmd(pattern="unfban ?(.*)"))
 async def _(event):
     if Config.G_BAN_LOGGER_GROUP is None:
         await event.edit("ENV VAR is not set. This module will not work.")
@@ -59,6 +59,6 @@ async def _(event):
         user_id = event.pattern_match.group(1)
         await borg.send_message(
             Config.G_BAN_LOGGER_GROUP,
-            "!fban [user](tg://user?id={})".format(user_id)
+            "!unfban [user](tg://user?id={})".format(user_id)
         )
     await event.delete()
