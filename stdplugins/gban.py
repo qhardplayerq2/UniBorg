@@ -32,10 +32,9 @@ async def _(event):
             "!fban {} {}".format(r.from_id, reason)
         )
     else:
-        user_id = event.pattern_match.group(1)
         await borg.send_message(
             Config.G_BAN_LOGGER_GROUP,
-            "!fban {}".format(user_id)
+            "!fban {}".format(reason)
         )
     await event.delete()
 
@@ -56,9 +55,8 @@ async def _(event):
             "!unfban {} {}".format(r_from_id, reason)
         )
     else:
-        user_id = event.pattern_match.group(1)
         await borg.send_message(
             Config.G_BAN_LOGGER_GROUP,
-            "!fban {}".format(user_id)
+            "!fban {}".format(reason)
         )
     await event.delete()
