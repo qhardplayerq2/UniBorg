@@ -11,6 +11,9 @@ from urllib.error import HTTPError
 
 from pySmartDL import SmartDL
 from uniborg.util import admin_cmd, humanbytes
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
+logger = logging.getLogger(__name__)
 
 
 def subprocess_run(cmd):
@@ -51,7 +54,7 @@ async def mega_download(url, megadl):
     except IndexError:
         await megadl.edit("`No MEGA.nz link found`\n")
         return
-    cmd = f'./bin/megadirect {link}'
+    cmd = f'./bin/mega.sh {link}'
     result = subprocess_run(cmd)
     try:
         data = json.loads(result[0])
