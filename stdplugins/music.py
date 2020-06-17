@@ -10,7 +10,7 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
 logger = logging.getLogger(__name__)
 
 
-@borg.on(admin_cmd(pattern="m ?(.*)"))  # pylint:disable=E0602
+@borg.on(admin_cmd(pattern="music ?(.*)"))  # pylint:disable=E0602
 async def music_find(event):
     if event.fwd_from:
         return
