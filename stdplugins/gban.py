@@ -13,7 +13,7 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
 logger = logging.getLogger(__name__)
 
 
-@borg.on(admin_cmd(pattern="gban ?(.*) + ?(.*)"))
+@borg.on(admin_cmd(pattern="fban ?(.*)"))
 async def _(event):
     if Config.G_BAN_LOGGER_GROUP is None:
         await event.edit("ENV VAR is not set. This module will not work.")
@@ -29,12 +29,13 @@ async def _(event):
             r_from_id = r.from_id
         await borg.send_message(
             Config.G_BAN_LOGGER_GROUP,
-            "!fban {} {}".format(r.from_id, reason)
+            "!fban [user](tg://user?id={}) {}".format(r.from_id, reason)
         )
     else:
+        user_id = event.pattern_match.group(1)
         await borg.send_message(
             Config.G_BAN_LOGGER_GROUP,
-            "!fban {}".format(reason)
+            "!fban [user](tg://user?id={})".format(user_id)
         )
     await event.delete()
 
@@ -52,11 +53,12 @@ async def _(event):
         r_from_id = r.from_id
         await borg.send_message(
             Config.G_BAN_LOGGER_GROUP,
-            "!unfban {} {}".format(r_from_id, reason)
+            "!unfban [user](tg://user?id={}) {}".format(r_from_id, reason)
         )
     else:
+        user_id = event.pattern_match.group(1)
         await borg.send_message(
             Config.G_BAN_LOGGER_GROUP,
-            "!fban {}".format(reason)
+            "!fban [user](tg://user?id={})".format(user_id)
         )
     await event.delete()
