@@ -35,7 +35,7 @@ async def on_snip(event):
         media_message = msg_o.media
         if isinstance(media_message, types.MessageMediaWebPage):
             media_message = None
-        await event.reply(
+        await event.client.send_message(
             msg_o,
             reply_to=msg.id
         )
