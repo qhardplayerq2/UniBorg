@@ -20,7 +20,8 @@ else:
         from sample_config import Development as Config
     else:
         logging.warning("No config.py Found!")
-        logging.info("Please run the command, again, after creating config.py similar to README.md")
+        logging.info(
+            "Please run the command, again, after creating config.py similar to README.md")
         sys.exit(1)
 
 
@@ -63,7 +64,3 @@ else:
                   "python3 -m stdborg <SESSION_NAME>"
                   "\n 👆👆 Please follow the above format to run your userbot."
                   "\n Bot quitting.")
-
-
-
-
