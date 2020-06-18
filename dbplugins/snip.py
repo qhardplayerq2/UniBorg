@@ -23,6 +23,7 @@ logger = logging.getLogger(__name__)
 async def on_snip(event):
     name = event.pattern_match.group(1)
     snip = get_snips(name)
+    msg = await event.get_reply_message()
     if snip:
         msg_o = await event.client.get_messages(
             entity=Config.PRIVATE_CHANNEL_BOT_API_ID,
@@ -36,7 +37,7 @@ async def on_snip(event):
             media_message = None
         await event.reply(
             msg_o,
-            reply_to=message_id
+            reply_to=msg.id
         )
         await event.delete()
 
