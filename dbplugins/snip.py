@@ -38,8 +38,7 @@ async def on_snip(event):
                 msg_o,
                 reply_to=message_id
             )
-        elif isinstance(media_message, event.voice) and isinstance(media_message, event.video) and isinstance(media_message, event.photo):
-            media_message = media_message
+        elif media_message:
             await event.client.send_message(
                 entity=event,
                 message=msg_o,
