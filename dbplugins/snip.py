@@ -6,13 +6,13 @@ Available Commands:
 
 import logging
 
+from telethon import events, utils
 from telethon.tl import types
 
 from sample_config import Config
 from sql_helpers.snips_sql import (add_snip, get_all_snips, get_snips,
                                    remove_snip)
 from uniborg.util import admin_cmd
-
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
@@ -59,13 +59,21 @@ async def on_snip_save(event):
     name = event.pattern_match.group(1)
     msg = await event.get_reply_message()
     if msg:
-        msg_o = await event.client.forward_messages(
-            entity=Config.PRIVATE_CHANNEL_BOT_API_ID,
-            messages=msg,
-            from_peer=event.chat_id,
-            silent=True
-        )
-        add_snip(name, msg_o.id)
+        snip = {'type': TYPE_TEXT, 'text': msg.message or ''}
+        if msg.media:
+            media = None
+            if isinstance(msg.media, types.MessageMediaPhoto):
+                media = utils.get_input_photo(msg.media.photo)
+                snip['type'] = TYPE_PHOTO
+            elif isinstance(msg.media, types.MessageMediaDocument):
+                media = utils.get_input_document(msg.media.document)
+                snip['type'] = TYPE_DOCUMENT
+            if media:
+                snip['id'] = media.id
+                snip['hash'] = media.access_hash
+                snip['fr'] = media.file_reference
+        add_snip(name, snip['text'], snip['type'], snip.get(
+            'id'), snip.get('hash'), snip.get('fr'))
         await event.edit("snip {name} saved successfully. Get it with #{name}".format(name=name))
     else:
         await event.edit("Reply to a message with `snips keyword` to save the snip")
@@ -83,7 +91,7 @@ async def on_snip_list(event):
     if len(OUT_STR) > Config.MAX_MESSAGE_SIZE_LIMIT:
         with io.BytesIO(str.encode(OUT_STR)) as out_file:
             out_file.name = "snips.text"
-            await event.client.send_file(
+            await borg.send_file(
                 event.chat_id,
                 out_file,
                 force_document=True,
