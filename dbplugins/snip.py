@@ -18,26 +18,38 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
                     level=logging.WARNING)
 logger = logging.getLogger(__name__)
 
+TYPE_TEXT = 0
+TYPE_PHOTO = 1
+TYPE_DOCUMENT = 2
+
 
 @borg.on(admin_cmd(pattern=r'\#(\S+)', outgoing=True))
 async def on_snip(event):
     name = event.pattern_match.group(1)
     snip = get_snips(name)
-    msg = await event.get_reply_message()
     if snip:
-        msg_o = await event.client.get_messages(
-            entity=Config.PRIVATE_CHANNEL_BOT_API_ID,
-            ids=int(snip.f_mesg_id)
-        )
+        if snip.snip_type == TYPE_PHOTO:
+            media = types.InputPhoto(
+                int(snip.media_id),
+                int(snip.media_access_hash),
+                snip.media_file_reference
+            )
+        elif snip.snip_type == TYPE_DOCUMENT:
+            media = types.InputDocument(
+                int(snip.media_id),
+                int(snip.media_access_hash),
+                snip.media_file_reference
+            )
+        else:
+            media = None
         message_id = event.message.id
         if event.reply_to_msg_id:
             message_id = event.reply_to_msg_id
-        media_message = msg_o.media
-        if isinstance(media_message, types.MessageMediaWebPage):
-            media_message = None
-        await event.reply(
-            msg_o,
-            reply_to=msg.id
+        await borg.send_message(
+            event.chat_id,
+            snip.reply,
+            reply_to=message_id,
+            file=media
         )
         await event.delete()
 
