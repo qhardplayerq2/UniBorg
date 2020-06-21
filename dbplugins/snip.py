@@ -31,10 +31,9 @@ async def on_snip(event):
             ids=int(snip.f_mesg_id)
         )
         if msg_o.media != None:
-            x = await event.client.download_media(msg_o,Config.TMP_DOWNLOAD_DIRECTORY)
             await event.client.send_file(
                 event.chat_id,
-                x,
+                msg_o.media,
                 supports_streaming=True,
                 reply_to=reply_message.id
             )
