@@ -59,6 +59,7 @@ wikipedia
 youtube-dl
 PyLyrics 
 soundcloud-lib
+JustWatch
 # gitpython
 # aioschedule
 # alive_progress
