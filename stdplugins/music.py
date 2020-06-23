@@ -90,4 +90,7 @@ async def _(event):
             await event.client.send_file(event.chat_id, details_3.media, caption="Kanal Linki:\nhttps://t.me/joinchat/AAAAAE8NqbV48l7ls-pFtQ")
         except YouBlockedUserError:
             await event.edit("**Error:** `unblock` @spotify_to_mp3_bot `and retry!`")
+        except TypeError:
+            await asyncio.sleep(2)
+            await event.client.send_file(event.chat_id, details_3.media, caption="Kanal Linki:\nhttps://t.me/joinchat/AAAAAE8NqbV48l7ls-pFtQ")
     await event.delete()
