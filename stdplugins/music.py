@@ -71,52 +71,22 @@ async def _(event):
         return
     await event.edit("müzik indiriliyor, birazdan gönderilecek.")
     d_link = event.pattern_match.group(1)
-    # if ".com" not in d_link:
-    #     await event.edit("` I need a link to download something pro.`**(._.)**")
-    # else:
-    #     await event.edit("🎶**Initiating Download!**🎶")
     bot = "@spotify_to_mp3_bot"
 
     async with event.client.conversation("@spotify_to_mp3_bot") as conv:
         try:
-            # await conv.send_message("/start")
-            # response = await conv.get_response()
-            # print(response)
-            # try:
-            #     await event.client(ImportChatInviteRequest('AAAAAFZPuYvdW1A8mrT8Pg'))
-            # except UserAlreadyParticipantError:
-            #     await asyncio.sleep(0.00000069420)
             await conv.send_message(d_link)
             await asyncio.sleep(2)
+            await event.delete()
             details = await conv.get_response()
-            # print(details.reply_markup)
-            # for a in range(len(details.reply_markup.rows)):
-            #     # details_1 = await conv.get_response()
-            #     if  details.buttons[a][0].text in d_link:
-            #         # x = await details_1.click(0)
-            #         print(details)
-            #     # print(details.buttons[a][0].text)
-            await asyncio.sleep(3)
-            # print(details)
+            await asyncio.sleep(2.75)
             x = await details.click(0)
-            # print(x)
-            # print("-------------------------------------------------------------------------")
             await asyncio.sleep(1)
             details_2 = await conv.get_response()
             y = await details_2.click(1)
-            # print(y)
-            # print("-------------------------------------------------------------------------")
-            print(details_2)
-            # print("-------------------------------------------------------------------------")
             await asyncio.sleep(1)
             details_3 = await conv.get_response()
-            # print(details_3)
-            # print("-------------------------------------------------------------------------")
-            await asyncio.sleep(2.5)
-            # await event.client.send_message(event.chat_id, details)
-            # await conv.get_response()
-            # songh = await conv.get_response()
+            await asyncio.sleep(3.75)
             await event.client.send_file(event.chat_id, details_3.media, caption="Kanal Linki:\nhttps://t.me/joinchat/AAAAAE8NqbV48l7ls-pFtQ")
-            # await event.delete()
         except YouBlockedUserError:
             await event.edit("**Error:** `unblock` @spotify_to_mp3_bot `and retry!`")
