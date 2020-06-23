@@ -69,7 +69,7 @@ async def _(event):
 async def _(event):
     if event.fwd_from:
         return
-    await event.edit("müzik indiriliyor, birazdan gönderilecek.")
+    await event.edit("`müzik indiriliyor, birazdan gönderilecek.`")
     d_link = event.pattern_match.group(1)
     bot = "@spotify_to_mp3_bot"
 
@@ -77,7 +77,7 @@ async def _(event):
         try:
             await conv.send_message(d_link)
             await asyncio.sleep(2)
-            await event.delete()
+
             details = await conv.get_response()
             await asyncio.sleep(2.75)
             x = await details.click(0)
@@ -90,3 +90,4 @@ async def _(event):
             await event.client.send_file(event.chat_id, details_3.media, caption="Kanal Linki:\nhttps://t.me/joinchat/AAAAAE8NqbV48l7ls-pFtQ")
         except YouBlockedUserError:
             await event.edit("**Error:** `unblock` @spotify_to_mp3_bot `and retry!`")
+    await event.delete()
