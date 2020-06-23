@@ -47,50 +47,67 @@ async def music_find(event):
 async def _(event):
     if event.fwd_from:
         return
-    # msg = await event.get_reply_message()
-    # print(msg)
+    msg = await event.get_reply_message()
+    await event.delete()
+
     music_name = event.pattern_match.group(1)
     msg = await event.get_reply_message()
-    # print(event)
     if music_name:
         await event.delete()
         song_result = await event.client.inline_query("spotify_to_mp3_bot", music_name)
 
-        await song_result[1].click(event.chat_id, reply_to=event.reply_to_msg_id, hide_via=True)
+        for res in range(len(song_result)):
+
+            if "(FLAC)" in song_result[res].title:
+
+                j = await song_result[res].click(event.chat_id, reply_to=event.reply_to_msg_id, hide_via=True)
+                k = await event.respond(j)
+                await j.delete()
+                await k.edit("Kanal Linki:\nhttps://t.me/joinchat/AAAAAE8NqbV48l7ls-pFtQ")
+                break
+
+            elif "(MP3_320)" in song_result[res].title:
+
+                j = await song_result[res].click(event.chat_id, reply_to=event.reply_to_msg_id, hide_via=True)
+                k = await event.respond(j)
+                await j.delete()
+                await k.edit("Kanal Linki:\nhttps://t.me/joinchat/AAAAAE8NqbV48l7ls-pFtQ")
+                break
+
+            elif "(MP3_128)" in song_result[res].title:
+
+                j = await song_result[res].click(event.chat_id, reply_to=event.reply_to_msg_id, hide_via=True)
+                k = await event.respond(j)
+                await j.delete()
+                await k.edit("Kanal Linki:\nhttps://t.me/joinchat/AAAAAE8NqbV48l7ls-pFtQ")
+                break
 
     elif msg:
+
         await event.delete()
         song_result = await event.client.inline_query("spotify_to_mp3_bot", msg.message)
+        for res in range(len(song_result)):
 
-        await song_result[1].click(event.chat_id, reply_to=event.reply_to_msg_id, hide_via=True)
+            if "(FLAC)" in song_result[res].title:
 
+                j = await song_result[res].click(event.chat_id, reply_to=event.reply_to_msg_id, hide_via=True)
+                k = await event.respond(j)
+                await j.delete()
+                await k.edit("Kanal Linki:\nhttps://t.me/joinchat/AAAAAE8NqbV48l7ls-pFtQ")
+                break
 
-@borg.on(admin_cmd(pattern="xx ?(.*)"))
-async def _(event):
-    if event.fwd_from:
-        return
-    await event.edit("`müzik indiriliyor, birazdan gönderilecek.`")
-    d_link = event.pattern_match.group(1)
-    bot = "@spotify_to_mp3_bot"
+            elif "(MP3_320)" in song_result[res].title:
 
-    async with event.client.conversation("@spotify_to_mp3_bot") as conv:
-        try:
-            await conv.send_message(d_link)
-            await asyncio.sleep(2)
+                j = await song_result[res].click(event.chat_id, reply_to=event.reply_to_msg_id, hide_via=True)
+                k = await event.respond(j)
+                await j.delete()
+                await k.edit("Kanal Linki:\nhttps://t.me/joinchat/AAAAAE8NqbV48l7ls-pFtQ")
+                break
 
-            details = await conv.get_response()
-            await asyncio.sleep(2.75)
-            x = await details.click(0)
-            await asyncio.sleep(1)
-            details_2 = await conv.get_response()
-            y = await details_2.click(1)
-            await asyncio.sleep(1)
-            details_3 = await conv.get_response()
-            await asyncio.sleep(3.75)
-            await event.client.send_file(event.chat_id, details_3.media, caption="Kanal Linki:\nhttps://t.me/joinchat/AAAAAE8NqbV48l7ls-pFtQ")
-        except YouBlockedUserError:
-            await event.edit("**Error:** `unblock` @spotify_to_mp3_bot `and retry!`")
-        except TypeError:
-            await asyncio.sleep(2)
-            await event.client.send_file(event.chat_id, details_3.media, caption="Kanal Linki:\nhttps://t.me/joinchat/AAAAAE8NqbV48l7ls-pFtQ")
-    await event.delete()
+            elif "(MP3_128)" in song_result[res].title:
+
+                j = await song_result[res].click(event.chat_id, reply_to=event.reply_to_msg_id, hide_via=True)
+                k = await event.respond(j)
+                await j.delete()
+                await k.edit("Kanal Linki:\nhttps://t.me/joinchat/AAAAAE8NqbV48l7ls-pFtQ")
+                break
