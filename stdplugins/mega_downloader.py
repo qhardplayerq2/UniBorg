@@ -127,4 +127,3 @@ def decrypt_file(file_name, temp_file_name, file_hex, file_raw_hex):
            .format(temp_file_name, file_hex, file_raw_hex, file_name))
     subprocess_run(cmd)
     os.remove(r"{}".format(temp_file_name))
-    return
