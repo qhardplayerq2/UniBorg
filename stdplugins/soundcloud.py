@@ -22,7 +22,8 @@ async def _(event):
     if os.path.exists(Config.TMP_DOWNLOAD_DIRECTORY):
         api = SoundcloudAPI()
         track = await api.resolve(link)
-        assert type(track) is Track
+        if type(track) is not Track:
+            raise AssertionError
         filename = Config.TMP_DOWNLOAD_DIRECTORY + \
             f'{track.artist} - {track.title}.mp3'
         with open(filename, 'wb+') as fp:
