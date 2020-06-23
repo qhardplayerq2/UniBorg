@@ -1,13 +1,7 @@
 "download from soundcloud mp3 using telegram. Credits: https://t.me/By_Azade"
-
-import asyncio
 import logging
 import os
-from datetime import datetime
-
-import requests
 from sclib.asyncio import SoundcloudAPI, Track
-from telethon import events
 
 from sample_config import Config
 from uniborg.util import admin_cmd

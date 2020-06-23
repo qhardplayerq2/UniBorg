@@ -1,14 +1,5 @@
 "get music from .m <music query>  Credits https://t.me/By_Azade"
-
-import asyncio
 import logging
-
-from telethon.errors.rpcerrorlist import (UserAlreadyParticipantError,
-                                          YouBlockedUserError)
-from telethon.tl.functions.account import UpdateNotifySettingsRequest
-from telethon.tl.functions.messages import ImportChatInviteRequest
-
-from sample_config import Config
 from uniborg.util import admin_cmd
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
