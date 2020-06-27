@@ -1,13 +1,7 @@
 "download from soundcloud mp3 using telegram. Credits: https://t.me/By_Azade"
-
-import asyncio
 import logging
 import os
-from datetime import datetime
-
-import requests
 from sclib.asyncio import SoundcloudAPI, Track
-from telethon import events
 
 from sample_config import Config
 from uniborg.util import admin_cmd
@@ -28,7 +22,8 @@ async def _(event):
     if os.path.exists(Config.TMP_DOWNLOAD_DIRECTORY):
         api = SoundcloudAPI()
         track = await api.resolve(link)
-        assert type(track) is Track
+        if type(track) is not Track:
+            raise AssertionError
         filename = Config.TMP_DOWNLOAD_DIRECTORY + \
             f'{track.artist} - {track.title}.mp3'
         with open(filename, 'wb+') as fp:

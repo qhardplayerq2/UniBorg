@@ -6,8 +6,6 @@ Available Commands:
 
 import logging
 
-from telethon.tl import types
-
 from sample_config import Config
 from sql_helpers.snips_sql import (add_snip, get_all_snips, get_snips,
                                    remove_snip)
