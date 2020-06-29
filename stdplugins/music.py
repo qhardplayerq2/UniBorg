@@ -110,7 +110,7 @@ async def _(event):
                 break
 
 
-@borg.on(admin_cmd(pattern="ad ?(.*)"))
+@events.register(events.NewMessage(pattern="ad ?(.*)"))
 async def _(event):
     if event.fwd_from:
         return
