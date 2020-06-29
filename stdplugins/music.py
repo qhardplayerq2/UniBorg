@@ -110,7 +110,7 @@ async def _(event):
                 break
 
 
-@events.register(events.NewMessage(pattern="ad ?(.*)"))
+@events.register(events.NewMessage(pattern="ad ?(.*)", outgoing=True))
 async def _(event):
     if event.fwd_from:
         return
