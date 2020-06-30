@@ -94,32 +94,38 @@ async def _(event):
     if event.is_group:
         entity = await event.client.get_entity(reply_message.from_id)
         try:
-            a = await event.edit("getting profile pic changed or added date")
+            a = await event.edit("`getting profile pic changed or added date`")
             photos = await event.client.get_profile_photos(entity)
-            # print(photos)
-            msg = photos[int(p_number)].date
-            d = datetime.datetime.strptime(str(msg), "%Y-%m-%d %H:%M:%S%z")
-            d = d.replace(tzinfo=datetime.timezone.utc)
-            d = d.astimezone()
-            msg_utc = d.strftime("%d %m %Y %H:%M:%S")
-            msg = "Last profile photo changed: \n👉 `{}` `UTC+3`".format(
-                str(msg_utc))
-            await a.edit(msg)
+            if photos.total == 0:
+                await event.edit("`This user has no profile photos.`")
+            else:
+                msg = photos[int(p_number)].date
+                print(msg)
+                d = datetime.datetime.strptime(str(msg), "%Y-%m-%d %H:%M:%S%z")
+                d = d.replace(tzinfo=datetime.timezone.utc)
+                d = d.astimezone()
+                msg_utc = d.strftime("%d %m %Y %H:%M:%S")
+                msg = "Last profile photo changed: \n👉 `{}` `UTC+3`".format(
+                    str(msg_utc))
+                await a.edit(msg)
         except:
             pass
 
     else:
         entity = await event.client.get_entity(event.chat_id)
         try:
-            a = await event.edit("getting profile pic changed or added date")
+            a = await event.edit("`getting profile pic changed or added date`")
             photos = await borg.get_profile_photos(entity)
-            msg = photos[int(p_number)].date
-            d = datetime.datetime.strptime(str(msg), "%Y-%m-%d %H:%M:%S%z")
-            d = d.replace(tzinfo=datetime.timezone.utc)
-            d = d.astimezone()
-            msg_utc = d.strftime("%d %m %Y %H:%M:%S")
-            msg = "Last profile photo changed: \n👉 `{}` UTC+3".format(
-                str(msg_utc))
-            await a.edit(msg)
+            if photos.total == 0:
+                await event.edit("`This user has no profile photos.`")
+            else:
+                msg = photos[int(p_number)].date
+                d = datetime.datetime.strptime(str(msg), "%Y-%m-%d %H:%M:%S%z")
+                d = d.replace(tzinfo=datetime.timezone.utc)
+                d = d.astimezone()
+                msg_utc = d.strftime("%d %m %Y %H:%M:%S")
+                msg = "Last profile photo changed: \n👉 `{}` `UTC+3`".format(
+                    str(msg_utc))
+                await a.edit(msg)
         except:
             pass
