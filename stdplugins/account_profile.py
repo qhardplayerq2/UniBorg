@@ -2,8 +2,10 @@
 .pbio <Bio>
 .pname <Name>
 .ppic"""
+import datetime
 import logging
 import os
+from datetime import datetime
 
 from telethon.tl import functions
 
@@ -94,18 +96,30 @@ async def _(event):
         try:
             a = await event.edit("getting profile pic changed or added date")
             photos = await event.client.get_profile_photos(entity)
+            # print(photos)
             msg = photos[int(p_number)].date
-            msg = "Last profile photo changed: \n👉 `{}` UTC+3".format(str(msg))
+            d = datetime.datetime.strptime(str(msg), "%Y-%m-%d %H:%M:%S%z")
+            d = d.replace(tzinfo=datetime.timezone.utc)
+            d = d.astimezone()
+            msg_utc = d.strftime("%d %m %Y %H:%M:%S")
+            msg = "Last profile photo changed: \n👉 `{}` `UTC+3`".format(
+                str(msg_utc))
             await a.edit(msg)
         except:
             pass
+
     else:
         entity = await event.client.get_entity(event.chat_id)
         try:
             a = await event.edit("getting profile pic changed or added date")
             photos = await borg.get_profile_photos(entity)
             msg = photos[int(p_number)].date
-            msg = "Last profile photo changed: \n👉 `{}` UTC+3".format(str(msg))
+            d = datetime.datetime.strptime(str(msg), "%Y-%m-%d %H:%M:%S%z")
+            d = d.replace(tzinfo=datetime.timezone.utc)
+            d = d.astimezone()
+            msg_utc = d.strftime("%d %m %Y %H:%M:%S")
+            msg = "Last profile photo changed: \n👉 `{}` UTC+3".format(
+                str(msg_utc))
             await a.edit(msg)
         except:
             pass
