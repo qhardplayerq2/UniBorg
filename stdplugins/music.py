@@ -6,7 +6,7 @@ from telethon.errors.rpcerrorlist import (UserAlreadyParticipantError,
                                           YouBlockedUserError)
 from telethon.tl.functions.account import UpdateNotifySettingsRequest
 
-from uniborg.util import admin_cmd
+from uniborg.util import admin_cmd, humanbytes
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
@@ -138,3 +138,18 @@ async def _(event):
             return
         await event.delete()
         await event.client.send_file(event.chat_id, response.message.media)
+
+
+@borg.on(admin_cmd(pattern="fm ?(.*)"))  # pylint:disable=E0602
+async def _(event):
+    msg = await event.get_reply_message()
+    await event.delete()
+    if msg:
+        msj = f"`{msg.file.name[:-4]}\n{humanbytes(msg.file.size)}`"
+        await event.client.send_message(
+            entity=1326295477,
+            file=msg.media,
+            message=msj
+        )
+    else:
+        await event.edit("`mesajı yanıtla`")
