@@ -743,13 +743,21 @@ async def _(event):
     if event.fwd_from:
         return
     c = await event.get_chat()
+    file_ = event.pattern_match.group(1)
     if c.admin_rights or c.creator:
-        a = await borg.get_admin_log(event.chat_id, limit=5, edit=False, delete=True)
-        # print(a[0].old.message)
-        deleted_msg = "Deleted message in this group:"
-        for i in a:
-            deleted_msg += "\n👉`{}`".format(i.old.message)
-        await event.edit(deleted_msg)
+        if file_ == "media":
+            await event.edit("`silinmiş medya getiriliyor`")
+            async for j in event.client.iter_admin_log(event.chat_id, delete=True):
+                if j.old.media != None:
+                    x = await event.client.download_media(j.old.media)
+                    await event.client.send_message(entity=event.chat_id, file=x)
+        else:
+            a = await borg.get_admin_log(event.chat_id, limit=10, edit=False, delete=True)
+            deleted_msg = "Deleted message in this group:"
+            for i in a:
+                if i.old.message != "":
+                    deleted_msg += "\n👉`{}`".format(i.old.message)
+                    await event.edit(deleted_msg)
     else:
         await event.edit("`You need administrative permissions in order to do this command`")
         await asyncio.sleep(3)

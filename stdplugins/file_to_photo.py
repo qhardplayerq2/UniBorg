@@ -14,7 +14,8 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
                     level=logging.WARNING)
 logger = logging.getLogger(__name__)
 
-@borg.on(util.admin_cmd(pattern="f  (.*)"))
+
+@borg.on(util.admin_cmd(pattern="f ?(.*)"))
 async def on_file_to_photo(event):
     await event.delete()
     target = await event.get_reply_message()
