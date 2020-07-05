@@ -93,8 +93,8 @@ async def kang(args):
                     # User sent just custom emote, wants to push to default
                     # pack
                     emoji = splat[1]
-            name = await event.client.get_me()
-            if name.user_name not None:
+            name = await borg.get_me()
+            if name.user_name != None:
                 packnick = name.user_name + "Pack"
                 packname = name.user_name[1:]
             else:
