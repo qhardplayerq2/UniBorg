@@ -94,12 +94,12 @@ async def kang(args):
                     # pack
                     emoji = splat[1]
             name = await borg.get_me()
-            if name.user_name != None:
-                packnick = name.user_name + "Pack"
-                packname = name.user_name[1:]
+            if name.username != None:
+                packnick = name.username + "Pack"
+                packname = name.username[1:]
             else:
                 packnick = name.first_name + "Pack"
-                packname = name.user_name[1:]
+                packname = name.username[1:]
             # packname = "By_Azade"
             # packnick = "@By_Azade Pack"
             cmd = '/newpack'
