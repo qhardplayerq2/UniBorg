@@ -137,25 +137,46 @@
     "MAX_FLOOD_IN_P_M_s": {
       "description": "define the number of messages that should be considered as 'spam' in PMs",
       "required": false
+    },
+    "LOGSPAMMER": {
+      "description": "PM stuff",
+      "required": true
+    },
+    "SPAM_WATCH_API": {
+      "description": "spamwatch api key",
+      "required": false
+    },
+    "SPAM_WATCHAPI": {
+      "description": "spamwatch api on/off",
+      "required": false
     }
   },
-  "addons": [{
-    "plan": "heroku-postgresql",
-    "options": {
-      "version": "9.5"
+  "addons": [
+    {
+      "plan": "heroku-postgresql",
+      "options": {
+        "version": "9.5"
+      }
     }
-  }],
-  "buildpacks": [{
-    "url": "https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest"
-  }, {
-    "url": "https://github.com/HasibulKabir/heroku-buildpack-rarlab"
-  }, {
-    "url": "https://github.com/HasibulKabir/heroku-buildpack-p7zip"
-  }, {
-    "url": "https://github.com/hugovelias/heroku-buildpack-youtube-dl"
-  }, {
-    "url": "https://github.com/amivin/aria2-heroku"
-    }, {
-    "url": "heroku/python"
-  }]
+  ],
+  "buildpacks": [
+    {
+      "url": "https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest"
+    },
+    {
+      "url": "https://github.com/HasibulKabir/heroku-buildpack-rarlab"
+    },
+    {
+      "url": "https://github.com/HasibulKabir/heroku-buildpack-p7zip"
+    },
+    {
+      "url": "https://github.com/hugovelias/heroku-buildpack-youtube-dl"
+    },
+    {
+      "url": "https://github.com/amivin/aria2-heroku"
+    },
+    {
+      "url": "heroku/python"
+    }
+  ]
 }

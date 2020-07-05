@@ -140,6 +140,7 @@ class Config(object):
     if RSS_POST_MSG_GROUP_ID:
         RSS_POST_MSG_GROUP_ID = int(RSS_POST_MSG_GROUP_ID)
     SPAM_WATCH_API = os.environ.get("SPAM_WATCH_API", None)
+    SPAM_WATCHAPI = os.environ.get("SPAM_WATCHAPI", None)
     # Userbot logging feature switch.
     LOGSPAMMER = sb(os.environ.get("LOGSPAMMER", None))
     MONGO_DB_URI = os.environ.get("MONGO_DB_URI", None)
