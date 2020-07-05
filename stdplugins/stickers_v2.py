@@ -14,7 +14,7 @@ from telethon.tl.functions.messages import GetStickerSetRequest
 from telethon.tl.types import (DocumentAttributeFilename,
                                DocumentAttributeSticker, InputStickerSetID,
                                MessageMediaPhoto)
-
+from telethon import events
 from PIL import Image
 from uniborg.util import admin_cmd
 
@@ -93,9 +93,15 @@ async def kang(args):
                     # User sent just custom emote, wants to push to default
                     # pack
                     emoji = splat[1]
-
-            packname = "By_Azade"
-            packnick = "@By_Azade Pack"
+            name = await event.client.get_me()
+            if name.user_name not None:
+                packnick = name.user_name + "Pack"
+                packname = name.user_name[1:]
+            else:
+                packnick = name.first_name + "Pack"
+                packname = name.user_name[1:]
+            # packname = "By_Azade"
+            # packnick = "@By_Azade Pack"
             cmd = '/newpack'
             file = io.BytesIO()
 
