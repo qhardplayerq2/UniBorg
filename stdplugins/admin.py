@@ -748,7 +748,7 @@ async def _(event):
         if file_ == "media":
             await event.edit("`silinmiş medya getiriliyor`")
             async for j in event.client.iter_admin_log(event.chat_id, delete=True):
-                if j.old.media != None:
+                if j.old.media is not None:
                     x = await event.client.download_media(j.old.media)
                     await event.client.send_message(entity=event.chat_id, file=x)
         else:
