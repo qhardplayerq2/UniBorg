@@ -147,7 +147,7 @@ async def _(event):
     if msg:
         msj = f"[{msg.file.name[1:-5]}](https://t.me/joinchat/AAAAAE8NqbV48l7ls-pFtQ)\n`{humanbytes(msg.file.size)}`"
         await event.client.send_message(
-            entity=1326295477,
+            entity=await event.client.get_entity(-1001326295477),
             file=msg.media,
             message=msj
         )
