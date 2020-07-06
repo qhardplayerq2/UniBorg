@@ -99,7 +99,7 @@ async def kang(args):
                 packname = name.username[0:]
             else:
                 packnick = name.first_name + " Pack"
-                packname = name.first_name
+                packname = name.first_name.replace(" ", "_")
             # packname = "By_Azade"
             # packnick = "@By_Azade Pack"
             cmd = '/newpack'
