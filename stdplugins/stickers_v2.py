@@ -96,10 +96,10 @@ async def kang(args):
             name = await borg.get_me()
             if name.username is not None:
                 packnick = name.username + " Pack"
-                packname = name.username
+                packname = name.username[0:]
             else:
                 packnick = name.first_name + " Pack"
-                packname = name.username[0:]
+                packname = name.first_name
             # packname = "By_Azade"
             # packnick = "@By_Azade Pack"
             cmd = '/newpack'
