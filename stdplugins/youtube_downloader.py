@@ -182,10 +182,10 @@ async def download_video(v_url):
         # song_size = size(raster_size)
         # thumb = f"{out_folder + ytdl_data['id']}.mp3"[
         #     :(len(f"{out_folder + ytdl_data['id']}.mp3")-4)] + ".jpg"
-        thumb = out_folder+ytdl_data['id']
-        if thumb.endswith(".jpg"):
+        # thumb = out_folder+ytdl_data['id']
+        if out_folder + ytdl_data['id'] + ".jpg":
             thumb = out_folder + ytdl_data['id'] + ".jpg"
-        elif thumb.endswith(".webp"):
+        elif out_folder + ytdl_data['id'] + ".webp":
             thumb = out_folder + ytdl_data['id'] + ".webp"
         file_path = f"{out_folder + ytdl_data['id']}.mp3"
         song_size = file_size(file_path)
@@ -220,10 +220,10 @@ async def download_video(v_url):
         video_size = file_size(file_path)
         image = f"{ytdl_data['id']}.jpg"
         # thumb = f"{out_folder + ytdl_data['id']}.jpg"
-        thumb = out_folder+ytdl_data['id']
-        if thumb.endswith(".jpg"):
+        # thumb = out_folder+ytdl_data['id']
+        if out_folder + ytdl_data['id'] + ".jpg":
             thumb = out_folder + ytdl_data['id'] + ".jpg"
-        elif thumb.endswith(".webp"):
+        elif out_folder + ytdl_data['id'] + ".webp":
             thumb = out_folder + ytdl_data['id'] + ".webp"
         await v_url.edit(f"`Preparing to upload video:`\
         \n**{ytdl_data['title']}**\
