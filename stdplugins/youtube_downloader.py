@@ -110,7 +110,6 @@ async def download_video(v_url):
             'nocheckcertificate': True,
             'postprocessors': [{
                 'key': 'FFmpegExtractAudio',
-                'audioformat': 'best',
                 'preferredcodec': 'mp3',
                 'preferredquality': '320',
             }],
@@ -133,8 +132,7 @@ async def download_video(v_url):
             'geo_bypass': True,
             'nocheckcertificate': True,
             'postprocessors': [{
-                'key': 'FFmpegVideoConvertor',
-                'recodevideo': 'mp4',
+                'key': 'FFmpegVideoConvertor'
                 'preferedformat': 'mp4'
             }],
             'outtmpl': out_folder+'%(id)s.mp4',
