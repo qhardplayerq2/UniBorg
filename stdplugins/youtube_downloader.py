@@ -110,6 +110,7 @@ async def download_video(v_url):
             'nocheckcertificate': True,
             'postprocessors': [{
                 'key': 'FFmpegExtractAudio',
+                'audioformat': 'best',
                 'preferredcodec': 'mp3',
                 'preferredquality': '320',
             }],
@@ -133,6 +134,7 @@ async def download_video(v_url):
             'nocheckcertificate': True,
             'postprocessors': [{
                 'key': 'FFmpegVideoConvertor',
+                'recodevideo': 'mp4',
                 'preferedformat': 'mp4'
             }],
             'outtmpl': out_folder+'%(id)s.mp4',
@@ -186,7 +188,7 @@ async def download_video(v_url):
         if thumb.endswith(".jpg"):
             thumb = out_folder + ytdl_data['id'] + ".jpg"
         elif thumb.endswith(".webp"):
-            thumb = out_folder + ytdl_data['id'] + ".jpg"
+            thumb = out_folder + ytdl_data['id'] + ".webp"
         file_path = f"{out_folder + ytdl_data['id']}.mp3"
         song_size = file_size(file_path)
         await v_url.edit(f"`Preparing to upload song:`\
@@ -194,7 +196,7 @@ async def download_video(v_url):
         \nby *{ytdl_data['uploader']}*")
         await v_url.client.send_file(
             v_url.chat_id,
-            f"{out_folder + ytdl_data['id']}.mp3",
+            file_path,
             caption=ytdl_data['title'] + "\n" + f"`{song_size}`",
             supports_streaming=True,
             thumb=thumb,
@@ -212,37 +214,36 @@ async def download_video(v_url):
         await v_url.delete()
         shutil.rmtree(out_folder)
     elif video:
-        for single_file in filename:
-            # image_link = ytdl_data['thumbnail']
-            # downloaded_image = wget.download(image_link,out_folder)
-            # thumb = downloaded_image
-            # raster_size = os.path.getsize(f"{out_folder + ytdl_data['id']}.mp4")
-            file_path = f"{out_folder + ytdl_data['id']}.mp4"
-            video_size = file_size(file_path)
-            image = f"{ytdl_data['id']}.jpg"
-            # thumb = f"{out_folder + ytdl_data['id']}.jpg"
-            thumb = out_folder+ytdl_data['id']
-            if thumb.endswith(".jpg"):
-                thumb = out_folder + ytdl_data['id'] + ".jpg"
-            elif thumb.endswith(".webp"):
-                thumb = out_folder + ytdl_data['id'] + ".jpg"
-            await v_url.edit(f"`Preparing to upload video:`\
-            \n**{ytdl_data['title']}**\
-            \nby *{ytdl_data['uploader']}*")
-            await v_url.client.send_file(
-                v_url.chat_id,
-                f"{out_folder + ytdl_data['id']}.mp4",
-                supports_streaming=True,
-                caption=ytdl_data['title'] + "\n" + f"`{video_size}`",
-                thumb=thumb,
-                progress_callback=lambda d, t: asyncio.get_event_loop(
-                ).create_task(
-                    progress(d, t, v_url, c_time, "Uploading..",
-                             f"{ytdl_data['title']}.mp4")))
-            os.remove(f"{out_folder + ytdl_data['id']}.mp4")
-            await asyncio.sleep(DELETE_TIMEOUT)
-            await v_url.delete()
-        shutil.rmtree(out_folder)
+        # image_link = ytdl_data['thumbnail']
+        # downloaded_image = wget.download(image_link,out_folder)
+        # thumb = downloaded_image
+        # raster_size = os.path.getsize(f"{out_folder + ytdl_data['id']}.mp4")
+        file_path = f"{out_folder + ytdl_data['id']}.mp4"
+        video_size = file_size(file_path)
+        image = f"{ytdl_data['id']}.jpg"
+        # thumb = f"{out_folder + ytdl_data['id']}.jpg"
+        thumb = out_folder+ytdl_data['id']
+        if thumb.endswith(".jpg"):
+            thumb = out_folder + ytdl_data['id'] + ".jpg"
+        elif thumb.endswith(".webp"):
+            thumb = out_folder + ytdl_data['id'] + ".webp"
+        await v_url.edit(f"`Preparing to upload video:`\
+        \n**{ytdl_data['title']}**\
+        \nby *{ytdl_data['uploader']}*")
+        await v_url.client.send_file(
+            v_url.chat_id,
+            file_path,
+            supports_streaming=True,
+            caption=ytdl_data['title'] + "\n" + f"`{video_size}`",
+            thumb=thumb,
+            progress_callback=lambda d, t: asyncio.get_event_loop(
+            ).create_task(
+                progress(d, t, v_url, c_time, "Uploading..",
+                         f"{ytdl_data['title']}.mp4")))
+        os.remove(f"{out_folder + ytdl_data['id']}.mp4")
+        await asyncio.sleep(DELETE_TIMEOUT)
+        await v_url.delete()
+    shutil.rmtree(out_folder)
 
 
 def get_lst_of_files(input_directory, output_lst):
