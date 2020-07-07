@@ -132,7 +132,7 @@ async def download_video(v_url):
             'geo_bypass': True,
             'nocheckcertificate': True,
             'postprocessors': [{
-                'key': 'FFmpegVideoConvertor'
+                'key': 'FFmpegVideoConvertor',
                 'preferedformat': 'mp4'
             }],
             'outtmpl': out_folder+'%(id)s.mp4',
