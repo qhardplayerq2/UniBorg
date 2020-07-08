@@ -100,16 +100,6 @@ async def download_video(v_url):
     if not os.path.isdir(out_folder):
         os.makedirs(out_folder)
     await v_url.edit("`Preparing to download...`")
-    regex = re.compile(
-        r'(https?://)?(www\.)?(youtube|youtu|youtube-nocookie)\.(com|be)/(watch\?v=|embed/|v/|.+\?v=)?(?P<id>[A-Za-z0-9\-=_]{11})')
-    match = regex.match(url)
-    if not match:
-        print('no match')
-    else:
-        youtube_id = match.group('id')
-
-    wget.download(
-        f"https://i.ytimg.com/vi/{youtube_id}/hq720.jpg", out_folder + "cover.jpg")
 
     if type == "a":
         opts = {
@@ -188,6 +178,9 @@ async def download_video(v_url):
         await v_url.edit(f"{str(type(e)): {str(e)}}")
         return
     c_time = time.time()
+
+    cover_url = ytdl_data['thumbnails'][0]['url']
+    wget.download(cover_url, out_folder + "cover.jpg")
 
     if song:
 
