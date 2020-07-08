@@ -192,7 +192,7 @@ async def download_video(v_url):
     if song:
 
         thumb = out_folder + "cover.jpg"
-        file_path = f"{out_folder + ytdl_data['id']}.mp3"
+        file_path = f"{out_folder + ytdl_data['title']}.mp3"
         song_size = file_size(file_path)
         await v_url.edit(f"`Preparing to upload song:`\
         \n**{ytdl_data['title']}**\
@@ -212,14 +212,14 @@ async def download_video(v_url):
             ).create_task(
                 progress(d, t, v_url, c_time, "Uploading..",
                          f"{ytdl_data['title']}.mp3")))
-        os.remove(f"{out_folder + ytdl_data['id']}.mp3")
+        os.remove(f"{out_folder + ytdl_data['title']}.mp3")
         await asyncio.sleep(DELETE_TIMEOUT)
         await v_url.delete()
         shutil.rmtree(out_folder)
 
     elif video:
 
-        file_path = f"{out_folder + ytdl_data['id']}.mp4"
+        file_path = f"{out_folder + ytdl_data['title']}.mp4"
         video_size = file_size(file_path)
         thumb = out_folder + "cover.jpg"
 
@@ -236,7 +236,7 @@ async def download_video(v_url):
             ).create_task(
                 progress(d, t, v_url, c_time, "Uploading..",
                          f"{ytdl_data['title']}.mp4")))
-        os.remove(f"{out_folder + ytdl_data['id']}.mp4")
+        os.remove(f"{out_folder + ytdl_data['title']}.mp4")
         await asyncio.sleep(DELETE_TIMEOUT)
         await v_url.delete()
     shutil.rmtree(out_folder)
