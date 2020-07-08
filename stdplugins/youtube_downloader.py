@@ -9,10 +9,13 @@ import asyncio
 import logging
 import math
 import os
+import re
 import shutil
 import time
 
 from telethon.tl.types import DocumentAttributeAudio
+
+import wget
 from sample_config import Config
 from uniborg.util import admin_cmd
 from youtube_dl import YoutubeDL
@@ -97,14 +100,24 @@ async def download_video(v_url):
     if not os.path.isdir(out_folder):
         os.makedirs(out_folder)
     await v_url.edit("`Preparing to download...`")
+    regex = re.compile(
+        r'(https?://)?(www\.)?(youtube|youtu|youtube-nocookie)\.(com|be)/(watch\?v=|embed/|v/|.+\?v=)?(?P<id>[A-Za-z0-9\-=_]{11})')
+    match = regex.match(url)
+    if not match:
+        print('no match')
+    else:
+        youtube_id = match.group('id')
+
+    wget.download(
+        f"https://i.ytimg.com/vi/{youtube_id}/hq720.jpg", out_folder + "cover.jpg")
 
     if type == "a":
         opts = {
             'format': 'bestaudio',
             'addmetadata': True,
             'key': 'FFmpegMetadata',
-            'writethumbnail': True,
-            'embedthumbnail': True,
+            'audioquality': 0,
+            'audioformat': 'mp3',
             'prefer_ffmpeg': True,
             'geo_bypass': True,
             'nocheckcertificate': True,
@@ -113,7 +126,7 @@ async def download_video(v_url):
                 'preferredcodec': 'mp3',
                 'preferredquality': '320',
             }],
-            'outtmpl': out_folder+'%(id)s.mp3',
+            'outtmpl': out_folder+'%(title)s.mp3',
             'quiet': True,
             'logtostderr': False
         }
@@ -126,16 +139,14 @@ async def download_video(v_url):
             'addmetadata': True,
             'key': 'FFmpegMetadata',
             'prefer_ffmpeg': True,
-            'getthumbnail': True,
-            'embedthumbnail': True,
-            'writethumbnail': True,
+            'hls_prefer_native': True,
             'geo_bypass': True,
             'nocheckcertificate': True,
             'postprocessors': [{
                 'key': 'FFmpegVideoConvertor',
                 'preferedformat': 'mp4'
             }],
-            'outtmpl': out_folder+'%(id)s.mp4',
+            'outtmpl': out_folder+'%(title)s.mp4',
             'logtostderr': False,
             'quiet': True
         }
@@ -177,16 +188,10 @@ async def download_video(v_url):
         await v_url.edit(f"{str(type(e)): {str(e)}}")
         return
     c_time = time.time()
+
     if song:
-        # raster_size = os.path.getsize(f"{out_folder + ytdl_data['id']}.mp3")
-        # song_size = size(raster_size)
-        # thumb = f"{out_folder + ytdl_data['id']}.mp3"[
-        #     :(len(f"{out_folder + ytdl_data['id']}.mp3")-4)] + ".jpg"
-        thumb = out_folder+ytdl_data['id']+".webp"
-        # if f"{out_folder + ytdl_data['id']}.jpg":
-        #     thumb = f"{out_folder + ytdl_data['id']}.jpg"
-        # elif f"{out_folder + ytdl_data['id']}.webp":
-        #     thumb = f"{out_folder + ytdl_data['id']}.webp"
+
+        thumb = out_folder + "cover.jpg"
         file_path = f"{out_folder + ytdl_data['id']}.mp3"
         song_size = file_size(file_path)
         await v_url.edit(f"`Preparing to upload song:`\
@@ -211,20 +216,13 @@ async def download_video(v_url):
         await asyncio.sleep(DELETE_TIMEOUT)
         await v_url.delete()
         shutil.rmtree(out_folder)
+
     elif video:
-        # image_link = ytdl_data['thumbnail']
-        # downloaded_image = wget.download(image_link,out_folder)
-        # thumb = downloaded_image
-        # raster_size = os.path.getsize(f"{out_folder + ytdl_data['id']}.mp4")
+
         file_path = f"{out_folder + ytdl_data['id']}.mp4"
         video_size = file_size(file_path)
-        image = f"{ytdl_data['id']}.jpg"
-        # thumb = f"{out_folder + ytdl_data['id']}.jpg"
-        thumb = out_folder+ytdl_data['id']+".webp"
-        # if f"{out_folder + ytdl_data['id']}.jpg":
-        #     thumb = f"{out_folder + ytdl_data['id']}.jpg"
-        # elif f"{out_folder + ytdl_data['id']}.webp":
-        #     thumb = f"{out_folder + ytdl_data['id']}.webp"
+        thumb = out_folder + "cover.jpg"
+
         await v_url.edit(f"`Preparing to upload video:`\
         \n**{ytdl_data['title']}**\
         \nby *{ytdl_data['uploader']}*")
