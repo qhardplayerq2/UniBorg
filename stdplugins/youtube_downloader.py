@@ -194,7 +194,7 @@ async def download_video(v_url):
                       if any(fn.endswith(ext) for ext in included_extensions)]
 
         thumb = out_folder + "cover.jpg"
-        file_path = file_names[0]
+        file_path = relevant_path + file_names[0]
         song_size = file_size(file_path)
         await v_url.edit(f"`Preparing to upload song:`\
         \n**{ytdl_data['title']}**\
@@ -221,11 +221,11 @@ async def download_video(v_url):
 
     elif video:
         relevant_path = "./DOWNLOADS/youtubedl"
-        included_extensions = ["mp3"]
+        included_extensions = ["mp4"]
         file_names = [fn for fn in os.listdir(relevant_path)
                       if any(fn.endswith(ext) for ext in included_extensions)]
 
-        file_path = file_names[0]
+        file_path = relevant_path + file_names[0]
         video_size = file_size(file_path)
         thumb = out_folder + "cover.jpg"
 
