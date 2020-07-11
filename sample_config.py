@@ -61,8 +61,7 @@ class Config(object):
     NO_LOAD = [
         "notification_mtab_manager",
         "dbhelper",
-        "fban_gban",
-        "gban",
+        "fban_gban"
         "unbanmute",
         "antispam"
     ]
