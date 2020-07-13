@@ -223,7 +223,7 @@ async def download_video(v_url):
             file_path = f"{out_folder + ytdl_data['id']}.mp4"
             video_size = file_size(file_path)
             image = f"{ytdl_data['id']}.jpg"
-            thumb = f"{out_folder + ytdl_data['id']}.jpg"
+            thumb = f"{out_folder + ytdl_data['id']}.webp"
             await v_url.edit(f"`Preparing to upload video:`\
             \n**{ytdl_data['title']}**\
             \nby *{ytdl_data['uploader']}*")
