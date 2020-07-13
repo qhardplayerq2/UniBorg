@@ -214,6 +214,7 @@ async def download_video(v_url):
                          f"{ytdl_data['title']}.mp3")))
         os.remove(f"{out_folder + ytdl_data['id']}.mp3")
         await asyncio.sleep(DELETE_TIMEOUT)
+        os.remove(thumb_image)
         await v_url.delete()
         os.removedirs(out_folder)
     elif video:
@@ -243,6 +244,7 @@ async def download_video(v_url):
                              f"{ytdl_data['title']}.mp4")))
             os.remove(f"{out_folder + ytdl_data['id']}.mp4")
             await asyncio.sleep(DELETE_TIMEOUT)
+            os.remove(thumb_image)
             await v_url.delete()
         os.removedirs(out_folder)
 
