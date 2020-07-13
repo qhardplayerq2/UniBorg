@@ -14,7 +14,7 @@ import time
 
 from telethon.tl.types import DocumentAttributeAudio
 
-from PIL import Image
+import wget
 from sample_config import Config
 from uniborg.util import admin_cmd
 from youtube_dl import YoutubeDL
@@ -189,12 +189,9 @@ async def download_video(v_url):
     if song:
         # raster_size = os.path.getsize(f"{out_folder + ytdl_data['id']}.mp3")
         # song_size = size(raster_size)
-        thumb = out_folder + \
-            f"{ytdl_data['id']}.webp" or out_folder + f"{ytdl_data['id']}.jpg"
-        if thumb.endswith(".webp") or thumb.endswith(".jpg"):
-            im = Image.open(thumb).convert("RGB")
-            im.save(out_folder + "thumb.jpeg", "jpeg")
-            thumb = out_folder + "thumb.jpeg"
+        thumb = f"https://i.ytimg.com/vi/{ytdl_data['id']}/maxresdefault.jpg"
+        wget.download(url=thumb, out=out_folder+"thumb.jpg")
+        thumb_image = out_folder+"thumb.jpg"
         file_path = f"{out_folder + ytdl_data['id']}.mp3"
         song_size = file_size(file_path)
         await v_url.edit(f"`Preparing to upload song:`\
@@ -205,7 +202,7 @@ async def download_video(v_url):
             f"{out_folder + ytdl_data['id']}.mp3",
             caption=ytdl_data['title'] + "\n" + f"`{song_size}`",
             supports_streaming=True,
-            thumb=thumb,
+            thumb=thumb_image,
             attributes=[
                 DocumentAttributeAudio(duration=int(ytdl_data['duration']),
                                        title=str(ytdl_data['title']),
@@ -228,16 +225,9 @@ async def download_video(v_url):
             file_path = f"{out_folder + ytdl_data['id']}.mp4"
             video_size = file_size(file_path)
             image = f"{ytdl_data['id']}.jpg"
-            if out_folder + f"{ytdl_data['id']}.webp":
-                thumb = out_folder + f"{ytdl_data['id']}.webp"
-                if thumb.endswith(".webp"):
-                    im = Image.open(thumb).convert("RGB")
-                    im.save(out_folder + "thumb.jpeg", "jpeg")
-                    thumb = out_folder + "thumb.jpeg"
-                thumb = out_folder + f"{ytdl_data['id']}.jpg"
-            elif out_folder + f"{ytdl_data['id']}.jpg":
-                if thumb.endswith(".jpg"):
-                    thumb = out_folder + f"{ytdl_data['id']}.jpg"
+            thumb = f"https://i.ytimg.com/vi/{ytdl_data['id']}/maxresdefault.jpg"
+            wget.download(url=thumb, out=out_folder)
+            thumb_image = out_folder+"thumb.jpg"
             await v_url.edit(f"`Preparing to upload video:`\
             \n**{ytdl_data['title']}**\
             \nby *{ytdl_data['uploader']}*")
@@ -246,7 +236,7 @@ async def download_video(v_url):
                 f"{out_folder + ytdl_data['id']}.mp4",
                 supports_streaming=True,
                 caption=ytdl_data['title'] + "\n" + f"`{video_size}`",
-                thumb=thumb,
+                thumb=thumb_image,
                 progress_callback=lambda d, t: asyncio.get_event_loop(
                 ).create_task(
                     progress(d, t, v_url, c_time, "Uploading..",
