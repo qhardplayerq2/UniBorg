@@ -191,7 +191,7 @@ async def download_video(v_url):
         # song_size = size(raster_size)
         thumb = f"https://i.ytimg.com/vi/{ytdl_data['id']}/maxresdefault.jpg"
         wget.download(url=thumb, out=out_folder+"thumb.jpg")
-        thumb_image = out_folder+"thumb.jpg"
+        thumb_image = out_folder + "maxresdefault.jpg"
         file_path = f"{out_folder + ytdl_data['id']}.mp3"
         song_size = file_size(file_path)
         await v_url.edit(f"`Preparing to upload song:`\
@@ -227,7 +227,7 @@ async def download_video(v_url):
             image = f"{ytdl_data['id']}.jpg"
             thumb = f"https://i.ytimg.com/vi/{ytdl_data['id']}/maxresdefault.jpg"
             wget.download(url=thumb, out=out_folder)
-            thumb_image = out_folder+"thumb.jpg"
+            thumb_image = out_folder + "maxresdefault.jpg"
             await v_url.edit(f"`Preparing to upload video:`\
             \n**{ytdl_data['title']}**\
             \nby *{ytdl_data['uploader']}*")
