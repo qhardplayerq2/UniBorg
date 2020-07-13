@@ -179,8 +179,8 @@ async def download_video(v_url):
         return
     c_time = time.time()
 
-    cover_url = f"https://img.youtube.com/vi/{ytdl_data['id']}/0.jpg"
-    thumb_path = wget.download(cover_url, out_folder + "cover.jpg")
+    # cover_url = f"https://img.youtube.com/vi/{ytdl_data['id']}/0.jpg"
+    # thumb_path = wget.download(cover_url, out_folder + "cover.jpg")
 
     # relevant_path = "./DOWNLOADS/youtubedl"
     # included_extensions = ["mp4","mp3"]
@@ -192,8 +192,12 @@ async def download_video(v_url):
         included_extensions = ["mp3"]
         file_names = [fn for fn in os.listdir(relevant_path)
                       if any(fn.endswith(ext) for ext in included_extensions)]
+        img_extensions = ["webp", "jpg", "jpeg"]
+        img_filenames = [fn_img for fn_img in os.listdir(relevant_path) if any(
+            fn_img.endswith(ext_img) for ext_img in img_extensions)]
+        thumb_image = out_folder + img_filenames[0]
 
-        thumb = out_folder + "cover.jpg"
+        # thumb = out_folder + "cover.jpg"
         file_path = out_folder + file_names[0]
         song_size = file_size(file_path)
         await v_url.edit(f"`Preparing to upload song:`\
@@ -204,7 +208,7 @@ async def download_video(v_url):
             file_path,
             caption=ytdl_data['title'] + "\n" + f"`{song_size}`",
             supports_streaming=True,
-            thumb=thumb_path,
+            thumb=thumb_image,
             attributes=[
                 DocumentAttributeAudio(duration=int(ytdl_data['duration']),
                                        title=str(ytdl_data['title']),
@@ -216,7 +220,7 @@ async def download_video(v_url):
                          f"{ytdl_data['title']}.mp3")))
         os.remove(file_path)
         await asyncio.sleep(DELETE_TIMEOUT)
-        os.remove(thumb_path)
+        os.remove(thumb_image)
         await v_url.delete()
         shutil.rmtree(out_folder)
 
@@ -225,6 +229,10 @@ async def download_video(v_url):
         included_extensions = ["mp4"]
         file_names = [fn for fn in os.listdir(relevant_path)
                       if any(fn.endswith(ext) for ext in included_extensions)]
+        img_extensions = ["webp", "jpg", "jpeg"]
+        img_filenames = [fn_img for fn_img in os.listdir(relevant_path) if any(
+            fn_img.endswith(ext_img) for ext_img in img_extensions)]
+        thumb_image = out_folder + img_filenames[0]
 
         file_path = out_folder + file_names[0]
         video_size = file_size(file_path)
@@ -238,7 +246,7 @@ async def download_video(v_url):
             file_path,
             supports_streaming=True,
             caption=ytdl_data['title'] + "\n" + f"`{video_size}`",
-            thumb=thumb_path,
+            thumb=thumb_image,
             progress_callback=lambda d, t: asyncio.get_event_loop(
             ).create_task(
                 progress(d, t, v_url, c_time, "Uploading..",
