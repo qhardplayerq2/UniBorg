@@ -191,8 +191,8 @@ async def download_video(v_url):
         # song_size = size(raster_size)
         thumb = out_folder + f"{ytdl_data['id']}.webp"
         im = Image.open(thumb).convert("RGB")
-        im.save("thumb.jpg", "jpeg")
-        thumb = out_folder + "thumb.jpg"
+        im.save("thumb.jpeg", "jpeg")
+        thumb = out_folder + "thumb.jpeg"
         file_path = f"{out_folder + ytdl_data['id']}.mp3"
         song_size = file_size(file_path)
         await v_url.edit(f"`Preparing to upload song:`\
@@ -228,8 +228,8 @@ async def download_video(v_url):
             image = f"{ytdl_data['id']}.jpg"
             thumb = out_folder + f"{ytdl_data['id']}.webp"
             im = Image.open(thumb).convert("RGB")
-            im.save("thumb.jpg", "jpeg")
-            thumb = out_folder + "thumb.jpg"
+            im.save("thumb.jpeg", "jpeg")
+            thumb = out_folder + "thumb.jpeg"
             await v_url.edit(f"`Preparing to upload video:`\
             \n**{ytdl_data['title']}**\
             \nby *{ytdl_data['uploader']}*")
