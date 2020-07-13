@@ -131,6 +131,7 @@ async def download_video(v_url):
             'addmetadata': True,
             'key': 'FFmpegMetadata',
             'writethumbnail': True,
+            'write_all_thumbnails': True,
             'embedthumbnail': True,
             'prefer_ffmpeg': True,
             'hls_prefer_native': True,
@@ -229,7 +230,7 @@ async def download_video(v_url):
         await v_url.delete()
 
     elif video:
-        relevant_path = "./DOWNLOADS/youtubedl"
+        relevant_path = "./DOWNLOADS/youtubedl/"
         included_extensions = ["mp4"]
         file_names = [fn for fn in os.listdir(relevant_path)
                       if any(fn.endswith(ext) for ext in included_extensions)]
@@ -240,7 +241,7 @@ async def download_video(v_url):
 
         file_path = out_folder + file_names[0]
         video_size = file_size(file_path)
-        thumb = out_folder + "cover.jpg"
+        # thumb = out_folder + "cover.jpg"
 
         await v_url.edit(f"`Preparing to upload video:`\
         \n**{ytdl_data['title']}**\
