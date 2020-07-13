@@ -179,7 +179,7 @@ async def download_video(v_url):
         return
     c_time = time.time()
 
-    cover_url = ytdl_data['thumbnails'][0]['url']
+    cover_url = f"https://img.youtube.com/vi/{ytdl_data['id']}/0.jpg"
     thumb_path = wget.download(cover_url, out_folder + "cover.jpg")
 
     # relevant_path = "./DOWNLOADS/youtubedl"
