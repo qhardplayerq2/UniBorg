@@ -5,20 +5,24 @@ Audio and video downloader using Youtube-dl
 .yta To Download in mp3 format
 .ytv To Download in mp4 format
 """
+import asyncio
+import logging
+import math
+import os
+import re
+import time
+
+from telethon.tl.types import DocumentAttributeAudio
+
+from PIL import Image
 from sample_config import Config
 from uniborg.util import admin_cmd
-from telethon.tl.types import DocumentAttributeAudio
-from youtube_dl.utils import (DownloadError, ContentTooShortError,
+from youtube_dl import YoutubeDL
+from youtube_dl.utils import (ContentTooShortError, DownloadError,
                               ExtractorError, GeoRestrictedError,
                               MaxDownloadsReached, PostProcessingError,
                               UnavailableVideoError, XAttrMetadataError)
-from youtube_dl import YoutubeDL
-import asyncio
-import re
-import math
-import time
-import os
-import logging
+
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
 
@@ -185,8 +189,7 @@ async def download_video(v_url):
     if song:
         # raster_size = os.path.getsize(f"{out_folder + ytdl_data['id']}.mp3")
         # song_size = size(raster_size)
-        thumb = f"{out_folder + ytdl_data['id']}.mp3"[
-            :(len(f"{out_folder + ytdl_data['id']}.mp3")-4)] + ".webp"
+        thumb = out_folder + f"{ytdl_data['id']}.webp"
         file_path = f"{out_folder + ytdl_data['id']}.mp3"
         song_size = file_size(file_path)
         await v_url.edit(f"`Preparing to upload song:`\
