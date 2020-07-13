@@ -228,14 +228,16 @@ async def download_video(v_url):
             file_path = f"{out_folder + ytdl_data['id']}.mp4"
             video_size = file_size(file_path)
             image = f"{ytdl_data['id']}.jpg"
-            thumb = out_folder + f"{ytdl_data['id']}.webp"
-            if thumb.endswith(".webp"):
-                im = Image.open(thumb).convert("RGB")
-                im.save(out_folder + "thumb.jpeg", "jpeg")
-                thumb = out_folder + "thumb.jpeg"
-            thumb = out_folder + f"{ytdl_data['id']}.jpg"
-            if thumb.endswith(".jpg"):
+            if out_folder + f"{ytdl_data['id']}.webp":
+                thumb = out_folder + f"{ytdl_data['id']}.webp"
+                if thumb.endswith(".webp"):
+                    im = Image.open(thumb).convert("RGB")
+                    im.save(out_folder + "thumb.jpeg", "jpeg")
+                    thumb = out_folder + "thumb.jpeg"
                 thumb = out_folder + f"{ytdl_data['id']}.jpg"
+            elif out_folder + f"{ytdl_data['id']}.jpg":
+                if thumb.endswith(".jpg"):
+                    thumb = out_folder + f"{ytdl_data['id']}.jpg"
             await v_url.edit(f"`Preparing to upload video:`\
             \n**{ytdl_data['title']}**\
             \nby *{ytdl_data['uploader']}*")
