@@ -255,8 +255,7 @@ async def download_video(v_url):
             ).create_task(
                 progress(d, t, v_url, c_time, "Uploading..",
                          f"{ytdl_data['title']}.mp4")))
-        # os.remove(file_path)
-        shutil.rmtree(out_folder)
+        os.remove(file_path)
         await asyncio.sleep(DELETE_TIMEOUT)
         os.remove(thumb_image)
         await v_url.delete()
