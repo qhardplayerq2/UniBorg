@@ -29,7 +29,7 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
 logger = logging.getLogger(__name__)
 
 
-DELETE_TIMEOUT = 5
+DELETE_TIMEOUT = 3
 
 
 async def progress(current, total, event, start, type_of_ps, file_name=None):
@@ -222,11 +222,11 @@ async def download_video(v_url):
             ).create_task(
                 progress(d, t, v_url, c_time, "Uploading..",
                          f"{ytdl_data['title']}.mp3")))
-        os.remove(file_path)
+        # os.remove(file_path)
+        shutil.rmtree(out_folder)
         await asyncio.sleep(DELETE_TIMEOUT)
         os.remove(thumb_image)
         await v_url.delete()
-        shutil.rmtree(out_folder)
 
     elif video:
         relevant_path = "./DOWNLOADS/youtubedl"
@@ -255,9 +255,10 @@ async def download_video(v_url):
             ).create_task(
                 progress(d, t, v_url, c_time, "Uploading..",
                          f"{ytdl_data['title']}.mp4")))
-        os.remove(file_path)
+        # os.remove(file_path)
+        shutil.rmtree(out_folder)
         await asyncio.sleep(DELETE_TIMEOUT)
-        os.remove(thumb_path)
+        os.remove(thumb_image)
         await v_url.delete()
     shutil.rmtree(out_folder)
 
