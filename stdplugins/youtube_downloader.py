@@ -180,7 +180,7 @@ async def download_video(v_url):
     c_time = time.time()
 
     cover_url = ytdl_data['thumbnails'][0]['url']
-    wget.download(cover_url, out_folder + "cover.jpg")
+    thumb_path = wget.download(cover_url, out_folder + "cover.jpg")
 
     # relevant_path = "./DOWNLOADS/youtubedl"
     # included_extensions = ["mp4","mp3"]
@@ -204,7 +204,7 @@ async def download_video(v_url):
             file_path,
             caption=ytdl_data['title'] + "\n" + f"`{song_size}`",
             supports_streaming=True,
-            thumb=thumb,
+            thumb=thumb_path,
             attributes=[
                 DocumentAttributeAudio(duration=int(ytdl_data['duration']),
                                        title=str(ytdl_data['title']),
@@ -214,8 +214,9 @@ async def download_video(v_url):
             ).create_task(
                 progress(d, t, v_url, c_time, "Uploading..",
                          f"{ytdl_data['title']}.mp3")))
-        os.remove(f"{out_folder + ytdl_data['title']}.mp3")
+        os.remove(file_path)
         await asyncio.sleep(DELETE_TIMEOUT)
+        os.remove(thumb_path)
         await v_url.delete()
         shutil.rmtree(out_folder)
 
@@ -237,13 +238,14 @@ async def download_video(v_url):
             file_path,
             supports_streaming=True,
             caption=ytdl_data['title'] + "\n" + f"`{video_size}`",
-            thumb=thumb,
+            thumb=thumb_path,
             progress_callback=lambda d, t: asyncio.get_event_loop(
             ).create_task(
                 progress(d, t, v_url, c_time, "Uploading..",
                          f"{ytdl_data['title']}.mp4")))
-        os.remove(f"{out_folder + ytdl_data['title']}.mp4")
+        os.remove(file_path)
         await asyncio.sleep(DELETE_TIMEOUT)
+        os.remove(thumb_path)
         await v_url.delete()
     shutil.rmtree(out_folder)
 
