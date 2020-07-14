@@ -6,13 +6,13 @@ import logging
 import os
 import sys
 from pathlib import Path
+
+from telethon import TelegramClient, events
+from telethon.sessions import StringSession
+
+from alchemysession import AlchemySessionContainer
 from uniborg import Uniborg
 from uniborg.storage import Storage
-from alchemysession import AlchemySessionContainer
-from telethon import events, TelegramClient
-
-from telethon.sessions import StringSession
-from uniborg import Uniborg
 
 logging.basicConfig(level=logging.INFO)
 
@@ -83,6 +83,7 @@ else:
             api_id=Config.APP_ID,
             api_hash=Config.API_HASH
         ).start(bot_token=Config.TG_BOT_TOKEN_BF_HER)
+
         @temp_borg.on(events.NewMessage())
         async def on_new_message(event):
             from helper_sign_in import bleck_megick
