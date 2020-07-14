@@ -4,9 +4,12 @@ Pluggable [``asyncio``](https://docs.python.org/3/library/asyncio.html)
 [Telegram](https://telegram.org) userbot based on
 [Telethon](https://github.com/LonamiWebs/Telethon).
 
-## installing
+/**
+// **DISCLAIMER**
 
-#### The Easy Way
+// multiple accounts are getting banned,
+// hence, please do not deploy this REPOsitory
+ */
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/muhammedfurkan/UniBorg)
 
@@ -27,7 +30,7 @@ Simply clone the repository and run the main file:
 ```sh
 git clone https://github.com/muhammedfurkan/uniborg.git
 cd uniborg
-virtualenv -p /usr/bin/python3 venv
+python3 -m venv venv
 . ./venv/bin/activate
 pip install -r requirements.txt
 # <Create config.py with variables as given below>

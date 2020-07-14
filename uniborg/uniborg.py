@@ -4,6 +4,7 @@
 import asyncio
 import importlib.util
 import logging
+import os
 from pathlib import Path
 
 import telethon.events
@@ -15,8 +16,15 @@ from . import hacks
 
 class Uniborg(TelegramClient):
     def __init__(
-            self, session, *, n_plugin_path="plugins", db_plugin_path="plugins",
-            bot_token=None, api_config=None, **kwargs):
+            self,
+            session,
+            *,
+            n_plugin_path="plugins",
+            db_plugin_path="plugins",
+            bot_token=None,
+            api_config=None,
+            **kwargs
+        ):
         self._name = "LoggedIn"
         self._logger = logging.getLogger("UniBorg")
         self._plugins = {}
@@ -25,8 +33,6 @@ class Uniborg(TelegramClient):
         self.config = api_config
 
         kwargs = {
-            "api_id": 6,
-            "api_hash": "eb06d4abfb49dc3eeb1aeb98ae0f581e",
             "device_model": "GNU/Linux nonUI",
             "app_version": "@UniBorg 2.0",
             "lang_code": "tr",
@@ -60,7 +66,7 @@ class Uniborg(TelegramClient):
         for a_plugin_path in Path().glob(f"{self.n_plugin_path}/*.py"):
             self.load_plugin_from_file(a_plugin_path)
 
-        if api_config.DB_URI is not None:
+        if api_config.DB_URI and os.path.exists(self.db_plugin_path):
             for a_plugin_path in Path().glob(f"{self.db_plugin_path}/*.py"):
                 self.load_plugin_from_file(a_plugin_path)
 
@@ -82,7 +88,10 @@ class Uniborg(TelegramClient):
         self.me = await self.get_me()
         self.uid = telethon.utils.get_peer_id(self.me)
 
-        self._logger.info(f"Logged in as {self.uid}")
+        self._logger.info(
+            f"Logged in as {self.uid} "
+            f"Try {self.config.COMMAND_HAND_LER}helpme in any chat..!"
+        )
 
     def load_plugin(self, shortname):
         self.load_plugin_from_file(f"{self.n_plugin_path}/{shortname}.py")

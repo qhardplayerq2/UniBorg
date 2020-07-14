@@ -4,10 +4,12 @@ PyDrive
 PyPDF2
 aiofiles
 aiohttp
+
 aria2p
 asyncio
 beautifulsoup4
 cfscrape
+
 coffeehouse
 convertdate
 covid
@@ -18,6 +20,7 @@ google-api-python-client
 google_images_download
 googletrans
 gtts
+
 hachoir
 httplib2==0.15.0
 humanize
@@ -37,6 +40,7 @@ python-barcode
 python-magic
 pytube3
 qrcode
+
 regex
 remotezip
 requests
@@ -47,6 +51,7 @@ spamwatch
 speedtest-cli
 spotify_token
 sqlalchemy
+
 telegraph
 textblob
 tgcrypto
@@ -56,6 +61,7 @@ urbandict
 urllib3
 wget
 wikipedia
+
 youtube-dl
 PyLyrics 
 soundcloud-lib

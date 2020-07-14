@@ -1,3 +1,5 @@
 # telethon==1.11.3
 https://github.com/LonamiWebs/Telethon/archive/master.zip
+telethon-session-sqlalchemy
+cryptg
 -r ./requirements-stdborg.txt

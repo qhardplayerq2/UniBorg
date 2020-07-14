@@ -8,7 +8,10 @@ import re
 import time
 
 from telethon import events
+from telethon.tl.functions.channels import GetParticipantRequest
 from telethon.tl.functions.messages import GetPeerDialogsRequest
+from telethon.tl.types import (ChannelParticipantAdmin,
+                               ChannelParticipantCreator)
 
 # from alive_progress import alive_bar
 
@@ -71,15 +74,6 @@ def admin_cmd(**args):
     black_list_chats = list(Config.UB_BLACK_LIST_CHAT)
     if len(black_list_chats) > 0:
         args["chats"] = black_list_chats
-
-    # check if the plugin should allow edited updates
-    allow_edited_updates = False
-    if "allow_edited_updates" in args and args["allow_edited_updates"]:
-        allow_edited_updates = args["allow_edited_updates"]
-        del args["allow_edited_updates"]
-
-    # check if the plugin should listen for outgoing 'messages'
-    is_message_enabled = True
 
     return events.NewMessage(**args)
 
@@ -214,3 +208,29 @@ def time_formatter(milliseconds: int) -> str:
         ((str(seconds) + "s, ") if seconds else "") + \
         ((str(milliseconds) + "ms, ") if milliseconds else "")
     return tmp[:-2]
+
+
+async def is_admin(client, chat_id, user_id):
+    if not str(chat_id).startswith("-100"):
+        return False
+    req_jo = await client(GetParticipantRequest(
+        channel=chat_id,
+        user_id=user_id
+    ))
+    chat_participant = req_jo.participant
+    if isinstance(chat_participant, ChannelParticipantCreator) or isinstance(chat_participant, ChannelParticipantAdmin):
+        return True
+    return False
+
+
+# Not that Great but it will fix sudo reply
+async def edit_or_reply(event, text):
+    if event.from_id in Config.SUDO_USERS:
+        await event.delete()
+        reply_to = await event.get_reply_message()
+        if reply_to:
+            return await reply_to.reply(text)
+        else:
+            return await event.reply(text)
+    else:
+        return await event.edit(text)
