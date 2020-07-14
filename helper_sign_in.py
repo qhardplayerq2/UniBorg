@@ -1,11 +1,11 @@
 import logging
 import secrets
+
 from telethon import TelegramClient
+from telethon.errors.rpcerrorlist import (PhoneCodeInvalidError,
+                                          SessionPasswordNeededError)
+
 from alchemysession import AlchemySessionContainer
-from telethon.errors.rpcerrorlist import (
-    SessionPasswordNeededError,
-    PhoneCodeInvalidError
-)
 
 
 async def bleck_megick(event, config_jbo):
