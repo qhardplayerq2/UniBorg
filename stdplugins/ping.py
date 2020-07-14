@@ -1,7 +1,7 @@
 import logging
 from datetime import datetime
 
-from uniborg.util import admin_cmd,edit_or_reply
+from uniborg.util import admin_cmd, edit_or_reply
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
@@ -14,7 +14,7 @@ async def _(event):
         return
     ed = await edit_or_reply(event, "...")
     start = datetime.now()
-    await event.edit("Pong!")
+    j = await ed.edit("Pong!")
     end = datetime.now()
     ms = (end - start).microseconds / 1000
-    await event.edit("Pong!\n`{}`".format(ms))
+    await j.edit("Pong!\n`{}`".format(ms))
