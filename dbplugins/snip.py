@@ -70,6 +70,7 @@ async def on_snip_save(event):
         )
         if not await check_one(name):
             await add(name, msg_o.id)
+            await event.edit("snip {name} saved successfully. Get it with #{name}".format(name=name))
         else:
             await event.edit("snip {name} already have it. Get it with #{name}".format(name=name))
     else:
