@@ -4,9 +4,9 @@ from database.mongo import cli
 cli = cli["Userbot"]["Snips"]
 
 
-async def add(key, value, media):
+async def add(key, value):
     return cli.insert_one(
-        {"Key": key, "Value": value, "Media": media})
+        {"Key": key, "Value": value})
 
 
 async def others(opt):
@@ -27,9 +27,9 @@ async def check_others():
     return False if cli.find_one({"Others": False}) else True
 
 
-async def update(query, key, value, media):
+async def update(query, key, value):
     return cli.update_one(
-        query, {"$set": {"Key": key, "Value": value, "Media": media}})
+        query, {"$set": {"Key": key, "Value": value}})
 
 
 async def delete():

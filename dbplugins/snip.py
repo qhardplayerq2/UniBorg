@@ -6,11 +6,12 @@ Available Commands:
 
 import logging
 
-from sample_config import Config
-from sql_helpers.snips_sql import (add_snip, get_all_snips, get_snips,
-                                   remove_snip)
-from uniborg.util import admin_cmd
+from telethon.tl import types
 
+from database.snipsdb import (add, check, check_one, check_others, delete,
+                              delete_one, delete_others, others, update)
+from sample_config import Config
+from uniborg.util import admin_cmd
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
@@ -19,18 +20,16 @@ logger = logging.getLogger(__name__)
 
 @borg.on(admin_cmd(pattern=r'\#(\S+)', outgoing=True))
 async def on_snip(event):
-    # await event.delete()
+    await event.delete()
     name = event.pattern_match.group(1)
-    snip = get_snips(name)
-    if not event.is_group:
-        await event.delete()
+    snip = await check_one(name)
     reply_message = await event.get_reply_message()
     if snip:
         msg_o = await event.client.get_messages(
             entity=Config.PRIVATE_CHANNEL_BOT_API_ID,
-            ids=int(snip.f_mesg_id)
+            ids=int(snip['Value'])
         )
-        if msg_o.media is not None:
+        if msg_o.media != None:
             if reply_message:
                 await event.client.send_file(
                     event.chat_id,
@@ -69,19 +68,21 @@ async def on_snip_save(event):
             from_peer=event.chat_id,
             silent=True
         )
-        add_snip(name, msg_o.id)
-        await event.edit("snip {name} saved successfully. Get it with #{name}".format(name=name))
+        if not await check_one(name):
+            await add(name, msg_o.id)
+        else:
+            await event.edit("snip {name} already have it. Get it with #{name}".format(name=name))
     else:
         await event.edit("Reply to a message with `snips keyword` to save the snip")
 
 
 @borg.on(admin_cmd(pattern="snipl"))
 async def on_snip_list(event):
-    all_snips = get_all_snips()
+    all_snips = await check()
     OUT_STR = "Available Snips:\n"
-    if len(all_snips) > 0:
+    if all_snips:
         for a_snip in all_snips:
-            OUT_STR += f"👉 #{a_snip.snip} \n"
+            OUT_STR += f"👉 #{a_snip['Key']} \n"
     else:
         OUT_STR = "No Snips. Start Saving using `.snips`"
     if len(OUT_STR) > Config.MAX_MESSAGE_SIZE_LIMIT:
@@ -103,5 +104,5 @@ async def on_snip_list(event):
 @borg.on(admin_cmd(pattern="snipd (\S+)"))
 async def on_snip_delete(event):
     name = event.pattern_match.group(1)
-    remove_snip(name)
+    await delete_one(name)
     await event.edit("snip #{} deleted successfully".format(name))
