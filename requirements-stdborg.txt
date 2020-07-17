@@ -61,7 +61,8 @@ urbandict
 urllib3
 wget
 wikipedia
-
+pymongo 
+dnspython
 youtube-dl
 PyLyrics 
 soundcloud-lib
@@ -70,8 +71,7 @@ JustWatch
 # aioschedule
 # alive_progress
 # apscheduler
-# pymongo 
-# dnspython
+
 # pylast
 # attrs
 # idna
