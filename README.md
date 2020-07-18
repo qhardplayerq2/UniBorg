@@ -25,12 +25,16 @@ Pluggable [``asyncio``](https://docs.python.org/3/library/asyncio.html)
 
 [![CodeFactor](https://www.codefactor.io/repository/github/muhammedfurkan/uniborg/badge)](https://www.codefactor.io/repository/github/muhammedfurkan/uniborg)
 
+#### The Easy Way
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
 #### The Legacy Way
 Simply clone the repository and run the main file:
 ```sh
 git clone https://github.com/muhammedfurkan/uniborg.git
 cd uniborg
-python3 -m venv venv
+virtualenv -p /usr/bin/python3 venv
 . ./venv/bin/activate
 pip install -r requirements.txt
 # <Create config.py with variables as given below>
