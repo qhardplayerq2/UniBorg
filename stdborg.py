@@ -5,14 +5,9 @@
 import logging
 import os
 import sys
-from pathlib import Path
 
-from telethon import TelegramClient, events
 from telethon.sessions import StringSession
-
-from alchemysession import AlchemySessionContainer
 from uniborg import Uniborg
-from uniborg.storage import Storage
 
 logging.basicConfig(level=logging.INFO)
 
@@ -21,10 +16,10 @@ ENV = bool(os.environ.get("ENV", False))
 if ENV:
     from sample_config import Config
 else:
-    if os.path.exists("config.py"):
+    if os.path.exists("sample_config.py"):
         from sample_config import Development as Config
     else:
-        logging.warning("No config.py Found!")
+        logging.warning("No sample_config.py Found!")
         logging.info(
             "Please run the command, again, after creating config.py similar to README.md")
         sys.exit(1)
@@ -40,13 +35,9 @@ if len(Config.SUDO_USERS) >= 0:
 
 if Config.HU_STRING_SESSION is not None:
     # for Running on Heroku
-    session_id = str(Config.HU_STRING_SESSION)
-    container = AlchemySessionContainer(
-        engine=Config.DB_URI
-    )
-    session = container.new_session(session_id)
+    session_name = str(Config.HU_STRING_SESSION)
     borg = Uniborg(
-        session,
+        StringSession(session_name),
         n_plugin_path="stdplugins/",
         db_plugin_path="dbplugins/",
         api_config=Config,
