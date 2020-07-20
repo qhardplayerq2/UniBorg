@@ -8,3 +8,4 @@ config.py
 sessions/
 
 .vscode/settings.json
+.vscode/.ropeproject/objectdb
