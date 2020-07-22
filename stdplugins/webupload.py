@@ -14,7 +14,7 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
 logger = logging.getLogger(__name__)
 
 
-@borg.on(admin_cmd(pattern="webupload ?(.+?|) --(anonfiles|transfer|filebin|anonymousfiles|megaupload|bayfiles|letsupload)"))
+@borg.on(admin_cmd(pattern="webupload ?(.+?|) --(anonfiles|transfer|filebin|anonymousfiles|megaupload|bayfiles|letsupload|vshare)"))
 async def _(event):
     await event.edit("processing ...")
     PROCESS_RUN_TIME = 100
@@ -36,7 +36,8 @@ async def _(event):
         "anonymousfiles": "curl -F file=\"@{full_file_path}\" https://api.anonymousfiles.io/",
         "megaupload": "curl -F \"file=@{full_file_path}\" https://megaupload.is/api/upload",
         "bayfiles": ".exec curl -F \"file=@{full_file_path}\" https://bayfiles.com/api/upload",
-        "letsupload": ".exec curl -F \"file=@{full_file_path}\" https://api.letsupload.cc/upload"
+        "letsupload": ".exec curl -F \"file=@{full_file_path}\" https://api.letsupload.cc/upload",
+        "vshare": "curl -F \"file=@{}\" https://api.vshare.is/upload",
     }
     filename = os.path.basename(file_name)
     try:
