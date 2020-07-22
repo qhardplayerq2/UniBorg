@@ -65,8 +65,7 @@ class Config(object):
     NO_LOAD = [
         "rss",
         "unbanmute",
-        "antispam",
-        "notification_mtab_manager"
+        "antispam"
     ]
     # Get your own API key from https://www.remove.bg/ or
     # feel free to use http://telegram.dog/Remove_BGBot
@@ -144,6 +143,12 @@ class Config(object):
     # Userbot logging feature switch.
     LOGSPAMMER = sb(os.environ.get("LOGSPAMMER", None))
     MONGO_DB_URI = os.environ.get("MONGO_DB_URI", None)
+
+    # Google Photos ()
+    G_PHOTOS_CLIENT_ID = os.environ.get("G_PHOTOS_CLIENT_ID", None)
+    G_PHOTOS_CLIENT_SECRET = os.environ.get("G_PHOTOS_CLIENT_SECRET", None)
+    G_PHOTOS_AUTH_TOKEN_ID = int(
+        os.environ.get("G_PHOTOS_AUTH_TOKEN_ID", "-100"))
 
 
 class Production(Config):

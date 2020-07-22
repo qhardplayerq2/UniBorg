@@ -1,54 +1,13 @@
-"""Count the Number of Dialogs you have in your Telegram Account
-Syntax: .count"""
-import logging
-import time
+# the entire code is verbatim copied
+# from https://github.com/mojurasu/kantek/raw/develop/kantek/plugins/private/stats.py
+# there are changes made by "me" to suit the needs of this repository
 
+import time
 from telethon.events import NewMessage
 from telethon.tl.custom import Dialog
-from telethon.tl.types import Channel, Chat, User
+from telethon.tl.types import Channel, User, Chat
 
 from uniborg.util import admin_cmd
-
-logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
-                    level=logging.WARNING)
-logger = logging.getLogger(__name__)
-
-
-# @borg.on(admin_cmd(pattern="count"))
-# async def _(event):
-#     if event.fwd_from:
-#         return
-#     start = datetime.now()
-#     u = 0 # number of users
-#     g = 0 # number of basic groups
-#     c = 0 # number of super groups
-#     bc = 0 # number of channels
-#     b = 0 # number of bots
-#     await event.edit("Retrieving Telegram Count(s)")
-#     async for d in borg.iter_dialogs(limit=None):
-#         if d.is_user:
-#             if d.entity.bot:
-#                 b += 1
-#             else:
-#                 u += 1
-#         elif d.is_channel:
-#             if d.entity.broadcast:
-#                 bc += 1
-#             else:
-#                 c += 1
-#         elif d.is_group:
-#             g += 1
-#         else:
-#             logger.info(d.stringify())
-#     end = datetime.now()
-#     ms = (end - start).seconds
-#     await event.edit("""Obtained in {} seconds.
-# Users:\t{}
-# Groups:\t{}
-# Super Groups:\t{}
-# Channels:\t{}
-# Bots:\t{}""".format(ms, u, g, c, bc, b))
-
 
 """Type `.count` and see Magic."""
 
@@ -113,16 +72,16 @@ async def stats(event: NewMessage.Event) -> None:  # pylint: disable = R0912, R0
     full_name = inline_mention(await event.client.get_me())
     response = f'🔸 **Stats for {full_name}** \n\n'
     response += f'**Private Chats:** {private_chats} \n'
-    response += f'   • `Users: {private_chats - bots}` \n'
-    response += f'   • `Bots: {bots}` \n'
+    response += f'   •`Users: {private_chats - bots}` \n'
+    response += f'   •`Bots: {bots}` \n'
     response += f'**Groups:** {groups} \n'
     response += f'**Channels:** {broadcast_channels} \n'
     response += f'**Admin in Groups:** {admin_in_groups} \n'
-    response += f'   • `Creator: {creator_in_groups}` \n'
-    response += f'   • `Admin Rights: {admin_in_groups - creator_in_groups}` \n'
+    response += f'   •`Creator: {creator_in_groups}` \n'
+    response += f'   •`Admin Rights: {admin_in_groups - creator_in_groups}` \n'
     response += f'**Admin in Channels:** {admin_in_broadcast_channels} \n'
-    response += f'   • `Creator: {creator_in_channels}` \n'
-    response += f'   • `Admin Rights: {admin_in_broadcast_channels - creator_in_channels}` \n'
+    response += f'   •`Creator: {creator_in_channels}` \n'
+    response += f'   •`Admin Rights: {admin_in_broadcast_channels - creator_in_channels}` \n'
     response += f'**Unread:** {unread} \n'
     response += f'**Unread Mentions:** {unread_mentions} \n\n'
     response += f'__It Took:__ {stop_time:.02f}s \n'
