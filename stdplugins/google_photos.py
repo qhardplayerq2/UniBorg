@@ -243,7 +243,7 @@ async def upload_google_photos(event):
                 headers = {
                     "Content-Length": str(len(current_chunk)),
                     "X-Goog-Upload-Command": "upload",
-                    "X-Goog-Upload-Offset": str(i),
+                    "X-Goog-Upload-Offset": str(i * upload_granularity),
                     "Authorization": "Bearer " + creds.access_token,
                 }
                 logger.info(i)
@@ -263,7 +263,7 @@ async def upload_google_photos(event):
             headers = {
                 "Content-Length": str(len(current_chunk)),
                 "X-Goog-Upload-Command": "upload, finalize",
-                "X-Goog-Upload-Offset": str(number_of_req_s),
+                "X-Goog-Upload-Offset": str(number_of_req_s * upload_granularity),
                 "Authorization": "Bearer " + creds.access_token,
             }
             logger.info(headers)
