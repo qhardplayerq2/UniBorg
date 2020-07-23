@@ -285,7 +285,7 @@ async def upload_google_photos(event):
     response_create_album = service.mediaItems().batchCreate(
         body={
             "newMediaItems": [{
-                "description": "uploaded using @UniBorg v7",
+                "description": file_name,
                 "simpleMediaItem": {
                     "fileName": file_name,
                     "uploadToken": final_response_text
