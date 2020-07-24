@@ -2,34 +2,30 @@
 Syntax:
 .ugdrive"""
 
-import asyncio
-import json
 # The entire code given below is verbatim copied from
 # https://github.com/cyberboysumanjay/Gdrivedownloader/blob/master/gdrive_upload.py
 # there might be some changes made to suit the needs for this repository
 # Licensed under MIT License
-import logging
+
+import asyncio
+import json
 import math
 import os
 import time
 from datetime import datetime
-#
 from mimetypes import guess_type
 
 import httplib2
 from telethon import events
 
 from apiclient.discovery import build
+from apiclient.errors import ResumableUploadError
 from apiclient.http import MediaFileUpload
+from oauth2client import client, file, tools
 from oauth2client.client import OAuth2WebServerFlow
 from oauth2client.file import Storage
 from sample_config import Config
 from uniborg.util import admin_cmd, humanbytes, progress
-
-logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
-                    level=logging.WARNING)
-logger = logging.getLogger(__name__)
-
 
 # Path to token json file, it should be in same directory as script
 G_DRIVE_TOKEN_FILE = Config.TMP_DOWNLOAD_DIRECTORY + "/auth_token.txt"
@@ -271,7 +267,6 @@ def authorize(token_file, storage):
     credentials = storage.get()
     # Create an httplib2.Http object and authorize it with our credentials
     http = httplib2.Http()
-    # https://github.com/googleapis/google-api-python-client/issues/803
     credentials.refresh(http)
     http = credentials.authorize(http)
     return http
@@ -298,7 +293,8 @@ async def upload_file(http, file_path, file_name, mime_type, event, parent_id):
         "withLink": True
     }
     # Insert a file
-    file = drive_service.files().insert(body=body, media_body=media_body)
+    file = drive_service.files().insert(
+        body=body, media_body=media_body, supportsTeamDrives=True)
     response = None
     display_message = ""
     while response is None:
@@ -307,8 +303,8 @@ async def upload_file(http, file_path, file_name, mime_type, event, parent_id):
         if status:
             percentage = int(status.progress() * 100)
             progress_str = "[{0}{1}]\nProgress: {2}%\n".format(
-                "".join("█" for i in range(math.floor(percentage / 5))),
-                "".join("░" for i in range(20 - math.floor(percentage / 5))),
+                "".join(["█" for i in range(math.floor(percentage / 5))]),
+                "".join(["░" for i in range(20 - math.floor(percentage / 5))]),
                 round(percentage, 2)
             )
             current_message = f"uploading to gDrive\nFile Name: {file_name}\n{progress_str}"
@@ -326,7 +322,7 @@ async def upload_file(http, file_path, file_name, mime_type, event, parent_id):
     except:
         pass
     # Define file instance and get url for download
-    file = drive_service.files().get(fileId=file_id).execute()
+    file = drive_service.files().get(fileId=file_id, supportsTeamDrives=True).execute()
     download_url = file.get("webContentLink")
     return download_url
 
@@ -345,7 +341,8 @@ async def create_directory(http, directory_name, parent_id):
     }
     if parent_id is not None:
         file_metadata["parents"] = [{"id": parent_id}]
-    file = drive_service.files().insert(body=file_metadata).execute()
+    file = drive_service.files().insert(
+        body=file_metadata, supportsTeamDrives=True).execute()
     file_id = file.get("id")
     try:
         drive_service.permissions().insert(fileId=file_id, body=permissions).execute()
@@ -377,7 +374,7 @@ async def DoTeskWithDir(http, input_directory, event, parent_id):
 
 async def gdrive_delete(service, file_id):
     try:
-        service.files().delete(fileId=file_id).execute()
+        service.files().delete(fileId=file_id, supportsTeamDrives=True).execute()
         return f"successfully deleted {file_id} from my gDrive."
     except Exception as e:
         return str(e)
@@ -385,7 +382,7 @@ async def gdrive_delete(service, file_id):
 
 async def gdrive_list_file_md(service, file_id):
     try:
-        file = service.files().get(fileId=file_id).execute()
+        file = service.files().get(fileId=file_id, supportsTeamDrives=True).execute()
         # logger.info(file)
         file_meta_data = {}
         file_meta_data["title"] = file["title"]
@@ -421,6 +418,8 @@ async def gdrive_search(http, search_query):
         try:
             response = drive_service.files().list(
                 q=query,
+                supportsTeamDrives=True,
+                includeTeamDriveItems=True,
                 spaces="drive",
                 fields="nextPageToken, items(id, title, mimeType)",
                 pageToken=page_token
