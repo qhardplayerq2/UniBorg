@@ -14,7 +14,6 @@
 
 """Google Photos
 """
-
 import asyncio
 import logging
 import os
@@ -226,24 +225,31 @@ async def upload_google_photos(event):
         real_upload_url = step_one_resp_headers.get(
             "X-Goog-Upload-URL"
         )
+        logger.info(real_upload_url)
         upload_granularity = int(step_one_resp_headers.get(
             "X-Goog-Upload-Chunk-Granularity"
         ))
+        logger.info(upload_granularity)
+        # https://t.me/c/1279877202/74
         number_of_req_s = int((
             file_size / upload_granularity
         ))
-
+        logger.info(number_of_req_s)
+        c_time = time.time()
+        loop = asyncio.get_event_loop()
         async with aiofiles.open(
             file_path,
             mode="rb"
         ) as f_d:
             for i in range(number_of_req_s):
                 current_chunk = await f_d.read(upload_granularity)
+                offset = i * upload_granularity
+                part_size = len(current_chunk)
 
                 headers = {
-                    "Content-Length": str(len(current_chunk)),
+                    "Content-Length": str(part_size),
                     "X-Goog-Upload-Command": "upload",
-                    "X-Goog-Upload-Offset": str(i * upload_granularity),
+                    "X-Goog-Upload-Offset": str(offset),
                     "Authorization": "Bearer " + creds.access_token,
                 }
                 logger.info(i)
@@ -253,11 +259,14 @@ async def upload_google_photos(event):
                     headers=headers,
                     data=current_chunk
                 )
+                loop.create_task(
+                    progress(offset + part_size, file_size, event, c_time, "uploading(gphoto)🧐?"))
                 logger.info(response.headers)
 
-                await f_d.seek(upload_granularity)
+                # await f_d.seek(i * upload_granularity)
             # await f_d.seek(upload_granularity)
             current_chunk = await f_d.read(upload_granularity)
+            # https://t.me/c/1279877202/74
 
             logger.info(number_of_req_s)
             headers = {
