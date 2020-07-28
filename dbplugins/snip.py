@@ -29,7 +29,7 @@ async def on_snip(event):
             entity=Config.PRIVATE_CHANNEL_BOT_API_ID,
             ids=int(snip['Value'])
         )
-        if msg_o.media != None:
+        if msg_o.media is not None:
             if reply_message:
                 await event.client.send_file(
                     event.chat_id,

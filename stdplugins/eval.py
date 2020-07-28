@@ -15,6 +15,7 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
                     level=logging.WARNING)
 logger = logging.getLogger(__name__)
 
+
 @borg.on(admin_cmd(pattern="eval"))
 async def _(event):
     if event.fwd_from or event.via_bot_id:
@@ -56,7 +57,7 @@ async def _(event):
 
     if len(final_output) > Config.MAX_MESSAGE_SIZE_LIMIT:
         with io.BytesIO(str.encode(final_output)) as out_file:
-            out_file.name = "eval.text"
+            out_file.name = "eval.txt"
             await borg.send_file(
                 event.chat_id,
                 out_file,
