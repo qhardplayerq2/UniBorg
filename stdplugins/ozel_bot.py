@@ -33,8 +33,10 @@ async def handler(event):
      
 @borg.on(events.NewMessage(func=lambda e: e.is_private))
 async def userpm(event):
+    my_id = await event.client.get_me()
     user_id = event.from_id
     if user_id in user:
         return
     else:
-        await event.reply("Selam, benimle konuşmak istiyorsan beni en az 1 gruba eklemeden yazmaya devam edersen sürekli bu mesajı alacaksın.")
+        if my_id.id != user_id:
+            await event.reply("Selam, benimle konuşmak istiyorsan beni en az 1 gruba eklemeden yazmaya devam edersen sürekli bu mesajı alacaksın.")
