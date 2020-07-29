@@ -146,6 +146,10 @@
       "description": "spamwatch api key",
       "required": false
     },
+    "SPAM_WATCHAPI": {
+      "description": "spamwatch api on/off",
+      "required": false
+    },
     "G_PHOTOS_CLIENT_ID": {
       "description": "get the client id from https://da.gd/PUniTBorg",
       "required": false
