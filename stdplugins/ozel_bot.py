@@ -18,14 +18,49 @@ async def oto(event):
     
     mesaj = event.message.message
     # if not my_id.id:
-    if mesaj == ("selam" or "Selam") and not event.message.from_id == my_id.id:
+    if mesaj == ("selam") and not event.message.from_id == my_id.id:
         await event.reply("selammm")
-    elif mesaj == ("Sea" or "sea" or "sa" or "Sa" or "SA") and not event.message.from_id == my_id.id:
-        await event.reply("ase")    
-    elif mesaj == ("naber" or "Naber" or "nbr" or "Nbr" or "NBR") and not event.message.from_id == my_id.id:
+    elif mesaj == ("Selam") and not event.message.from_id == my_id.id:
+        await event.reply("selamm")
+    elif mesaj == ("Sea") and not event.message.from_id == my_id.id:
+        await event.reply("ase")
+    elif mesaj == ("sea") and not event.message.from_id == my_id.id:
+        await event.reply("ase")
+    elif mesaj == ("sa") and not event.message.from_id == my_id.id:
+        await event.reply("ase")
+    elif mesaj == ("Sa") and not event.message.from_id == my_id.id:
+        await event.reply("ase")
+    elif mesaj == ("SA") and not event.message.from_id == my_id.id:
+        await event.reply("ase")
+    elif mesaj == ("Slm") and not event.message.from_id == my_id.id:
+        await event.reply("slm")
+    elif mesaj == ("slm") and not event.message.from_id == my_id.id:
+        await event.reply("slm")
+
+    elif mesaj == ("naber") and not event.message.from_id == my_id.id:
         await event.reply("iyidir senden naber")
-    elif mesaj == ("napıyon" or "Napıyon" or "ne yapıyorsun" or "napıyorsun" or "Napıyonuz" or "Napiyosunuz") and not event.message.from_id == my_id.id:
+    elif mesaj == ("Naber") and not event.message.from_id == my_id.id:
+        await event.reply("iyidir senden naber")
+    elif mesaj == ("nbr") and not event.message.from_id == my_id.id:
+        await event.reply("iyidir senden naber")
+    elif mesaj == ("Nbr") and not event.message.from_id == my_id.id:
+        await event.reply("iyidir senden naber")
+    elif mesaj == ("NBR") and not event.message.from_id == my_id.id:
+        await event.reply("iyidir senden naber")
+
+    elif mesaj == ("napıyon") and not event.message.from_id == my_id.id:
         await event.reply("oturuyom sen")
+    elif mesaj == ("Napıyon") and not event.message.from_id == my_id.id:
+        await event.reply("oturuyom sen")
+    elif mesaj == ("ne yapıyorsun") and not event.message.from_id == my_id.id:
+        await event.reply("oturuyom sen")
+    elif mesaj == ("napıyorsun") and not event.message.from_id == my_id.id:
+        await event.reply("oturuyom sen")
+    elif mesaj == ("Napıyonuz") and not event.message.from_id == my_id.id:
+        await event.reply("oturuyom sen")
+    elif mesaj == ("Napiyosunuz") and not event.message.from_id == my_id.id:
+        await event.reply("oturuyom sen")
+
 
 
 user = []
