@@ -18,13 +18,13 @@ async def oto(event):
     
     mesaj = event.message.message
     # if not my_id.id:
-    if mesaj == "selam" and "Selam" and not event.message.from_id == my_id.id:
+    if mesaj == ("selam" and "Selam") and not event.message.from_id == my_id.id:
         await event.reply("selammm")
-    elif mesaj == "Sea" and "sea" and "sa" and "Sa" and "SA" and not event.message.from_id == my_id.id:
+    elif mesaj == ("Sea" and "sea" and "sa" and "Sa" and "SA") and not event.message.from_id == my_id.id:
         await event.reply("ase")    
-    elif mesaj == "naber" and "Naber" and "nbr" and "Nbr" and "NBR" and not event.message.from_id == my_id.id:
+    elif mesaj == ("naber" and "Naber" and "nbr" and "Nbr" and "NBR") and not event.message.from_id == my_id.id:
         await event.reply("iyidir senden naber")
-    elif mesaj == "napıyon" and "Napıyon" and "ne yapıyorsun" and "napıyorsun" and not event.message.from_id == my_id.id:
+    elif mesaj == ("napıyon" and "Napıyon" and "ne yapıyorsun" and "napıyorsun" and "Napıyonuz" and "Napiyosunuz") and not event.message.from_id == my_id.id:
         await event.reply("oturuyom sen")
 
 
