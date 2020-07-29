@@ -18,10 +18,14 @@ async def oto(event):
     
     mesaj = event.message.message
     # if not my_id.id:
-    if mesaj == "selam" and not event.message.from_id == my_id.id:
-        await event.reply("selam canım")
-    elif mesaj == "naber" and not event.message.from_id == my_id.id:
+    if mesaj == "selam" or "Selam" and not event.message.from_id == my_id.id:
+        await event.reply("selammm")
+    elif mesaj == "Sea" or "sea" or "sa" or "Sa" or "SA" and not event.message.from_id == my_id.id:
+        await event.reply("ase")    
+    elif mesaj == "naber" or "Naber" or "nbr" or "Nbr" or "NBR" and not event.message.from_id == my_id.id:
         await event.reply("iyidir senden naber")
+    elif mesaj == "napıyon" or "Napıyon" or "ne yapıyorsun" or "napıyorsun" and not event.message.from_id == my_id.id:
+        await event.reply("oturuyom sen")
 
 
 user = []
@@ -39,4 +43,4 @@ async def userpm(event):
         return
     else:
         if my_id.id != user_id:
-            await event.reply("Selam, benimle konuşmak istiyorsan beni en az 1 gruba eklemeden yazmaya devam edersen sürekli bu mesajı alacaksın.")
+            await event.reply("Selam, benimle konuşmak istiyorsan beni en az 1 gruba ekle eğer eklemeden yazmaya devam edersen sürekli bu mesajı alacaksın. \n\nVe alttaki kanalıma katılır mısın 👇👇👇\nhttps://t.me/joinchat/AAAAAEylXUB6ztFxdgHp1w")
