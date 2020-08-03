@@ -17,7 +17,7 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
 logger = logging.getLogger(__name__)
 
 
-@borg.on(admin_cmd(pattern="tts (.*)"))
+@borg.on(admin_cmd(pattern="ses (.*)"))
 async def _(event):
     if event.fwd_from:
         return
@@ -26,14 +26,15 @@ async def _(event):
     if event.reply_to_msg_id:
         previous_message = await event.get_reply_message()
         text = previous_message.message
-        lan = input_str
-    elif "|" in input_str:
-        lan, text = input_str.split("|")
+        lan = "tr"
+    elif input_str:
+        lan = "tr"
+        text = input_str
     else:
         await event.edit("Invalid Syntax. Module stopping.")
         return
     text = text.strip()
-    lan = lan.strip()
+    lan = "tr"
     if not os.path.isdir(Config.TMP_DOWNLOAD_DIRECTORY):
         os.makedirs(Config.TMP_DOWNLOAD_DIRECTORY)
     required_file_name = Config.TMP_DOWNLOAD_DIRECTORY + "voice.ogg"
@@ -74,8 +75,8 @@ async def _(event):
             voice_note=True
         )
         os.remove(required_file_name)
-        await event.edit("Processed {} ({}) in {} seconds!".format(text[0:97], lan, ms))
-        await asyncio.sleep(5)
-        await event.delete()
+        x =await event.edit("Processed {} ({}) in {} seconds!".format(text[0:97], lan, ms))
+        await asyncio.sleep(1)
+        await x.delete()
     except Exception as e:
         await event.edit(str(e))
