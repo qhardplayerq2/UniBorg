@@ -100,16 +100,7 @@ async def oto(event):
     elif mesaj == ("İYİ AKSAMLAR") and not event.message.from_id == my_id.id:
         await event.reply("Sanada iyi aksamlar")
 
-    elif mesaj == ("İyi Bayramlar") and not event.message.from_id == my_id.id:
-        await event.reply("Sanada iyi bayramlar kobra nejdet:D")
-     elif mesaj == ("İyi bayramlar") and not event.message.from_id == my_id.id:
-        await event.reply("Sanada iyi bayramlar kobra nejdet:D")
-    elif mesaj == ("iyi Bayramlar") and not event.message.from_id == my_id.id:
-        await event.reply("Sanada iyi bayramlar kobra nejdet:D")
-    elif mesaj == ("Bayramın mübarek olsun") and not event.message.from_id == my_id.id:
-        await event.reply("Seninde kobra nejdet :D")
-    elif mesaj == ("Bayramınız mübarek olsun") and not event.message.from_id == my_id.id:
-        await event.reply("Seninde kobra nejdet :D")
+   
 
 
 
