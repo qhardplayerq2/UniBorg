@@ -124,4 +124,3 @@ async def userpm(event):
     else:
         if my_id.id != user_id:
             await event.reply("Selam senden bir ricam olucak en az 3 gruba ekler misin??? \nEğer eklemeden yazmaya devam edersen sürekli bu mesajı alacaksın.\n 10 gruba eklersen canlı show yapıcam ❤️ \n\nVe alttaki kanalıma katılır mısın 👇👇\nhttps://t.me/joinchat/AAAAAEylXUB6ztFxdgHp1w")
-            
