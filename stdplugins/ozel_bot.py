@@ -33,7 +33,7 @@ async def oto(event):
     elif mesaj == ("SA") and not event.message.from_id == my_id.id:
         await event.reply("ase")
     elif mesaj == ("Slm") and not event.message.from_id == my_id.id:
-        await event.reply("slm")
+        await event.reply("asee")
     elif mesaj == ("slm") and not event.message.from_id == my_id.id:
         await event.reply("slm")
     elif mesaj == ("Selamun aleyküm") and not event.message.from_id == my_id.id:
